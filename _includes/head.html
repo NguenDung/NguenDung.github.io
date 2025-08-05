@@ -2,14 +2,27 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
   {%- seo -%}
-  <link rel="stylesheet" href="{{ "/assets/css/style.css" | relative_url }}">
-  <link rel="icon" type="image/png" href="{{ "/assets/favicon.png" | relative_url }}" />
-  <link rel="stylesheet" href="{{ "/assets/css/magnific-popup.css" | relative_url }}">
+
+  <!-- CSS mặc định của theme -->
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+
+  <!-- Popup CSS (nếu dùng) -->
+  <link rel="stylesheet" href="{{ '/assets/css/magnific-popup.css' | relative_url }}">
+
+  <!-- CSS override: ảnh nền, widget, v.v. -->
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="{{ '/assets/favicon.png' | relative_url }}" />
+
   {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
-  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script> 
-  <script src="{{ "/assets/js/jquery.magnific-popup.js" | relative_url }}"></script>
+
+  <!-- JS popup & jQuery -->
+  <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
+  <script src="{{ '/assets/js/jquery.magnific-popup.js' | relative_url }}"></script>
 </head>
