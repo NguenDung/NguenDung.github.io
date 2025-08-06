@@ -4,16 +4,18 @@
   lang="{{ page.lang | default: site.lang | default: 'en' }}">
 
   {%- include head.html -%}
-<script>
-  window.__ASSET_BASE__ = '{{ "" | relative_url }}';
-</script>
-<script defer src="{{ '/assets/js/cursor-trail.js' | relative_url }}"></script>
-<script defer src="{{ '/assets/js/click-sound.js' | relative_url }}"></script>
-
+  <script>
+    window.__ASSET_BASE__ = '{{ "" | relative_url }}';
+  </script>
+  <!-- Chỉ load hai script gốc, không có star-effect hay search.js -->
+  <script defer src="{{ '/assets/js/cursor-trail.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/js/click-sound.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/js/search.js'         | relative_url }}"></script>
+  
   <body>
 
-    {%- include schedule.html -%}         
-    {%- include spotify-player.html -%}    
+    {%- include schedule.html -%}
+    {%- include spotify-player.html -%}
 
     <main id="swup" class="page-content transition-fade" aria-label="Content">
       <div class="wrapper">
@@ -33,7 +35,6 @@
         containers: ['#swup'],
         linkSelector: 'a[href^="{{ site.baseurl | default: "/" }}"]:not([data-no-swup]):not([target]):not([href*="#"])'
       });
-
       document.addEventListener('swup:contentReplaced', () => {
         // Prism && Prism.highlightAll();
         // MathJax && MathJax.typeset && MathJax.typeset();

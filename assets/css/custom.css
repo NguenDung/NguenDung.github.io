@@ -1,42 +1,44 @@
 /* ====== CẤU HÌNH NHANH ====== */
-:root{
+:root {
   /* Kích thước & vị trí Spotify (đồng bộ với thanh lịch) */
   --player-w: 455px;        /* rộng Spotify */
   --player-h: 520px;        /* cao Spotify */
   --player-right: 2rem;     /* cách mép phải */
 
   /* Khoảng hở giữa Lịch và Spotify (0 = dính hẳn) */
-  --stack-gap: 0rem;     /* đổi thành .75rem nếu muốn hở ~12px */
+  --stack-gap: 0rem;        /* đổi thành .75rem nếu muốn hở ~12px */
 
   /* Khung blog (overlay) */
   --wrapper-left: 2rem;     /* lề trái của khung blog */
-  --gap: 1.2rem;              /* lề phải khung blog (khoảng hở nhỏ bên cạnh) */
+  --gap: 1.2rem;            /* lề phải khung blog (khoảng hở nhỏ bên cạnh) */
 }
 
 /* Tránh tràn ngang khi dùng 100vw trên Chrome */
-html, body { overflow-x: clip; }
+html, body {
+  overflow-x: clip;
+}
 
 /* ====== NỀN ====== */
-body{
+body {
   background: url("../images/background.jpg") no-repeat center/cover fixed;
 }
 
 /* ====== LAYOUT CHUNG ====== */
-.page-content{
-  display:flex;
-  justify-content:flex-start;
+.page-content {
+  display: flex;
+  justify-content: flex-start;
 }
 
 /* ====== KHUNG BLOG (OVERLAY) ====== */
 /* rộng = full viewport - (rộng Spotify + khoảng cách phải + lề trái) */
-.page-content .wrapper{
+.page-content .wrapper {
   width: calc(100vw - var(--player-w) - var(--player-right) - var(--wrapper-left));
   max-width: none !important;
   margin: 2rem var(--gap) 2rem var(--wrapper-left);  /* top right bottom left */
   background: rgba(0,0,0,0.98);
   padding: 2.5rem;
   border-radius: 1.2rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,.8);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.8);
   overflow: hidden;
   box-sizing: border-box;
 
@@ -50,7 +52,7 @@ body{
 .page-content .wrapper .site-header .wrapper,
 .page-content .wrapper .site-footer .wrapper,
 .page-content .wrapper .page-header .wrapper,
-.page-content .wrapper .dash-header .wrapper{
+.page-content .wrapper .dash-header .wrapper {
   width: 100% !important;
   max-width: none !important;
   margin: 0 !important;
@@ -62,34 +64,42 @@ body{
 .page-content .wrapper .site-header,
 .page-content .wrapper .page-header,
 .page-content .wrapper .dash-header,
-.page-content .wrapper .site-footer{
+.page-content .wrapper .site-footer {
   background: transparent !important;
   box-shadow: none !important;
   border: 0 !important;
 }
 
 /* ====== TYPO & TAGS TRONG KHUNG BLOG ====== */
-.page-content .wrapper h1{ font-size: 2.2rem; }
-.page-content .wrapper h2{ font-size: 1.6rem; letter-spacing: .2px; margin-bottom: 1rem; }
-.page-content .wrapper h3{ font-size: 1.25rem; }
+.page-content .wrapper h1 {
+  font-size: 2.2rem;
+}
+.page-content .wrapper h2 {
+  font-size: 1.6rem;
+  letter-spacing: 0.2px;
+  margin-bottom: 1rem;
+}
+.page-content .wrapper h3 {
+  font-size: 1.25rem;
+}
 
 .page-content .wrapper .tag,
 .page-content .wrapper .post-tag,
-.page-content .wrapper .label{
+.page-content .wrapper .label {
   font-size: 0.92rem;
   padding: 0.25rem 0.6rem;
   border-radius: 0.6rem;
 }
 
 .page-content .wrapper .post-meta,
-.page-content .wrapper .post__meta{
+.page-content .wrapper .post__meta {
   font-size: 0.95rem;
 }
 
 /* ====== AVATAR + GIỚI THIỆU Ở HEADER ====== */
 .page-content .wrapper header img,
 .page-content .wrapper .site-header img,
-.page-content .wrapper .dash-header img{
+.page-content .wrapper .dash-header img {
   width: 72px;
   height: 72px;
   object-fit: cover;
@@ -98,12 +108,12 @@ body{
 }
 .page-content .wrapper header p,
 .page-content .wrapper .site-header p,
-.page-content .wrapper .dash-header p{
+.page-content .wrapper .dash-header p {
   font-size: 1.02em;
 }
 
 /* ====== SPOTIFY (CARD VIEW) ====== */
-#spotify-player-wrapper{
+#spotify-player-wrapper {
   position: fixed;
   bottom: 2rem;
   right: var(--player-right);
@@ -115,18 +125,18 @@ body{
   border-top-right-radius: 0;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,.6);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.6);
   overflow: hidden;
   z-index: 1000;
 }
-#spotify-player-wrapper iframe{
-  width:100%;
-  height:100%;
-  border:none;
+#spotify-player-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
 }
 
 /* ====== THANH LỊCH (NẰM TRÊN SPOTIFY) ====== */
-#schedule-bar{
+#schedule-bar {
   position: fixed !important;
   right: var(--player-right);
   /* Đặt ngay trên Spotify: 2rem (khoảng cách đáy) + chiều cao Spotify + khe tùy chọn */
@@ -140,21 +150,21 @@ body{
   /* vuông góc dưới để khớp Spotify */
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  box-shadow: 0 6px 16px rgba(0,0,0,.6);
+  box-shadow: 0 6px 16px rgba(0,0,0,0.6);
   overflow: hidden;
   z-index: 1000;
 }
-#schedule-bar iframe{
+#schedule-bar iframe {
   width: 100%;
   height: 100%;
   border: 0;
 }
 
 /* ====== MOBILE ====== */
-@media (max-width: 600px){
+@media (max-width: 600px) {
   #spotify-player-wrapper,
-  #schedule-bar{ display:none; }
-  .page-content .wrapper{
+  #schedule-bar { display: none; }
+  .page-content .wrapper {
     width: 100%;
     margin: 1rem;
     max-width: none;
@@ -162,78 +172,114 @@ body{
 }
 
 /* Hiệu ứng mượt khi Swup thay nội dung */
-.transition-fade { transition: opacity .2s ease; }
-html.is-changing .transition-fade { opacity: 0; }
+.transition-fade {
+  transition: opacity .2s ease;
+}
+html.is-changing .transition-fade {
+  opacity: 0;
+}
 
 /* ===== WARNING MODAL (final, responsive) ===== */
-#warning-modal{
+#warning-modal {
   position: fixed; inset: 0;
   display: none;
   align-items: center; justify-content: center;
-  background: rgba(0,0,0,.66);
+  background: rgba(0,0,0,0.66);
   z-index: 1300;
   backdrop-filter: blur(2px);
 }
-
 /* reset mặc định để .soft/.hard làm chủ kích thước */
-#warning-modal img{ display:block; max-width:none; max-height:none; }
-
-/* SOFT: gần chạm top/bottom, chừa 2 mép trái/phải */
-#warning-modal.soft{
-  background: rgba(0,0,0,.66);
-  padding-inline: 3vw;
-  /* chừa safe-area trên di động */
-  padding-top:  max(1.5vh, env(safe-area-inset-top));
-  padding-bottom:max(1.5vh, env(safe-area-inset-bottom));
+#warning-modal img {
+  display: block; max-width: none; max-height: none;
 }
-#warning-modal.soft img{
+/* SOFT: gần chạm top/bottom, chừa 2 mép trái/phải */
+#warning-modal.soft {
+  background: rgba(0,0,0,0.66);
+  padding-inline: 3vw;
+  padding-top: max(1.5vh, env(safe-area-inset-top));
+  padding-bottom: max(1.5vh, env(safe-area-inset-bottom));
+}
+#warning-modal.soft img {
   height: 94vh;
   width: auto;
   object-fit: contain;
   border-radius: 18px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
-
-/* HARD: full-bleed phủ kín viewport, ưu tiên giữ chữ phía trên */
-#warning-modal.hard{
-  background: rgba(0,0,0,.9);
+/* HARD: full-bleed phủ kín viewport */
+#warning-modal.hard {
+  background: rgba(0,0,0,0.9);
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
-#warning-modal.hard img{
-  /* vmin = min(viewport width, viewport height) → cực hợp cho ảnh vuông */
+#warning-modal.hard img {
   width: 96vmin;
   height: auto;
   max-width: 96vw;
   max-height: 96vh;
   object-fit: contain;
   border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
-
-/* Mobile dọc: chừa tai thỏ/safe-area và giảm crop nếu cần */
-@media (orientation: portrait){
-  #warning-modal.hard{
+@media (orientation: portrait) {
+  #warning-modal.hard {
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
              env(safe-area-inset-bottom) env(safe-area-inset-left);
   }
-  #warning-modal.hard img{
+  #warning-modal.hard img {
     width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right));
     height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   }
 }
-
-/* Màn hình cực thấp: giảm một chút chiều cao soft để không dính mép */
-@media (max-height: 520px){
-  #warning-modal.soft img{ height: 88vh; }
+@media (max-height: 520px) {
+  #warning-modal.soft img { height: 88vh; }
+}
+/* khoá cuộn + feedback con trỏ khi đang warn */
+body.warn-lock {
+  overflow: hidden !important;
+  cursor: not-allowed !important;
+  user-select: none !important;
 }
 
-/* khoá cuộn + feedback con trỏ khi đang warn */
-body.warn-lock{
-  overflow:hidden !important;
-  cursor:not-allowed !important;
-  user-select:none !important;
+/* === TÙY CHỈNH CHO SEARCH BOX === */
+.recent-articles .recent-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-right: 2rem;
+}
+.recent-articles .recent-header h2 {
+  margin: 0;
+  font-size: 2rem;
+  color: #4e8cff;
+}
+#article-search {
+  width: clamp(350px, 60%, 800px);
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  background-color: #f5f5f5;
+  color: #4e8cff;
+  transition: border-color .2s, box-shadow .2s;
+}
+#article-search::placeholder {
+  color: #a0a0a0;
+}
+#article-search:focus {
+  outline: none;
+  border-color: #4e8cff;
+  box-shadow: 0 0 0 3px rgba(78, 140, 255, 0.3);
+}
+/* Ẩn/hiện mượt các mục không khớp */
+.article-item.hidden {
+  opacity: 0;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  transition: opacity .3s, height .3s;
 }
