@@ -3,188 +3,197 @@
   if (window.__clickSoundInstalled) return;
   window.__clickSoundInstalled = true;
 
+  // ─── 1) Base path & URLs ──────────────────────────────────────────────────────
   const BASE = (window.__ASSET_BASE__ || '').replace(/\/$/, '');
-
-  /* ===== Paths & config ===== */
-  const PATHS = {
-    click:   BASE + '/assets/audio/click.mp3',
-    rare:    BASE + '/assets/audio/click-rare.mp3',
-    warn:    BASE + '/assets/audio/warn.mp3',
-    softImg: BASE + '/assets/images/warn-soft.jpg',
-    hardImg: BASE + '/assets/images/warn.jpg',
+  const URLS = {
+    click: `${BASE}/assets/audio/click.mp3`,
+    rare:  `${BASE}/assets/audio/click-rare.mp3`,
+    warn:  `${BASE}/assets/audio/warn.mp3`,
+    softImg: `${BASE}/assets/images/warn-soft.jpg`,
+    hardImg: `${BASE}/assets/images/warn.jpg`
   };
 
-  // âm lượng mặc định (click < Spotify)
-  const VOLUME = { click: 0.12, rare: 0.16, warn: 0.9 };
-  const SPOTIFY_DUCK = 0.4;          // click sound giảm bớt khi Spotify đang bật
-
-  const RARE_BASE       = 50;        // ~1/50 click phát rare
-  const SOFT_THRESHOLD  = 30;        // >=30 click / 8s -> soft
-  const HARD_THRESHOLD  = 50;        // >=50 click / 8s -> hard
-  const WINDOW_MS       = 8000;      // cửa sổ 8s
-  const SOFT_AUTOHIDE   = 3200;      // soft tự ẩn sau ~3.2s (không cho bấm tắt)
-  const HARD_AFTER_SOFT = 18;        // sau soft, thêm >=18 click -> hard
-  const SOFT_ARM_MS     = 7000;      // cửa sổ leo thang sau soft
+  // ─── 2) Config thresholds ────────────────────────────────────────────────────
+  const RARE_RATE       = 50;      // 1/50 chance rare
+  const WINDOW_MS       = 8000;    // 8s window
+  const SOFT_THRESHOLD  = 30;      // ≥30 clicks → soft
+  const HARD_THRESHOLD  = 50;      // ≥50 clicks → hard trực tiếp
+  const SOFT_ARM_MS     = 7000;    // 7s sau soft để arm hard
+  const HARD_AFTER_SOFT = 18;      // +18 clicks trong 7s → hard
+  const SOFT_AUTOHIDE   = 3200;    // auto-hide soft modal sau 3.2s
   const REDIRECT_URL    = 'https://www.youtube.com/watch?v=TscaT-2aIKc&autoplay=1';
 
-  /* ===== Audio ===== */
-  const sndClick = new Audio(PATHS.click); sndClick.volume = VOLUME.click;
-  const sndRare  = new Audio(PATHS.rare);  sndRare.volume  = VOLUME.rare;
-  const sndWarn  = new Audio(PATHS.warn);  sndWarn.volume  = VOLUME.warn;
-  sndClick.preload = sndRare.preload = sndWarn.preload = 'auto';
+  // ─── 3) Web Audio setup ─────────────────────────────────────────────────────
+  const ctx = new (window.AudioContext || window.webkitAudioContext)();
+  const buffers = {};
+  let rareCounter = 0;
 
-  /* ===== Modal ===== */
+  async function loadSound(name, url) {
+    try {
+      const res = await fetch(url);
+      const ab  = await res.arrayBuffer();
+      buffers[name] = await ctx.decodeAudioData(ab);
+    } catch (e) { console.warn('Failed to load', name, e); }
+  }
+  Promise.all(Object.entries(URLS)
+    .filter(([k]) => k==='click' || k==='rare' || k==='warn')
+    .map(([k,u]) => loadSound(k,u))
+  );
+
+  function unlockAudio() {
+    if (ctx.state === 'suspended') ctx.resume();
+    window.removeEventListener('pointerdown', unlockAudio);
+    window.removeEventListener('touchstart',   unlockAudio);
+  }
+  window.addEventListener('pointerdown', unlockAudio, { once:true, passive:true });
+  window.addEventListener('touchstart',   unlockAudio, { once:true, passive:true });
+
+  function playBuf(name, volume=0.3) {
+    const buf = buffers[name];
+    if (!buf) return;
+    const src = ctx.createBufferSource();
+    const gain = ctx.createGain();
+    gain.gain.value = volume;
+    src.buffer = buf;
+    src.connect(gain).connect(ctx.destination);
+    src.start();
+  }
+
+  // ─── 4) Spotify suspend/resume ────────────────────────────────────────────────
+  function suspendSpotify() {
+    const sp = document.querySelector('iframe[src*="spotify"]');
+    if (!sp) return;
+    sp.dataset.prevSrc = sp.src;
+    sp.src = '';
+  }
+  function resumeSpotify() {
+    const sp = document.querySelector('iframe[data-prev-src]');
+    if (!sp) return;
+    sp.src = sp.dataset.prevSrc;
+    delete sp.dataset.prevSrc;
+  }
+
+  // ─── 5) Modal & blocker ──────────────────────────────────────────────────────
   const modal = document.createElement('div');
   modal.id = 'warning-modal';
-  const modalImg = document.createElement('img');
-  modal.appendChild(modalImg);
+  Object.assign(modal.style, {
+    position: 'fixed', inset: '0',
+    display: 'none', alignItems:'center', justifyContent:'center',
+    background:'rgba(0,0,0,0.7)', zIndex:99999,
+    backdropFilter:'blur(2px)'
+  });
+  const img = document.createElement('img');
+  Object.assign(img.style, { maxWidth:'none', maxHeight:'none', display:'block' });
+  modal.appendChild(img);
   document.body.appendChild(modal);
 
-  const modalVisible = () => modal.style.display === 'flex';
-  function showModal(src, kind){
-    modal.classList.remove('soft','hard');
-    if (kind) modal.classList.add(kind);
-    modalImg.src = src;
+  function modalOn()   { return modal.style.display === 'flex'; }
+  function showModal(type) {
+    blockAll();
+    modal.className = type;
+    img.src = type==='soft' ? URLS.softImg : URLS.hardImg;
     modal.style.display = 'flex';
+
+    if (type==='soft') {
+      setTimeout(() => {
+        if (!hardFired) hideModal();
+      }, SOFT_AUTOHIDE);
+    }
   }
-  function hideModal(){
+  function hideModal() {
     modal.style.display = 'none';
-    modal.classList.remove('soft','hard');
+    unblockAll();
+    if (hardFired) {
+      resumeSpotify();
+    }
   }
 
-  /* ===== Spotify ===== */
-  const findSpotify = () => document.querySelector('#spotify-player-wrapper iframe');
-  const isSpotifyActive = () => {
-    const ifr = findSpotify();
-    return !!(ifr && ifr.src && ifr.src !== 'about:blank');
-  };
-  function suspendSpotify(){
-    const ifr = findSpotify(); if (!ifr) return;
-    if (!ifr.dataset.prevSrc) { ifr.dataset.prevSrc = ifr.src || ''; try { ifr.src = 'about:blank'; } catch{} }
+  function blocker(e) {
+    if (modalOn()) e.preventDefault(), e.stopPropagation();
   }
-  function resumeSpotify(){
-    const ifr = findSpotify(); if (!ifr) return;
-    if (ifr.dataset.prevSrc) { const s = ifr.dataset.prevSrc; delete ifr.dataset.prevSrc; try { ifr.src = s; } catch{} }
+  function blockAll() {
+    window.addEventListener('pointerdown', blocker, true);
+    window.addEventListener('wheel',       blocker, { capture:true, passive:false });
+    window.addEventListener('keydown',     blocker, true);
+    document.body.style.overflow = 'hidden';
   }
-
-  /* ===== State ===== */
-  let clicks = [];
-  let rareCounter = 0;
-  let softShown = false;
-  let softArmedUntil = 0;
-  let softBaseCount = 0;
-  let hardFired = false;
-  let muteAll = false;
-
-  /* ===== Helpers ===== */
-  function playClick() {
-    if (muteAll) return;            // hard: tắt hoàn toàn
-    if (modalVisible()) return;     // đang soft/hard: không phát click sound
-
-    // ducking khi Spotify đang bật
-    const duck = isSpotifyActive() ? SPOTIFY_DUCK : 1;
-    sndClick.volume = VOLUME.click * duck;
-    sndRare .volume = VOLUME.rare  * duck;
-
-    rareCounter++;
-    const rareHit = (rareCounter % RARE_BASE === 0) || (Math.random() < 1/(RARE_BASE*2));
-    try {
-      if (rareHit) { sndRare.currentTime = 0; sndRare.play().catch(()=>{}); }
-      else         { sndClick.currentTime = 0; sndClick.play().catch(()=>{}); }
-    } catch {}
+  function unblockAll() {
+    window.removeEventListener('pointerdown', blocker, true);
+    window.removeEventListener('wheel',       blocker, true);
+    window.removeEventListener('keydown',     blocker, true);
+    document.body.style.overflow = '';
   }
 
-  function showSoft() {
-    softShown = true;
-    // KHÔNG dừng Spotify ở soft warn
-    document.body.classList.add('warn-lock');
-    showModal(PATHS.softImg, 'soft');
+  // ─── 6) State for spam logic ─────────────────────────────────────────────────
+  let clicks = [], softShown = false, hardFired = false;
+  let softBase = 0, softUntil = 0;
 
-    // vũ khí hóa soft: nếu tiếp tục spam trong 7s kế tiếp → hard
-    softBaseCount  = clicks.length;
-    softArmedUntil = Date.now() + SOFT_ARM_MS;
-
-    // tự ẩn sau SOFT_AUTOHIDE, không cho thao tác để tắt
-    setTimeout(() => { if (!hardFired) closeSoft(); }, SOFT_AUTOHIDE);
-  }
-
-  function closeSoft() {
-    hideModal();
-    document.body.classList.remove('warn-lock');
-  }
-
-  function showHard() {
-    hardFired = true;
-    muteAll = true;                       // chặn mọi click sound
-    try { sndClick.pause(); sndRare.pause(); } catch{}
-    suspendSpotify();                     // hard: dừng Spotify
-
-    document.body.classList.add('warn-lock');
-    showModal(PATHS.hardImg, 'hard');
-
-    // chặn hoàn toàn thao tác
-    const trap = e => { e.stopPropagation(); e.preventDefault(); };
-    window.addEventListener('click',       trap, true);
-    window.addEventListener('pointerdown', trap, true);
-    window.addEventListener('keydown',     trap, true);
-
-    let redirected = false;
-    const go = () => {
-      if (redirected) return;
-      redirected = true;
-      try { document.documentElement.requestFullscreen?.(); } catch {}
-      window.removeEventListener('click',       trap, true);
-      window.removeEventListener('pointerdown', trap, true);
-      window.removeEventListener('keydown',     trap, true);
-      setTimeout(() => { window.location.href = REDIRECT_URL; }, 120);
-    };
-
-    try {
-      sndWarn.currentTime = 0;
-      sndWarn.play().then(() => {
-        sndWarn.onended = go;
-        setTimeout(go, Math.max(10000, (sndWarn.duration||7)*1000 + 400));
-      }).catch(() => setTimeout(go, 1800));
-    } catch { setTimeout(go, 1800); }
-  }
-
-  /* --- Chặn bấm ra ngoài hoặc trên ảnh để thoát soft ---
-     (vẫn đếm click nhờ handler capture trên window) */
-  const block = (e) => { e.preventDefault(); e.stopPropagation(); };
-  modal.addEventListener('click', block, true);
-  modalImg.addEventListener('click', block, true);
-
-  /* ===== Click logic ===== */
-  function handleClick() {
-    playClick();
-
+  // ─── 7) Core click handler ──────────────────────────────────────────────────
+  window.addEventListener('pointerdown', e => {
     const now = Date.now();
+
+    // 7.1 play click/rare nếu chưa có modal
+    if (!modalOn()) {
+      rareCounter++;
+      if (rareCounter % RARE_RATE === 0) playBuf('rare', 0.4);
+      else                                playBuf('click',0.3);
+    }
+
+    // 7.2 record & prune
     clicks.push(now);
     clicks = clicks.filter(t => now - t <= WINDOW_MS);
 
+    // 7.3 hard trực tiếp
     if (!hardFired && clicks.length >= HARD_THRESHOLD) {
-      showHard(); clicks.length = 0; return;
+      hardFired = true;
+      suspendSpotify();
+      playBuf('warn', 0.8);
+      showModal('hard');
+      const dur = (buffers.warn?.duration||7)*1000 + 200;
+      setTimeout(() => {
+        document.documentElement.requestFullscreen?.();
+        location.href = REDIRECT_URL;
+      }, dur);
+      return;
     }
-    if (!hardFired && softArmedUntil && now <= softArmedUntil) {
-      if (clicks.length - softBaseCount >= HARD_AFTER_SOFT) {
-        showHard(); clicks.length = 0; return;
-      }
-    }
-    if (!hardFired && !softShown && clicks.length >= SOFT_THRESHOLD) {
-      showSoft(); return;
-    }
-    if (clicks.length === 1) { softShown = false; softArmedUntil = 0; }
-  }
 
-  // đếm cả khi overlay đang bật (capture)
-  window.addEventListener('click', handleClick, { capture: true });
+    // 7.4 hard sau soft
+    if (!hardFired && softUntil >= now
+      && clicks.length - softBase >= HARD_AFTER_SOFT) {
+      hardFired = true;
+      suspendSpotify();
+      playBuf('warn', 0.8);
+      showModal('hard');
+      const dur = (buffers.warn?.duration||7)*1000 + 200;
+      setTimeout(() => {
+        document.documentElement.requestFullscreen?.();
+        location.href = REDIRECT_URL;
+      }, dur);
+      return;
+    }
 
-  // reset khi đổi trang nội bộ (Swup)
+    // 7.5 soft
+    if (!softShown && clicks.length >= SOFT_THRESHOLD) {
+      softShown = true;
+      softBase  = clicks.length;
+      softUntil = now + SOFT_ARM_MS;
+      showModal('soft');
+      return;
+    }
+
+    // 7.6 reset nếu click đếm lại từ đầu
+    if (clicks.length === 1) {
+      softShown = false;
+      softUntil = 0;
+    }
+  }, { capture:true, passive:true });
+
+  // ─── 8) SPA reset (Swup) ─────────────────────────────────────────────────────
   window.addEventListener('swup:contentReplaced', () => {
-    clicks.length = 0;
-    softShown = false;
-    softArmedUntil = 0;
-    hardFired = false;
-    muteAll = false;
+    hideModal();
+    resumeSpotify();
+    clicks = []; softShown = false; hardFired = false;
+    softUntil = 0;
   });
+
 })();
