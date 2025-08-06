@@ -6,7 +6,7 @@
   --player-right: 2rem;     /* cách mép phải */
 
   /* Khoảng hở giữa Lịch và Spotify (0 = dính hẳn) */
-  --stack-gap: 0rem;        /* đổi thành .75rem nếu muốn hở ~12px */
+  --stack-gap: 0rem;     /* đổi thành .75rem nếu muốn hở ~12px */
 
   /* Khung blog (overlay) */
   --wrapper-left: 2rem;     /* lề trái của khung blog */
@@ -111,8 +111,8 @@ body{
   height: var(--player-h);
   background: rgba(0,0,0,0.7);
   /* bo góc dưới, bỏ bo góc trên để dính lịch phía trên */
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+  border-top-left-radius: 1;
+  border-top-right-radius: 1;
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   box-shadow: 0 4px 16px rgba(0,0,0,.6);
@@ -137,11 +137,11 @@ body{
   /* bo góc trên, bỏ bo góc dưới để dính Spotify */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 1;
+  border-bottom-right-radius: 1;
   box-shadow: 0 6px 16px rgba(0,0,0,.6);
   overflow: hidden;
-  z-index: 1100; /* cao hơn Spotify và nội dung */
+  z-index: 1000; /* cao hơn Spotify và nội dung */
 }
 #schedule-bar iframe{
   width: 100%;
@@ -162,3 +162,79 @@ body{
 /* Hiệu ứng mượt khi Swup thay nội dung */
 .transition-fade { transition: opacity .2s ease; }
 html.is-changing .transition-fade { opacity: 0; }
+
+/* ===== WARNING MODAL (final, responsive) ===== */
+#warning-modal{
+  position: fixed; inset: 0;
+  display: none;                       /* show bằng JS */
+  align-items: center; justify-content: center;
+  background: rgba(0,0,0,.66);
+  z-index: 1300;
+  backdrop-filter: blur(2px);
+}
+
+/* reset mặc định để .soft/.hard làm chủ kích thước */
+#warning-modal img{ display:block; max-width:none; max-height:none; }
+
+/* SOFT: gần chạm top/bottom, chừa 2 mép trái/phải */
+#warning-modal.soft{
+  background: rgba(0,0,0,.66);
+  padding-inline: 3vw;
+  /* chừa safe-area trên di động */
+  padding-top:  max(1.5vh, env(safe-area-inset-top));
+  padding-bottom:max(1.5vh, env(safe-area-inset-bottom));
+}
+#warning-modal.soft img{
+  height: 94vh;                 /* to theo chiều dọc, không full width */
+  width: auto;                  /* giữ tỉ lệ ảnh */
+  object-fit: contain;
+  border-radius: 18px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+
+/* HARD: full-bleed phủ kín viewport, ưu tiên giữ chữ phía trên */
+/* HARD: hiển thị toàn bộ ảnh, scale theo cạnh ngắn màn hình – không crop */
+#warning-modal.hard{
+  background: rgba(0,0,0,.9);
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#warning-modal.hard img{
+  /* vmin = min(viewport width, viewport height) → cực hợp cho ảnh vuông */
+  width: 96vmin;               /* chiếm ~96% cạnh ngắn */
+  height: auto;                /* giữ đúng tỉ lệ ảnh */
+  max-width: 96vw;             /* thêm “phanh” an toàn */
+  max-height: 96vh;
+  object-fit: contain;         /* đảm bảo không crop */
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+}
+
+
+/* Mobile dọc: chừa tai thỏ/safe-area và giảm crop nếu cần */
+@media (orientation: portrait){
+  #warning-modal.hard{
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+             env(safe-area-inset-bottom) env(safe-area-inset-left);
+  }
+  #warning-modal.hard img{
+    width: calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right));
+    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    /* nếu vẫn bị crop chữ nhiều, đổi 'cover' -> 'contain' ở đây */
+  }
+}
+
+/* Màn hình cực thấp: giảm một chút chiều cao soft để không dính mép */
+@media (max-height: 520px){
+  #warning-modal.soft img{ height: 88vh; }
+}
+
+/* khoá cuộn + feedback con trỏ khi đang warn */
+body.warn-lock{
+  overflow:hidden !important;
+  cursor:not-allowed !important;
+  user-select:none !important;
+}
