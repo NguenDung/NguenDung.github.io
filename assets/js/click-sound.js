@@ -14,17 +14,17 @@
     hardImg: BASE + '/assets/images/warn.jpg',
   };
 
-  // âm lượng click thấp hơn nhạc Spotify
+  // âm lượng mặc định (click < Spotify)
   const VOLUME = { click: 0.12, rare: 0.16, warn: 0.9 };
+  const SPOTIFY_DUCK = 0.4;          // click sound giảm bớt khi Spotify đang bật
 
-  const RARE_BASE       = 50;          // ~1/50 click phát rare
-  const SOFT_THRESHOLD  = 30;          // >=30 click / cửa sổ → soft
-  const HARD_THRESHOLD  = 50;          // >=50 click / cửa sổ → hard
-  const WINDOW_MS       = 8000;        // cửa sổ đếm 8s (ngưng >8s reset)
-  const SOFT_LOCK_MS    = 2000;        // soft khóa thao tác tối thiểu 2s
-  const SOFT_AUTOHIDE   = 3200;        // auto ẩn soft sau ~3.2s
-  const HARD_AFTER_SOFT = 18;          // sau soft, thêm ≥18 click → hard
-  const SOFT_ARM_MS     = 7000;        // “cửa sổ” leo thang sau soft (7s)
+  const RARE_BASE       = 50;        // ~1/50 click phát rare
+  const SOFT_THRESHOLD  = 30;        // >=30 click / 8s -> soft
+  const HARD_THRESHOLD  = 50;        // >=50 click / 8s -> hard
+  const WINDOW_MS       = 8000;      // cửa sổ 8s
+  const SOFT_AUTOHIDE   = 3200;      // soft tự ẩn sau ~3.2s (không cho bấm tắt)
+  const HARD_AFTER_SOFT = 18;        // sau soft, thêm >=18 click -> hard
+  const SOFT_ARM_MS     = 7000;      // cửa sổ leo thang sau soft
   const REDIRECT_URL    = 'https://www.youtube.com/watch?v=TscaT-2aIKc&autoplay=1';
 
   /* ===== Audio ===== */
@@ -33,7 +33,7 @@
   const sndWarn  = new Audio(PATHS.warn);  sndWarn.volume  = VOLUME.warn;
   sndClick.preload = sndRare.preload = sndWarn.preload = 'auto';
 
-  /* ===== Modal (dùng class .soft / .hard để style) ===== */
+  /* ===== Modal ===== */
   const modal = document.createElement('div');
   modal.id = 'warning-modal';
   const modalImg = document.createElement('img');
@@ -41,7 +41,6 @@
   document.body.appendChild(modal);
 
   const modalVisible = () => modal.style.display === 'flex';
-
   function showModal(src, kind){
     modal.classList.remove('soft','hard');
     if (kind) modal.classList.add(kind);
@@ -53,8 +52,12 @@
     modal.classList.remove('soft','hard');
   }
 
-  /* ===== Spotify: tạm dừng / khôi phục ===== */
+  /* ===== Spotify ===== */
   const findSpotify = () => document.querySelector('#spotify-player-wrapper iframe');
+  const isSpotifyActive = () => {
+    const ifr = findSpotify();
+    return !!(ifr && ifr.src && ifr.src !== 'about:blank');
+  };
   function suspendSpotify(){
     const ifr = findSpotify(); if (!ifr) return;
     if (!ifr.dataset.prevSrc) { ifr.dataset.prevSrc = ifr.src || ''; try { ifr.src = 'about:blank'; } catch{} }
@@ -65,20 +68,23 @@
   }
 
   /* ===== State ===== */
-  let clicks = [];                 // timestamps trong 8s gần nhất
+  let clicks = [];
   let rareCounter = 0;
   let softShown = false;
-  let softUnlockAt = 0;            // thời điểm có thể tắt soft
-  let softArmedUntil = 0;          // cửa sổ leo thang sau soft
-  let softBaseCount = 0;           // số click tại thời điểm bật soft
+  let softArmedUntil = 0;
+  let softBaseCount = 0;
   let hardFired = false;
-  let muteAll = false;             // hard: tắt mọi click sound
+  let muteAll = false;
 
   /* ===== Helpers ===== */
   function playClick() {
-    if (muteAll) return;           // hard → không còn phát click sound
-    // không phát tiếng khi overlay đang mở (tránh “đá” âm)
-    if (modalVisible()) return;
+    if (muteAll) return;            // hard: tắt hoàn toàn
+    if (modalVisible()) return;     // đang soft/hard: không phát click sound
+
+    // ducking khi Spotify đang bật
+    const duck = isSpotifyActive() ? SPOTIFY_DUCK : 1;
+    sndClick.volume = VOLUME.click * duck;
+    sndRare .volume = VOLUME.rare  * duck;
 
     rareCounter++;
     const rareHit = (rareCounter % RARE_BASE === 0) || (Math.random() < 1/(RARE_BASE*2));
@@ -90,23 +96,20 @@
 
   function showSoft() {
     softShown = true;
-    suspendSpotify();
+    // KHÔNG dừng Spotify ở soft warn
     document.body.classList.add('warn-lock');
-
     showModal(PATHS.softImg, 'soft');
-    softUnlockAt   = performance.now() + SOFT_LOCK_MS;
 
-    // vũ khí hóa soft: nếu tiếp tục spam trong 7s kế → hard
+    // vũ khí hóa soft: nếu tiếp tục spam trong 7s kế tiếp → hard
     softBaseCount  = clicks.length;
     softArmedUntil = Date.now() + SOFT_ARM_MS;
 
-    // auto-ẩn sau 3.2s nếu không bấm
+    // tự ẩn sau SOFT_AUTOHIDE, không cho thao tác để tắt
     setTimeout(() => { if (!hardFired) closeSoft(); }, SOFT_AUTOHIDE);
   }
 
   function closeSoft() {
     hideModal();
-    resumeSpotify();
     document.body.classList.remove('warn-lock');
   }
 
@@ -114,26 +117,25 @@
     hardFired = true;
     muteAll = true;                       // chặn mọi click sound
     try { sndClick.pause(); sndRare.pause(); } catch{}
+    suspendSpotify();                     // hard: dừng Spotify
 
-    suspendSpotify();
     document.body.classList.add('warn-lock');
     showModal(PATHS.hardImg, 'hard');
 
     // chặn hoàn toàn thao tác
     const trap = e => { e.stopPropagation(); e.preventDefault(); };
-    window.addEventListener('click', trap, true);
+    window.addEventListener('click',       trap, true);
     window.addEventListener('pointerdown', trap, true);
-    window.addEventListener('keydown', trap, true);
+    window.addEventListener('keydown',     trap, true);
 
     let redirected = false;
     const go = () => {
       if (redirected) return;
       redirected = true;
-      // thử vào fullscreen (có thể bị chặn tuỳ trình duyệt)
       try { document.documentElement.requestFullscreen?.(); } catch {}
-      window.removeEventListener('click', trap, true);
+      window.removeEventListener('click',       trap, true);
       window.removeEventListener('pointerdown', trap, true);
-      window.removeEventListener('keydown', trap, true);
+      window.removeEventListener('keydown',     trap, true);
       setTimeout(() => { window.location.href = REDIRECT_URL; }, 120);
     };
 
@@ -146,42 +148,35 @@
     } catch { setTimeout(go, 1800); }
   }
 
-  // click lên modal: chỉ đóng soft sau khi hết thời gian khóa
-  modal.addEventListener('click', (e) => {
-    if (modal.classList.contains('soft')) {
-      e.preventDefault(); e.stopPropagation();
-      if (performance.now() >= softUnlockAt) closeSoft();
-    }
-  }, true);
+  /* --- Chặn bấm ra ngoài hoặc trên ảnh để thoát soft ---
+     (vẫn đếm click nhờ handler capture trên window) */
+  const block = (e) => { e.preventDefault(); e.stopPropagation(); };
+  modal.addEventListener('click', block, true);
+  modalImg.addEventListener('click', block, true);
 
   /* ===== Click logic ===== */
   function handleClick() {
-    // vẫn đếm để leo thang; nhưng playClick() chỉ khi không có overlay
     playClick();
 
     const now = Date.now();
     clicks.push(now);
-    clicks = clicks.filter(t => now - t <= WINDOW_MS); // chỉ giữ 8s gần nhất
+    clicks = clicks.filter(t => now - t <= WINDOW_MS);
 
     if (!hardFired && clicks.length >= HARD_THRESHOLD) {
       showHard(); clicks.length = 0; return;
     }
-
     if (!hardFired && softArmedUntil && now <= softArmedUntil) {
       if (clicks.length - softBaseCount >= HARD_AFTER_SOFT) {
         showHard(); clicks.length = 0; return;
       }
     }
-
     if (!hardFired && !softShown && clicks.length >= SOFT_THRESHOLD) {
       showSoft(); return;
     }
-
-    // nếu chuỗi vừa reset (user ngừng lâu) → cho phép soft lại
     if (clicks.length === 1) { softShown = false; softArmedUntil = 0; }
   }
 
-  // bắt ở capture-phase để vẫn đếm khi modal đang che
+  // đếm cả khi overlay đang bật (capture)
   window.addEventListener('click', handleClick, { capture: true });
 
   // reset khi đổi trang nội bộ (Swup)
