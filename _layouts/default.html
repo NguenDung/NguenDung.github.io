@@ -41,12 +41,12 @@
               </a>
             </li>
             <li>
-              <a href="https://instagram.com/yourname" target="_blank">
+              <a href="https://www.instagram.com/suii_cute/" target="_blank">
                 <i class="fab fa-instagram"></i> Instagram
               </a>
             </li>
             <li>
-              <a href="https://www.threads.net/@Suii_cute" target="_blank">
+              <a href="https://www.threads.com/@suii_cute" target="_blank">
                 <span class="svg-icon">
                   <!-- Threads SVG -->
                   <svg viewBox="0 0 48 48" width="22" height="22" fill="none" style="display:block">
@@ -59,7 +59,7 @@
               </a>
             </li>
             <li>
-              <a href="https://www.tiktok.com/@yourname" target="_blank">
+              <a href="https://www.tiktok.com/@suiicute" target="_blank">
                 <span class="svg-icon">
                   <!-- TikTok SVG -->
                   <svg viewBox="0 0 48 48" width="22" height="22" fill="none" style="display:block">
@@ -82,19 +82,19 @@
           const closeBtn = document.getElementById('welcome-close');
           const audio    = document.getElementById('welcome-audio');
           function open() {
-            overlay.style.display = 'block';
-            modal.style.display   = 'flex';
+            overlay.classList.add('active');
+            modal.classList.add('active');
             document.body.classList.add('modal-open');
           }
           function close() {
-            overlay.style.display = 'none';
-            modal.style.display   = 'none';
+            overlay.classList.remove('active');
+            modal.classList.remove('active');
             document.body.classList.remove('modal-open');
             if(audio) audio.pause();
           }
-          open();
+          setTimeout(open, 60);
           closeBtn.addEventListener('click', close);
-          overlay .addEventListener('click', close);
+          overlay.addEventListener('click', close);
           document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
         });
       </script>
@@ -116,4 +116,3 @@
     <script defer src="https://unpkg.com/swup@4/dist/swup.min.js"></script>
   </body>
 </html>
-

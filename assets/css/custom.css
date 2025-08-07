@@ -208,20 +208,41 @@ body.warn-lock {
   transition: opacity .3s, height .3s;
 }
 
-/* ===== WELCOME MODAL ===== */
-#welcome-overlay {
-  display: none; position: fixed; inset: 0;
-  background: rgba(0,0,0,.6); z-index: 1999;
+/* ===== WELCOME MODAL: Opacity mượt, không nhấp nháy ===== */
+#welcome-overlay, #welcome-modal {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s cubic-bezier(.4,0,.2,1);
+  display: none;
+}
+#welcome-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  display: block;
+}
+#welcome-modal.active {
+  opacity: 1;
+  pointer-events: auto;
+  display: flex;
 }
 #welcome-modal {
-  display: none; position: fixed; top: 50%; left: 50%;
+  /* KHÔNG CẦN display: flex ở đây nữa! */
+  position: fixed; top: 50%; left: 50%;
   transform: translate(-50%,-50%);
   width: 90vw; max-width: 600px; padding: 3rem;
   background: rgba(0,0,0,.95);
   border-radius: 1rem;
   box-shadow: 0 8px 30px rgba(0,0,0,.8);
-  z-index: 2000; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+  z-index: 2000;
+  flex-direction: column; align-items: center; gap: 1.5rem;
 }
+#welcome-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,.6); z-index: 1999;
+}
+
+/* Các rule cũ như .welcome-card, .welcome-avatar giữ nguyên */
+
 .modal-open { overflow: hidden }
 .welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative }
 .welcome-avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover }
