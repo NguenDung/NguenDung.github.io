@@ -283,3 +283,133 @@ body.warn-lock {
   overflow: hidden;
   transition: opacity .3s, height .3s;
 }
+/* —— Welcome Modal Styles —— */
+
+/* Overlay mờ nền */
+#welcome-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 1999;
+}
+
+/* Modal chính */
+#welcome-modal {
+  display: none;
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90vw;
+  max-width: 600px;
+  padding: 3rem;
+  background: rgba(0,0,0,0.95);
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+  z-index: 2000;
+
+  /* Flex column căn giữa */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+/* Disable scroll khi modal mở */
+.modal-open {
+  overflow: hidden;
+}
+
+/* Nội dung card */
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+/* Avatar */
+.welcome-avatar {
+  width: 160px;    /* tăng kích thước */
+  height: 160px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Tiêu đề lớn */
+.welcome-card h1 {
+  font-size: 3rem;  /* tăng cỡ chữ */
+  margin: 0;
+}
+
+/* Đoạn text */
+.welcome-card p {
+  font-size: 1.3rem; /* tăng cỡ chữ */
+  margin: 0.5rem 0;
+  line-height: 1.4;
+}
+
+/* Danh sách link 3 cột */
+.welcome-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* 3 cột */
+  gap: 0.75rem 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 1.5rem 0 0;
+}
+
+/* Link kèm icon */
+.welcome-links li a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem; /* tăng cỡ chữ */
+  color: #4e8cff;
+  text-decoration: none;
+}
+.welcome-links li a:hover {
+  text-decoration: underline;
+}
+
+/* Nút đóng */
+#welcome-close {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  font-size: 2.4rem; /* tăng size nút */
+  color: #ccc;
+  cursor: pointer;
+}
+#welcome-close:hover {
+  color: #fff;
+}
+
+/* —— Particle effects trong welcome-modal —— */
+.particle-container {
+  position: absolute;
+  inset: 0;             /* phủ toàn bộ modal */
+  pointer-events: none; /* click xuyên xuống dưới */
+  overflow: hidden;
+  z-index: 10;
+}
+
+/* Mỗi particle sẽ là 1 span.foo */
+.particle {
+  position: absolute;
+  font-size: 1.4rem; /* tăng cỡ icon particle */
+  opacity: 0.9;
+  animation: floatUp 2s ease-out forwards;
+}
+
+.particle.star  { color: gold;     }
+.particle.heart { color: hotpink; }
+
+/* rũ lên và mờ dần */
+@keyframes floatUp {
+  0%   { transform: translateY(0) scale(1);    opacity: 1; }
+  100% { transform: translateY(-150px) scale(1.4); opacity: 0; }
+}

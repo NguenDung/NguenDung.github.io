@@ -7,12 +7,36 @@
   <script>
     window.__ASSET_BASE__ = '{{ "" | relative_url }}';
   </script>
-  <!-- Chỉ load hai script gốc, không có star-effect hay search.js -->
   <script defer src="{{ '/assets/js/cursor-trail.js' | relative_url }}"></script>
-  <script defer src="{{ '/assets/js/click-sound.js' | relative_url }}"></script>
+  <script defer src="{{ '/assets/js/click-sound.js'   | relative_url }}"></script>
   <script defer src="{{ '/assets/js/search.js'         | relative_url }}"></script>
   
   <body>
+
+    <!-- Welcome Modal -->
+    <div id="welcome-overlay"></div>
+    <div id="welcome-modal">
+      <button id="welcome-close" aria-label="Close">&times;</button>
+      <div class="welcome-card">
+        <img src="{{ '/assets/wink.gif' | relative_url }}"
+             alt="SuiiKawaii Avatar" class="welcome-avatar">
+        <h1>Welcome! 👋</h1>
+        <p>I'm <strong>SuiiKawaii</strong>, a part-time CTF player and HoshiSuisei superfan.</p>
+        <p>Explore the blog and connect with me on:</p>
+        <ul class="welcome-links">
+          <li><a href="https://twitter.com/Suii_cute"      target="_blank"><i class="fab fa-twitter"></i> Twitter</a></li>
+          <li><a href="https://github.com/NguenDung"        target="_blank"><i class="fab fa-github"></i> GitHub</a></li>
+          <li><a href="https://facebook.com/SuiiKawaii"     target="_blank"><i class="fab fa-facebook"></i> Facebook</a></li>
+          <li><a href="https://instagram.com/yourname"      target="_blank"><i class="fab fa-instagram"></i> Instagram</a></li>
+          <li><a href="https://www.threads.net/@Suii_cute"   target="_blank"><i class="fab fa-threads"></i> Threads</a></li>
+          <li><a href="https://www.tiktok.com/@yourname"     target="_blank"><i class="fab fa-tiktok"></i> TikTok</a></li>
+        </ul>
+        <audio id="welcome-audio"
+               src="{{ '/assets/audio/welcome.mp3' | relative_url }}"
+               autoplay></audio>
+        <div class="particle-container"></div>
+      </div>
+    </div>
 
     {%- include schedule.html -%}
     {%- include spotify-player.html -%}
@@ -28,17 +52,51 @@
     <script>
       window.FontAwesomeConfig = { searchPseudoElements: true };
     </script>
-
     <script defer src="https://unpkg.com/swup@4/dist/swup.min.js"></script>
+
     <script>
-      const swup = new Swup({
-        containers: ['#swup'],
-        linkSelector: 'a[href^="{{ site.baseurl | default: "/" }}"]:not([data-no-swup]):not([target]):not([href*="#"])'
+    document.addEventListener('DOMContentLoaded', () => {
+      const overlay = document.getElementById('welcome-overlay');
+      const modal   = document.getElementById('welcome-modal');
+      const closeBtn= document.getElementById('welcome-close');
+      const audio   = document.getElementById('welcome-audio');
+      const container = document.querySelector('.particle-container');
+      let particleInterval;
+
+      function spawnParticle() {
+        const p = document.createElement('span');
+        p.classList.add('particle', Math.random()<0.5?'star':'heart');
+        p.style.left = (50 + (Math.random()-0.5)*60) + '%';
+        container.appendChild(p);
+        // tự động remove sau animation
+        p.addEventListener('animationend', () => p.remove());
+      }
+
+      function openModal() {
+        overlay.style.display = 'block';
+        modal.style.display   = 'flex';
+        document.body.classList.add('modal-open');
+        // bắt đầu tạo particle mỗi 300ms
+        particleInterval = setInterval(spawnParticle, 300);
+      }
+
+      function closeModal() {
+        overlay.style.display = '';
+        modal.style.display   = '';
+        document.body.classList.remove('modal-open');
+        clearInterval(particleInterval);
+        audio.pause();
+      }
+
+      // Mở tự động khi load trang
+      openModal();
+
+      closeBtn.addEventListener('click', closeModal);
+      overlay.addEventListener('click', closeModal);
+      document.addEventListener('keydown', e => {
+        if (e.key === 'Escape') closeModal();
       });
-      document.addEventListener('swup:contentReplaced', () => {
-        // Prism && Prism.highlightAll();
-        // MathJax && MathJax.typeset && MathJax.typeset();
-      });
+    });
     </script>
   </body>
 </html>
