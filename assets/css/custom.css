@@ -1,22 +1,13 @@
 /* ====== CẤU HÌNH NHANH ====== */
 :root {
-  /* Kích thước & vị trí Spotify (đồng bộ với thanh lịch) */
-  --player-w: 455px;        /* rộng Spotify */
-  --player-h: 520px;        /* cao Spotify */
-  --player-right: 2rem;     /* cách mép phải */
-
-  /* Khoảng hở giữa Lịch và Spotify (0 = dính hẳn) */
-  --stack-gap: 0rem;        /* đổi thành .75rem nếu muốn hở ~12px */
-
-  /* Khung blog (overlay) */
-  --wrapper-left: 2rem;     /* lề trái của khung blog */
-  --gap: 1.2rem;            /* lề phải khung blog (khoảng hở nhỏ bên cạnh) */
+  --player-w: 455px;
+  --player-h: 520px;
+  --player-right: 2rem;
+  --stack-gap: 0rem;
+  --wrapper-left: 2rem;
+  --gap: 1.2rem;
 }
-
-/* Tránh tràn ngang khi dùng 100vw trên Chrome */
-html, body {
-  overflow-x: clip;
-}
+html, body { overflow-x: clip; }
 
 /* ====== NỀN ====== */
 body {
@@ -24,30 +15,22 @@ body {
 }
 
 /* ====== LAYOUT CHUNG ====== */
-.page-content {
-  display: flex;
-  justify-content: flex-start;
-}
+.page-content { display: flex; justify-content: flex-start; }
 
 /* ====== KHUNG BLOG (OVERLAY) ====== */
-/* rộng = full viewport - (rộng Spotify + khoảng cách phải + lề trái) */
 .page-content .wrapper {
   width: calc(100vw - var(--player-w) - var(--player-right) - var(--wrapper-left));
   max-width: none !important;
-  margin: 2rem var(--gap) 2rem var(--wrapper-left);  /* top right bottom left */
+  margin: 2rem var(--gap) 2rem var(--wrapper-left);
   background: rgba(0,0,0,0.98);
   padding: 2.5rem;
   border-radius: 1.2rem;
   box-shadow: 0 6px 20px rgba(0,0,0,0.8);
   overflow: hidden;
   box-sizing: border-box;
-
-  /* Scale nhẹ nội dung để tận dụng diện tích */
   font-size: 1.08rem;
   line-height: 1.7;
 }
-
-/* Reset wrapper lồng trong header/footer để không lệch khung */
 .page-content .wrapper .wrapper,
 .page-content .wrapper .site-header .wrapper,
 .page-content .wrapper .site-footer .wrapper,
@@ -59,8 +42,6 @@ body {
   padding: 0 !important;
   box-sizing: border-box;
 }
-
-/* Loại nền/bóng riêng của header/footer để “nằm gọn” trong overlay */
 .page-content .wrapper .site-header,
 .page-content .wrapper .page-header,
 .page-content .wrapper .dash-header,
@@ -71,18 +52,9 @@ body {
 }
 
 /* ====== TYPO & TAGS TRONG KHUNG BLOG ====== */
-.page-content .wrapper h1 {
-  font-size: 2.2rem;
-}
-.page-content .wrapper h2 {
-  font-size: 1.6rem;
-  letter-spacing: 0.2px;
-  margin-bottom: 1rem;
-}
-.page-content .wrapper h3 {
-  font-size: 1.25rem;
-}
-
+.page-content .wrapper h1 { font-size: 2.2rem; }
+.page-content .wrapper h2 { font-size: 1.6rem; letter-spacing: 0.2px; margin-bottom: 1rem; }
+.page-content .wrapper h3 { font-size: 1.25rem; }
 .page-content .wrapper .tag,
 .page-content .wrapper .post-tag,
 .page-content .wrapper .label {
@@ -90,7 +62,6 @@ body {
   padding: 0.25rem 0.6rem;
   border-radius: 0.6rem;
 }
-
 .page-content .wrapper .post-meta,
 .page-content .wrapper .post__meta {
   font-size: 0.95rem;
@@ -100,11 +71,7 @@ body {
 .page-content .wrapper header img,
 .page-content .wrapper .site-header img,
 .page-content .wrapper .dash-header img {
-  width: 72px;
-  height: 72px;
-  object-fit: cover;
-  border-radius: 12px;
-  margin-right: 12px;
+  width: 72px; height: 72px; object-fit: cover; border-radius: 12px; margin-right: 12px;
 }
 .page-content .wrapper header p,
 .page-content .wrapper .site-header p,
@@ -120,7 +87,6 @@ body {
   width: var(--player-w);
   height: var(--player-h);
   background: rgba(0,0,0,0.7);
-  /* bo góc dưới, bỏ bo góc trên để dính lịch phía trên */
   border-top-left-radius: 0;
   border-top-right-radius: 0;
   border-bottom-left-radius: 1rem;
@@ -129,55 +95,35 @@ body {
   overflow: hidden;
   z-index: 1000;
 }
-#spotify-player-wrapper iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
+#spotify-player-wrapper iframe { width: 100%; height: 100%; border: none; }
 
 /* ====== THANH LỊCH (NẰM TRÊN SPOTIFY) ====== */
 #schedule-bar {
   position: fixed !important;
   right: var(--player-right);
-  /* Đặt ngay trên Spotify: 2rem (khoảng cách đáy) + chiều cao Spotify + khe tùy chọn */
   bottom: calc(2rem + var(--player-h) + var(--stack-gap));
   width: var(--player-w);
   height: 230px;
   background: rgba(0,0,0,0.85);
-  /* bo góc trên để dính Spotify phía dưới */
   border-top-left-radius: 1rem;
   border-top-right-radius: 1rem;
-  /* vuông góc dưới để khớp Spotify */
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
   box-shadow: 0 6px 16px rgba(0,0,0,0.6);
   overflow: hidden;
   z-index: 1000;
 }
-#schedule-bar iframe {
-  width: 100%;
-  height: 100%;
-  border: 0;
-}
+#schedule-bar iframe { width: 100%; height: 100%; border: 0; }
 
 /* ====== MOBILE ====== */
 @media (max-width: 600px) {
-  #spotify-player-wrapper,
-  #schedule-bar { display: none; }
-  .page-content .wrapper {
-    width: 100%;
-    margin: 1rem;
-    max-width: none;
-  }
+  #spotify-player-wrapper, #schedule-bar { display: none; }
+  .page-content .wrapper { width: 100%; margin: 1rem; max-width: none; }
 }
 
 /* Hiệu ứng mượt khi Swup thay nội dung */
-.transition-fade {
-  transition: opacity .2s ease;
-}
-html.is-changing .transition-fade {
-  opacity: 0;
-}
+.transition-fade { transition: opacity .2s ease; }
+html.is-changing .transition-fade { opacity: 0; }
 
 /* ===== WARNING MODAL (final, responsive) ===== */
 #warning-modal {
@@ -188,11 +134,7 @@ html.is-changing .transition-fade {
   z-index: 1300;
   backdrop-filter: blur(2px);
 }
-/* reset mặc định để .soft/.hard làm chủ kích thước */
-#warning-modal img {
-  display: block; max-width: none; max-height: none;
-}
-/* SOFT: gần chạm top/bottom, chừa 2 mép trái/phải */
+#warning-modal img { display: block; max-width: none; max-height: none; }
 #warning-modal.soft {
   background: rgba(0,0,0,0.66);
   padding-inline: 3vw;
@@ -200,27 +142,19 @@ html.is-changing .transition-fade {
   padding-bottom: max(1.5vh, env(safe-area-inset-bottom));
 }
 #warning-modal.soft img {
-  height: 94vh;
-  width: auto;
+  height: 94vh; width: auto;
   object-fit: contain;
   border-radius: 18px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
-/* HARD: full-bleed phủ kín viewport */
 #warning-modal.hard {
-  background: rgba(0,0,0,0.9);
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: rgba(0,0,0,0.9); padding: 0;
+  display: flex; align-items: center; justify-content: center;
 }
 #warning-modal.hard img {
-  width: 96vmin;
-  height: auto;
-  max-width: 96vw;
-  max-height: 96vh;
-  object-fit: contain;
-  border-radius: 12px;
+  width: 96vmin; height: auto;
+  max-width: 96vw; max-height: 96vh;
+  object-fit: contain; border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
 @media (orientation: portrait) {
@@ -233,10 +167,7 @@ html.is-changing .transition-fade {
     height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   }
 }
-@media (max-height: 520px) {
-  #warning-modal.soft img { height: 88vh; }
-}
-/* khoá cuộn + feedback con trỏ khi đang warn */
+@media (max-height: 520px) { #warning-modal.soft img { height: 88vh; } }
 body.warn-lock {
   overflow: hidden !important;
   cursor: not-allowed !important;
@@ -266,61 +197,53 @@ body.warn-lock {
   color: #4e8cff;
   transition: border-color .2s, box-shadow .2s;
 }
-#article-search::placeholder {
-  color: #a0a0a0;
-}
+#article-search::placeholder { color: #a0a0a0; }
 #article-search:focus {
   outline: none;
   border-color: #4e8cff;
   box-shadow: 0 0 0 3px rgba(78, 140, 255, 0.3);
 }
-/* Ẩn/hiện mượt các mục không khớp */
 .article-item.hidden {
-  opacity: 0;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
+  opacity: 0; height: 0; margin: 0; padding: 0; overflow: hidden;
   transition: opacity .3s, height .3s;
 }
-/* Welcome Modal Styles */
-#welcome-overlay{
-  display:none;position:fixed;inset:0;
-  background:rgba(0,0,0,.6);z-index:1999;
-}
-#welcome-modal{
-  display:none;position:fixed;top:50%;left:50%;
-  transform:translate(-50%,-50%);
-  width:90vw;max-width:600px;padding:3rem;
-  background:rgba(0,0,0,.95);
-  border-radius:1rem;box-shadow:0 8px 30px rgba(0,0,0,.8);
-  z-index:2000;display:flex;flex-direction:column;align-items:center;gap:1.5rem;
-}
-.modal-open{overflow:hidden}
-.welcome-card{display:flex;flex-direction:column;align-items:center;text-align:center;position:relative}
-.welcome-avatar{width:160px;height:160px;border-radius:50%;object-fit:cover}
-.welcome-card h1{font-size:3rem;margin:0}
-.welcome-card p{font-size:1.3rem;margin:.5rem 0;line-height:1.4}
 
-/* Link 3 cột + icon */
-.welcome-links{
-  display:grid;grid-template-columns:repeat(3,1fr);
-  gap:.75rem 1.5rem;list-style:none;padding:0;margin:1.5rem 0 0
+/* ===== WELCOME MODAL ===== */
+#welcome-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(0,0,0,.6); z-index: 1999;
 }
-.welcome-links a{
-  display:inline-flex;align-items:center;gap:.5rem;
-  font-size:1.2rem;
-  color:#4e8cff !important;
-  fill: currentColor; /* SVG kế thừa màu chữ */
-  text-decoration:none;
+#welcome-modal {
+  display: none; position: fixed; top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  width: 90vw; max-width: 600px; padding: 3rem;
+  background: rgba(0,0,0,.95);
+  border-radius: 1rem;
+  box-shadow: 0 8px 30px rgba(0,0,0,.8);
+  z-index: 2000; display: flex; flex-direction: column; align-items: center; gap: 1.5rem;
+}
+.modal-open { overflow: hidden }
+.welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative }
+.welcome-avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover }
+.welcome-card h1 { font-size: 3rem; margin: 0 }
+.welcome-card p { font-size: 1.3rem; margin: .5rem 0; line-height: 1.4; }
+.welcome-links {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: .75rem 1.5rem; list-style: none; padding: 0; margin: 1.5rem 0 0;
+}
+.welcome-links a {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-size: 1.2rem;
+  color: #4e8cff !important;
+  fill: currentColor;
+  text-decoration: none;
   transition: color 0.15s;
 }
-.welcome-links a:hover{
-  color:#75aaff !important;
+.welcome-links a:hover {
+  color: #75aaff !important;
   fill: #75aaff;
-  text-decoration:underline
+  text-decoration: underline
 }
-
 /* SVG icon căn giữa + kích thước đồng bộ */
 .svg-icon {
   display: inline-flex;
@@ -329,20 +252,52 @@ body.warn-lock {
   width: 1.2em;
   height: 1.2em;
 }
-.svg-icon svg {
-  width: 1.2em;
-  height: 1.2em;
-  display: block;
-}
-
-/* Nếu thích hiệu ứng nổi cho Threads/TikTok icon */
-.threads-icon svg, .tiktok-icon svg {
-  filter: drop-shadow(0 0 2px #fff);
-}
+.svg-icon svg { width: 1.2em; height: 1.2em; display: block; }
+.threads-icon svg, .tiktok-icon svg { filter: drop-shadow(0 0 2px #fff); }
 
 /* Nút đóng */
-#welcome-close{
-  position:absolute;top:.5rem;right:.75rem;
-  background:none;border:none;font-size:2.4rem;color:#ccc;cursor:pointer
+#welcome-close {
+  position: absolute; top: .5rem; right: .75rem;
+  background: none; border: none; font-size: 2.4rem; color: #ccc; cursor: pointer
 }
-#welcome-close:hover{color:#fff}
+#welcome-close:hover { color: #fff }
+
+/* nút About Me (pill giống social icons) */
+.about-btn {
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit;
+  background: rgba(255,255,255,0.17);
+  border: none;
+  border-radius: 0.7rem;           /* Phình bo góc thêm chút */
+  padding: 0.28em 1.1em;           /* Cao hơn xíu (0.28em), ngang giữ lại sự cân đối */
+  margin-left: 1rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  line-height: 1.13;
+  box-shadow: none;
+  letter-spacing: 0.01em;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.about-btn:hover,
+.about-btn:focus {
+  background: rgba(255,255,255,0.28);
+  color: inherit;
+  text-decoration: none;
+}
+
+
+/* Fix social icon màu khi hover không bị chuyển hồng */
+.social_links a,
+.social_links a:visited,
+.social_links a:active {
+  color: #fff !important;
+  background: none !important;
+  transition: color 0.17s;
+}
+.social_links a:hover {
+  color: #4e8cff !important;
+}
