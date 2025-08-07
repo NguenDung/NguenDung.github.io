@@ -7,16 +7,3 @@
     </div>
   </div>
 </footer>
-
-<!-- Script bật/tắt About Me panel -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    const btn   = document.getElementById('about-toggle');
-    const panel = document.getElementById('about-panel');
-    if (btn && panel) {
-      btn.addEventListener('click', () => {
-        panel.style.display = panel.style.display === 'flex' ? 'none' : 'flex';
-      });
-    }
-  });
-</script>

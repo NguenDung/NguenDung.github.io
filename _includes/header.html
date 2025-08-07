@@ -7,42 +7,26 @@
     </a>
 
     <!-- Nhóm About Me + Social, sẽ tự đẩy sang phải -->
-    <div class="header-controls"
-         style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
-      <!-- Nút About Me -->
-      <button id="about-toggle" class="about-btn" aria-label="About Me">
+    <div class="header-controls" style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
+      <!-- Link About Me dẫn tới bài post /about/ -->
+      <a href="{{ '/about/' | relative_url }}" class="about-btn" aria-label="About Me">
         About Me
-      </button>
+      </a>
 
       <!-- Social links -->
       <span class="social_links">
         {% for link in site.dash.social_links %}
           {% if link.fa %}
-            <a class="color-{{ link.color }}-hover"
-               href="{{ link.url }}"{% if link.rel %} rel="{{ link.rel }}"{% endif %}>
+            <a class="color-{{ link.color }}-hover" href="{{ link.url }}"{% if link.rel %} rel="{{ link.rel }}"{% endif %}>
               <i class="fa fa-{{ link.icon }}"></i>
             </a>
           {% else %}
-            <a class="color-{{ link.color }}-hover"
-               href="{{ link.url }}"{% if link.rel %} rel="{{ link.rel }}"{% endif %}>
+            <a class="color-{{ link.color }}-hover" href="{{ link.url }}"{% if link.rel %} rel="{{ link.rel }}"{% endif %}>
               <i class="fab fa-{{ link.icon }}"></i>
             </a>
           {% endif %}
         {% endfor %}
       </span>
-    </div>
-  </div>
-
-  <!-- Panel About Me (ẩn/bật bằng script) -->
-  <div id="about-panel">
-    <div class="about-box">
-      <h3>Me (SuiiKawaii)</h3>
-      <p>Part-time CTF Player…</p>
-    </div>
-    <div id="about-heart">❤️</div>
-    <div class="about-box">
-      <h3>Hoshimachi Suisei 🌟</h3>
-      <p>My idol VTuber với giọng ca tuyệt vời!</p>
     </div>
   </div>
 </div>
