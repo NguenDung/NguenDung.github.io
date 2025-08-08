@@ -538,3 +538,139 @@ body.warn-lock {
 /* Normalize states inside footer */
 .site-footer a:active,
 .site-footer a:visited { color: inherit !important; }
+
+/* ===== WELCOME MODAL — Light mode fix (white card, dark body text) ===== */
+:root[data-theme="light"] #welcome-modal {
+  background: rgba(255,255,255,0.98) !important;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.18) !important;
+}
+
+/* Body text inside modal → dark, but don't touch heading/link colors */
+:root[data-theme="light"] #welcome-modal p,
+:root[data-theme="light"] #welcome-modal li,
+:root[data-theme="light"] #welcome-modal small {
+  color: #111 !important;
+}
+
+/* Close button readable on white */
+:root[data-theme="light"] #welcome-close { color: #666 !important; }
+:root[data-theme="light"] #welcome-close:hover { color: #000 !important; }
+
+/* (optional) overlay a bit lighter in light mode — uncomment if bạn muốn */
+/*
+:root[data-theme="light"] #welcome-overlay {
+  background: rgba(0,0,0,0.30) !important;
+}
+
+/* ===== WELCOME MODAL — XXL (both themes) ===== */
+#welcome-modal{
+  max-width: min(92vw, 980px) !important;   /* rộng hơn */
+  max-height: calc(100vh - 8vh) !important; /* không tràn màn hình */
+  overflow: auto !important;
+  padding: 4rem 4rem 3.25rem !important;
+  border-radius: 1.35rem !important;
+}
+
+/* Avatar to bự */
+#welcome-modal .welcome-avatar{
+  width: 260px !important;
+  height: 260px !important;
+}
+
+/* Heading to bự nhưng responsive */
+#welcome-modal .welcome-card h1{
+  font-size: clamp(3.4rem, 2.6rem + 2.2vw, 5rem) !important;
+  line-height: 1.04 !important;
+  margin-top: .35rem !important;
+}
+
+/* Body text lớn hơn chút */
+#welcome-modal .welcome-card p{
+  font-size: clamp(1.15rem, 1.05rem + .35vw, 1.45rem) !important;
+}
+
+/* Link size & spacing */
+#welcome-modal .welcome-links{
+  gap: 1rem 2rem !important;
+  margin-top: 1.35rem !important;
+}
+#welcome-modal .welcome-links a{
+  font-size: 1.3rem !important;
+}
+
+/* Nút đóng tương xứng */
+#welcome-close{ font-size: 3rem !important; }
+
+/* Siêu rộng màn hình: bump thêm */
+@media (min-width: 1400px){
+  #welcome-modal{ max-width: 1100px !important; padding: 4.25rem 4.25rem 3.5rem !important; }
+  #welcome-modal .welcome-avatar{ width: 300px !important; height: 300px !important; }
+  #welcome-modal .welcome-card h1{ font-size: clamp(3.8rem, 2.2rem + 3vw, 5.4rem) !important; }
+}
+
+/* Màn hình nhỏ/chiều cao thấp: giữ dễ nhìn */
+@media (max-width: 480px){
+  #welcome-modal{ width: 92vw !important; max-width: none !important; padding: 2rem !important; }
+  #welcome-modal .welcome-avatar{ width: 150px !important; height: 150px !important; }
+  #welcome-modal .welcome-links a{ font-size: 1.12rem !important; }
+}
+@media (max-height: 600px){
+  #welcome-modal{ padding: 2.25rem !important; }
+  #welcome-modal .welcome-avatar{ width: 170px !important; height: 170px !important; }
+}
+
+/* Light-mode look (giữ như đã fix) */
+:root[data-theme="light"] #welcome-modal{
+  background: rgba(255,255,255,0.98) !important;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.2) !important;
+}
+:root[data-theme="light"] #welcome-modal p,
+:root[data-theme="light"] #welcome-modal li,
+:root[data-theme="light"] #welcome-modal small{ color: #111 !important; }
+:root[data-theme="light"] #welcome-close{ color: #666 !important; }
+:root[data-theme="light"] #welcome-close:hover{ color: #000 !important; }
+
+/* ===== WELCOME MODAL — +1 step bigger (both themes) ===== */
+#welcome-modal{
+  max-width: min(92vw, 1080px) !important;      /* was 980px */
+  max-height: calc(100vh - 8vh) !important;
+  overflow: auto !important;
+  padding: 4.25rem 4.25rem 3.5rem !important;   /* a bit more padding */
+  border-radius: 1.4rem !important;
+}
+
+/* Larger avatar */
+#welcome-modal .welcome-avatar{
+  width: 280px !important;                       /* was 260px */
+  height: 280px !important;
+}
+
+/* Heading just a touch bigger */
+#welcome-modal .welcome-card h1{
+  font-size: clamp(3.6rem, 2.4rem + 2.6vw, 5.4rem) !important; /* was max 5.0–5.4 */
+  line-height: 1.04 !important;
+}
+
+/* Body text slightly larger */
+#welcome-modal .welcome-card p{
+  font-size: clamp(1.18rem, 1.05rem + .40vw, 1.50rem) !important;
+}
+
+/* Links size + spacing */
+#welcome-modal .welcome-links{
+  gap: 1rem 2rem !important;
+  margin-top: 1.35rem !important;
+}
+#welcome-modal .welcome-links a{
+  font-size: 1.34rem !important;                 /* was 1.30rem */
+}
+
+/* Close button follows size */
+#welcome-close{ font-size: 3.2rem !important; }
+
+/* Ultra-wide screens: one more small bump */
+@media (min-width: 1400px){
+  #welcome-modal{ max-width: 1200px !important; }
+  #welcome-modal .welcome-avatar{ width: 320px !important; height: 320px !important; }
+  #welcome-modal .welcome-card h1{ font-size: clamp(3.9rem, 2rem + 3.2vw, 5.8rem) !important; }
+}
