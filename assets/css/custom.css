@@ -11,7 +11,7 @@ html, body { overflow-x: clip; }
 
 /* ====== NỀN ====== */
 body {
-  background: url("../images/background.jpg") no-repeat center/cover fixed;
+  background: url("../images/bground/background.jpg") no-repeat center/cover fixed;
 }
 
 /* ====== LAYOUT CHUNG ====== */
@@ -322,8 +322,37 @@ body.warn-lock {
 .social_links a:hover {
   color: #4e8cff !important;
 }
+/* ===== LIGHT: Post titles = pink everywhere ===== */
+:root[data-theme="light"] .page-content .wrapper .post-link,
+:root[data-theme="light"] a.post-link,
+:root[data-theme="light"] .post-title a,
+:root[data-theme="light"] h1.post-title a,
+:root[data-theme="light"] .posts .post-title a {
+  color: #ff4da6 !important;     /* pink */
+  text-decoration: none !important;
+}
+:root[data-theme="light"] .page-content .wrapper .post-link:hover,
+:root[data-theme="light"] a.post-link:hover,
+:root[data-theme="light"] .post-title a:hover,
+:root[data-theme="light"] h1.post-title a:hover,
+:root[data-theme="light"] .posts .post-title a:hover {
+  color: #cc0077 !important;      /* darker pink on hover */
+  text-decoration: underline !important;
+}
+
+/* ===== LIGHT: Site title "SuiiKawaii" = blue-violet ===== */
+:root[data-theme="light"] .site-title,
+:root[data-theme="light"] .site-title a,
+:root[data-theme="light"] .page-title a {
+  color: #5e5eff !important;      /* blue-violet */
+  text-decoration: none !important;
+}
+:root[data-theme="light"] .site-title a:hover,
+:root[data-theme="light"] .page-title a:hover {
+  color: #3a3aff !important;
+}
 /* =========================
-   LIGHT THEME — final clean block
+   LIGHT THEME — final merged
    (Dark stays exactly the same)
    ========================= */
 
@@ -331,24 +360,33 @@ body.warn-lock {
 :root[data-theme="light"]{
   --text-main:   #222;
   --text-dim:    #5b5b5b;
-  --title-blue:  #2a66d4;
-  --title-hover: #003f80;
 
   --overlay-bg:  rgba(255,255,255,0.92);
 
+  /* Titles */
+  --title-pink:   #ff4da6;  /* post titles */
+  --title-pink-h: #cc0077;
+
+  /* Site title */
+  --brand-blue:   #5e5eff;  /* "SuiiKawaii" */
+  --brand-blue-h: #3a3aff;
+
+  /* Tags (green style) */
   --tag-bg:      #e8f5ee;
   --tag-text:    #2a915a;
   --tag-border:  #c6ead7;
 
+  /* Social icons */
   --icon:        #111;
   --icon-hover:  #2a66d4;
 
+  /* Search */
   --search-bg:   #f5f7fb;
   --search-bd:   #d9dfeb;
   --search-ph:   #9aa6b2;
 }
 
-/* Card overlay + base text */
+/* Card + base text */
 :root[data-theme="light"] .page-content .wrapper{
   background: var(--overlay-bg) !important;
   color: var(--text-main) !important;
@@ -362,41 +400,42 @@ body.warn-lock {
   color: var(--text-dim) !important;
 }
 
-/* Titles — make them blue */
-:root[data-theme="light"] .post-link,
+/* Post titles = pink */
+:root[data-theme="light"] .page-content .wrapper .post-link,
 :root[data-theme="light"] a.post-link,
 :root[data-theme="light"] .post-title a,
 :root[data-theme="light"] h1.post-title a,
 :root[data-theme="light"] .posts .post-title a{
-  color: var(--title-blue) !important;
+  color: var(--title-pink) !important;
   text-decoration: none !important;
 }
-:root[data-theme="light"] .post-link:hover,
+:root[data-theme="light"] .page-content .wrapper .post-link:hover,
+:root[data-theme="light"] a.post-link:hover,
 :root[data-theme="light"] .post-title a:hover,
 :root[data-theme="light"] h1.post-title a:hover,
 :root[data-theme="light"] .posts .post-title a:hover{
-  color: var(--title-hover) !important;
+  color: var(--title-pink-h) !important;
   text-decoration: underline !important;
 }
 
-/* Site title "SuiiKawaii" */
+/* Site title "SuiiKawaii" = blue‑violet */
 :root[data-theme="light"] .site-title,
 :root[data-theme="light"] .site-title a,
 :root[data-theme="light"] .page-title a{
-  color: var(--title-blue) !important;
+  color: var(--brand-blue) !important;
   text-decoration: none !important;
 }
 :root[data-theme="light"] .site-title a:hover,
 :root[data-theme="light"] .page-title a:hover{
-  color: var(--title-hover) !important;
+  color: var(--brand-blue-h) !important;
 }
 
-/* Recent Articles heading (nếu theme cũ đè) */
+/* Recent Articles heading (nếu theme gốc đè) */
 :root[data-theme="light"] .recent-articles .recent-header h2{
-  color: var(--title-blue) !important;
+  color: #2a66d4 !important;
 }
 
-/* Tags — green pills, single border (no double outline) */
+/* Tags — green, single border */
 :root[data-theme="light"] .page-content .wrapper .tag,
 :root[data-theme="light"] .page-content .wrapper .post-tag,
 :root[data-theme="light"] .page-content .wrapper .label{
@@ -417,7 +456,7 @@ body.warn-lock {
   color: var(--search-ph) !important;
 }
 
-/* Header/Footer — fully transparent in Light (no pill) */
+/* Header/Footer transparent (no pill) */
 :root[data-theme="light"] .site-header,
 :root[data-theme="light"] .page-header,
 :root[data-theme="light"] .dash-header,
@@ -431,7 +470,7 @@ body.warn-lock {
   border: 0 !important;
 }
 
-/* Social icons — black -> blue on hover */
+/* Social icons = black -> blue on hover */
 :root[data-theme="light"] .social_links a,
 :root[data-theme="light"] header .social_links a,
 :root[data-theme="light"] .dash-header .social_links a{
@@ -444,7 +483,7 @@ body.warn-lock {
   color: var(--icon-hover) !important;
 }
 
-/* Guard: keep DARK overlay EXACTLY your original */
+/* Guard: DARK overlay unchanged */
 :root:not([data-theme="light"]) .page-content .wrapper{
   background: rgba(0,0,0,0.98) !important;
   color: inherit !important;

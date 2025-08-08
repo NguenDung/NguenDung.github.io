@@ -7,8 +7,8 @@
     click: `${BASE}/assets/audio/click.mp3`,
     rare:  `${BASE}/assets/audio/click-rare.mp3`,
     warn:  `${BASE}/assets/audio/warn.mp3`,
-    softImg: `${BASE}/assets/images/warn-soft.jpg`,
-    hardImg: `${BASE}/assets/images/warn.jpg`
+    softImg: `${BASE}/assets/images/warn/warn-soft.jpg`,
+    hardImg: `${BASE}/assets/images/warn/warn.jpg`
   };
 
   const RARE_RATE       = 50;
