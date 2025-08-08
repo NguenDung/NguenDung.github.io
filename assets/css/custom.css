@@ -322,3 +322,130 @@ body.warn-lock {
 .social_links a:hover {
   color: #4e8cff !important;
 }
+/* =========================
+   LIGHT THEME — final clean block
+   (Dark stays exactly the same)
+   ========================= */
+
+/* Vars */
+:root[data-theme="light"]{
+  --text-main:   #222;
+  --text-dim:    #5b5b5b;
+  --title-blue:  #2a66d4;
+  --title-hover: #003f80;
+
+  --overlay-bg:  rgba(255,255,255,0.92);
+
+  --tag-bg:      #e8f5ee;
+  --tag-text:    #2a915a;
+  --tag-border:  #c6ead7;
+
+  --icon:        #111;
+  --icon-hover:  #2a66d4;
+
+  --search-bg:   #f5f7fb;
+  --search-bd:   #d9dfeb;
+  --search-ph:   #9aa6b2;
+}
+
+/* Card overlay + base text */
+:root[data-theme="light"] .page-content .wrapper{
+  background: var(--overlay-bg) !important;
+  color: var(--text-main) !important;
+}
+:root[data-theme="light"] .page-content .wrapper p,
+:root[data-theme="light"] .page-content .wrapper li{
+  color: var(--text-main) !important;
+}
+:root[data-theme="light"] .page-content .wrapper .post-meta,
+:root[data-theme="light"] .page-content .wrapper .post__meta{
+  color: var(--text-dim) !important;
+}
+
+/* Titles — make them blue */
+:root[data-theme="light"] .post-link,
+:root[data-theme="light"] a.post-link,
+:root[data-theme="light"] .post-title a,
+:root[data-theme="light"] h1.post-title a,
+:root[data-theme="light"] .posts .post-title a{
+  color: var(--title-blue) !important;
+  text-decoration: none !important;
+}
+:root[data-theme="light"] .post-link:hover,
+:root[data-theme="light"] .post-title a:hover,
+:root[data-theme="light"] h1.post-title a:hover,
+:root[data-theme="light"] .posts .post-title a:hover{
+  color: var(--title-hover) !important;
+  text-decoration: underline !important;
+}
+
+/* Site title "SuiiKawaii" */
+:root[data-theme="light"] .site-title,
+:root[data-theme="light"] .site-title a,
+:root[data-theme="light"] .page-title a{
+  color: var(--title-blue) !important;
+  text-decoration: none !important;
+}
+:root[data-theme="light"] .site-title a:hover,
+:root[data-theme="light"] .page-title a:hover{
+  color: var(--title-hover) !important;
+}
+
+/* Recent Articles heading (nếu theme cũ đè) */
+:root[data-theme="light"] .recent-articles .recent-header h2{
+  color: var(--title-blue) !important;
+}
+
+/* Tags — green pills, single border (no double outline) */
+:root[data-theme="light"] .page-content .wrapper .tag,
+:root[data-theme="light"] .page-content .wrapper .post-tag,
+:root[data-theme="light"] .page-content .wrapper .label{
+  background: var(--tag-bg) !important;
+  color: var(--tag-text) !important;
+  border: 1px solid var(--tag-border) !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
+}
+
+/* Search box (light) */
+:root[data-theme="light"] #article-search{
+  background-color: var(--search-bg) !important;
+  border: 1px solid var(--search-bd) !important;
+  color: var(--text-main) !important;
+}
+:root[data-theme="light"] #article-search::placeholder{
+  color: var(--search-ph) !important;
+}
+
+/* Header/Footer — fully transparent in Light (no pill) */
+:root[data-theme="light"] .site-header,
+:root[data-theme="light"] .page-header,
+:root[data-theme="light"] .dash-header,
+:root[data-theme="light"] .site-footer,
+:root[data-theme="light"] .site-header .wrapper,
+:root[data-theme="light"] .page-header .wrapper,
+:root[data-theme="light"] .dash-header .wrapper,
+:root[data-theme="light"] .site-footer .wrapper{
+  background: transparent !important;
+  box-shadow: none !important;
+  border: 0 !important;
+}
+
+/* Social icons — black -> blue on hover */
+:root[data-theme="light"] .social_links a,
+:root[data-theme="light"] header .social_links a,
+:root[data-theme="light"] .dash-header .social_links a{
+  color: var(--icon) !important;
+  background: transparent !important;
+}
+:root[data-theme="light"] .social_links a:hover,
+:root[data-theme="light"] header .social_links a:hover,
+:root[data-theme="light"] .dash-header .social_links a:hover{
+  color: var(--icon-hover) !important;
+}
+
+/* Guard: keep DARK overlay EXACTLY your original */
+:root:not([data-theme="light"]) .page-content .wrapper{
+  background: rgba(0,0,0,0.98) !important;
+  color: inherit !important;
+}

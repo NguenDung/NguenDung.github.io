@@ -1,63 +1,66 @@
 <div class="toggleWrapper">
-    <input type="checkbox" class="dn" id="theme-toggle" onclick="modeSwitcher()" checked />
-    <label for="theme-toggle" class="toggle">
+  <input type="checkbox" class="dn" id="theme-toggle" aria-label="Toggle theme" />
+  <label for="theme-toggle" class="toggle">
     <span class="toggle__handler">
       <span class="crater crater--1"></span>
       <span class="crater crater--2"></span>
       <span class="crater crater--3"></span>
     </span>
-        <span class="star star--1"></span>
-        <span class="star star--2"></span>
-        <span class="star star--3"></span>
-        <span class="star star--4"></span>
-        <span class="star star--5"></span>
-        <span class="star star--6"></span>
-    </label>
+    <span class="star star--1"></span>
+    <span class="star star--2"></span>
+    <span class="star star--3"></span>
+    <span class="star star--4"></span>
+    <span class="star star--5"></span>
+    <span class="star star--6"></span>
+  </label>
 </div>
-<script type="text/javascript">
-const theme = localStorage.getItem('theme');
 
-if (theme === "light") {
-    document.documentElement.setAttribute('data-theme', 'light');
-} else {
-    document.documentElement.setAttribute('data-theme', 'dark');
-}
-const userPrefers = getComputedStyle(document.documentElement).getPropertyValue('content');
+<script>
+(() => {
+  const root   = document.documentElement;
+  const toggle = document.getElementById('theme-toggle');
 
-function activateDarkTheme() {
-    document.getElementById('theme-toggle').checked = true;
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.documentElement.classList.add('theme--dark');
-    document.documentElement.classList.remove('theme--light');
-	document.getElementById("theme-toggle").className = 'light';
-	window.localStorage.setItem('theme', 'dark');
-}
+  const getSystemPref = () =>
+    window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches
+      ? 'light' : 'dark';
 
-function activateLightTheme() {
-    document.getElementById('theme-toggle').checked = false;
-    document.documentElement.setAttribute('data-theme', 'light');
-    document.documentElement.classList.add('theme--light');
-    document.documentElement.classList.remove('theme--dark');
-	document.getElementById("theme-toggle").className = 'dark';
-	window.localStorage.setItem('theme', 'light');
-}
+  const applyTheme = (theme) => {
+    // data-theme cho CSS
+    root.setAttribute('data-theme', theme);
 
-if (theme === "dark") {
-    activateDarkTheme();
-} else if (theme === "light") {
-    activateLightTheme();
-} else if  (userPrefers === "light") {
-    activateDarkTheme();
-} else {
-    activateDarkTheme();
-}
+    // optional: class hooks nếu CSS của bạn có dùng
+    root.classList.toggle('theme--light', theme === 'light');
+    root.classList.toggle('theme--dark',  theme !== 'light');
 
-function modeSwitcher() {
-	let currentMode = document.documentElement.getAttribute('data-theme');
-	if (currentMode === "dark") {
-	    activateLightTheme();
-	} else {
-	    activateDarkTheme();
-	}
-}
+    // trạng thái UI (checkbox checked = dark)
+    toggle.checked = (theme === 'dark');
+
+    // nếu bạn có CSS dựa trên class trên chính input:
+    toggle.classList.toggle('light', theme === 'dark'); // moon
+    toggle.classList.toggle('dark',  theme === 'light'); // sun
+
+    localStorage.setItem('theme', theme);
+  };
+
+  // 1) lấy theme đã lưu, nếu chưa có thì theo hệ thống
+  const initial = localStorage.getItem('theme') || getSystemPref();
+  applyTheme(initial);
+
+  // 2) click để đổi
+  toggle.addEventListener('change', () => {
+    applyTheme(toggle.checked ? 'dark' : 'light');
+  });
+
+  // 3) (tuỳ chọn) cập nhật khi hệ thống đổi, chỉ khi user CHƯA chọn thủ công
+  if (window.matchMedia) {
+    const mq = window.matchMedia('(prefers-color-scheme: light)');
+    const onChange = (e) => {
+      if (!localStorage.getItem('theme')) {
+        applyTheme(e.matches ? 'light' : 'dark');
+      }
+    };
+    if (mq.addEventListener) mq.addEventListener('change', onChange);
+    else mq.addListener(onChange); // Safari cũ
+  }
+})();
 </script>
