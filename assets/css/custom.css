@@ -488,3 +488,95 @@ body.warn-lock {
   background: rgba(0,0,0,0.98) !important;
   color: inherit !important;
 }
+/* LIGHT: SuiiKawaii giống màu Odin */
+:root[data-theme="light"] .site-title {
+  color: #111 !important; /* chữ đen */
+  font-weight: 700;
+}
+:root[data-theme="light"] .site-title a {
+  color: inherit !important;
+  text-decoration: none !important;
+}
+:root[data-theme="light"] .site-title a:hover {
+  opacity: 0.85;
+}
+
+/* Chỉ đổi màu ký hiệu '>' trong site title (không tạo mới) */
+:root[data-theme="light"] .site-title::after,
+:root[data-theme="light"] .site-title > span,
+:root[data-theme="light"] .site-title .chevron,
+:root[data-theme="light"] .site-title a > span {
+  color: #4e8cff !important;
+}
+
+/* FOOTER CREDIT: sáng hơn, dễ đọc */
+.site-footer {
+  color: rgba(255, 255, 255, 0.8) !important; /* trắng nhạt rõ hơn */
+  font-size: 0.9rem;
+}
+.site-footer a {
+  color: rgba(255, 255, 255, 0.9) !important;
+  text-decoration: underline;
+}
+.site-footer a:hover {
+  color: #ffffff !important;
+}
+/* Light: làm pill About Me rõ hơn */
+:root[data-theme="light"] .about-btn {
+  background: rgba(0,0,0,0.08) !important;
+  color: #111 !important;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+:root[data-theme="light"] .about-btn:hover {
+  background: rgba(0,0,0,0.14) !important;
+}
+/* Dark: footer sáng dễ đọc */
+:root:not([data-theme="light"]) .site-footer {
+  color: rgba(255,255,255,0.82) !important;
+  font-size: 0.9rem;
+}
+:root:not([data-theme="light"]) .site-footer a {
+  color: rgba(255,255,255,0.92) !important;
+  text-decoration: underline;
+}
+:root:not([data-theme="light"]) .site-footer a:hover { color: #fff !important; }
+
+/* Light: footer chữ tối, link xanh */
+:root[data-theme="light"] .site-footer {
+  color: #2b2b2b !important;
+  font-size: 0.9rem;
+}
+:root[data-theme="light"] .site-footer a {
+  color: #2a66d4 !important;
+  text-decoration: underline;
+}
+:root[data-theme="light"] .site-footer a:hover { color: #003f80 !important; }
+/* ===== Footer credit: đồng bộ màu ===== */
+.site-footer {
+  color: rgba(255, 255, 255, 0.85) !important; /* Trắng nhạt rõ trên nền tối */
+  font-size: 0.9rem;
+}
+:root[data-theme="light"] .site-footer {
+  color: rgba(0, 0, 0, 0.65) !important; /* Xám đậm trên nền sáng */
+}
+
+/* Link trong footer cùng màu text, không đổi màu */
+.site-footer a,
+:root[data-theme="light"] .site-footer a {
+  color: inherit !important;
+  text-decoration: underline; /* vẫn có gạch để nhận ra là link */
+}
+.site-footer a:hover,
+:root[data-theme="light"] .site-footer a:hover {
+  opacity: 0.8; /* hover nhẹ, không đổi màu */
+}
+/* Footer credit — dark mode link same color as text */
+:root:not([data-theme="light"]) .site-footer,
+:root:not([data-theme="light"]) .site-footer a {
+  color: rgba(255, 255, 255, 0.65) !important; /* xám nhạt */
+  text-decoration: none !important;
+}
+:root:not([data-theme="light"]) .site-footer a:hover {
+  color: rgba(255, 255, 255, 0.8) !important; /* sáng hơn khi hover */
+  text-decoration: underline;
+}
