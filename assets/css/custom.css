@@ -1,4 +1,9 @@
-/* ====== CẤU HÌNH NHANH ====== */
+/* =========================================================
+   CUSTOM.CSS — CLEAN & CONSOLIDATED
+   Keep layout/behavior, remove duplicates, scope overrides
+   ========================================================= */
+
+/* ====== QUICK CONFIG ====== */
 :root {
   --player-w: 455px;
   --player-h: 520px;
@@ -7,17 +12,19 @@
   --wrapper-left: 2rem;
   --gap: 1.2rem;
 }
+
+/* Prevent horizontal overflow with 100vw on Chrome */
 html, body { overflow-x: clip; }
 
-/* ====== NỀN ====== */
+/* ====== BACKGROUND ====== */
 body {
   background: url("../images/bground/background.jpg") no-repeat center/cover fixed;
 }
 
-/* ====== LAYOUT CHUNG ====== */
+/* ====== LAYOUT ====== */
 .page-content { display: flex; justify-content: flex-start; }
 
-/* ====== KHUNG BLOG (OVERLAY) ====== */
+/* Blog overlay/card */
 .page-content .wrapper {
   width: calc(100vw - var(--player-w) - var(--player-right) - var(--wrapper-left));
   max-width: none !important;
@@ -31,6 +38,8 @@ body {
   font-size: 1.08rem;
   line-height: 1.7;
 }
+
+/* Normalize nested wrappers inside the overlay */
 .page-content .wrapper .wrapper,
 .page-content .wrapper .site-header .wrapper,
 .page-content .wrapper .site-footer .wrapper,
@@ -42,6 +51,8 @@ body {
   padding: 0 !important;
   box-sizing: border-box;
 }
+
+/* Transparent header/footer bars when placed inside overlay */
 .page-content .wrapper .site-header,
 .page-content .wrapper .page-header,
 .page-content .wrapper .dash-header,
@@ -51,10 +62,11 @@ body {
   border: 0 !important;
 }
 
-/* ====== TYPO & TAGS TRONG KHUNG BLOG ====== */
+/* ====== TYPOGRAPHY ====== */
 .page-content .wrapper h1 { font-size: 2.2rem; }
 .page-content .wrapper h2 { font-size: 1.6rem; letter-spacing: 0.2px; margin-bottom: 1rem; }
 .page-content .wrapper h3 { font-size: 1.25rem; }
+
 .page-content .wrapper .tag,
 .page-content .wrapper .post-tag,
 .page-content .wrapper .label {
@@ -62,12 +74,13 @@ body {
   padding: 0.25rem 0.6rem;
   border-radius: 0.6rem;
 }
+
 .page-content .wrapper .post-meta,
 .page-content .wrapper .post__meta {
   font-size: 0.95rem;
 }
 
-/* ====== AVATAR + GIỚI THIỆU Ở HEADER ====== */
+/* ====== HEADER AVATAR & INTRO ====== */
 .page-content .wrapper header img,
 .page-content .wrapper .site-header img,
 .page-content .wrapper .dash-header img {
@@ -79,7 +92,7 @@ body {
   font-size: 1.02em;
 }
 
-/* ====== SPOTIFY (CARD VIEW) ====== */
+/* ====== SPOTIFY CARD ====== */
 #spotify-player-wrapper {
   position: fixed;
   bottom: 2rem;
@@ -97,7 +110,7 @@ body {
 }
 #spotify-player-wrapper iframe { width: 100%; height: 100%; border: none; }
 
-/* ====== THANH LỊCH (NẰM TRÊN SPOTIFY) ====== */
+/* ====== SCHEDULE BAR (STACKED ABOVE SPOTIFY) ====== */
 #schedule-bar {
   position: fixed !important;
   right: var(--player-right);
@@ -121,11 +134,11 @@ body {
   .page-content .wrapper { width: 100%; margin: 1rem; max-width: none; }
 }
 
-/* Hiệu ứng mượt khi Swup thay nội dung */
+/* ====== SWUP FADE ====== */
 .transition-fade { transition: opacity .2s ease; }
 html.is-changing .transition-fade { opacity: 0; }
 
-/* ===== WARNING MODAL (final, responsive) ===== */
+/* ====== WARNING MODAL (SOFT/HARD) ====== */
 #warning-modal {
   position: fixed; inset: 0;
   display: none;
@@ -135,6 +148,7 @@ html.is-changing .transition-fade { opacity: 0; }
   backdrop-filter: blur(2px);
 }
 #warning-modal img { display: block; max-width: none; max-height: none; }
+
 #warning-modal.soft {
   background: rgba(0,0,0,0.66);
   padding-inline: 3vw;
@@ -147,6 +161,7 @@ html.is-changing .transition-fade { opacity: 0; }
   border-radius: 18px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
+
 #warning-modal.hard {
   background: rgba(0,0,0,0.9); padding: 0;
   display: flex; align-items: center; justify-content: center;
@@ -157,6 +172,7 @@ html.is-changing .transition-fade { opacity: 0; }
   object-fit: contain; border-radius: 12px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
 }
+
 @media (orientation: portrait) {
   #warning-modal.hard {
     padding: env(safe-area-inset-top) env(safe-area-inset-right)
@@ -168,13 +184,14 @@ html.is-changing .transition-fade { opacity: 0; }
   }
 }
 @media (max-height: 520px) { #warning-modal.soft img { height: 88vh; } }
+
 body.warn-lock {
   overflow: hidden !important;
   cursor: not-allowed !important;
   user-select: none !important;
 }
 
-/* === TÙY CHỈNH CHO SEARCH BOX === */
+/* ====== SEARCH BOX ====== */
 .recent-articles .recent-header {
   display: flex;
   align-items: center;
@@ -187,6 +204,7 @@ body.warn-lock {
   font-size: 2rem;
   color: #4e8cff;
 }
+
 #article-search {
   width: clamp(350px, 60%, 800px);
   padding: 0.6rem 1rem;
@@ -203,12 +221,13 @@ body.warn-lock {
   border-color: #4e8cff;
   box-shadow: 0 0 0 3px rgba(78, 140, 255, 0.3);
 }
+
 .article-item.hidden {
   opacity: 0; height: 0; margin: 0; padding: 0; overflow: hidden;
   transition: opacity .3s, height .3s;
 }
 
-/* ===== WELCOME MODAL: Opacity mượt, không nhấp nháy ===== */
+/* ====== WELCOME MODAL (no flicker) ====== */
 #welcome-overlay, #welcome-modal {
   opacity: 0;
   pointer-events: none;
@@ -226,7 +245,6 @@ body.warn-lock {
   display: flex;
 }
 #welcome-modal {
-  /* KHÔNG CẦN display: flex ở đây nữa! */
   position: fixed; top: 50%; left: 50%;
   transform: translate(-50%,-50%);
   width: 90vw; max-width: 600px; padding: 3rem;
@@ -241,13 +259,13 @@ body.warn-lock {
   background: rgba(0,0,0,.6); z-index: 1999;
 }
 
-/* Các rule cũ như .welcome-card, .welcome-avatar giữ nguyên */
-
+/* Welcome content */
 .modal-open { overflow: hidden }
 .welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative }
 .welcome-avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover }
 .welcome-card h1 { font-size: 3rem; margin: 0 }
 .welcome-card p { font-size: 1.3rem; margin: .5rem 0; line-height: 1.4; }
+
 .welcome-links {
   display: grid; grid-template-columns: repeat(3,1fr);
   gap: .75rem 1.5rem; list-style: none; padding: 0; margin: 1.5rem 0 0;
@@ -265,7 +283,6 @@ body.warn-lock {
   fill: #75aaff;
   text-decoration: underline
 }
-/* SVG icon căn giữa + kích thước đồng bộ */
 .svg-icon {
   display: inline-flex;
   vertical-align: middle;
@@ -276,14 +293,14 @@ body.warn-lock {
 .svg-icon svg { width: 1.2em; height: 1.2em; display: block; }
 .threads-icon svg, .tiktok-icon svg { filter: drop-shadow(0 0 2px #fff); }
 
-/* Nút đóng */
+/* Close button */
 #welcome-close {
   position: absolute; top: .5rem; right: .75rem;
   background: none; border: none; font-size: 2.4rem; color: #ccc; cursor: pointer
 }
 #welcome-close:hover { color: #fff }
 
-/* nút About Me (pill giống social icons) */
+/* About pill */
 .about-btn {
   font-family: inherit;
   font-size: 1rem;
@@ -291,8 +308,8 @@ body.warn-lock {
   color: inherit;
   background: rgba(255,255,255,0.17);
   border: none;
-  border-radius: 0.7rem;           /* Phình bo góc thêm chút */
-  padding: 0.28em 1.1em;           /* Cao hơn xíu (0.28em), ngang giữ lại sự cân đối */
+  border-radius: 0.7rem;
+  padding: 0.28em 1.1em;
   margin-left: 1rem;
   cursor: pointer;
   transition: background 0.18s, color 0.18s;
@@ -302,7 +319,6 @@ body.warn-lock {
   display: inline-block;
   vertical-align: middle;
 }
-
 .about-btn:hover,
 .about-btn:focus {
   background: rgba(255,255,255,0.28);
@@ -310,73 +326,37 @@ body.warn-lock {
   text-decoration: none;
 }
 
-
-/* Fix social icon màu khi hover không bị chuyển hồng */
-.social_links a,
-.social_links a:visited,
-.social_links a:active {
+/* ====== SOCIAL ICONS ====== */
+/* Dark default: white => blue on hover */
+:root:not([data-theme="light"]) .social_links a,
+:root:not([data-theme="light"]) header .social_links a,
+:root:not([data-theme="light"]) .dash-header .social_links a {
   color: #fff !important;
   background: none !important;
   transition: color 0.17s;
 }
-.social_links a:hover {
+:root:not([data-theme="light"]) .social_links a:hover,
+:root:not([data-theme="light"]) header .social_links a:hover,
+:root:not([data-theme="light"]) .dash-header .social_links a:hover {
   color: #4e8cff !important;
 }
-/* ===== LIGHT: Post titles = pink everywhere ===== */
-:root[data-theme="light"] .page-content .wrapper .post-link,
-:root[data-theme="light"] a.post-link,
-:root[data-theme="light"] .post-title a,
-:root[data-theme="light"] h1.post-title a,
-:root[data-theme="light"] .posts .post-title a {
-  color: #ff4da6 !important;     /* pink */
-  text-decoration: none !important;
-}
-:root[data-theme="light"] .page-content .wrapper .post-link:hover,
-:root[data-theme="light"] a.post-link:hover,
-:root[data-theme="light"] .post-title a:hover,
-:root[data-theme="light"] h1.post-title a:hover,
-:root[data-theme="light"] .posts .post-title a:hover {
-  color: #cc0077 !important;      /* darker pink on hover */
-  text-decoration: underline !important;
-}
 
-/* ===== LIGHT: Site title "SuiiKawaii" = blue-violet ===== */
-:root[data-theme="light"] .site-title,
-:root[data-theme="light"] .site-title a,
-:root[data-theme="light"] .page-title a {
-  color: #5e5eff !important;      /* blue-violet */
-  text-decoration: none !important;
-}
-:root[data-theme="light"] .site-title a:hover,
-:root[data-theme="light"] .page-title a:hover {
-  color: #3a3aff !important;
-}
-/* =========================
-   LIGHT THEME — final merged
-   (Dark stays exactly the same)
-   ========================= */
-
-/* Vars */
-:root[data-theme="light"]{
+/* ====== LIGHT THEME — TOKENS ====== */
+:root[data-theme="light"] {
   --text-main:   #222;
   --text-dim:    #5b5b5b;
-
   --overlay-bg:  rgba(255,255,255,0.92);
 
   /* Titles */
-  --title-pink:   #ff4da6;  /* post titles */
+  --title-pink:   #ff4da6;
   --title-pink-h: #cc0077;
-
-  /* Site title */
-  --brand-blue:   #5e5eff;  /* "SuiiKawaii" */
-  --brand-blue-h: #3a3aff;
 
   /* Tags (green style) */
   --tag-bg:      #e8f5ee;
   --tag-text:    #2a915a;
   --tag-border:  #c6ead7;
 
-  /* Social icons */
+  /* Social */
   --icon:        #111;
   --icon-hover:  #2a66d4;
 
@@ -386,26 +366,26 @@ body.warn-lock {
   --search-ph:   #9aa6b2;
 }
 
-/* Card + base text */
-:root[data-theme="light"] .page-content .wrapper{
+/* Light: overlay and base text */
+:root[data-theme="light"] .page-content .wrapper {
   background: var(--overlay-bg) !important;
   color: var(--text-main) !important;
 }
 :root[data-theme="light"] .page-content .wrapper p,
-:root[data-theme="light"] .page-content .wrapper li{
+:root[data-theme="light"] .page-content .wrapper li {
   color: var(--text-main) !important;
 }
 :root[data-theme="light"] .page-content .wrapper .post-meta,
-:root[data-theme="light"] .page-content .wrapper .post__meta{
+:root[data-theme="light"] .page-content .wrapper .post__meta {
   color: var(--text-dim) !important;
 }
 
-/* Post titles = pink */
+/* Light: post titles = pink */
 :root[data-theme="light"] .page-content .wrapper .post-link,
 :root[data-theme="light"] a.post-link,
 :root[data-theme="light"] .post-title a,
 :root[data-theme="light"] h1.post-title a,
-:root[data-theme="light"] .posts .post-title a{
+:root[data-theme="light"] .posts .post-title a {
   color: var(--title-pink) !important;
   text-decoration: none !important;
 }
@@ -413,95 +393,21 @@ body.warn-lock {
 :root[data-theme="light"] a.post-link:hover,
 :root[data-theme="light"] .post-title a:hover,
 :root[data-theme="light"] h1.post-title a:hover,
-:root[data-theme="light"] .posts .post-title a:hover{
+:root[data-theme="light"] .posts .post-title a:hover {
   color: var(--title-pink-h) !important;
   text-decoration: underline !important;
 }
 
-/* Site title "SuiiKawaii" = blue‑violet */
-:root[data-theme="light"] .site-title,
-:root[data-theme="light"] .site-title a,
-:root[data-theme="light"] .page-title a{
-  color: var(--brand-blue) !important;
-  text-decoration: none !important;
-}
-:root[data-theme="light"] .site-title a:hover,
-:root[data-theme="light"] .page-title a:hover{
-  color: var(--brand-blue-h) !important;
-}
-
-/* Recent Articles heading (nếu theme gốc đè) */
-:root[data-theme="light"] .recent-articles .recent-header h2{
-  color: #2a66d4 !important;
-}
-
-/* Tags — green, single border */
-:root[data-theme="light"] .page-content .wrapper .tag,
-:root[data-theme="light"] .page-content .wrapper .post-tag,
-:root[data-theme="light"] .page-content .wrapper .label{
-  background: var(--tag-bg) !important;
-  color: var(--tag-text) !important;
-  border: 1px solid var(--tag-border) !important;
-  box-shadow: none !important;
-  background-clip: padding-box !important;
-}
-
-/* Search box (light) */
-:root[data-theme="light"] #article-search{
-  background-color: var(--search-bg) !important;
-  border: 1px solid var(--search-bd) !important;
-  color: var(--text-main) !important;
-}
-:root[data-theme="light"] #article-search::placeholder{
-  color: var(--search-ph) !important;
-}
-
-/* Header/Footer transparent (no pill) */
-:root[data-theme="light"] .site-header,
-:root[data-theme="light"] .page-header,
-:root[data-theme="light"] .dash-header,
-:root[data-theme="light"] .site-footer,
-:root[data-theme="light"] .site-header .wrapper,
-:root[data-theme="light"] .page-header .wrapper,
-:root[data-theme="light"] .dash-header .wrapper,
-:root[data-theme="light"] .site-footer .wrapper{
-  background: transparent !important;
-  box-shadow: none !important;
-  border: 0 !important;
-}
-
-/* Social icons = black -> blue on hover */
-:root[data-theme="light"] .social_links a,
-:root[data-theme="light"] header .social_links a,
-:root[data-theme="light"] .dash-header .social_links a{
-  color: var(--icon) !important;
-  background: transparent !important;
-}
-:root[data-theme="light"] .social_links a:hover,
-:root[data-theme="light"] header .social_links a:hover,
-:root[data-theme="light"] .dash-header .social_links a:hover{
-  color: var(--icon-hover) !important;
-}
-
-/* Guard: DARK overlay unchanged */
-:root:not([data-theme="light"]) .page-content .wrapper{
-  background: rgba(0,0,0,0.98) !important;
-  color: inherit !important;
-}
-/* LIGHT: SuiiKawaii giống màu Odin */
+/* Light: site title black, chevron blue */
 :root[data-theme="light"] .site-title {
-  color: #111 !important; /* chữ đen */
+  color: #111 !important;
   font-weight: 700;
 }
 :root[data-theme="light"] .site-title a {
   color: inherit !important;
   text-decoration: none !important;
 }
-:root[data-theme="light"] .site-title a:hover {
-  opacity: 0.85;
-}
-
-/* Chỉ đổi màu ký hiệu '>' trong site title (không tạo mới) */
+:root[data-theme="light"] .site-title a:hover { opacity: 0.85; }
 :root[data-theme="light"] .site-title::after,
 :root[data-theme="light"] .site-title > span,
 :root[data-theme="light"] .site-title .chevron,
@@ -509,74 +415,126 @@ body.warn-lock {
   color: #4e8cff !important;
 }
 
-/* FOOTER CREDIT: sáng hơn, dễ đọc */
-.site-footer {
-  color: rgba(255, 255, 255, 0.8) !important; /* trắng nhạt rõ hơn */
-  font-size: 0.9rem;
+/* Light: section headings that were overridden by theme */
+:root[data-theme="light"] .recent-articles .recent-header h2 {
+  color: #2a66d4 !important;
 }
-.site-footer a {
-  color: rgba(255, 255, 255, 0.9) !important;
-  text-decoration: underline;
+
+/* Light: Tags (single border) */
+:root[data-theme="light"] .page-content .wrapper .tag,
+:root[data-theme="light"] .page-content .wrapper .post-tag,
+:root[data-theme="light"] .page-content .wrapper .label {
+  background: var(--tag-bg) !important;
+  color: var(--tag-text) !important;
+  border: 1px solid var(--tag-border) !important;
+  box-shadow: none !important;
+  background-clip: padding-box !important;
 }
-.site-footer a:hover {
-  color: #ffffff !important;
+
+/* Light: Search box */
+:root[data-theme="light"] #article-search {
+  background-color: var(--search-bg) !important;
+  border: 1px solid var(--search-bd) !important;
+  color: var(--text-main) !important;
 }
-/* Light: làm pill About Me rõ hơn */
+:root[data-theme="light"] #article-search::placeholder {
+  color: var(--search-ph) !important;
+}
+
+/* Light: header/footer bars inside overlay already transparent via base rule */
+
+/* Light: social icons = black -> blue on hover */
+:root[data-theme="light"] .social_links a,
+:root[data-theme="light"] header .social_links a,
+:root[data-theme="light"] .dash-header .social_links a {
+  color: var(--icon) !important;
+  background: transparent !important;
+}
+:root[data-theme="light"] .social_links a:hover,
+:root[data-theme="light"] header .social_links a:hover,
+:root[data-theme="light"] .dash-header .social_links a:hover {
+  color: var(--icon-hover) !important;
+}
+
+/* ====== DARK GUARD (overlay color intact) ====== */
+:root:not([data-theme="light"]) .page-content .wrapper {
+  background: rgba(0,0,0,0.98) !important;
+  color: inherit !important;
+}
+
+/* Light tweak for About pill for better contrast */
 :root[data-theme="light"] .about-btn {
   background: rgba(0,0,0,0.08) !important;
   color: #111 !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
-:root[data-theme="light"] .about-btn:hover {
-  background: rgba(0,0,0,0.14) !important;
-}
-/* Dark: footer sáng dễ đọc */
-:root:not([data-theme="light"]) .site-footer {
-  color: rgba(255,255,255,0.82) !important;
-  font-size: 0.9rem;
-}
-:root:not([data-theme="light"]) .site-footer a {
-  color: rgba(255,255,255,0.92) !important;
-  text-decoration: underline;
-}
-:root:not([data-theme="light"]) .site-footer a:hover { color: #fff !important; }
+:root[data-theme="light"] .about-btn:hover { background: rgba(0,0,0,0.14) !important; }
 
-/* Light: footer chữ tối, link xanh */
-:root[data-theme="light"] .site-footer {
-  color: #2b2b2b !important;
-  font-size: 0.9rem;
-}
-:root[data-theme="light"] .site-footer a {
-  color: #2a66d4 !important;
-  text-decoration: underline;
-}
-:root[data-theme="light"] .site-footer a:hover { color: #003f80 !important; }
-/* ===== Footer credit: đồng bộ màu ===== */
-.site-footer {
-  color: rgba(255, 255, 255, 0.85) !important; /* Trắng nhạt rõ trên nền tối */
-  font-size: 0.9rem;
-}
-:root[data-theme="light"] .site-footer {
-  color: rgba(0, 0, 0, 0.65) !important; /* Xám đậm trên nền sáng */
-}
-
-/* Link trong footer cùng màu text, không đổi màu */
-.site-footer a,
-:root[data-theme="light"] .site-footer a {
-  color: inherit !important;
-  text-decoration: underline; /* vẫn có gạch để nhận ra là link */
-}
-.site-footer a:hover,
-:root[data-theme="light"] .site-footer a:hover {
-  opacity: 0.8; /* hover nhẹ, không đổi màu */
-}
-/* Footer credit — dark mode link same color as text */
+/* =========================================================
+   FOOTER CREDIT — unified per prompt (scope = .site-footer)
+   - Dark: rgba(255,255,255,0.70)
+   - Light: rgba(0,0,0,0.70)
+   - Links same color as text, keep underline, subtle hover
+   ========================================================= */
 :root:not([data-theme="light"]) .site-footer,
-:root:not([data-theme="light"]) .site-footer a {
-  color: rgba(255, 255, 255, 0.65) !important; /* xám nhạt */
-  text-decoration: none !important;
+:root:not([data-theme="light"]) .site-footer a,
+:root:not([data-theme="light"]) .site-footer a:visited {
+  color: rgba(255,255,255,0.70) !important;
+  text-decoration: underline !important;
 }
-:root:not([data-theme="light"]) .site-footer a:hover {
-  color: rgba(255, 255, 255, 0.8) !important; /* sáng hơn khi hover */
-  text-decoration: underline;
+
+:root[data-theme="light"] .site-footer,
+:root[data-theme="light"] .site-footer a,
+:root[data-theme="light"] .site-footer a:visited {
+  color: rgba(0,0,0,0.70) !important;
+  text-decoration: underline !important;
 }
+
+/* Hover: brighten slightly, no color switch to avoid flicker */
+.site-footer a:hover,
+.site-footer a:focus-visible { opacity: .85; }
+
+/* ===== LIGHT MODE: remove header/footer pill (no blur/shadow/radius) ===== */
+:root[data-theme="light"] .site-header,
+:root[data-theme="light"] .site-header .wrapper,
+:root[data-theme="light"] .site-footer,
+:root[data-theme="light"] .site-footer .wrapper {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* kill any pill pseudo-elements */
+:root[data-theme="light"] .site-header::before,
+:root[data-theme="light"] .site-header::after,
+:root[data-theme="light"] .site-footer::before,
+:root[data-theme="light"] .site-footer::after {
+  content: none !important;
+}
+
+/* ===== FOOTER CREDIT — text & links same color, no underline ===== */
+/* Dark: grey-ish like surrounding text */
+:root:not([data-theme="light"]) .site-footer,
+:root:not([data-theme="light"]) .site-footer a,
+:root:not([data-theme="light"]) .site-footer a:visited {
+  color: rgba(255,255,255,0.70) !important; /* xám nhạt */
+  text-decoration: none !important;         /* bỏ gạch chân */
+}
+
+/* Light: dark grey for readability on light overlay */
+:root[data-theme="light"] .site-footer,
+:root[data-theme="light"] .site-footer a,
+:root[data-theme="light"] .site-footer a:visited {
+  color: rgba(0,0,0,0.70) !important;       /* xám đậm */
+  text-decoration: none !important;         /* bỏ gạch chân */
+}
+
+/* Hover subtle: no color switch → tránh nhấp nháy khi toggle theme */
+.site-footer a:hover,
+.site-footer a:focus-visible { opacity: .85; }
+
+/* Normalize states inside footer */
+.site-footer a:active,
+.site-footer a:visited { color: inherit !important; }
