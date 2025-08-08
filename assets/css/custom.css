@@ -13,7 +13,7 @@
   --gap: 1.2rem;
 }
 
-/* Prevent horizontal overflow with 100vw on Chrome */
+/* Avoid horizontal scroll on Chrome when using 100vw */
 html, body { overflow-x: clip; }
 
 /* ====== BACKGROUND ====== */
@@ -76,9 +76,7 @@ body {
 }
 
 .page-content .wrapper .post-meta,
-.page-content .wrapper .post__meta {
-  font-size: 0.95rem;
-}
+.page-content .wrapper .post__meta { font-size: 0.95rem; }
 
 /* ====== HEADER AVATAR & INTRO ====== */
 .page-content .wrapper header img,
@@ -88,9 +86,7 @@ body {
 }
 .page-content .wrapper header p,
 .page-content .wrapper .site-header p,
-.page-content .wrapper .dash-header p {
-  font-size: 1.02em;
-}
+.page-content .wrapper .dash-header p { font-size: 1.02em; }
 
 /* ====== SPOTIFY CARD ====== */
 #spotify-player-wrapper {
@@ -204,7 +200,6 @@ body.warn-lock {
   font-size: 2rem;
   color: #4e8cff;
 }
-
 #article-search {
   width: clamp(350px, 60%, 800px);
   padding: 0.6rem 1rem;
@@ -221,13 +216,12 @@ body.warn-lock {
   border-color: #4e8cff;
   box-shadow: 0 0 0 3px rgba(78, 140, 255, 0.3);
 }
-
 .article-item.hidden {
   opacity: 0; height: 0; margin: 0; padding: 0; overflow: hidden;
   transition: opacity .3s, height .3s;
 }
 
-/* ====== WELCOME MODAL (no flicker) ====== */
+/* ====== WELCOME MODAL (no flicker base) ====== */
 #welcome-overlay, #welcome-modal {
   opacity: 0;
   pointer-events: none;
@@ -244,63 +238,76 @@ body.warn-lock {
   pointer-events: auto;
   display: flex;
 }
+
+/* Base card (dark theme default) — already XXL */
 #welcome-modal {
   position: fixed; top: 50%; left: 50%;
   transform: translate(-50%,-50%);
-  width: 90vw; max-width: 600px; padding: 3rem;
+  width: 92vw; max-width: 1080px;               /* consolidated size */
+  max-height: calc(100vh - 8vh);
+  padding: 4.25rem 4.25rem 3.5rem;
   background: rgba(0,0,0,.95);
-  border-radius: 1rem;
-  box-shadow: 0 8px 30px rgba(0,0,0,.8);
+  border-radius: 1.4rem;
+  box-shadow: 0 16px 36px rgba(0,0,0,.8);
   z-index: 2000;
   flex-direction: column; align-items: center; gap: 1.5rem;
-}
-#welcome-overlay {
-  position: fixed; inset: 0;
-  background: rgba(0,0,0,.6); z-index: 1999;
+  overflow: auto;
 }
 
-/* Welcome content */
-.modal-open { overflow: hidden }
+/* Welcome content sizing (consolidated XXL + bump) */
 .welcome-card { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative }
-.welcome-avatar { width: 160px; height: 160px; border-radius: 50%; object-fit: cover }
-.welcome-card h1 { font-size: 3rem; margin: 0 }
-.welcome-card p { font-size: 1.3rem; margin: .5rem 0; line-height: 1.4; }
+.welcome-avatar { width: 280px; height: 280px; border-radius: 50%; object-fit: cover }
+.welcome-card h1 { font-size: clamp(3.6rem, 2.4rem + 2.6vw, 5.4rem); margin: 0; line-height: 1.04; }
+.welcome-card p  { font-size: clamp(1.18rem, 1.05rem + .40vw, 1.50rem); margin: .5rem 0; line-height: 1.4; }
 
 .welcome-links {
   display: grid; grid-template-columns: repeat(3,1fr);
-  gap: .75rem 1.5rem; list-style: none; padding: 0; margin: 1.5rem 0 0;
+  gap: 1rem 2rem; list-style: none; padding: 0; margin: 1.35rem 0 0;
 }
 .welcome-links a {
   display: inline-flex; align-items: center; gap: .5rem;
-  font-size: 1.2rem;
+  font-size: 1.34rem;
   color: #4e8cff !important;
   fill: currentColor;
   text-decoration: none;
   transition: color 0.15s;
 }
-.welcome-links a:hover {
-  color: #75aaff !important;
-  fill: #75aaff;
-  text-decoration: underline
-}
-.svg-icon {
-  display: inline-flex;
-  vertical-align: middle;
-  margin-right: 0.4em;
-  width: 1.2em;
-  height: 1.2em;
-}
+.welcome-links a:hover { color: #75aaff !important; fill: #75aaff; text-decoration: underline }
+.svg-icon { display: inline-flex; vertical-align: middle; margin-right: 0.4em; width: 1.2em; height: 1.2em; }
 .svg-icon svg { width: 1.2em; height: 1.2em; display: block; }
-.threads-icon svg, .tiktok-icon svg { filter: drop-shadow(0 0 2px #fff); }
 
-/* Close button */
-#welcome-close {
-  position: absolute; top: .5rem; right: .75rem;
-  background: none; border: none; font-size: 2.4rem; color: #ccc; cursor: pointer
-}
+#welcome-close { position: absolute; top: .5rem; right: .75rem; background: none; border: none; font-size: 3.2rem; color: #ccc; cursor: pointer }
 #welcome-close:hover { color: #fff }
 
-/* About pill */
+/* Light-mode welcome card (keep white look) */
+:root[data-theme="light"] #welcome-modal {
+  background: rgba(255,255,255,0.98) !important;
+  box-shadow: 0 16px 36px rgba(0,0,0,0.2) !important;
+}
+:root[data-theme="light"] #welcome-modal p,
+:root[data-theme="light"] #welcome-modal li,
+:root[data-theme="light"] #welcome-modal small { color: #111 !important; }
+:root[data-theme="light"] #welcome-close { color: #666 !important; }
+:root[data-theme="light"] #welcome-close:hover { color: #000 !important; }
+
+/* Small screens/short heights */
+@media (max-width: 480px){
+  #welcome-modal{ width: 92vw; max-width: none; padding: 2rem; }
+  .welcome-avatar{ width: 150px; height: 150px; }
+  .welcome-links a{ font-size: 1.12rem; }
+}
+@media (max-height: 600px){
+  #welcome-modal{ padding: 2.25rem; }
+  .welcome-avatar{ width: 170px; height: 170px; }
+}
+/* Ultra-wide */
+@media (min-width: 1400px){
+  #welcome-modal{ max-width: 1200px; }
+  .welcome-avatar{ width: 320px; height: 320px; }
+  .welcome-card h1{ font-size: clamp(3.9rem, 2rem + 3.2vw, 5.8rem); }
+}
+
+/* ====== ABOUT PILL ====== */
 .about-btn {
   font-family: inherit;
   font-size: 1rem;
@@ -319,8 +326,7 @@ body.warn-lock {
   display: inline-block;
   vertical-align: middle;
 }
-.about-btn:hover,
-.about-btn:focus {
+.about-btn:hover, .about-btn:focus {
   background: rgba(255,255,255,0.28);
   color: inherit;
   text-decoration: none;
@@ -341,7 +347,7 @@ body.warn-lock {
   color: #4e8cff !important;
 }
 
-/* ====== LIGHT THEME — TOKENS ====== */
+/* ====== LIGHT THEME — TOKENS & OVERRIDES ====== */
 :root[data-theme="light"] {
   --text-main:   #222;
   --text-dim:    #5b5b5b;
@@ -366,19 +372,15 @@ body.warn-lock {
   --search-ph:   #9aa6b2;
 }
 
-/* Light: overlay and base text */
+/* Light: overlay + text */
 :root[data-theme="light"] .page-content .wrapper {
   background: var(--overlay-bg) !important;
   color: var(--text-main) !important;
 }
 :root[data-theme="light"] .page-content .wrapper p,
-:root[data-theme="light"] .page-content .wrapper li {
-  color: var(--text-main) !important;
-}
+:root[data-theme="light"] .page-content .wrapper li { color: var(--text-main) !important; }
 :root[data-theme="light"] .page-content .wrapper .post-meta,
-:root[data-theme="light"] .page-content .wrapper .post__meta {
-  color: var(--text-dim) !important;
-}
+:root[data-theme="light"] .page-content .wrapper .post__meta { color: var(--text-dim) !important; }
 
 /* Light: post titles = pink */
 :root[data-theme="light"] .page-content .wrapper .post-link,
@@ -399,28 +401,18 @@ body.warn-lock {
 }
 
 /* Light: site title black, chevron blue */
-:root[data-theme="light"] .site-title {
-  color: #111 !important;
-  font-weight: 700;
-}
-:root[data-theme="light"] .site-title a {
-  color: inherit !important;
-  text-decoration: none !important;
-}
+:root[data-theme="light"] .site-title { color: #111 !important; font-weight: 700; }
+:root[data-theme="light"] .site-title a { color: inherit !important; text-decoration: none !important; }
 :root[data-theme="light"] .site-title a:hover { opacity: 0.85; }
 :root[data-theme="light"] .site-title::after,
 :root[data-theme="light"] .site-title > span,
 :root[data-theme="light"] .site-title .chevron,
-:root[data-theme="light"] .site-title a > span {
-  color: #4e8cff !important;
-}
+:root[data-theme="light"] .site-title a > span { color: #4e8cff !important; }
 
-/* Light: section headings that were overridden by theme */
-:root[data-theme="light"] .recent-articles .recent-header h2 {
-  color: #2a66d4 !important;
-}
+/* Light: headings if theme overrides */
+:root[data-theme="light"] .recent-articles .recent-header h2 { color: #2a66d4 !important; }
 
-/* Light: Tags (single border) */
+/* Light: tags */
 :root[data-theme="light"] .page-content .wrapper .tag,
 :root[data-theme="light"] .page-content .wrapper .post-tag,
 :root[data-theme="light"] .page-content .wrapper .label {
@@ -431,19 +423,15 @@ body.warn-lock {
   background-clip: padding-box !important;
 }
 
-/* Light: Search box */
+/* Light: search box */
 :root[data-theme="light"] #article-search {
   background-color: var(--search-bg) !important;
   border: 1px solid var(--search-bd) !important;
   color: var(--text-main) !important;
 }
-:root[data-theme="light"] #article-search::placeholder {
-  color: var(--search-ph) !important;
-}
+:root[data-theme="light"] #article-search::placeholder { color: var(--search-ph) !important; }
 
-/* Light: header/footer bars inside overlay already transparent via base rule */
-
-/* Light: social icons = black -> blue on hover */
+/* Light: social icons */
 :root[data-theme="light"] .social_links a,
 :root[data-theme="light"] header .social_links a,
 :root[data-theme="light"] .dash-header .social_links a {
@@ -462,37 +450,13 @@ body.warn-lock {
   color: inherit !important;
 }
 
-/* Light tweak for About pill for better contrast */
+/* Light tweak for About pill */
 :root[data-theme="light"] .about-btn {
   background: rgba(0,0,0,0.08) !important;
   color: #111 !important;
   box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 :root[data-theme="light"] .about-btn:hover { background: rgba(0,0,0,0.14) !important; }
-
-/* =========================================================
-   FOOTER CREDIT — unified per prompt (scope = .site-footer)
-   - Dark: rgba(255,255,255,0.70)
-   - Light: rgba(0,0,0,0.70)
-   - Links same color as text, keep underline, subtle hover
-   ========================================================= */
-:root:not([data-theme="light"]) .site-footer,
-:root:not([data-theme="light"]) .site-footer a,
-:root:not([data-theme="light"]) .site-footer a:visited {
-  color: rgba(255,255,255,0.70) !important;
-  text-decoration: underline !important;
-}
-
-:root[data-theme="light"] .site-footer,
-:root[data-theme="light"] .site-footer a,
-:root[data-theme="light"] .site-footer a:visited {
-  color: rgba(0,0,0,0.70) !important;
-  text-decoration: underline !important;
-}
-
-/* Hover: brighten slightly, no color switch to avoid flicker */
-.site-footer a:hover,
-.site-footer a:focus-visible { opacity: .85; }
 
 /* ===== LIGHT MODE: remove header/footer pill (no blur/shadow/radius) ===== */
 :root[data-theme="light"] .site-header,
@@ -506,171 +470,25 @@ body.warn-lock {
   backdrop-filter: none !important;
   -webkit-backdrop-filter: none !important;
 }
-/* kill any pill pseudo-elements */
 :root[data-theme="light"] .site-header::before,
 :root[data-theme="light"] .site-header::after,
 :root[data-theme="light"] .site-footer::before,
-:root[data-theme="light"] .site-footer::after {
-  content: none !important;
-}
+:root[data-theme="light"] .site-footer::after { content: none !important; }
 
-/* ===== FOOTER CREDIT — text & links same color, no underline ===== */
-/* Dark: grey-ish like surrounding text */
+/* =========================================================
+   FOOTER CREDIT — unified (links same color, no underline)
+   Both themes = rgba(255,255,255,0.70) for readability
+   ========================================================= */
 :root:not([data-theme="light"]) .site-footer,
 :root:not([data-theme="light"]) .site-footer a,
-:root:not([data-theme="light"]) .site-footer a:visited {
-  color: rgba(255,255,255,0.70) !important; /* xám nhạt */
-  text-decoration: none !important;         /* bỏ gạch chân */
-}
-
-/* Light: dark grey for readability on light overlay */
+:root:not([data-theme="light"]) .site-footer a:visited,
 :root[data-theme="light"] .site-footer,
 :root[data-theme="light"] .site-footer a,
 :root[data-theme="light"] .site-footer a:visited {
-  color: rgba(0,0,0,0.70) !important;       /* xám đậm */
-  text-decoration: none !important;         /* bỏ gạch chân */
+  color: rgba(255,255,255,0.70) !important;
+  text-decoration: none !important;
 }
-
-/* Hover subtle: no color switch → tránh nhấp nháy khi toggle theme */
 .site-footer a:hover,
 .site-footer a:focus-visible { opacity: .85; }
-
-/* Normalize states inside footer */
 .site-footer a:active,
 .site-footer a:visited { color: inherit !important; }
-
-/* ===== WELCOME MODAL — Light mode fix (white card, dark body text) ===== */
-:root[data-theme="light"] #welcome-modal {
-  background: rgba(255,255,255,0.98) !important;
-  box-shadow: 0 12px 30px rgba(0,0,0,0.18) !important;
-}
-
-/* Body text inside modal → dark, but don't touch heading/link colors */
-:root[data-theme="light"] #welcome-modal p,
-:root[data-theme="light"] #welcome-modal li,
-:root[data-theme="light"] #welcome-modal small {
-  color: #111 !important;
-}
-
-/* Close button readable on white */
-:root[data-theme="light"] #welcome-close { color: #666 !important; }
-:root[data-theme="light"] #welcome-close:hover { color: #000 !important; }
-
-/* (optional) overlay a bit lighter in light mode — uncomment if bạn muốn */
-/*
-:root[data-theme="light"] #welcome-overlay {
-  background: rgba(0,0,0,0.30) !important;
-}
-
-/* ===== WELCOME MODAL — XXL (both themes) ===== */
-#welcome-modal{
-  max-width: min(92vw, 980px) !important;   /* rộng hơn */
-  max-height: calc(100vh - 8vh) !important; /* không tràn màn hình */
-  overflow: auto !important;
-  padding: 4rem 4rem 3.25rem !important;
-  border-radius: 1.35rem !important;
-}
-
-/* Avatar to bự */
-#welcome-modal .welcome-avatar{
-  width: 260px !important;
-  height: 260px !important;
-}
-
-/* Heading to bự nhưng responsive */
-#welcome-modal .welcome-card h1{
-  font-size: clamp(3.4rem, 2.6rem + 2.2vw, 5rem) !important;
-  line-height: 1.04 !important;
-  margin-top: .35rem !important;
-}
-
-/* Body text lớn hơn chút */
-#welcome-modal .welcome-card p{
-  font-size: clamp(1.15rem, 1.05rem + .35vw, 1.45rem) !important;
-}
-
-/* Link size & spacing */
-#welcome-modal .welcome-links{
-  gap: 1rem 2rem !important;
-  margin-top: 1.35rem !important;
-}
-#welcome-modal .welcome-links a{
-  font-size: 1.3rem !important;
-}
-
-/* Nút đóng tương xứng */
-#welcome-close{ font-size: 3rem !important; }
-
-/* Siêu rộng màn hình: bump thêm */
-@media (min-width: 1400px){
-  #welcome-modal{ max-width: 1100px !important; padding: 4.25rem 4.25rem 3.5rem !important; }
-  #welcome-modal .welcome-avatar{ width: 300px !important; height: 300px !important; }
-  #welcome-modal .welcome-card h1{ font-size: clamp(3.8rem, 2.2rem + 3vw, 5.4rem) !important; }
-}
-
-/* Màn hình nhỏ/chiều cao thấp: giữ dễ nhìn */
-@media (max-width: 480px){
-  #welcome-modal{ width: 92vw !important; max-width: none !important; padding: 2rem !important; }
-  #welcome-modal .welcome-avatar{ width: 150px !important; height: 150px !important; }
-  #welcome-modal .welcome-links a{ font-size: 1.12rem !important; }
-}
-@media (max-height: 600px){
-  #welcome-modal{ padding: 2.25rem !important; }
-  #welcome-modal .welcome-avatar{ width: 170px !important; height: 170px !important; }
-}
-
-/* Light-mode look (giữ như đã fix) */
-:root[data-theme="light"] #welcome-modal{
-  background: rgba(255,255,255,0.98) !important;
-  box-shadow: 0 16px 36px rgba(0,0,0,0.2) !important;
-}
-:root[data-theme="light"] #welcome-modal p,
-:root[data-theme="light"] #welcome-modal li,
-:root[data-theme="light"] #welcome-modal small{ color: #111 !important; }
-:root[data-theme="light"] #welcome-close{ color: #666 !important; }
-:root[data-theme="light"] #welcome-close:hover{ color: #000 !important; }
-
-/* ===== WELCOME MODAL — +1 step bigger (both themes) ===== */
-#welcome-modal{
-  max-width: min(92vw, 1080px) !important;      /* was 980px */
-  max-height: calc(100vh - 8vh) !important;
-  overflow: auto !important;
-  padding: 4.25rem 4.25rem 3.5rem !important;   /* a bit more padding */
-  border-radius: 1.4rem !important;
-}
-
-/* Larger avatar */
-#welcome-modal .welcome-avatar{
-  width: 280px !important;                       /* was 260px */
-  height: 280px !important;
-}
-
-/* Heading just a touch bigger */
-#welcome-modal .welcome-card h1{
-  font-size: clamp(3.6rem, 2.4rem + 2.6vw, 5.4rem) !important; /* was max 5.0–5.4 */
-  line-height: 1.04 !important;
-}
-
-/* Body text slightly larger */
-#welcome-modal .welcome-card p{
-  font-size: clamp(1.18rem, 1.05rem + .40vw, 1.50rem) !important;
-}
-
-/* Links size + spacing */
-#welcome-modal .welcome-links{
-  gap: 1rem 2rem !important;
-  margin-top: 1.35rem !important;
-}
-#welcome-modal .welcome-links a{
-  font-size: 1.34rem !important;                 /* was 1.30rem */
-}
-
-/* Close button follows size */
-#welcome-close{ font-size: 3.2rem !important; }
-
-/* Ultra-wide screens: one more small bump */
-@media (min-width: 1400px){
-  #welcome-modal{ max-width: 1200px !important; }
-  #welcome-modal .welcome-avatar{ width: 320px !important; height: 320px !important; }
-  #welcome-modal .welcome-card h1{ font-size: clamp(3.9rem, 2rem + 3.2vw, 5.8rem) !important; }
-}
