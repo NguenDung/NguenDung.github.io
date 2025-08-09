@@ -7,7 +7,7 @@ description: >
   <br/>🌠 I Love Hoshimachi Suisei!! 🌠
 show_excerpts: false
 
-paginate: 5
+paginate: 10
 paginate_path: "/blog/page:num/"
 
 # ---- URLs ----
@@ -66,3 +66,15 @@ jekyll-archives:
     tag: tag
   permalinks:
     tag: /tag/:name/     # URL sẽ là /tag/ten-tag/
+
+timezone: Asia/Ho_Chi_Minh
+future: true
+
+
+
+
+
+
+
+
+    
