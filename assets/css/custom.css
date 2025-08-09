@@ -580,3 +580,35 @@ body.warn-lock {
     max-width: 60% !important;
   }
 }
+/* MOBILE PORTRAIT — pack About + social icons, never cut off */
+@media (max-width: 600px) and (orientation: portrait){
+  /* Đừng cắt con bên trong */
+  .site-header .wrapper,
+  .dash-header .wrapper{ overflow: visible !important; }
+
+  /* About Me gọn + chừa khe nhỏ trước icon */
+  .about-btn{
+    font-size: 13px !important;
+    padding: .20em .70em !important;
+    margin-right: 6px !important;
+    border-radius: .6rem !important;
+  }
+
+  /* Icon thành 1 hàng, sát nhau, KHÔNG wrap */
+  .social_links{
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 4px !important;              /* giảm/ tăng nếu muốn */
+    white-space: nowrap !important;   /* không xuống dòng -> không “mất nửa” */
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+  .social_links li{ flex: 0 0 auto !important; margin:0 !important; padding:0 !important; }
+  .social_links a{
+    width: 30px; height: 30px; line-height: 30px;
+    font-size: 24px;                  /* vừa với 30×30 */
+  }
+
+  /* Màu icon ở Light (phòng mờ/ẩn) — bạn đã có, thêm lại cho chắc */
+  :root[data-theme="light"] .social_links a{ color:#111 !important; }
+}
