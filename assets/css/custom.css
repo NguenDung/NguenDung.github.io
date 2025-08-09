@@ -493,11 +493,11 @@ body.warn-lock {
 .site-footer a:active,
 .site-footer a:visited { color: inherit !important; }
 
-/* ===== MOBILE CLEAN PATCH (final) ===== */
+/* ===== MOBILE (clean) ================================== */
 
-/* Portrait: search 85%, About + social cùng hàng, không wrap, ẩn widgets */
+/* Portrait (điện thoại cầm dọc) */
 @media (max-width: 600px) and (orientation: portrait) {
-  /* Recent + search */
+  /* Search ~85% và không tràn */
   .recent-articles .recent-header{
     flex-wrap: wrap !important;
     gap: .6rem 1rem !important;
@@ -512,54 +512,68 @@ body.warn-lock {
     box-sizing: border-box !important;
   }
 
-  /* Header cluster: About + social đứng 1 hàng, không bị cắt */
+  /* Header cluster: About + MXH đứng cùng hàng, không wrap */
   .site-header .wrapper,
-  .dash-header .wrapper{ overflow: visible !important; }
-
+  .dash-header  .wrapper{
+    display: flex !important;
+    align-items: center !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;
+    overflow: visible !important;
+  }
+  .site-title{ margin-right: auto !important; }
   .about-btn{
     font-size: 13px !important;
     padding: .22em .65em !important;
     border-radius: .55rem !important;
-    margin: 0 6px 0 0 !important;
+    margin: 0 4px 0 8px !important;
     display: inline-flex !important;
     flex: 0 0 auto !important;
     vertical-align: middle !important;
   }
-
-  /* ul.social_links là cấu trúc theme dash */
   ul.social_links{
     display: inline-flex !important;
     align-items: center !important;
-    gap: 4px !important;              
+    gap: 3px !important;              /* khe nhỏ để không “rụng” icon */
     flex-wrap: nowrap !important;
     white-space: nowrap !important;
-    margin: 0 !important; padding: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
   }
   ul.social_links li{ margin:0 !important; padding:0 !important; flex:0 0 auto !important; }
   ul.social_links a{
     width: 30px; height: 30px; line-height: 30px;
-    font-size: 24px;                      
+    font-size: 24px;
     display: inline-flex; align-items:center; justify-content:center;
     border-radius: 7px;
   }
-
-  /* Bảo đảm icon nhìn rõ ở Light */
   :root[data-theme="light"] ul.social_links a{ color:#111 !important; }
 
   /* Ẩn widget khi cầm dọc */
   #spotify-player-wrapper, #schedule-bar { display: none !important; }
+
+  /* Welcome modal: tiêu đề không xuống dòng, cân lại kích thước */
+  #welcome-modal .welcome-card h1{
+    font-size: clamp(1.9rem, 7.2vw, 2.25rem) !important;
+    line-height: 1.06 !important;
+    white-space: nowrap !important;
+  }
+  #welcome-modal .welcome-avatar{ width: 180px; height: 180px; }
+  #welcome-modal .welcome-links a{ font-size: 1.08rem; }
 }
 
-/* Landscape (điện thoại xoay ngang, tránh tablet): hiện widget thu nhỏ, chừa chỗ bên phải, search 60% */
+/* Landscape (điện thoại xoay ngang, tránh tablet) */
 @media (orientation: landscape) and (max-height: 480px) {
+  /* Hiện widget thu nhỏ ở cạnh phải */
   #spotify-player-wrapper,
   #schedule-bar { display: block !important; position: fixed !important; right: 10px; z-index: 1000; }
-
   #spotify-player-wrapper { width: 360px !important; height: 420px !important; bottom: 12px !important; }
   #schedule-bar { width: 360px !important; height: 170px !important; bottom: calc(12px + 420px + 8px) !important; }
 
+  /* Chừa chỗ cho widget */
   .page-content .wrapper { margin-right: calc(360px + 24px) !important; max-width: none !important; }
 
+  /* Search ngắn hơn để cân bố cục ngang */
   #article-search,
   .recent-articles .recent-header input[type="search"]{ width: 60% !important; max-width: 60% !important; }
 }
