@@ -28,17 +28,17 @@ checking for RB_WARN_CATEGORY_DEPRECATED in ruby.h... yes
 creating Makefile
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-i9iul4 sitelibdir\=./.gem.20250809-16296-i9iul4 clean
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-4r0kvx sitelibdir\=./.gem.20250809-37794-4r0kvx clean
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-i9iul4 sitelibdir\=./.gem.20250809-16296-i9iul4
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-4r0kvx sitelibdir\=./.gem.20250809-37794-4r0kvx
 compiling bigdecimal.c
 compiling missing.c
 linking shared-object bigdecimal.so
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-i9iul4 sitelibdir\=./.gem.20250809-16296-i9iul4 install
-/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250809-16296-i9iul4
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-4r0kvx sitelibdir\=./.gem.20250809-37794-4r0kvx install
+/usr/bin/install -c -m 0755 bigdecimal.so ./.gem.20250809-37794-4r0kvx
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/bigdecimal-3.2.2/ext/bigdecimal
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-i9iul4 sitelibdir\=./.gem.20250809-16296-i9iul4 clean
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-4r0kvx sitelibdir\=./.gem.20250809-37794-4r0kvx clean

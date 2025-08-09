@@ -3,17 +3,17 @@ current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3
 creating Makefile
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-5eexyv sitelibdir\=./.gem.20250809-16296-5eexyv clean
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-mo07vu sitelibdir\=./.gem.20250809-37794-mo07vu clean
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-5eexyv sitelibdir\=./.gem.20250809-16296-5eexyv
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-mo07vu sitelibdir\=./.gem.20250809-37794-mo07vu
 compiling ruby_http_parser.c
 compiling ryah_http_parser.c
 linking shared-object ruby_http_parser.so
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-5eexyv sitelibdir\=./.gem.20250809-16296-5eexyv install
-/usr/bin/install -c -m 0755 ruby_http_parser.so ./.gem.20250809-16296-5eexyv
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-mo07vu sitelibdir\=./.gem.20250809-37794-mo07vu install
+/usr/bin/install -c -m 0755 ruby_http_parser.so ./.gem.20250809-37794-mo07vu
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/http_parser.rb-0.8.0/ext/ruby_http_parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-5eexyv sitelibdir\=./.gem.20250809-16296-5eexyv clean
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-mo07vu sitelibdir\=./.gem.20250809-37794-mo07vu clean

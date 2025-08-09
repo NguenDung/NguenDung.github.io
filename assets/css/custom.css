@@ -493,16 +493,16 @@ body.warn-lock {
 .site-footer a:active,
 .site-footer a:visited { color: inherit !important; }
 
-/* ===== MOBILE CLEAN PATCH (put at end) ===== */
+/* ===== MOBILE CLEAN PATCH (final) ===== */
 
-/* Portrait: search 85%, About + social nằm 1 hàng, ẩn widgets */
+/* Portrait: search 85%, About + social cùng hàng, không wrap, ẩn widgets */
 @media (max-width: 600px) and (orientation: portrait) {
+  /* Recent + search */
   .recent-articles .recent-header{
     flex-wrap: wrap !important;
     gap: .6rem 1rem !important;
     padding-right: 0 !important;
   }
-
   #article-search,
   .recent-articles .recent-header input[type="search"]{
     flex: 0 0 85% !important;
@@ -512,103 +512,54 @@ body.warn-lock {
     box-sizing: border-box !important;
   }
 
-  /* About + MXH gọn & cùng một hàng */
+  /* Header cluster: About + social đứng 1 hàng, không bị cắt */
+  .site-header .wrapper,
+  .dash-header .wrapper{ overflow: visible !important; }
+
   .about-btn{
     font-size: 13px !important;
     padding: .22em .65em !important;
     border-radius: .55rem !important;
-    margin-left: 0 !important;   /* bỏ margin thừa */
-    margin-right: 6px !important;
+    margin: 0 6px 0 0 !important;
     display: inline-flex !important;
     flex: 0 0 auto !important;
     vertical-align: middle !important;
   }
 
-  .social_links{
+  /* ul.social_links là cấu trúc theme dash */
+  ul.social_links{
     display: inline-flex !important;
-    flex-direction: row !important;
     align-items: center !important;
-    gap: 6px !important;
-    flex-wrap: nowrap !important;   /* không xuống dòng */
+    gap: 4px !important;              
+    flex-wrap: nowrap !important;
     white-space: nowrap !important;
-    vertical-align: middle !important;
+    margin: 0 !important; padding: 0 !important;
   }
-  .social_links ul{ display:inline-flex !important; gap:6px !important; }
-  .social_links li{ display:inline-flex !important; margin:0 !important; }
-
-  .social_links a{
-    width: 32px; height: 32px; line-height: 32px;
-    font-size: 26px !important;
-    display: inline-flex; align-items: center; justify-content: center;
+  ul.social_links li{ margin:0 !important; padding:0 !important; flex:0 0 auto !important; }
+  ul.social_links a{
+    width: 30px; height: 30px; line-height: 30px;
+    font-size: 24px;                      
+    display: inline-flex; align-items:center; justify-content:center;
     border-radius: 7px;
-    flex: 0 0 auto;
   }
+
+  /* Bảo đảm icon nhìn rõ ở Light */
+  :root[data-theme="light"] ul.social_links a{ color:#111 !important; }
 
   /* Ẩn widget khi cầm dọc */
-  #spotify-player-wrapper,
-  #schedule-bar { display: none !important; }
+  #spotify-player-wrapper, #schedule-bar { display: none !important; }
 }
 
-/* Landscape: hiện widget thu nhỏ, chừa chỗ bên phải, search 60% */
+/* Landscape (điện thoại xoay ngang, tránh tablet): hiện widget thu nhỏ, chừa chỗ bên phải, search 60% */
 @media (orientation: landscape) and (max-height: 480px) {
   #spotify-player-wrapper,
-  #schedule-bar {
-    display: block !important;
-    position: fixed !important;
-    right: 10px; z-index: 1000;
-  }
+  #schedule-bar { display: block !important; position: fixed !important; right: 10px; z-index: 1000; }
 
-  #spotify-player-wrapper {
-    width: 360px !important;
-    height: 420px !important;
-    bottom: 12px !important;
-  }
-  #schedule-bar {
-    width: 360px !important;
-    height: 170px !important;
-    bottom: calc(12px + 420px + 8px) !important; /* trên Spotify */
-  }
+  #spotify-player-wrapper { width: 360px !important; height: 420px !important; bottom: 12px !important; }
+  #schedule-bar { width: 360px !important; height: 170px !important; bottom: calc(12px + 420px + 8px) !important; }
 
-  .page-content .wrapper {
-    margin-right: calc(360px + 24px) !important;
-    max-width: none !important;
-  }
+  .page-content .wrapper { margin-right: calc(360px + 24px) !important; max-width: none !important; }
 
   #article-search,
-  .recent-articles .recent-header input[type="search"]{
-    width: 60% !important;
-    max-width: 60% !important;
-  }
-}
-/* MOBILE PORTRAIT — pack About + social icons, never cut off */
-@media (max-width: 600px) and (orientation: portrait){
-  /* Đừng cắt con bên trong */
-  .site-header .wrapper,
-  .dash-header .wrapper{ overflow: visible !important; }
-
-  /* About Me gọn + chừa khe nhỏ trước icon */
-  .about-btn{
-    font-size: 13px !important;
-    padding: .20em .70em !important;
-    margin-right: 6px !important;
-    border-radius: .6rem !important;
-  }
-
-  /* Icon thành 1 hàng, sát nhau, KHÔNG wrap */
-  .social_links{
-    display: inline-flex !important;
-    align-items: center !important;
-    gap: 4px !important;              /* giảm/ tăng nếu muốn */
-    white-space: nowrap !important;   /* không xuống dòng -> không “mất nửa” */
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-  .social_links li{ flex: 0 0 auto !important; margin:0 !important; padding:0 !important; }
-  .social_links a{
-    width: 30px; height: 30px; line-height: 30px;
-    font-size: 24px;                  /* vừa với 30×30 */
-  }
-
-  /* Màu icon ở Light (phòng mờ/ẩn) — bạn đã có, thêm lại cho chắc */
-  :root[data-theme="light"] .social_links a{ color:#111 !important; }
+  .recent-articles .recent-header input[type="search"]{ width: 60% !important; max-width: 60% !important; }
 }

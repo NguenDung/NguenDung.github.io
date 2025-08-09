@@ -10,16 +10,16 @@ checking for cpuid.h... yes
 creating Makefile
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/json-2.13.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-4qpma sitelibdir\=./.gem.20250809-16296-4qpma clean
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-tkjsfl sitelibdir\=./.gem.20250809-37794-tkjsfl clean
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/json-2.13.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-4qpma sitelibdir\=./.gem.20250809-16296-4qpma
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-tkjsfl sitelibdir\=./.gem.20250809-37794-tkjsfl
 compiling parser.c
 linking shared-object json/ext/parser.so
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/json-2.13.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-4qpma sitelibdir\=./.gem.20250809-16296-4qpma install
-/usr/bin/install -c -m 0755 parser.so ./.gem.20250809-16296-4qpma/json/ext
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-tkjsfl sitelibdir\=./.gem.20250809-37794-tkjsfl install
+/usr/bin/install -c -m 0755 parser.so ./.gem.20250809-37794-tkjsfl/json/ext
 
 current directory: /home/suiikawaii/Web/NguenDung.github.io/vendor/bundle/ruby/3.3.0/gems/json-2.13.2/ext/json/ext/parser
-make DESTDIR\= sitearchdir\=./.gem.20250809-16296-4qpma sitelibdir\=./.gem.20250809-16296-4qpma clean
+make DESTDIR\= sitearchdir\=./.gem.20250809-37794-tkjsfl sitelibdir\=./.gem.20250809-37794-tkjsfl clean

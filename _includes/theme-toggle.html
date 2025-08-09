@@ -36,22 +36,22 @@
     toggle.checked = (theme === 'dark');
 
     // nếu bạn có CSS dựa trên class trên chính input:
-    toggle.classList.toggle('light', theme === 'dark'); // moon
-    toggle.classList.toggle('dark',  theme === 'light'); // sun
+    toggle.classList.toggle('light', theme === 'dark'); 
+    toggle.classList.toggle('dark',  theme === 'light'); 
 
     localStorage.setItem('theme', theme);
   };
 
-  // 1) lấy theme đã lưu, nếu chưa có thì theo hệ thống
+  // lấy theme đã lưu, nếu chưa có thì theo hệ thống
   const initial = localStorage.getItem('theme') || getSystemPref();
   applyTheme(initial);
 
-  // 2) click để đổi
+  // click để đổi
   toggle.addEventListener('change', () => {
     applyTheme(toggle.checked ? 'dark' : 'light');
   });
 
-  // 3) (tuỳ chọn) cập nhật khi hệ thống đổi, chỉ khi user CHƯA chọn thủ công
+  // cập nhật khi hệ thống đổi, chỉ khi user CHƯA chọn thủ công
   if (window.matchMedia) {
     const mq = window.matchMedia('(prefers-color-scheme: light)');
     const onChange = (e) => {
@@ -60,7 +60,7 @@
       }
     };
     if (mq.addEventListener) mq.addEventListener('change', onChange);
-    else mq.addListener(onChange); // Safari cũ
+    else mq.addListener(onChange); 
   }
 })();
 </script>
