@@ -145,17 +145,40 @@ html.is-changing .transition-fade { opacity: 0; }
 }
 #warning-modal img { display: block; max-width: none; max-height: none; }
 
-#warning-modal.soft {
+/* ==== SOFT WARN: fit vừa màn hình, giống hard, hỗ trợ safe-area ==== */
+#warning-modal.soft{
   background: rgba(0,0,0,0.66);
-  padding-inline: 3vw;
-  padding-top: max(1.5vh, env(safe-area-inset-top));
-  padding-bottom: max(1.5vh, env(safe-area-inset-bottom));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* chừa tai thỏ / home indicator */
+  padding-top:    max(8px, env(safe-area-inset-top));
+  padding-right:  max(8px, env(safe-area-inset-right));
+  padding-bottom: max(8px, env(safe-area-inset-bottom));
+  padding-left:   max(8px, env(safe-area-inset-left));
 }
-#warning-modal.soft img {
-  height: 94vh; width: auto;
+
+#warning-modal.soft img{
+  display: block;
+  width: auto;
+  height: auto;
   object-fit: contain;
+
+  /* giới hạn theo khung nhìn đã trừ safe-area */
+  max-width:  calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 16px);
+  max-height: calc(100vh - env(safe-area-inset-top)  - env(safe-area-inset-bottom) - 16px);
+
   border-radius: 18px;
   box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+}
+
+/* Mobile PORTRAIT: siết nhẹ để chắc chắn không chạm mép */
+@media (max-width: 600px) and (orientation: portrait){
+  #warning-modal.soft img{
+    max-width:  92vw;
+    max-height: 86vh;
+  }
 }
 
 #warning-modal.hard {
@@ -179,7 +202,6 @@ html.is-changing .transition-fade { opacity: 0; }
     height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
   }
 }
-@media (max-height: 520px) { #warning-modal.soft img { height: 88vh; } }
 
 body.warn-lock {
   overflow: hidden !important;
