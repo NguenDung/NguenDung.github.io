@@ -599,3 +599,46 @@ body.warn-lock {
   #article-search,
   .recent-articles .recent-header input[type="search"]{ width: 60% !important; max-width: 60% !important; }
 }
+/* === Force SOFT = HARD layout (mọi thiết bị) === */
+#warning-modal.soft,
+#warning-modal.hard {
+  background: rgba(0,0,0,0.9) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+/* Ảnh luôn fit trong khung nhìn, không bị crop */
+#warning-modal.soft img,
+#warning-modal.hard img {
+  width: 96vmin !important;          
+  height: auto !important;
+  object-fit: contain !important;
+  max-width: calc(100vw - 16px) !important;
+  max-height: calc(100vh - 16px) !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 40px rgba(0,0,0,.6) !important;
+}
+
+/* Portrait: chừa safe-area (tai thỏ/home bar) */
+@media (orientation: portrait) {
+  #warning-modal.soft,
+  #warning-modal.hard {
+    padding: env(safe-area-inset-top) env(safe-area-inset-right)
+             env(safe-area-inset-bottom) env(safe-area-inset-left) !important;
+  }
+  #warning-modal.soft img,
+  #warning-modal.hard img {
+    max-width:  calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 16px) !important;
+    max-height: calc(100vh - env(safe-area-inset-top)  - env(safe-area-inset-bottom) - 16px) !important;
+  }
+}
+
+/* Mobile nhỏ: siết nhẹ để chắc chắn không chạm mép */
+@media (max-width: 600px) and (orientation: portrait) {
+  #warning-modal.soft img,
+  #warning-modal.hard img {
+    width: 92vmin !important;
+  }
+}
