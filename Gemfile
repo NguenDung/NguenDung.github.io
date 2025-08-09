@@ -1,8 +1,11 @@
 source "https://rubygems.org"
 
-gem "liquid-md5"
-gem "jekyll-tagging"
+gem "jekyll", "~> 4.3"
+gem "jekyll-remote-theme"  
+gem "jekyll-tagging"        
+gem "jekyll-seo-tag"
+gem "jekyll-feed"
+gem "jekyll-paginate"
 gem "kramdown-parser-gfm"
-gem 'bundler', '>= 2.2.28'
-
-gemspec
+gem "liquid-md5"
+gem "webrick", "~> 1.8"     

@@ -1,31 +1,40 @@
+# ---- Site basics (keep yours) ----
 title: SuiiKawaii
 author: SuiiKawaii
-#email: 
-description: > # this means to ignore newlines until "show_exerpts:"
-  Part time CTF Player learn every day!! 
+description: >
+  Part time CTF Player learn every day!!
   <br/>🌠 I Love Hoshimachi Suisei!!  🌠
   <br/>🌠 I Love Hoshimachi Suisei!! 🌠
-show_excerpts: false # set to true to show excerpts on the homepage
+show_excerpts: false
 
 paginate: 5
 paginate_path: "/blog/page:num/"
 
-tag_permalink_style: pretty
-tag_page_layout: tag_page
-tag_page_dir: tag
+# ---- URLs ----
+# Set your user domain. Do NOT set baseurl here if workflow passes --baseurl.
+url: "https://NguenDung.github.io"   # <--- đổi 'NguenDung' nếu khác
+# baseurl: "/design"                 # <--- ĐỂ TRỐNG vì workflow đã truyền --baseurl
 
-# jekyll-dash date format
-# refer to http://shopify.github.io/liquid/filters/date/ if you want to customize this
+# ---- Theme ----
+remote-theme: jekyll-dash
+
+# ---- Plugins (load by Actions build) ----
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-paginate
+  - liquid-md5
+  - jekyll/tagging          # <--- Quan trọng: bật plugin tag
+
+# ---- jekyll-tagging config ----
+tag_permalink_style: pretty    # /tag/<slug>/
+tag_page_layout: tag_page      # layout bạn đang có trong _layouts
+tag_page_dir: tag              # output vào /tag/
+
+# ---- dash theme options (giữ nguyên phần của bạn) ----
 dash:
-  # the way how dates should be displayed
   date_format: "%b %-d, %Y"
-
-  # (optional) discqus comment configuration
-  #disqus:
-    #shortname: bitbrain-github-io
-
-  # generate social links in footer
-  # supported colors: green, red, orange, blue, cyan, pink, teal, yellow, indigo, purple
   social_links:
     - url: https://x.com/Suii_cute
       icon: twitter-square
@@ -36,28 +45,16 @@ dash:
     - url: https://github.com/NguenDung
       icon: github-square
       color: purple
-
-  # wether the author box should be displayed
   show_author: true
-
-  # the animation speed of the scroll-in effect
   animation_speed: 50
-
-  # wether to enable Right-to-Left support or not
   rtl: false
-
-  # Replaces the default avatar provider (gravatar)
-  #avatar_source: github
-  #github_username: bitbrain
   avatar_source: local
   avatar_path: /assets/ringo.gif
 
-# Build settings
-remote-theme: jekyll-dash
-
-plugins:
- - jekyll-feed
- - jekyll-seo-tag
- - jekyll-paginate
- - liquid-md5
- - jekyll/tagging
+# ---- Build hygiene ----
+exclude:
+  - vendor
+  - node_modules
+  - README.md
+  - .gitignore
+  - .github

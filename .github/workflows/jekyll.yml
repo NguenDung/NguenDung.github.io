@@ -1,8 +1,8 @@
-name: Deploy Jekyll site to Pages
+name: Build & Deploy Jekyll (with plugins)
 
 on:
   push:
-    branches: ["main"]
+    branches: ["main"]        # đổi nếu default branch khác
   workflow_dispatch:
 
 permissions:
@@ -15,29 +15,34 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  # Build job
   build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.2.3'  # Specify the Ruby version here 
+          ruby-version: '3.2.3'
           bundler-cache: true
-          cache-version: 0  # Increment this to invalidate the cache
+          cache-version: 0
+
+      - name: Install gems
+        run: bundle install --path vendor/bundle
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
-  # Deployment job
   deploy:
     environment:
       name: github-pages
