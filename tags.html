@@ -1,0 +1,18 @@
+---
+layout: default
+title: all tags
+permalink: /tags/
+---
+
+<h1>all tags</h1>
+
+<div class="tags-cloud" style="display:flex; flex-wrap:wrap; gap:.6rem; margin-top:1rem;">
+  {% assign sorted = site.tags | sort %}
+  {% for tag in sorted %}
+    {% assign name = tag[0] %}
+    {% assign count = tag[1].size %}
+    <a class="tag" href="{{ '/tag/' | append: name | slugify | append: '/' | relative_url }}">
+      {{ name }}{% if count %} <span>({{ count }})</span>{% endif %}
+    </a>
+  {% endfor %}
+</div>

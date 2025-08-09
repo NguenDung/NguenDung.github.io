@@ -26,6 +26,7 @@ plugins:
   - jekyll-paginate
   - liquid-md5
   - jekyll/tagging          # <--- Quan trọng: bật plugin tag
+  - jekyll-archives
 
 # ---- jekyll-tagging config ----
 tag_permalink_style: pretty    # /tag/<slug>/
@@ -58,3 +59,10 @@ exclude:
   - README.md
   - .gitignore
   - .github
+
+jekyll-archives:
+  enabled: [tags]
+  layouts:
+    tag: tag
+  permalinks:
+    tag: /tag/:name/     # URL sẽ là /tag/ten-tag/
