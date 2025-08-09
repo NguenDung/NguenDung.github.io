@@ -492,3 +492,142 @@ body.warn-lock {
 .site-footer a:focus-visible { opacity: .85; }
 .site-footer a:active,
 .site-footer a:visited { color: inherit !important; }
+
+/* --- MOBILE: PORTRAIT (điện thoại cầm dọc) --- */
+@media (max-width: 600px) and (orientation: portrait) {
+  /* Search box ~85% bề ngang, tránh tràn viền phải */
+  #article-search,
+  input#article-search,
+  .recent-articles input[type="search"] {
+    width: 85% !important;
+    max-width: 85% !important;
+  }
+
+  /* Icon MXH ~30px, gọn và thẳng hàng */
+  .social_links a {
+    font-size: 30px !important;
+    width: 38px; height: 38px;
+    line-height: 38px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+  }
+
+  /* Nút About Me gọn lại (đỡ “béo”) */
+  .about-btn {
+    font-size: 14px !important;
+    padding: .28em .9em !important;
+    border-radius: .6rem !important;
+  }
+
+  /* Ẩn widget khi cầm dọc */
+  #spotify-player-wrapper,
+  #schedule-bar { display: none !important; }
+}
+
+/* --- MOBILE: LANDSCAPE (điện thoại xoay ngang) --- */
+/* Nhắm đúng điện thoại (chiều cao thấp), tránh ảnh hưởng tablet */
+@media (orientation: landscape) and (max-height: 480px) {
+  /* Hiện widget và thu nhỏ lại */
+  #spotify-player-wrapper,
+  #schedule-bar { display: block !important; position: fixed !important; right: 10px; z-index: 1000; }
+
+  #spotify-player-wrapper {
+    width: 360px !important;
+    height: 420px !important;
+    bottom: 12px !important;
+  }
+
+  #schedule-bar {
+    width: 360px !important;
+    height: 170px !important;
+    bottom: calc(12px + 420px + 8px) !important; /* nằm trên Spotify */
+  }
+
+  /* Chừa chỗ bên phải cho 2 widget */
+  .page-content .wrapper {
+    margin-right: calc(360px + 24px) !important;
+    max-width: none !important; /* tránh bị bó cứng độ rộng */
+  }
+
+  /* Search không quá dài trong landscape */
+  #article-search,
+  input#article-search,
+  .recent-articles input[type="search"] {
+    width: 60% !important;
+    max-width: 60% !important;
+  }
+
+  /* Icon MXH giữ kích thước hợp lý khi ngang */
+  .social_links a { font-size: 28px !important; width: 36px; height: 36px; line-height: 36px; }
+  .about-btn { font-size: 14px !important; padding: .28em .9em !important; }
+}
+/* ---- MOBILE PORTRAIT: fix hàng Recent + ô search ---- */
+@media (max-width: 600px) and (orientation: portrait) {
+  /* Cho tiêu đề và ô search được xuống dòng, bỏ padding phải gây tràn */
+  .recent-articles .recent-header{
+    flex-wrap: wrap !important;
+    gap: .6rem 1rem !important;
+    padding-right: 0 !important;
+  }
+
+  /* Ép input chiếm 85% hàng, không nở ra toàn bộ do flex */
+  .recent-articles .recent-header #article-search,
+  .recent-articles .recent-header input[type="search"]{
+    flex: 0 0 85% !important; /* quan trọng nhất */
+    width: 85% !important;
+    max-width: 85% !important;
+  }
+}
+/* ===== FIX MOBILE — DROP-IN PATCH (put at the very end) ===== */
+
+/* Reset width mặc định để mobile override thắng */
+#article-search,
+.recent-articles .recent-header input[type="search"],
+.recent-articles input[type="search"]{
+  width: 100%;
+}
+
+/* Desktop/Tablet: khôi phục clamp như cũ */
+@media (min-width: 700px){
+  #article-search,
+  .recent-articles .recent-header input[type="search"]{
+    width: clamp(350px, 60%, 800px);
+  }
+}
+
+/* MOBILE PORTRAIT (điện thoại cầm dọc) */
+@media (max-width: 600px) and (orientation: portrait){
+
+  /* Cho "Recent Articles" + ô search xuống hàng gọn, không tràn */
+  .recent-articles .recent-header{
+    flex-wrap: wrap !important;
+    gap: .6rem 1rem !important;
+    padding-right: 0 !important;
+  }
+
+  /* Ô search = 85% bề ngang, không bị flex kéo giãn */
+  .recent-articles .recent-header input[type="search"],
+  #article-search{
+    flex: 0 0 85% !important;
+    width: 85% !important;
+    max-width: 85% !important;
+    min-width: 0 !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Icon MXH và About Me gọn hơn */
+  .social_links a{
+    font-size: 30px !important;
+    width: 38px; height: 38px; line-height: 38px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+  }
+  .about-btn{
+    font-size: 14px !important;
+    padding: .28em .9em !important;
+    border-radius: .6rem !important;
+  }
+
+  /* Ẩn widget khi cầm dọc */
+  #spotify-player-wrapper, #schedule-bar{ display: none !important; }
+}
