@@ -493,121 +493,18 @@ body.warn-lock {
 .site-footer a:active,
 .site-footer a:visited { color: inherit !important; }
 
-/* --- MOBILE: PORTRAIT (điện thoại cầm dọc) --- */
+/* ===== MOBILE CLEAN PATCH (put at end) ===== */
+
+/* Portrait: search 85%, About + social nằm 1 hàng, ẩn widgets */
 @media (max-width: 600px) and (orientation: portrait) {
-  /* Search box ~85% bề ngang, tránh tràn viền phải */
-  #article-search,
-  input#article-search,
-  .recent-articles input[type="search"] {
-    width: 85% !important;
-    max-width: 85% !important;
-  }
-
-  /* Icon MXH ~30px, gọn và thẳng hàng */
-  .social_links a {
-    font-size: 30px !important;
-    width: 38px; height: 38px;
-    line-height: 38px;
-    display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 8px;
-  }
-
-  /* Nút About Me gọn lại (đỡ “béo”) */
-  .about-btn {
-    font-size: 14px !important;
-    padding: .28em .9em !important;
-    border-radius: .6rem !important;
-  }
-
-  /* Ẩn widget khi cầm dọc */
-  #spotify-player-wrapper,
-  #schedule-bar { display: none !important; }
-}
-
-/* --- MOBILE: LANDSCAPE (điện thoại xoay ngang) --- */
-/* Nhắm đúng điện thoại (chiều cao thấp), tránh ảnh hưởng tablet */
-@media (orientation: landscape) and (max-height: 480px) {
-  /* Hiện widget và thu nhỏ lại */
-  #spotify-player-wrapper,
-  #schedule-bar { display: block !important; position: fixed !important; right: 10px; z-index: 1000; }
-
-  #spotify-player-wrapper {
-    width: 360px !important;
-    height: 420px !important;
-    bottom: 12px !important;
-  }
-
-  #schedule-bar {
-    width: 360px !important;
-    height: 170px !important;
-    bottom: calc(12px + 420px + 8px) !important; /* nằm trên Spotify */
-  }
-
-  /* Chừa chỗ bên phải cho 2 widget */
-  .page-content .wrapper {
-    margin-right: calc(360px + 24px) !important;
-    max-width: none !important; /* tránh bị bó cứng độ rộng */
-  }
-
-  /* Search không quá dài trong landscape */
-  #article-search,
-  input#article-search,
-  .recent-articles input[type="search"] {
-    width: 60% !important;
-    max-width: 60% !important;
-  }
-
-  /* Icon MXH giữ kích thước hợp lý khi ngang */
-  .social_links a { font-size: 28px !important; width: 36px; height: 36px; line-height: 36px; }
-  .about-btn { font-size: 14px !important; padding: .28em .9em !important; }
-}
-/* ---- MOBILE PORTRAIT: fix hàng Recent + ô search ---- */
-@media (max-width: 600px) and (orientation: portrait) {
-  /* Cho tiêu đề và ô search được xuống dòng, bỏ padding phải gây tràn */
   .recent-articles .recent-header{
     flex-wrap: wrap !important;
     gap: .6rem 1rem !important;
     padding-right: 0 !important;
   }
 
-  /* Ép input chiếm 85% hàng, không nở ra toàn bộ do flex */
-  .recent-articles .recent-header #article-search,
-  .recent-articles .recent-header input[type="search"]{
-    flex: 0 0 85% !important; /* quan trọng nhất */
-    width: 85% !important;
-    max-width: 85% !important;
-  }
-}
-/* ===== FIX MOBILE — DROP-IN PATCH (put at the very end) ===== */
-
-/* Reset width mặc định để mobile override thắng */
-#article-search,
-.recent-articles .recent-header input[type="search"],
-.recent-articles input[type="search"]{
-  width: 100%;
-}
-
-/* Desktop/Tablet: khôi phục clamp như cũ */
-@media (min-width: 700px){
   #article-search,
   .recent-articles .recent-header input[type="search"]{
-    width: clamp(350px, 60%, 800px);
-  }
-}
-
-/* MOBILE PORTRAIT (điện thoại cầm dọc) */
-@media (max-width: 600px) and (orientation: portrait){
-
-  /* Cho "Recent Articles" + ô search xuống hàng gọn, không tràn */
-  .recent-articles .recent-header{
-    flex-wrap: wrap !important;
-    gap: .6rem 1rem !important;
-    padding-right: 0 !important;
-  }
-
-  /* Ô search = 85% bề ngang, không bị flex kéo giãn */
-  .recent-articles .recent-header input[type="search"],
-  #article-search{
     flex: 0 0 85% !important;
     width: 85% !important;
     max-width: 85% !important;
@@ -615,57 +512,71 @@ body.warn-lock {
     box-sizing: border-box !important;
   }
 
-  /* Icon MXH và About Me gọn hơn */
-  .social_links a{
-    font-size: 30px !important;
-    width: 38px; height: 38px; line-height: 38px;
-    display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 8px;
-  }
+  /* About + MXH gọn & cùng một hàng */
   .about-btn{
-    font-size: 14px !important;
-    padding: .28em .9em !important;
-    border-radius: .6rem !important;
-  }
-
-  /* Ẩn widget khi cầm dọc */
-  #spotify-player-wrapper, #schedule-bar{ display: none !important; }
-}
-/* --- MOBILE PORTRAIT: About + social on one line --- */
-@media (max-width: 600px) {
-  /* nhóm About + icons nằm ngang, căn giữa dọc */
-  .about-btn { 
+    font-size: 13px !important;
+    padding: .22em .65em !important;
+    border-radius: .55rem !important;
+    margin-left: 0 !important;   /* bỏ margin thừa */
+    margin-right: 6px !important;
     display: inline-flex !important;
+    flex: 0 0 auto !important;
     vertical-align: middle !important;
-    margin-right: 10px !important;
   }
 
-  /* .social_links có thể là div chứa <a> trực tiếp hoặc <ul> */
-  .about-btn + .social_links,
-  .social_links {
+  .social_links{
     display: inline-flex !important;
     flex-direction: row !important;
     align-items: center !important;
-    gap: 10px !important;
+    gap: 6px !important;
+    flex-wrap: nowrap !important;   /* không xuống dòng */
+    white-space: nowrap !important;
     vertical-align: middle !important;
   }
+  .social_links ul{ display:inline-flex !important; gap:6px !important; }
+  .social_links li{ display:inline-flex !important; margin:0 !important; }
 
-  /* nếu theme dùng <ul><li> cho icons thì ép các li nằm ngang luôn */
-  .social_links ul {
-    display: inline-flex !important;
-    flex-direction: row !important;
-    gap: 10px !important;
-  }
-  .social_links li {
-    display: inline-flex !important;
-    margin: 0 !important;
-  }
-
-  /* size icon ~30px như bạn muốn */
-  .social_links a {
-    font-size: 30px !important;
-    width: 38px; height: 38px; line-height: 38px;
+  .social_links a{
+    width: 32px; height: 32px; line-height: 32px;
+    font-size: 26px !important;
     display: inline-flex; align-items: center; justify-content: center;
-    border-radius: 8px;
+    border-radius: 7px;
+    flex: 0 0 auto;
+  }
+
+  /* Ẩn widget khi cầm dọc */
+  #spotify-player-wrapper,
+  #schedule-bar { display: none !important; }
+}
+
+/* Landscape: hiện widget thu nhỏ, chừa chỗ bên phải, search 60% */
+@media (orientation: landscape) and (max-height: 480px) {
+  #spotify-player-wrapper,
+  #schedule-bar {
+    display: block !important;
+    position: fixed !important;
+    right: 10px; z-index: 1000;
+  }
+
+  #spotify-player-wrapper {
+    width: 360px !important;
+    height: 420px !important;
+    bottom: 12px !important;
+  }
+  #schedule-bar {
+    width: 360px !important;
+    height: 170px !important;
+    bottom: calc(12px + 420px + 8px) !important; /* trên Spotify */
+  }
+
+  .page-content .wrapper {
+    margin-right: calc(360px + 24px) !important;
+    max-width: none !important;
+  }
+
+  #article-search,
+  .recent-articles .recent-header input[type="search"]{
+    width: 60% !important;
+    max-width: 60% !important;
   }
 }
