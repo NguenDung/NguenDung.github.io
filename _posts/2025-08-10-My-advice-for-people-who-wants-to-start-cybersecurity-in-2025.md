@@ -8,17 +8,17 @@ description: "A realistic, beginner-friendly path: sniff-test with YouTube, lear
 
 # My Advice for Self-Learning Cybersecurity (Red Team Track): A Practical Roadmap
 
-Halloo!! It’s an honor to see you again on the blog. As the title suggests, here’s how I learned information security from scratch. Of course, beyond what I learned at school, with IT in general—and security in particular—if we want to get good, we have to **self-study** and spend time exploring.
+Halloo!! It’s an honor to see you again on the blog. As the title suggests, here’s how I learned cybersecurity from scratch. Of course, beyond what I learned at school, with IT in general—and security in particular—if we want to get good, we have to **self-study** and spend time exploring.
 
 ![Suihi]({{ '/assets/images/advice/suihi.gif' | relative_url }})
 
-Before we begin: this is **my personal experience**. It may fit some people and not others, so don’t treat it as absolute truth—use it as a reference. Everyone’s starting point and journey are different, but I hope you’ll find something useful here. If you’re wondering where to start in security, here’s what worked for me. It’s simple on purpose: **try the vibe first**, then **practice in the browser**, then **play CTFs**, **meet people**, **read a few great books**, and **optionally** get certified. Most progress came from **consistency**, not talent.
+Before we begin: this is **my personal experience**. It may fit some people and not others, so don’t treat it as absolute truth—use it as a reference. Everyone’s starting point and journey are different, but I hope you’ll find something useful here. If you’re wondering where to start in cybersecurity, here’s what worked for me. It’s simple on purpose: **try the vibe first**, then **practice in the browser**, then **play CTFs**, **meet people**, **read a few great books**, and **optionally** get certified. Most progress came from **consistency**, not talent.
 
 ---
 
-## What “information security” actually means (and where you can go)
+## What “cybersecurity” actually means (and where you can go)
 
-**Information security (InfoSec)** protects information and systems from unauthorized access, use, disclosure, disruption, modification, or destruction—so we preserve **Confidentiality, Integrity, Availability** (the CIA triad).
+**Cybersecurity (CyberSec)** protects information and systems from unauthorized access, use, disclosure, disruption, modification, or destruction—so we preserve **Confidentiality, Integrity, Availability** (the CIA triad).
 
 Common paths:
 - **Red Team (offense):** simulate real attacks and demonstrate impact.  
@@ -151,7 +151,7 @@ Certs won’t replace skill, but they can **expand your network** and **signal y
 ![Cert]({{ '/assets/images/advice/cert.jpg' | relative_url }})
 
 If you’re in Viet Nam—specifically Hà Nội—and want structured study with peers, try:
-- **IPMAC** — long-running IT & security training (that’s where I did CCNA, Security+):  
+- **IPMAC** — long-running IT & security training (that’s where I did CCNA, CEH, Security+ and Pentest+):  
   [ipmac.vn](https://ipmac.vn/){:target="_blank" rel="noopener"}
 - **CyberJutsu Academy** — hands-on offensive courses & community:  
   [cyberjutsu.io](https://cyberjutsu.io/){:target="_blank" rel="noopener"}
