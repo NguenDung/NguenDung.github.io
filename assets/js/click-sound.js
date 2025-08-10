@@ -11,6 +11,7 @@
     hardImg: `${BASE}/assets/images/warn/warn.jpg`
   };
 
+  // Tuning
   const RARE_RATE       = 50;
   const WINDOW_MS       = 8000;
   const SOFT_THRESHOLD  = 30;
@@ -64,6 +65,7 @@
     delete sp.dataset.prevSrc;
   }
 
+  // ---- Modal
   const modal = document.createElement('div');
   modal.id = 'warning-modal';
   Object.assign(modal.style, {
@@ -77,47 +79,58 @@
   modal.appendChild(img);
   document.body.appendChild(modal);
 
+  const wheelOpts = { capture: true, passive: false };
+  let softTimer = null;
+
   function modalOn() { return modal.style.display === 'flex'; }
+
   function showModal(type) {
+    clearTimeout(softTimer);                 // chống timer bị treo
     blockAll();
     modal.className = type;
     img.src = type === 'soft' ? URLS.softImg : URLS.hardImg;
-    modal.style.display = 'flex';
+    modal.style.setProperty('display', 'flex', 'important');  // chống CSS override
+
     if (type === 'soft') {
-      setTimeout(() => { if (!hardFired) hideModal(); }, SOFT_AUTOHIDE);
+      softTimer = setTimeout(() => { if (!hardFired) hideModal(); }, SOFT_AUTOHIDE);
     }
   }
   function hideModal() {
-    modal.style.display = 'none';
+    clearTimeout(softTimer);
+    modal.style.setProperty('display', 'none', 'important');  // chống CSS override
     unblockAll();
     if (hardFired) resumeSpotify();
   }
+
   function blockAll() {
     window.addEventListener('pointerdown', blocker, true);
-    window.addEventListener('wheel', blocker, { capture: true, passive: false });
+    window.addEventListener('wheel', blocker, wheelOpts);
     window.addEventListener('keydown', blocker, true);
+    document.body.classList.add('warn-lock');
     document.body.style.overflow = 'hidden';
   }
   function unblockAll() {
     window.removeEventListener('pointerdown', blocker, true);
-    window.removeEventListener('wheel', blocker, true);
+    window.removeEventListener('wheel', blocker, wheelOpts);
     window.removeEventListener('keydown', blocker, true);
+    document.body.classList.remove('warn-lock');
     document.body.style.overflow = '';
   }
   function blocker(e) {
-    if (modalOn()) e.preventDefault(), e.stopPropagation();
+    if (modalOn()) { e.preventDefault(); e.stopPropagation(); }
   }
 
+  // ---- State
   let clicks = [], softShown = false, hardFired = false;
   let softBase = 0, softUntil = 0;
 
-  // 🛠 Chỉ gắn pointerdown để tránh double play
+  // chỉ nghe pointerdown để khỏi double-play
   window.addEventListener('pointerdown', onUserTap, { capture: true, passive: false });
 
   function onUserTap(e) {
     if (ctx.state === 'suspended') ctx.resume();
 
-    // 💡 Bỏ qua click vào link → reset spam state
+    // click vào link điều hướng thì reset spam state
     const anchor = e.target.closest('a');
     if (anchor && anchor.href && anchor.target !== '_blank') {
       clicks = [];
@@ -132,16 +145,16 @@
     if (rareCounter % RARE_RATE === 0) playBuf('rare', 0.4);
     else playBuf('click', 0.3);
 
-    const now = Date.now();
-    clicks.push(now);
-    clicks = clicks.filter(t => now - t <= WINDOW_MS);
+    const tnow = Date.now();
+    clicks.push(tnow);
+    clicks = clicks.filter(t => tnow - t <= WINDOW_MS);
 
     if (!hardFired && clicks.length >= HARD_THRESHOLD) {
       hardFired = true;
       triggerHard();
       return;
     }
-    if (!hardFired && softUntil >= now && clicks.length - softBase >= HARD_AFTER_SOFT) {
+    if (!hardFired && softUntil >= tnow && clicks.length - softBase >= HARD_AFTER_SOFT) {
       hardFired = true;
       triggerHard();
       return;
@@ -149,7 +162,7 @@
     if (!softShown && clicks.length >= SOFT_THRESHOLD) {
       softShown = true;
       softBase = clicks.length;
-      softUntil = now + SOFT_ARM_MS;
+      softUntil = tnow + SOFT_ARM_MS;
       showModal('soft');
       return;
     }
