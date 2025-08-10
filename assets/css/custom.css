@@ -145,12 +145,6 @@ html.is-changing .transition-fade { opacity: 0; }
   padding: 0;
 }
 
-/* Kích hoạt modal cho cả soft & hard */
-#warning-modal.soft,
-#warning-modal.hard{
-  display: flex !important;
-}
-
 /* Ảnh luôn fit khung nhìn, không crop (desktop + mobile) */
 #warning-modal img{
   display: block;
