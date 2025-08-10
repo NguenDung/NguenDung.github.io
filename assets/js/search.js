@@ -1,129 +1,106 @@
 // assets/js/search.js
 (() => {
-  const BASE = (window.__ASSET_BASE__ || "").replace(/\/$/, "");
-  const INDEX_URL = `${BASE}/search.json`;
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const input = document.getElementById("article-search");
+  document.addEventListener('DOMContentLoaded', () => {
+    const input = document.getElementById('article-search');
     if (!input) return;
 
-    // các khối hiện tại
-    const list = document.querySelector("#articles-list");
-    const listItems = list ? Array.from(list.querySelectorAll(".article-item")) : [];
-    const pagers = Array.from(document.querySelectorAll(".pagination, .paginator, .pager"));
-    const tagBlocks = Array.from(document.querySelectorAll("#all-tags, .all-tags, .tag-cloud"));
+    const BASE = (window.__ASSET_BASE__ || '').replace(/\/$/, '');
+    const SEARCH_URL = `${BASE}/search.json`;
 
-    // khối kết quả động
-    const results = document.createElement("ul");
-    results.id = "search-results";
-    results.style.listStyle = "none";
-    results.style.margin = "0";
-    results.style.padding = "0";
-    results.style.display = "none";
-    results.className = "posts";
+    // container danh sách bài (đang hiển thị trong trang)
+    const list = document.querySelector('#articles-list');
+    if (!list) return;
 
-    // chèn results vào DOM: ưu tiên trước list, nếu không có list thì sau ô input
-    if (list && list.parentNode) {
-      list.parentNode.insertBefore(results, list);
-    } else {
-      input.parentNode.insertBefore(results, input.nextSibling);
+    // các khối phụ để ẩn khi search (tuỳ theme, bắt thêm selector phổ biến)
+    const pagers   = document.querySelector('.pagination, .pager, .paginator');
+    const tagCloud = document.querySelector('.all-tags, .tags, .tags-cloud');
+
+    // lưu lại HTML gốc để khôi phục khi xoá query
+    const originalHTML = list.innerHTML;
+
+    // cache dữ liệu
+    let data = null;
+    async function ensureData() {
+      if (data) return data;
+      const res = await fetch(SEARCH_URL, { cache: 'force-cache' });
+      data = await res.json();
+      // tiền xử lý: tạo field không dấu + lowercase cho title & tags
+      data.forEach(p => {
+        p._title = norm(p.title);
+        p._tags  = (p.tags || []).map(norm);
+      });
+      return data;
     }
 
-    const showOriginal = () => {
-      results.style.display = "none";
-      if (list) list.style.display = "";
-      pagers.forEach(p => (p.style.display = ""));
-      tagBlocks.forEach(t => (t.style.display = ""));
+    // chuẩn hoá chuỗi: lowercase + bỏ dấu
+    function norm(s) {
+      return (s || '')
+        .toString()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/\p{Diacritic}/gu, '');
+    }
+
+    // debounce
+    const debounce = (fn, wait = 180) => {
+      let t; return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
     };
 
-    const showResults = () => {
-      results.style.display = "";
-      if (list) list.style.display = "none";
-      pagers.forEach(p => (p.style.display = "none"));
-      tagBlocks.forEach(t => (t.style.display = "none"));
-    };
+    // vẽ 1 item kết quả
+    function renderItem(p) {
+      const tags = (p.tags || [])
+        .map(t => `<span class="post-tag">${escapeHtml(t)}</span>`)
+        .join(' ');
+      return `
+<li class="article-item">
+  <h3 class="post-title">
+    <a class="post-link" href="${p.url}">${escapeHtml(p.title)}</a>
+  </h3>
+  <div class="post__meta"><time>${p.date || ''}</time></div>
+  ${tags ? `<div class="post-tags">${tags}</div>` : ''}
+  ${p.excerpt ? `<p class="post-excerpt">${escapeHtml(p.excerpt)}</p>` : ''}
+</li>`;
+    }
 
-    const norm = s => (s || "").toString().toLowerCase();
+    function escapeHtml(s) {
+      return (s || '').replace(/[&<>"]/g, c => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'
+      }[c]));
+    }
 
-    let indexCache = null;
-    let indexPromise = null;
-
-    const ensureIndex = async () => {
-      if (indexCache) return indexCache;
-      if (!indexPromise) {
-        indexPromise = fetch(INDEX_URL)
-          .then(r => (r.ok ? r.json() : []))
-          .then(json => (indexCache = Array.isArray(json) ? json : []))
-          .catch(() => (indexCache = []));
-      }
-      return indexPromise;
-    };
-
-    const renderResults = arr => {
-      if (!arr.length) {
-        results.innerHTML = `<li class="article-item"><p>Không tìm thấy kết quả.</p></li>`;
+    async function onInput() {
+      const raw = input.value.trim();
+      if (!raw) {
+        // khôi phục
+        list.innerHTML = originalHTML;
+        if (pagers)   pagers.style.display = '';
+        if (tagCloud) tagCloud.style.display = '';
         return;
       }
-      results.innerHTML = arr
-        .map(p => {
-          const tags =
-            (p.tags || [])
-              .map(t => `<span class="post-tag">${t}</span>`)
-              .join(" ");
-          return `
-            <li class="article-item">
-              <h2 class="post-title"><a class="post-link" href="${p.url}">${p.title}</a></h2>
-              <div class="post__meta">${p.date}${tags ? " — " + tags : ""}</div>
-              ${p.excerpt ? `<p>${p.excerpt}</p>` : ""}
-            </li>
-          `;
-        })
-        .join("");
-    };
 
-    // fallback: lọc local ngay trên trang hiện tại
-    const filterLocal = q => {
-      const n = norm(q);
-      listItems.forEach(li => {
-        const title = norm(li.dataset.title);
-        const tags = norm(li.dataset.tags);
-        if (!n || title.includes(n) || tags.includes(n)) {
-          li.classList.remove("hidden");
-        } else {
-          li.classList.add("hidden");
-        }
-      });
-    };
+      const q = norm(raw);
+      const posts = await ensureData();
+      const matches = posts.filter(p =>
+        p._title.includes(q) || p._tags.some(t => t.includes(q))
+      );
 
-    let deb = null;
-    input.addEventListener("input", () => {
-      const q = input.value.trim();
-      clearTimeout(deb);
-      deb = setTimeout(async () => {
-        if (!q) {
-          showOriginal();
-          filterLocal(""); // trả list về trạng thái ban đầu
-          return;
-        }
+      list.innerHTML = matches.length
+        ? matches.map(renderItem).join('')
+        : `<li class="article-item">No results for
+             "<strong>${escapeHtml(raw)}</strong>"</li>`;
 
-        // ưu tiên dùng index toàn site
-        const data = await ensureIndex();
-        if (data && data.length) {
-          const nq = norm(q);
-          const res = data.filter(p => {
-            const inTitle = norm(p.title).includes(nq);
-            const inTags = (p.tags || []).some(t => norm(t).includes(nq));
-            const inExcerpt = norm(p.excerpt).includes(nq);
-            return inTitle || inTags || inExcerpt;
-          });
-          renderResults(res);
-          showResults();
-        } else {
-          // nếu không có index thì lọc local
-          filterLocal(q);
-          // giữ UI gốc (không showResults) để còn phân trang
-        }
-      }, 120);
+      if (pagers)   pagers.style.display = 'none';
+      if (tagCloud) tagCloud.style.display = 'none';
+    }
+
+    // Enter = mở kết quả đầu tiên (nếu có)
+    input.addEventListener('keydown', e => {
+      if (e.key === 'Enter') {
+        const first = list.querySelector('.post-link');
+        if (first) first.click();
+      }
     });
+
+    input.addEventListener('input', debounce(onInput));
   });
 })();
