@@ -31,22 +31,29 @@ Common paths:
 
 Personally, I’m on the **Red** path—yet I learn fastest when I collaborate with defenders. The path you choose doesn’t matter as long as you **enjoy it** and **get good at it**. If that’s true, you’re good to go!!
 
----
+- **Cyber Jutsu — InfoSec Roadmap (VN)**  
+  [cbjs-exploit101-notebook.notion.site/Roadmap-h-c-ATTT-bc5ce41bac2c4d24a2e93c4a08fdb052](https://cbjs-exploit101-notebook.notion.site/Roadmap-h-c-ATTT-bc5ce41bac2c4d24a2e93c4a08fdb052){:target="_blank" rel="noopener"}
 
 ## Step 0 — Sniff-test with YouTube (do you actually like this?)
 
 Spend a weekend with a few creators. If their mindset clicks, you’ll enjoy the grind that follows.
 
 - **LiveOverflow** — clear fundamentals, CTF culture, real hacker thinking.  
-  Channel: https://www.youtube.com/LiveOverflow
+  Channel: [youtube.com/LiveOverflow](https://www.youtube.com/LiveOverflow){:target="_blank" rel="noopener"}
 - **John Hammond** — approachable walkthroughs, incident analysis, timely topics.  
-  Channel: https://www.youtube.com/@_JohnHammond
+  Channel: [@_JohnHammond](https://www.youtube.com/@_JohnHammond){:target="_blank" rel="noopener"}
 - **IppSec** — legendary **Hack The Box** walkthroughs; methodology over magic.  
-  Channel: https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA
+  Channel: [IppSec](https://www.youtube.com/channel/UCa6eh7gCkpPo5XXUDfygQQA){:target="_blank" rel="noopener"}
 - **STÖK** — bug bounty mindset, reporting, and “how hackers think”.  
-  Channel: https://www.youtube.com/@stokfredrik
+  Channel: [@stokfredrik](https://www.youtube.com/@stokfredrik){:target="_blank" rel="noopener"}
 
-There are **a lot** more good channels (NetworkChuck, David Bombal, Mad Hat, Bog…). Just be careful not to get stuck in the **tutorial loop**. If you only watch 12-hour tutorials and never try things yourself, you won’t level up. Spend time **doing**: break something, then fix it. That’s learning!
+There are **a lot** more good channels (NetworkChuck, David Bombal, Mad Hat, Bog, The Cyber Mentor, CyberFlow…). Just be careful not to get stuck in the **tutorial loop**. If you binge 12-hour tutorials and never try things yourself, you won’t level up—you can’t even do basic steps without opening a video. Spend time **doing**: break something, then fix it. That’s learning!
+
+- **Why EVERY “Beginner Hacking Guide” is a TRAP!**  
+  [youtube.com/watch?v=4-CHU6cWfWA](https://www.youtube.com/watch?v=4-CHU6cWfWA){:target="_blank" rel="noopener"}
+
+- **Why I Don’t Watch Hacking Tutorials Anymore.**  
+  [youtube.com/watch?v=uAsxBEQLmjI](https://www.youtube.com/watch?v=uAsxBEQLmjI){:target="_blank" rel="noopener"}
 
 **How to watch:** pick one video, pause often, replicate the steps in a lab, and write down **exactly** what you did and **why**. Practice asking: *“Why did they do that? What does it achieve? Is there another way?”* That mindset matters in a field that changes daily.
 
@@ -57,17 +64,17 @@ There are **a lot** more good channels (NetworkChuck, David Bombal, Mad Hat, Bog
 I recommend starting with **web security**: it’s everywhere and gives quick wins to build confidence.
 
 - **PortSwigger Web Security Academy (free)** — the best first-principles path with hands-on labs:  
-  https://portswigger.net/web-security
+  [portswigger.net/web-security](https://portswigger.net/web-security){:target="_blank" rel="noopener"}
 
 ![Ps]({{ '/assets/images/advice/ps.jpg' | relative_url }})
 
 - **TryHackMe** — guided rooms and gamified tracks for daily reps:  
-  https://tryhackme.com/
+  [tryhackme.com](https://tryhackme.com/){:target="_blank" rel="noopener"}
 
 ![Thm]({{ '/assets/images/advice/thm.jpg' | relative_url }})
 
 - **Hack The Box / HTB Academy** — realistic boxes and structured skill paths once you have basics:  
-  https://www.hackthebox.com/ and https://academy.hackthebox.com/
+  [hackthebox.com](https://www.hackthebox.com/){:target="_blank" rel="noopener"} and [academy.hackthebox.com](https://academy.hackthebox.com/){:target="_blank" rel="noopener"}
 
 ![Htb]({{ '/assets/images/advice/htb.jpg' | relative_url }})
 
@@ -87,9 +94,9 @@ Types you’ll see:
 - **Attack-Defense:** teams attack others’ services while defending their own.
 
 Where to play & track progress:
-- **CTFtime** (events & ratings): https://ctftime.org/  
-- **OverTheWire** (wargames): https://overthewire.org/wargames/  
-- **picoCTF** (beginner-friendly): https://picoctf.org/
+- **CTFtime** (events & ratings): [ctftime.org](https://ctftime.org/){:target="_blank" rel="noopener"}  
+- **OverTheWire** (wargames): [overthewire.org/wargames](https://overthewire.org/wargames/){:target="_blank" rel="noopener"}  
+- **picoCTF** (beginner-friendly): [picoctf.org](https://picoctf.org/){:target="_blank" rel="noopener"}
 
 Create or join a team. Treat events as *structured practice*, not pass/fail.
 
@@ -101,13 +108,19 @@ Create or join a team. Treat events as *structured practice*, not pass/fail.
 
 **Example day-1 web flow:** intercept login with Burp → enumerate endpoints with feroxbuster → fuzz params with ffuf → check auth/session flags → look for IDOR/SSRF clues → write down exact requests and diffs.
 
+- **BEGINNER CTF — picoCTF 2021 #001 “Obedient Cat”**  
+  [youtube.com/watch?v=P07NH5F-t3s&t=718s](https://www.youtube.com/watch?v=P07NH5F-t3s&t=718s){:target="_blank" rel="noopener"}
+
+- **CTFs explained in 5 Minutes**  
+  [youtube.com/watch?v=nCMGIR8V-NE](https://www.youtube.com/watch?v=nCMGIR8V-NE){:target="_blank" rel="noopener"}
+
 ---
 
 ## Step 3 — Join communities, make friends, form a team
 
 Security is easier with people. Join:
-- Discords for PortSwigger/THM/HTB,  
-- University clubs and local groups,  
+- Discords for PortSwigger / THM / HTB, Facebook groups (you can find them almost everywhere).  
+- University clubs and local groups.  
 - Forums where write-ups are shared.
 
 Run **weekly mini-CTFs** together and rotate roles (driver/navigator; web/crypto/forensics leads). Your network will teach you faster than any single course.
@@ -137,11 +150,11 @@ Certs won’t replace skill, but they can **expand your network** and **signal y
 
 If you’re in Viet Nam—specifically Hà Nội—and want structured study with peers, try:
 - **IPMAC** — long-running IT & security training (that’s where I did CCNA, Security+):  
-  https://ipmac.vn/
+  [ipmac.vn](https://ipmac.vn/){:target="_blank" rel="noopener"}
 - **CyberJutsu Academy** — hands-on offensive courses & community:  
-  https://cyberjutsu.io/
+  [cyberjutsu.io](https://cyberjutsu.io/){:target="_blank" rel="noopener"}
 - **Cookie Hân Hoan / Cookie Arena** — Vietnamese security community & CTF-style learning:  
-  https://cookiearena.org/ and https://www.youtube.com/c/CookieHanHoan
+  [cookiearena.org](https://cookiearena.org/){:target="_blank" rel="noopener"} and [YouTube: Cookie Hân Hoan](https://www.youtube.com/c/CookieHanHoan){:target="_blank" rel="noopener"}
 
 Pick certs that match your practice (e.g., web/offensive if you’re doing PortSwigger + HTB). Time it **after** you’ve built daily habits so your notes become your study guide.
 
@@ -155,7 +168,7 @@ Pick certs that match your practice (e.g., web/offensive if you’re doing PortS
 
 ## Step 6 — Learn your tools deeply and make Linux your home
 
-If you’re on the red path, Linux is home base. Mastering it (plus a few core tools) will save you hours every week and make your CTF/write-ups reproducible.
+If you’re on the red path or any other path, Linux is home base. Mastering it (plus a few core tools) will save you hours every week and make your CTF/write-ups reproducible.
 
 ![Linux]({{ '/assets/images/advice/linux.gif' | relative_url }})
 
@@ -169,6 +182,11 @@ If you’re on the red path, Linux is home base. Mastering it (plus a few core t
 - Networking quicks: `ip addr/route`, `ss -tulpn`, `tcpdump`, `curl`, `wget`.  
 - Archives & handy utils: `tar`, `zip/unzip`, `jq` (JSON), `python3 -m http.server`.
 
+- **Why Every Beginner Struggles with Linux (At First!)**  
+  [youtube.com/watch?v=uulkiWNjpj0](https://www.youtube.com/watch?v=uulkiWNjpj0){:target="_blank" rel="noopener"}
+- **Every LINUX DISTRO Explained in 4 minutes**  
+  [youtube.com/watch?v=VKNMI6cYOFk](https://www.youtube.com/watch?v=VKNMI6cYOFk){:target="_blank" rel="noopener"}
+
 **Security tools to grow into**
 
 ![tool]({{ '/assets/images/advice/tool.jpg' | relative_url }})
@@ -178,6 +196,8 @@ If you’re on the red path, Linux is home base. Mastering it (plus a few core t
 - Crypto & scripting: **Python**, **SageMath**, **pycryptodome**.  
 - Forensics: **binwalk**, **strings/exiftool**, **Wireshark**, **Volatility**.  
 - OSINT: **theHarvester**, **SpiderFoot**, **Wayback Machine**, **Shodan**.
+- **Every HACKING TOOL Explained in 5 minutes.**
+[youtube.com/watch?v=5une30fIDww](https://www.youtube.com/watch?v=5une30fIDww){:target="_blank" rel="noopener"}
 
 **Mini-labs you can do tonight**
 - *Packets in the wild:* in one terminal run  
@@ -214,6 +234,9 @@ Gadgets look cool, but they’re **not** what makes you a hacker. Hardware toys 
 - Is there a **software** or **simulated** alternative while I learn?  
 - Do I have a **legal** environment/scope to try it?  
 - Is this required for a **specific project/exam** I’m actually doing now?
+
+- **From Free to Premium Cyber Security Tools (gadgets overview)**  
+  [youtube.com/watch?v=xg6aZ2i36wc&t=725s](https://www.youtube.com/watch?v=xg6aZ2i36wc&t=725s){:target="_blank" rel="noopener"}
 
 If you’re rich and just want a toy—go wild 😄. Otherwise, invest in **habits, labs, and notes**. Tools don’t make hackers; **practice** does.  
 *(Confession: I do own a Rubber Ducky, a Wi-Fi Pineapple, and a Flipper Zero with add-ons. They’re handy in the right context—but still not for beginners.)*
@@ -279,8 +302,8 @@ I’ve had nights glued to the screen—stuck, hungry, frustrated—then the fix
 <h3>Bonus video</h3>
 <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;margin:1rem 0;border-radius:12px;">
   <iframe
-    src="https://www.youtube-nocookie.com/embed/5xWnmUEi1Qw"
-    title="Getting started in Cybersecurity — reference video"
+    src="https://www.youtube-nocookie.com/embed/iCbOV8p6tD4"
+    title="How to Learn Hacking (2025) — a Practical Guide"
     frameborder="0"
     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen
@@ -288,7 +311,7 @@ I’ve had nights glued to the screen—stuck, hungry, frustrated—then the fix
     style="position:absolute;top:0;left:0;width:100%;height:100%;">
   </iframe>
 </div>
-<p><a href="https://www.youtube.com/watch?v=5xWnmUEi1Qw">Open on YouTube</a></p>
+<p><a href="https://www.youtube.com/watch?v=iCbOV8p6tD4" target="_blank" rel="noopener">Open on YouTube</a></p>
 
 — **Suiikawaii** (Red Team learner, USTH)
 
