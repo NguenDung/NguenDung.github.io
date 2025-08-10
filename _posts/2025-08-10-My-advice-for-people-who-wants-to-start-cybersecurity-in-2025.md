@@ -34,6 +34,8 @@ Personally, I’m on the **Red** path—yet I learn fastest when I collaborate w
 - **Cyber Jutsu — InfoSec Roadmap (VN)**  
   [cbjs-exploit101-notebook.notion.site/Roadmap-h-c-ATTT-bc5ce41bac2c4d24a2e93c4a08fdb052](https://cbjs-exploit101-notebook.notion.site/Roadmap-h-c-ATTT-bc5ce41bac2c4d24a2e93c4a08fdb052){:target="_blank" rel="noopener"}
 
+---
+
 ## Step 0 — Sniff-test with YouTube (do you actually like this?)
 
 Spend a weekend with a few creators. If their mindset clicks, you’ll enjoy the grind that follows.
