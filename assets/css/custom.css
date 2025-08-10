@@ -211,6 +211,22 @@ body.warn-lock{
   transition: opacity .3s, height .3s;
 }
 
+/* Remove bullets for the search results list */
+#articles-list{
+  list-style: none;           
+  padding-left: 0;            
+  margin: 0;
+}
+#articles-list > li{
+  list-style: none;
+  margin: 0 0 1.25rem 0;      
+}
+/* Safari/Theme guard: nếu theme có ::marker/::before */
+#articles-list > li::marker,
+#articles-list > li::before{
+  content: none !important;
+}
+
 /* ====== WELCOME MODAL (no flicker base) ====== */
 #welcome-overlay, #welcome-modal {
   opacity: 0;

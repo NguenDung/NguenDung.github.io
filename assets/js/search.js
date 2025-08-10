@@ -5,9 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
   if (!input || !list) return;
 
   const BASE = (window.__ASSET_BASE__ || '').replace(/\/$/, '');
-  let index = null;                            // dữ liệu /search.json
+  let index = null;                            
   const pager = document.querySelector('.pagination');
-  const originalHTML = list.innerHTML;         // để khôi phục khi xóa query
+  const originalHTML = list.innerHTML;         
 
   // escape đơn giản để nhét text vào HTML
   const esc = s => String(s || '').replace(/[&<>"']/g, m => ({
@@ -70,7 +70,7 @@ document.addEventListener('DOMContentLoaded', () => {
     clearTimeout(t);
     t = setTimeout(() => {
       if (index) globalFilter(input.value);
-      else       localFilter(input.value); // trước khi index sẵn sàng
+      else       localFilter(input.value); 
     }, 120);
   });
 
