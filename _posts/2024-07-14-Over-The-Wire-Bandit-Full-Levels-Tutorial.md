@@ -7,7 +7,7 @@ description: "A full index of my OverTheWire Bandit walkthroughs — from Level 
 ---
 
 # OverTheWire Bandit — Complete Walkthrough Index
-Halloo SuiiKawaii dessu!! im glad that we met again in this post i dont have much to say because the title and desciption already help you figure what is this post about so yeah today we gonna do some OverTheWire Bandit RRAHHHHHH 🗣️🔥🔥🔥🔥!!
+Halloo SuiiKawaii dessu!! I'm glad that we met again in this post and actually i don't have much to say because the title and desciption already help you figure out what is this post about so yeah today we gonna do some OverTheWire Bandit RRAHHHHHH 🗣️🔥🔥🔥🔥!!
 
 ![Suipad]({{ '/assets/images/bandit/suipad.gif' | relative_url }})
 
@@ -71,28 +71,28 @@ Below is the full clickable index. Each link opens in a new tab. Icons = little 
   <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Use `cat` to read the password file.
 
 - 🌀 **Level 2 — Weird Filenames**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Handle filenames with spaces or special characters.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-2/" target="_blank" rel="noopener">Read post →</a> — Handle filenames with spaces or special characters.
 
 - 💬 **Level 3 — Spaces in Filenames**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Quote or escape filenames to read them.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-3/" target="_blank" rel="noopener">Read post →</a> — Quote or escape filenames to read them.
 
 - 👀 **Level 4 — Hidden Files**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Discover files starting with `.` using `ls -a`.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-4/" target="_blank" rel="noopener">Read post →</a> — Discover files starting with `.` using `ls -a`.
 
 - 🧾 **Level 5 — File Types**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Use `file` command to identify correct file.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-5/" target="_blank" rel="noopener">Read post →</a> — Use `file` command to identify correct file.
 
 - 📏 **Level 6 — Size & Permissions**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Find files by size, owner, and type.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-6/" target="_blank" rel="noopener">Read post →</a> — Find files by size, owner, and type.
 
 - 🧍 **Level 7 — Owner/Group Search**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Search for files by ownership.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-7/" target="_blank" rel="noopener">Read post →</a> — Search for files by ownership.
 
 - 🔍 **Level 8 — Grep & Pipe**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Filter content with `grep` and pipes.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-8/" target="_blank" rel="noopener">Read post →</a> — Filter content with `grep` and pipes.
 
 - 🔄 **Level 9 — Unique Lines**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Use `sort` + `uniq` to find unique strings.
+  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-9/" target="_blank" rel="noopener">Read post →</a> — Use `sort` + `uniq` to find unique strings.
 
 - 💻 **Level 10 — Strings in Binary**  
   <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Extract readable text with `strings`.
