@@ -8,7 +8,7 @@ description: "A full index of my OverTheWire Bandit walkthroughs — from Level 
 
 # OverTheWire Bandit — Complete Walkthrough Index
 
-Halloo SuiiKawaii dessu!! Glad to see you again. This post is the **master index** for my Bandit walkthroughs — actually i don’t have much to say because the title and desciption already help you figure out what is this post about so yeah today we gonna do some OverTheWire Bandit 🗣️🔥🔥🔥🔥!!
+Halloo SuiiKawaii dessu!! Glad to see you again. This page is the **master index** for my Bandit walkthroughs — actually i don’t have much to say because the title and desciption already help you figure out what is this post about so yeah today we gonna do some OverTheWire Bandit 🗣️🔥🔥🔥🔥!!
 
 ![Suipad]({{ '/assets/images/bandit/suipad.gif' | relative_url }})
 
@@ -171,7 +171,7 @@ Each link opens in a new tab. The one-liner tells you the main idea for that lev
 
 ## Conclusion
 
-There are tons of Bandit guides out there, but this series is **my** take with my workflow, notes, and explanations. Even if you just skim, I hope it helps you learn faster.
+There are tons of Bandit guides out there from other Blog to Youtube videos, but i made this series is **my** take with my own style of workflow, notes, and explanations. Even if you just skim, I hope it will helps you learn faster.
 
 Finishing Bandit feels like leveling up from “Linux noob” to “terminal ninja” 🥷:
 - The command line becomes a friendly tool.
