@@ -185,6 +185,8 @@ Finishing Bandit feels like leveling up from “Linux noob” to “terminal nin
 
 Keep playing, keep breaking (legally!), keep notes — **you got this** 💪
 
+---
+
 ## Thanks for reading!
 
 Until next time — **Otsumachi!!** 💖☄️✨
