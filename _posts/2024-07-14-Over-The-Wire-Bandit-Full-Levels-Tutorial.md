@@ -7,185 +7,182 @@ description: "A full index of my OverTheWire Bandit walkthroughs — from Level 
 ---
 
 # OverTheWire Bandit — Complete Walkthrough Index
-Halloo SuiiKawaii dessu!! I'm glad that we met again in this post and actually i don't have much to say because the title and desciption already help you figure out what is this post about so yeah today we gonna do some OverTheWire Bandit RRAHHHHHH 🗣️🔥🔥🔥🔥!!
+
+Halloo SuiiKawaii dessu!! Glad to see you again. This post is the **master index** for my Bandit walkthroughs — actually i don’t have much to say because the title and desciption already help you figure out what is this post about so yeah today we gonna do some OverTheWire Bandit 🗣️🔥🔥🔥🔥!!
 
 ![Suipad]({{ '/assets/images/bandit/suipad.gif' | relative_url }})
 
 ## Introduction
 
-If you’re just starting out in **cybersecurity** or **ethical hacking**, one of the best beginner-friendly playgrounds you can jump into is [**OverTheWire**](https://overthewire.org/wargames/) <a href="https://overthewire.org/wargames/" target="_blank" rel="noopener">(open in new tab)</a>.
+If you’re getting into **cybersecurity** or **ethical hacking**, [**OverTheWire**](https://overthewire.org/wargames/) <a href="https://overthewire.org/wargames/" target="_blank" rel="noopener">(open in new tab)</a> is one of the best beginner-friendly playgrounds.
 
 ![OTW]({{ '/assets/images/bandit/otw.jpg' | relative_url }})
 
-OverTheWire’s **Bandit** game is like a fun bootcamp for Linux + basic hacking skills. It’s beginner-friendly, but it sneaks in *real* skills you’ll use in CTFs, pentesting, or even day-to-day sysadmin work. The first few levels are like “How do I even ge![alt text](image.png)t in?”, and before you know it, you’re decoding, grepping, piping, and feeling like a command-line wizard 🧙.
+**Bandit** is basically a fun Linux bootcamp disguised as a wargame. It starts simple (“how do I even log in?”) and ramps up to decoding, grepping, piping, and small forensics. You’ll build real skills you’ll reuse in CTFs, pentesting, and sysadmin work.
 
 **Why start with Bandit?**
-- It’s **hands-on** from the first second — no theory walls.
-- Builds real Linux muscle memory.
-- Teaches you to read, research, and experiment (the hacker mindset).
-- Totally **free** — just an internet connection and a terminal.
+- **Hands-on** from minute one — no walls of theory.
+- Builds real **Linux muscle memory**.
+- Trains the **hacker mindset**: read, research, experiment.
+- Totally **free** — just a terminal + internet.
 
-By the end, you’ll be more comfortable with:
-- Navigating the command line like a pro.
-- Hunting for files, reading permissions, decoding weird formats.
-- Combining commands in clever one-liners.
-- Feeling smug every time you use `grep` in the real world 😏.
+By the end you’ll be comfortable with:
+- Navigating the shell quickly.
+- Hunting files, reading permissions, decoding formats.
+- Chaining commands into powerful one-liners.
 
 ---
 
 ## About This Series
 
-This post is your **master index** for my OverTheWire Bandit walkthrough collection.  
-Each level gets its own post with:
+Each level has its **own post** with:
 
-1. **Login Information** — how to connect to the server for that level.  
-2. **Task** — the challenge prompt from OTW.  
-3. **Theory** — short explanation of commands/concepts involved.  
-4. **Solution** — step-by-step walkthrough.
+1. **Login Info** — how to connect for that level  
+2. **Task** — the original OTW prompt  
+3. **Theory** — short notes on the commands/concepts  
+4. **Solution** — step-by-step, reproducible walkthrough
 
-My aim isn’t to just dump passwords, but to explain why each step works, so next time you can figure it out *yourself*.  
+My goal isn’t to dump passwords but to show *why* each step works so you can solve similar problems on your own.
 
 ---
 
 ## How to Play Bandit (and actually learn)
 
-Here’s the game plan:
 1. **Read** the challenge carefully.  
-2. **Try** on your own before peeking.  
-3. Use `man` and `--help` like your life depends on it.  
-4. Keep a **notebook** — commands, ideas, dead ends, wins.  
-5. **Fail fast** and retry until you can solve it without hints.  
+2. **Try first**, then peek at hints if stuck.  
+3. Use `man`/`--help` aggressively.  
+4. Keep a **logbook** of commands, ideas, dead ends.  
+5. **Fail fast**, retry until you can solve it without notes.  
 
-Pro tip: The magic of Bandit is in *piping* (`|`). You’ll chain commands and feel like you’re casting spells.
+Pro tip: the real magic is in **pipes** (`|`) and **redirection** (`>`, `>>`, `2>`).
 
 ---
 
-## Levels Index
+## Levels Index (0 → 34)
 
-Below is the full clickable index. Each link opens in a new tab. Icons = little mood for each challenge 🎯
+Each link opens in a new tab. The one-liner tells you the main idea for that level.
 
 - 🐣 **Level 0 — SSH Login**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-0/" target="_blank" rel="noopener">Read post →</a> — Connect to the Bandit server via SSH for the first time.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-0/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — First SSH into the Bandit server.
 
 - 📄 **Level 1 — Reading a File**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Use `cat` to read the password file.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-1/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Use `cat` to read the password.
 
 - 🌀 **Level 2 — Weird Filenames**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-2/" target="_blank" rel="noopener">Read post →</a> — Handle filenames with spaces or special characters.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-2/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Handle names with spaces/special chars.
 
 - 💬 **Level 3 — Spaces in Filenames**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-3/" target="_blank" rel="noopener">Read post →</a> — Quote or escape filenames to read them.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-3/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Quote/escape filenames.
 
 - 👀 **Level 4 — Hidden Files**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-4/" target="_blank" rel="noopener">Read post →</a> — Discover files starting with `.` using `ls -a`.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-4/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Reveal dotfiles with `ls -a`.
 
 - 🧾 **Level 5 — File Types**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-5/" target="_blank" rel="noopener">Read post →</a> — Use `file` command to identify correct file.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-5/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Identify with `file`.
 
 - 📏 **Level 6 — Size & Permissions**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-6/" target="_blank" rel="noopener">Read post →</a> — Find files by size, owner, and type.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-6/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — `find` by size/owner/type.
 
 - 🧍 **Level 7 — Owner/Group Search**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-7/" target="_blank" rel="noopener">Read post →</a> — Search for files by ownership.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-7/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Search by ownership.
 
 - 🔍 **Level 8 — Grep & Pipe**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-8/" target="_blank" rel="noopener">Read post →</a> — Filter content with `grep` and pipes.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-8/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Filter with `grep`.
 
 - 🔄 **Level 9 — Unique Lines**  
-  <a href="https://nguendung.github.io/posts/OverTheWire-Bandit-Level-9/" target="_blank" rel="noopener">Read post →</a> — Use `sort` + `uniq` to find unique strings.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-9/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — `sort` + `uniq`.
 
 - 💻 **Level 10 — Strings in Binary**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Extract readable text with `strings`.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-10/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Extract text with `strings`.
 
 - 🧩 **Level 11 — Base64**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Decode with `base64 -d`.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-11/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Decode with `base64 -d`.
 
-- 🔡 **Level 12 — Rot13**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Decode text with `tr`.
+- 🔡 **Level 12 — Rot13 / Substitution**  
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-12/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Transform with `tr`.
 
 - 🪄 **Level 13 — Hexdump Magic**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Identify file types from hex.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-13/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Recognize file types by hex.
 
 - 🔑 **Level 14 — SSH Keys**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Connect using a private key.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-14/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Login using a private key.
 
 - 📡 **Level 15 — Netcat Basics**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Grab data from a network service.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-15/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Read from a TCP service.
 
 - 📂 **Level 16 — Port Scanning**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Scan and connect to the correct port.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-16/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Find the right port.
 
 - 🕵️ **Level 17 — Diff Files**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Compare files with `diff`.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-17/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Compare with `diff`.
 
 - 🔐 **Level 18 — Hidden in Plain Sight**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Spot password hidden in text.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-18/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Spot secrets in text.
 
 - 📜 **Level 19 — Permissions Trick**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Exploit file permissions to read files.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-19/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Exploit file permissions.
 
 - 🛠️ **Level 20 — Netcat & Scripts**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Use netcat to interact with scripts.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-20/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Interact with a server script.
 
 - 🔄 **Level 21 — Cron Jobs**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Exploit scheduled tasks.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-21/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Abuse scheduled tasks.
 
 - 🗂️ **Level 22 — Cron & Scripts**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Read scripts run by cron.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-22/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Read what cron runs.
 
 - 🧵 **Level 23 — More Cron Fun**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Chain cron scripts for password.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-23/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Chain cron scripts.
 
 - ⚙️ **Level 24 — TCP & Scripts**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Connect to custom TCP service.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-24/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Connect to a custom TCP service.
 
 - 📨 **Level 25 — SSH & Port Forwarding**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Forward ports with SSH.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-25/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Forward ports with SSH.
 
 - 📦 **Level 26 — Special Shells**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Escape restricted shells.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-26/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Escape restricted shells.
 
 - 🧪 **Level 27 — Git Basics**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Clone a repo and read files.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-27/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Clone and inspect a repo.
 
 - 🕳️ **Level 28 — Git History**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Find secrets in commit history.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-28/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Dig secrets from commits.
 
 - 🗝️ **Level 29 — Git Tags**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Look at tags for hidden info.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-29/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Check tags for clues.
 
 - 📖 **Level 30 — Git Branches**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Check other branches for clues.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-30/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Inspect branches.
 
 - 🌀 **Level 31 — Git Remotes**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Inspect remote repos.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-31/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Explore remotes.
 
 - 📚 **Level 32 — Bash Loops**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Automate with loops.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-32/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Automate with loops.
 
 - 🧠 **Level 33 — Knowledge Check**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Combine skills from previous levels.
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-33/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Combine previous skills.
 
 - 🏁 **Level 34 — The End!**  
-  <a href="LINK_HERE" target="_blank" rel="noopener">Read post →</a> — Final challenge, graduation time!
+  <a href="{{ '/posts/OverTheWire-Bandit-Level-34/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Final challenge 🎓
 
 ---
 
 ## Conclusion
 
-Finishing Bandit is like leveling up from “Linux noob” to “terminal ninja” 🥷.  
-You’ll walk away knowing:
-- The Linux command line is your friend (not scary).
-- You can chain tools like LEGO bricks to solve problems.
-- You *can* learn complex things if you break them into small steps.
+There are tons of Bandit guides out there, but this series is **my** take with my workflow, notes, and explanations. Even if you just skim, I hope it helps you learn faster.
 
-**Next adventures after Bandit:**
-- [Krypton](https://overthewire.org/wargames/krypton/) (crypto puzzles)  
+Finishing Bandit feels like leveling up from “Linux noob” to “terminal ninja” 🥷:
+- The command line becomes a friendly tool.
+- You can chain small utilities like LEGO bricks.
+- You *can* learn anything by slicing it into tiny, winnable steps.
+
+**Next adventures:**  
+- [Krypton](https://overthewire.org/wargames/krypton/) (crypto)  
 - [Narnia](https://overthewire.org/wargames/narnia/) (binary exploitation)  
-- [TryHackMe](https://tryhackme.com/) or [Hack The Box](https://www.hackthebox.com/) for more realistic labs.
+- Labs: [TryHackMe](https://tryhackme.com/) / [Hack The Box](https://www.hackthebox.com/)
 
-Most important: Keep playing. Keep breaking things (in legal environments). Keep notes.  
-And remember — **you got this** 💪
+Keep playing, keep breaking (legally!), keep notes — **you got this** 💪
 
 ![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
-
