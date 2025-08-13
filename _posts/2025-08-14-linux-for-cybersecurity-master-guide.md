@@ -1,6 +1,3 @@
-Quá ok nè! Mình in nguyên file **Markdown** ra đây để bạn copy–paste vào `_posts/2025-08-14-linux-for-cybersecurity-master-guide.md` (hoặc tên bạn thích).
-
-````markdown
 ---
 layout: post
 title: "Linux for Cybersecurity — From Zero to Daily Driver (Deep Guide)"
