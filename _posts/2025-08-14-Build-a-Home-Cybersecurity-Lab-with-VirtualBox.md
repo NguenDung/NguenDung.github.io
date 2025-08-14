@@ -2,12 +2,13 @@
 layout: post
 title: "Build a Home Cybersecurity Lab with VirtualBox/VMware"
 permalink: /posts/home-cyber-lab/
-tags: [virtualization, homelab, kali, parrot, blackarch, backbox, virtualbox, vmware, networking, beginner]
+tags: [virtualization, lab, kali, parrot, blackarch, backbox, virtualbox, vmware, networking, beginner]
 description: "A step-by-step guide to building a safe, isolated cybersecurity lab at home using VirtualBox or VMware — with Kali/Parrot, vulnerable targets, hosted labs, network modes, snapshots, and best practices."
 ---
 
-<!-- Responsive embeds for THIS post only -->
+<!-- Scoped styles for THIS post only -->
 <style>
+/* Responsive video embeds */
 iframe[src*="youtube.com"],
 iframe[src*="youtu.be"],
 iframe[src*="vimeo.com"]{
@@ -18,6 +19,35 @@ iframe[src*="vimeo.com"]{
   aspect-ratio:16/9;
   border:0;
 }
+
+/* Topology block: larger and more readable monospace */
+pre.topology {
+  font-size: 1.05rem;
+  line-height: 1.55;
+  padding: .9rem 1rem;
+  border: 1px solid rgba(255,255,255,.15);
+  border-radius: 6px;
+  overflow:auto;
+}
+
+/* Nicer table spacing without touching entire theme */
+.md-table table {
+  width:100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.md-table th, .md-table td {
+  padding: .65rem .85rem;
+  vertical-align: top;
+}
+.md-table thead th {
+  border-bottom: 1px solid rgba(255,255,255,.15);
+}
+.md-table tbody tr + tr td {
+  border-top: 1px dashed rgba(255,255,255,.12);
+}
+
+/* Helper */
 .back-to-top { display:inline-block; margin-top:0.75rem; font-size:0.95rem }
 kbd { background:#eee; border:1px solid #ccc; border-bottom:2px solid #bbb; padding:0 .35em; border-radius:3px; }
 .table-scroll { overflow-x:auto; }
@@ -42,6 +72,7 @@ Halloo, it’s me SuiiKawaii again — this time we’re building your **home cy
 - [6) Network modes explained](#6-network-modes-explained)
 - [7) Create your attacker VM (Kali/Parrot)](#7-create-your-attacker-vm-kaliparrot)
   - [7.1) Attacker OS choices & comparison](#71-attacker-os-choices--comparison)
+  - [7.1.1) OS selection flow (decision tree)](#711-os-selection-flow-decision-tree)
   - [7.2) Quick install & first snapshot](#72-quick-install--first-snapshot)
 - [8) Add safe target VMs](#8-add-safe-target-vms)
   - [8.1) Hosted practice labs (no VM required)](#81-hosted-practice-labs-no-vm-required)
@@ -67,19 +98,14 @@ Halloo, it’s me SuiiKawaii again — this time we’re building your **home cy
 - **Focus:** Curated targets teach specific skills (web vulns, services, creds).  
 - **Portability:** Your entire lab fits on a laptop + external SSD.
 
-<!-- Why build a home lab — main embeds (two videos, full width, responsive) -->
+<!-- Main embed (one video, start from 0) -->
 <iframe src="https://www.youtube.com/embed/fffSbCbafts"
         title="Do you need a Cybersecurity home lab?"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         allowfullscreen loading="lazy"></iframe>
 
-<iframe src="https://www.youtube.com/embed/izmCJlJEvQw"
-        title="Build Your Own Cybersecurity Lab at Home (For FREE)"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
-        allowfullscreen loading="lazy"></iframe>
-
 **Further references:**  
-- <a href="https://www.youtube.com/watch?v=fffSbCbafts" target="_blank" rel="noopener noreferrer">Do you need a Cybersecurity home lab? (YouTube)</a>
+- <a href="https://www.youtube.com/watch?v=izmCJlJEvQw" target="_blank" rel="noopener noreferrer">Build Your Own Cybersecurity Lab at Home (For FREE)</a>
 
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
@@ -99,17 +125,14 @@ Halloo, it’s me SuiiKawaii again — this time we’re building your **home cy
 
 Start simple, then scale:
 
-```
+<pre class="topology"><code>(Attacker)
+Kali / Parrot / BlackArch / BackBox  ──┐
+                                       ├── Host-Only Network  ← isolated playground
+Target #1                             ──┤
+Target #2                             ──┘
 
-(Attacker)
-Kali/Parrot  ──┐
-├── Host-Only Network  ← isolated playground
-Target #1  ────┤
-Target #2  ────┘
-
-Kali/Parrot  ── NAT ── Internet (for updates/tools)
-
-````
+Attacker                              ── NAT ── Internet (for updates/tools)
+</code></pre>
 
 - **Phase 1:** One attacker VM + one target on a **Host-only** network.  
 - **Phase 2:** Add more targets (e.g., a web vuln box + a Linux service box).  
@@ -141,21 +164,26 @@ Kali/Parrot  ── NAT ── Internet (for updates/tools)
 
 **Host machine suggested minimum:** 4 cores, 16 GB RAM, SSD, and virtualization enabled in BIOS/UEFI (Intel VT-x / AMD-V).
 
-**Hardware research (optional):**  
-- <a href="https://www.youtube.com/watch?v=jsMp65-piIc" target="_blank" rel="noopener noreferrer">Best hacking laptop and OS? (YouTube)</a>
+<!-- Hardware video embed -->
+<iframe src="https://www.youtube.com/embed/jsMp65-piIc"
+        title="Best hacking laptop and OS?"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+        allowfullscreen loading="lazy"></iframe>
 
 **Further references:**  
 - <a href="https://virtualcyberlabs.com/how-to-build-a-home-cybersecurity-lab/" target="_blank" rel="noopener noreferrer">How to Build a Home Cybersecurity Lab (Virtual Cyber Labs)</a>  
 - <a href="https://medium.com/@jibingeorge.mg/cybersecurity-research-lab-setup-5beb54d8dd59" target="_blank" rel="noopener noreferrer">Cybersecurity Research Lab Setup (Medium)</a>  
 - <a href="https://www.offsec.com/blog/cybersecurity-homelab/" target="_blank" rel="noopener noreferrer">OffSec: Cybersecurity Homelab (Blog)</a>  
-- <a href="https://www.youtube.com/watch?v=kku0fVfksrk&list=PLG6KGSNK4PuBWmX9NykU0wnWamjxdKhDJ" target="_blank" rel="noopener noreferrer">Cybersecurity Tip: Build A Basic Home Lab (Playlist)</a>  
-- <a href="https://www.youtube.com/watch?v=8hvn5poOo0E&list=PLyyVTBXnmyxK-dnk5RcgxSr1ix8uphnEa" target="_blank" rel="noopener noreferrer">Cybersecurity Home Lab — VirtualBox (Playlist)</a>
+- <a href="https://www.youtube.com/watch?v=kku0fVfksrk&list=PLG6KGSNK4PuBWmX9NykU0wnWamjxdKhDJ" target="_blank" rel="noopener noreferrer">Build A Basic Home Lab (Playlist)</a>  
+- <a href="https://www.youtube.com/watch?v=8hvn5poOo0E&list=PLyyVTBXnmyxK-dnk5RcgxSr1ix8uphnEa" target="_blank" rel="noopener noreferrer">Home Lab — VirtualBox (Playlist)</a>
 
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
 ## 5) VirtualBox vs VMware (quick compare)
+
+<div class="md-table table-scroll">
 
 | Feature | VirtualBox | VMware Workstation/Fusion |
 |---|---|---|
@@ -165,6 +193,8 @@ Kali/Parrot  ── NAT ── Internet (for updates/tools)
 | Shared folders | Yes | Yes |
 | 3D/Graphics | Basic | Often better integration |
 | Cross-platform | Win/macOS/Linux | Win/Linux (Workstation), macOS (Fusion) |
+
+</div>
 
 **Pick one** and stick with it; the concepts here apply to both.
 
@@ -201,46 +231,131 @@ This is your “offensive workstation.” Before we install anything, here’s h
 
 **Short take:** If you’re new, choose **Kali** or **Parrot**. They’re friendly, well-documented, and come with a curated toolset that “just works”.
 
-<div class="table-scroll">
-
-| Distro | Base & Package Manager | Preinstalled Tools | Update Style | Community/Docs | Footprint | Best For | Notes |
-|---|---|---|---|---|---|---|---|
-| **Kali Linux** | Debian; `apt` | Extensive (pentest, forensics) | Rolling | Huge community, lots of tutorials | Medium | **Beginners → Pro** | “Industry standard” for pentest labs; great device support. |
-| **Parrot Security OS** | Debian; `apt` | Extensive (pentest + privacy) | Rolling | Strong community | Light/Medium | **Beginners → Pro** | Privacy-focused flavor; often lighter than Kali. |
-| **BlackArch** | Arch; `pacman` + AUR | Massive (thousands) | Rolling (bleeding) | Niche but passionate | Light | **Advanced** | For Arch users; expect more DIY and break-fix. |
-| **BackBox** | Ubuntu LTS; `apt` | Curated (leaner) | Regular LTS | Moderate | Light | **Beginner/Intermediate** | Stable Ubuntu base + select tools; less bloat, add what you need. |
-
+<div class="md-table table-scroll">
+<table class="os-compare">
+  <thead>
+    <tr>
+      <th>Distro</th>
+      <th>Base &amp; Package Manager</th>
+      <th>Preinstalled Tools</th>
+      <th>Update Style</th>
+      <th>Community / Docs</th>
+      <th>Footprint</th>
+      <th>Best For</th>
+      <th>Notes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Kali Linux</strong></td>
+      <td>Debian; <code>apt</code></td>
+      <td>Extensive (pentest, forensics)</td>
+      <td>Rolling</td>
+      <td>Huge community, lots of tutorials</td>
+      <td>Medium</td>
+      <td><strong>Beginners → Pro</strong></td>
+      <td>“Industry standard” for pentest labs; great device support.</td>
+    </tr>
+    <tr>
+      <td><strong>Parrot Security OS</strong></td>
+      <td>Debian; <code>apt</code></td>
+      <td>Extensive (pentest + privacy)</td>
+      <td>Rolling</td>
+      <td>Strong community</td>
+      <td>Light/Medium</td>
+      <td><strong>Beginners → Pro</strong></td>
+      <td>Privacy-leaning feel; often lighter than Kali.</td>
+    </tr>
+    <tr>
+      <td><strong>BlackArch</strong></td>
+      <td>Arch; <code>pacman</code> + AUR</td>
+      <td>Massive (thousands)</td>
+      <td>Rolling (bleeding)</td>
+      <td>Niche but passionate</td>
+      <td>Light</td>
+      <td><strong>Advanced</strong></td>
+      <td>DIY maintenance; excellent if you like Arch workflows.</td>
+    </tr>
+    <tr>
+      <td><strong>BackBox</strong></td>
+      <td>Ubuntu LTS; <code>apt</code></td>
+      <td>Curated (leaner)</td>
+      <td>Regular LTS</td>
+      <td>Moderate</td>
+      <td>Light</td>
+      <td><strong>Beginner/Intermediate</strong></td>
+      <td>Stable Ubuntu base; add only what you need.</td>
+    </tr>
+  </tbody>
+</table>
 </div>
 
 **Decision criteria (pick what matters to you):**
 - **Experience level:** New? Kali/Parrot. Comfortable with Arch? BlackArch. Want Ubuntu LTS stability? BackBox.  
-- **Philosophy:** Want **everything preinstalled** (Kali/Parrot) vs **curated/lean** (BackBox) vs **huge repo/DIY** (BlackArch).  
-- **Community & docs:** Kali/Parrot have the most tutorials, writeups, and troubleshooting guides.  
+- **Philosophy:** **Everything preinstalled** (Kali/Parrot) vs **curated/lean** (BackBox) vs **huge repo/DIY** (BlackArch).  
+- **Community & docs:** Kali/Parrot have the most tutorials and troubleshooting guides.  
 - **Update cadence:** Rolling is convenient but can break occasionally — snapshot first.  
-- **Hardware & drivers:** Kali/Parrot generally smooth in VMs and on laptops.
+- **Hardware & drivers:** Kali/Parrot are generally smooth in VMs and on laptops.
 
-<!-- OS comparison — main embed -->
-<iframe src="https://www.youtube.com/embed/l75r9tmdZic?start=322"
+<!-- OS comparison — main embed (start at 0) -->
+<iframe src="https://www.youtube.com/embed/l75r9tmdZic"
         title="Kali Linux vs BlackArch vs Parrot OS - Which is Best for [Ethical] Hacking?"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
-- <a href="https://www.youtube.com/watch?v=olS6JsRwPaE" target="_blank" rel="noopener noreferrer">Best OS For Pentesting & Security Research? (YouTube)</a>  
-- <a href="https://www.youtube.com/watch?v=lAnQzVqx9s4" target="_blank" rel="noopener noreferrer">Best Hacking Operating System! (YouTube)</a>
+- <a href="https://www.youtube.com/watch?v=olS6JsRwPaE" target="_blank" rel="noopener noreferrer">Best OS For Pentesting & Security Research?</a>  
+- <a href="https://www.youtube.com/watch?v=lAnQzVqx9s4" target="_blank" rel="noopener noreferrer">Best Hacking Operating System!</a>
 
-> **Recommendation:** Start with **Kali** or **Parrot** for your first 3–6 months. Once you’re comfortable, try **BlackArch** (if you like Arch) or **BackBox** (if you want Ubuntu LTS stability with a lighter toolset).
+#### 7.1.1) OS selection flow (decision tree)
+
+**Quick checklist (text version)**
+
+1) **Brand-new to Linux?**  
+   - **Yes →** Pick **Kali** (largest preinstalled toolset, huge community) **or** **Parrot** (lighter feel, privacy-leaning).  
+   - **No →** Go to 2.  
+2) **Already comfortable with Arch (pacman/AUR, rolling, DIY)?**  
+   - **Yes →** **BlackArch**.  
+   - **No →** Go to 3.  
+3) **Prefer Ubuntu LTS stability with a lean, curated toolkit?**  
+   - **Yes →** **BackBox**.  
+   - **No →** Go to 4.  
+4) **Tighter hardware (≤ 8 GB RAM / older CPU) and want a smoother VM?**  
+   - Prefer **Parrot** or **BackBox**; **Kali** is still fine (medium footprint).  
+5) **Need the broadest out-of-the-box suite and tutorials everywhere?** → **Kali**.  
+6) **Want a privacy-friendly flavor that still ships offensive tools and feels snappy?** → **Parrot**.  
+7) **Still unsure?** Start with **Kali/Parrot** for **3–6 months**. Snapshot often. Then try **BlackArch**/**BackBox**.
+
+**TL;DR mapping:**  
+**Beginner, want everything ready → Kali** • **Beginner, lighter/privacy → Parrot** • **Advanced+Arch → BlackArch** • **Ubuntu LTS lean → BackBox**
+
+```mermaid
+flowchart TD
+    A[Start] --> B{New to Linux?}
+    B -- Yes --> C{Prefer biggest preinstalled\ntoolset & community?}
+    C -- Yes --> K[Kali Linux]
+    C -- No / prefer lighter & privacy --> P[Parrot Security]
+    B -- No --> D{Comfortable with Arch (pacman/AUR)?}
+    D -- Yes --> BA[BlackArch]
+    D -- No --> E{Prefer Ubuntu LTS with\nlean curated tools?}
+    E -- Yes --> BB[BackBox]
+    E -- No --> F{Need largest OOTB suite\n& docs everywhere?}
+    F -- Yes --> K
+    F -- Prefer lighter/privacy --> P
+    G[Low RAM / older CPU] --> P
+    G --> BB
+````
 
 ### 7.2) Quick install & first snapshot
 
 Allocate **2–4 vCPUs**, **4–8 GB RAM**, **40+ GB disk**. Enable **EFI** if your ISO needs it.
 
-- **Kali post-install quick steps:**
+* **Kali post-install quick steps:**
+
   ```bash
   sudo apt update && sudo apt -y upgrade
   sudo apt install -y git curl neovim
-````
-
+  ```
 * Optional: install VMware/VirtualBox guest tools (clipboard, drag & drop, display).
 
 <!-- Install Kali — embed -->
@@ -274,15 +389,15 @@ Pick one to start:
 
 ### 8.1) Hosted practice labs (no VM required)
 
-Nếu bạn không muốn tự dựng nạn nhân ngay, các nền tảng dưới đây có **máy ảo/môi trường sẵn** và **kịch bản có hướng dẫn**:
+If you don’t want to build targets right away, these platforms provide **ready-made environments** with **guided scenarios**:
 
-* <a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe</a> — lab theo phòng, có lộ trình cho người mới; kết nối bằng **OpenVPN/WireGuard** từ attacker VM của bạn.
-* <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a> — nhiều box theo độ khó; phần “Starting Point” hợp cho người mới; cũng dùng VPN.
-* <a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">PortSwigger Web Security Academy</a> — hàng trăm lab web an toàn/hợp pháp chạy trên hạ tầng của họ.
-* <a href="https://overthewire.org/wargames/" target="_blank" rel="noopener noreferrer">OverTheWire</a> — wargames qua SSH, rất tốt để luyện CLI.
-* <a href="https://picoctf.org/" target="_blank" rel="noopener noreferrer">picoCTF</a> — CTF cho người mới, có phần web/forensics/crypto hay.
+* <a href="https://tryhackme.com/" target="_blank" rel="noopener noreferrer">TryHackMe</a> — room-based labs with beginner paths; connect via **OpenVPN/WireGuard** from your attacker VM.
+* <a href="https://www.hackthebox.com/" target="_blank" rel="noopener noreferrer">Hack The Box</a> — many boxes by difficulty; “Starting Point” is great for beginners; also uses VPN.
+* <a href="https://portswigger.net/web-security" target="_blank" rel="noopener noreferrer">PortSwigger Web Security Academy</a> — hundreds of web labs hosted safely and legally.
+* <a href="https://overthewire.org/wargames/" target="_blank" rel="noopener noreferrer">OverTheWire</a> — SSH-based wargames to sharpen your CLI.
+* <a href="https://picoctf.org/" target="_blank" rel="noopener noreferrer">picoCTF</a> — beginner-friendly CTFs across web/forensics/crypto.
 
-**VPN note:** Khi nối VPN của THM/HTB trong attacker VM, hãy **giữ targets nội bộ** của bạn trên Host-only. Không bật Bridged trừ khi bạn hiểu rõ phạm vi và rủi ro.
+**VPN note:** When connecting THM/HTB VPN inside your attacker VM, keep your **local targets** on Host-only. Don’t enable Bridged unless you fully understand the scope and risks.
 
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
@@ -402,11 +517,15 @@ Great idea for web apps like Juice Shop. Just ensure containers are attached to 
 
 ## Appendix A — Quick sizing matrix
 
+<div class="md-table table-scroll">
+
 | VM role                          | vCPU |    RAM |     Disk | Notes                        |
 | -------------------------------- | ---: | -----: | -------: | ---------------------------- |
 | Attacker (Kali/Parrot)           |  2–4 | 4–8 GB | 40–80 GB | Add 2 NICs (Host-only + NAT) |
 | Web target (DVWA/Juice)          |  1–2 | 1–2 GB | 10–20 GB | Host-only only               |
 | Service target (Metasploitable2) |  1–2 | 1–2 GB | 10–20 GB | Host-only only               |
+
+</div>
 
 Tune up/down depending on your host. SSD strongly recommended.
 
@@ -475,7 +594,7 @@ curl -I http://192.168.56.102/
 
 * <a href="https://www.youtube.com/watch?v=fffSbCbafts" target="_blank" rel="noopener noreferrer">Do you need a Cybersecurity home lab?</a>
 * <a href="https://www.youtube.com/watch?v=jsMp65-piIc" target="_blank" rel="noopener noreferrer">Best hacking laptop and OS?</a>
-* <a href="https://www.youtube.com/watch?v=l75r9tmdZic&t=322s" target="_blank" rel="noopener noreferrer">Kali Linux vs BlackArch vs Parrot OS — Which is Best?</a>
+* <a href="https://www.youtube.com/watch?v=l75r9tmdZic" target="_blank" rel="noopener noreferrer">Kali Linux vs BlackArch vs Parrot OS — Which is Best?</a>
 * <a href="https://www.youtube.com/watch?v=olS6JsRwPaE" target="_blank" rel="noopener noreferrer">Best OS For Pentesting & Security Research?</a>
 * <a href="https://www.youtube.com/watch?v=lAnQzVqx9s4" target="_blank" rel="noopener noreferrer">Best Hacking Operating System!</a>
 * <a href="https://www.youtube.com/watch?v=kku0fVfksrk&list=PLG6KGSNK4PuBWmX9NykU0wnWamjxdKhDJ" target="_blank" rel="noopener noreferrer">Build A Basic Home Lab (Playlist)</a>
@@ -488,6 +607,7 @@ curl -I http://192.168.56.102/
 You now have a safe playground to learn. Keep the **attacker** on Host-only + NAT, keep **targets** Host-only only, snapshot early/often, and journal what you try. Pair this with your Linux study from **[Mastering Linux for Cybersecurity](/posts/mastering-linux-for-cybersecurity/)** and steady hands-on work via **[OverTheWire Bandit](/posts/overthewire/bandit-overview/)** — you’ll level up fast.
 
 ---
+
 ## Thanks for reading!
 
 Until next time — **Otsumachi!!** 💖☄️✨
