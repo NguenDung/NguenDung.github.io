@@ -155,7 +155,7 @@ Attacker                              ── NAT ── Internet (for updates/to
 ## 4) Requirements & downloads
 
 - **Hypervisor:**  
-  - <a href="https://www.virtualbox.org/" target="_blank" rel="noopener noreferrer">VirtualBox</a> (free) or  
+  - <a href="https://www.virtualbox.org/" target="_blank" rel="noopener noreferrer">VirtualBox</a> (free)   
   - <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion" target="_blank" rel="noopener noreferrer">VMware Workstation/Fusion</a> (Player is free for personal use).
 
 - **Attacker OS:**  
@@ -588,18 +588,41 @@ Great idea for web apps like Juice Shop. Just ensure containers are attached to 
 ## Appendix A — Quick sizing matrix
 
 <div class="md-table table-scroll">
-
-| VM role                          | vCPU |    RAM |     Disk | Notes                        |
-| -------------------------------- | ---: | -----: | -------: | ---------------------------- |
-| Attacker (Kali/Parrot)           |  2–4 | 4–8 GB | 40–80 GB | Add 2 NICs (Host-only + NAT) |
-| Web target (DVWA/Juice)          |  1–2 | 1–2 GB | 10–20 GB | Host-only only               |
-| Service target (Metasploitable2) |  1–2 | 1–2 GB | 10–20 GB | Host-only only               |
-
+  <table>
+    <thead>
+      <tr>
+        <th>VM role</th>
+        <th>vCPU</th>
+        <th>RAM</th>
+        <th>Disk</th>
+        <th>Notes</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Attacker (Kali/Parrot)</td>
+        <td>2–4</td>
+        <td>4–8 GB</td>
+        <td>40–80 GB</td>
+        <td>Add 2 NICs (Host-only + NAT)</td>
+      </tr>
+      <tr>
+        <td>Web target (DVWA/Juice)</td>
+        <td>1–2</td>
+        <td>1–2 GB</td>
+        <td>10–20 GB</td>
+        <td>Host-only</td>
+      </tr>
+      <tr>
+        <td>Service target (Metasploitable2)</td>
+        <td>1–2</td>
+        <td>1–2 GB</td>
+        <td>10–20 GB</td>
+        <td>Host-only</td>
+      </tr>
+    </tbody>
+  </table>
 </div>
-
-Tune up/down depending on your host. SSD strongly recommended.
-
-<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
