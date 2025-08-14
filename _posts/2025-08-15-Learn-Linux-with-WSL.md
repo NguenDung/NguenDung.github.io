@@ -4,6 +4,7 @@ title: "Learn Linux with WSL: A Practical Starter for Windows Users"
 permalink: /posts/wsl-linux-starter/
 tags: [wsl, windows, linux, beginner, ubuntu, terminal, dev, guide]
 description: "A step-by-step starter for learning Linux on Windows using WSL2: setup, daily workflow, interop with Windows, limitations, and when to use a VM instead."
+excerpt_separator: <!--more-->
 ---
 
 <!-- Scoped styles for THIS post only -->
@@ -12,23 +13,24 @@ description: "A step-by-step starter for learning Linux on Windows using WSL2: s
 .embed-16x9 { position: relative; width: 100%; aspect-ratio: 16 / 9; }
 .embed-16x9 iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-/* Optional 2-col video grid on wide screens */
-.video-grid { display: grid; gap: 1rem; }
-@media (min-width: 900px) { .video-grid { grid-template-columns: 1fr 1fr; } }
-
-/* Nicer tables + horizontal scroll on small screens */
+/* Nicer tables + horizontal scroll */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .md-table table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .md-table th, .md-table td { padding: .6rem .8rem; border: 1px solid var(--table-border, #e5e7eb); }
 .md-table thead th { background: var(--table-head, #f8fafc); text-align: left; }
 
-/* Lightweight callouts */
+/* Lightweight callouts (avoid blockquote pitfalls) */
 .callout { padding:.8rem 1rem; border-left:4px solid #6b7280; background:rgba(107,114,128,.08); margin:1rem 0; }
 .callout.warn { border-color:#d97706; background:rgba(217,119,6,.08); }
 .callout.ok { border-color:#059669; background:rgba(5,150,105,.08); }
 </style>
 
-<!-- VIDEO: add later -->
+<!-- Main video embed -->
+<div class="embed-16x9" markdown="0">
+  <iframe src="https://www.youtube.com/embed/vxTW22y8zV8"
+          title="Linux on Windows......Windows on Linux"
+          allowfullscreen loading="lazy"></iframe>
+</div>
 
 ## Table of Contents
 - [1) What WSL Is (and WSL1 vs WSL2)](#1-what-wsl-is-and-wsl1-vs-wsl2)
@@ -42,7 +44,6 @@ description: "A step-by-step starter for learning Linux on Windows using WSL2: s
 - [9) Troubleshooting & FAQ](#9-troubleshooting--faq)
 - [10) Resources](#10-resources)
 - [Appendix A: Optional .wslconfig & wsl.conf](#appendix-a-optional-wslconfig--wslconf)
-- [Appendix B: Video Gallery](#appendix-b-video-gallery)
 - [Appendix C: Windows Terminal Profiles (ready-to-paste)](#appendix-c-windows-terminal-profiles-ready-to-paste)
 - [Appendix D: Docker + GPU (CUDA/WSLg) on WSL](#appendix-d-docker--gpu-cudawslg-on-wsl)
 - [Appendix E: VS Code Dev Containers (Node + Python example)](#appendix-e-vs-code-dev-containers-node--python-example)
@@ -52,13 +53,23 @@ description: "A step-by-step starter for learning Linux on Windows using WSL2: s
 - [Appendix I: Kali on WSL — Quick Kit](#appendix-i-kali-on-wsl--quick-kit)
 - [Appendix J: GPU Quick Start Box (NVIDIA/AMD/Intel)](#appendix-j-gpu-quick-start-box-nvidiaamdintel)
 
+<!--more-->
+
 ---
 
 ## 1) What WSL Is (and WSL1 vs WSL2)
 
-**WSL (Windows Subsystem for Linux)** lets you run a GNU/Linux environment directly on Windows without dual-boot.  
+WSL lets you run a GNU/Linux environment directly on Windows without dual-boot.
+
+<!-- Inline supporting video for this section -->
+<div class="embed-16x9" markdown="0">
+  <iframe src="https://www.youtube.com/embed/EAROgwvOV4s"
+          title="What Is The Windows Subsystem for Linux (WSL) For?!"
+          allowfullscreen loading="lazy"></iframe>
+</div>
+
 - **WSL1** translates Linux syscalls to Windows (compat layer).  
-- **WSL2** runs a real Linux kernel in a lightweight VM → better compatibility and containers.
+- **WSL2** runs a real Linux kernel in a lightweight VM → best compatibility and containers.
 
 <div class="table-scroll md-table">
 
@@ -66,34 +77,34 @@ description: "A step-by-step starter for learning Linux on Windows using WSL2: s
 |---|---|---|
 | Architecture | Translation layer (no Linux kernel) | Lightweight VM with a real Linux kernel |
 | Compatibility | Good CLI coverage | Near-native (cgroups, iptables, namespaces) |
-| Filesystem I/O | Fast on Windows FS, slower on Linux FS | Fastest on Linux FS (`~`); slower across `/mnt/c` |
+| Filesystem I/O | Fast on Windows FS; slower on Linux FS | Fastest on Linux FS (`~`); slower across `/mnt/c` |
 | Docker/Containers | Workarounds only | First-class via Docker Desktop (WSL backend) |
 | Networking | Shared host IP (simple) | NAT by default; modern builds map `localhost` reliably |
 | Resource Usage | Lower baseline | Slightly higher (VM) but dynamic |
 | Best Use | Simple scripting | Dev/security tooling, containers, most learning paths |
 
-**Why not just a full VM?**  
-VMs (VirtualBox/VMware/Hyper-V) excel at hardware passthrough, custom kernels, and lab isolation. WSL2 wins on startup time, Windows integration (VS Code, Explorer), and day-to-day productivity.
-
-> Need monitor mode/USB passthrough/isolated labs? See: [Build a Home Cybersecurity Lab](/posts/home-cyber-lab/) and the broader track [Mastering Linux for Cybersecurity](/posts/mastering-linux-for-cybersecurity/).
+<div class="callout">
+If you need monitor mode/USB passthrough/isolated labs, move to a full VM: <a href="/posts/home-cyber-lab/" target="_blank" rel="noopener noreferrer">Build a Home Cybersecurity Lab</a> and the broader track <a href="/posts/mastering-linux-for-cybersecurity/" target="_blank" rel="noopener noreferrer">Mastering Linux for Cybersecurity</a>.
+</div>
 
 ---
 
 ## 2) Prerequisites
 
 - **Windows 11** or **Windows 10 (21H2/19044+)** recommended.  
-- **Virtualization on** in BIOS/UEFI (Intel VT-x / AMD-V). Quick checks:
-  - Task Manager → **Performance** → CPU → “Virtualization: Enabled”.
-  - PowerShell (Admin):
-    ```powershell
-    wsl --status
-    wsl --version
-    ```
-- On older Windows 10 you may need Windows features:
+- **Virtualization** enabled in BIOS/UEFI (Intel VT-x / AMD-V).
+- Quick checks:
+  ```powershell
+  wsl --status
+  wsl --version
+````
+
+* On older Windows 10 you may need:
+
   ```powershell
   dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
   dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-````
+  ```
 
 ---
 
@@ -103,23 +114,15 @@ VMs (VirtualBox/VMware/Hyper-V) excel at hardware passthrough, custom kernels, a
 
 ```powershell
 wsl --install
+wsl --list --online
+wsl --install -d <DistroName>     # e.g. Debian
 ```
-
-* Installs WSL with the default distro (**Ubuntu**).
-* Pick a different distro:
-
-  ```powershell
-  wsl --list --online
-  wsl --install -d <DistroName>
-  # Example:
-  wsl --install -d Debian
-  ```
 
 ### B) Microsoft Store — GUI route
 
-Open Microsoft Store → search **Ubuntu**, **Debian**, **Kali Linux**, etc → **Get** → **Launch**.
+Install **Ubuntu**, **Debian**, **Kali**, etc.
 
-### C) Upgrade an existing WSL1 to WSL2
+### C) Upgrade existing WSL1 → WSL2
 
 ```powershell
 wsl --set-default-version 2
@@ -129,19 +132,13 @@ wsl --set-version <ExistingDistroName> 2
 
 ### First boot inside Linux
 
-Create your user/password, then update packages:
-
 ```bash
 sudo apt update && sudo apt -y upgrade
 ```
 
-### (Optional) Enable **systemd** on WSL2
+### (Optional) Enable systemd
 
-Recent WSL builds support systemd. Create/edit `/etc/wsl.conf`:
-
-```bash
-sudo nano /etc/wsl.conf
-```
+Create `/etc/wsl.conf`:
 
 ```ini
 [boot]
@@ -155,56 +152,46 @@ wsl --shutdown
 wsl
 ```
 
-If `systemctl` still fails, update the Store version of WSL (`wsl --update`) and try again.
-
 ---
 
 ## 4) Daily Workflow (the right way)
 
-### Work inside the Linux filesystem
-
-Use `~/projects` for code, venvs, and `node_modules` to avoid cross-filesystem penalties.
-
-```bash
-mkdir -p ~/projects && cd ~/projects
-```
-
-* `/` is Linux root;
-* `/mnt/c` is your Windows C: drive (crossing boundaries is slower).
-
-### VS Code Remote – WSL
-
-Install VS Code + the **Remote - WSL** extension. From WSL:
-
-```bash
-code .
-```
-
-Suggested extensions: Remote - WSL, Python, Jupyter (if needed), ESLint, Prettier, Docker, GitHub Pull Requests & Issues.
-
-### Git & SSH keys in WSL
-
-```bash
-ssh-keygen -t ed25519 -C "you@example.com"
-cat ~/.ssh/id_ed25519.pub
-ssh -T git@github.com
-```
-
-### Practical Python/Node toolchains
-
-* **Python** via `pyenv` + `venv`:
+* Work on Linux FS:
 
   ```bash
-  sudo apt update && sudo apt -y install build-essential curl git libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
+  mkdir -p ~/projects && cd ~/projects
+  ```
 
+  `/mnt/c` is Windows drive (crossing boundaries is slower).
+
+* VS Code Remote – WSL:
+
+  ```bash
+  code .
+  ```
+
+  Install extensions: Remote - WSL, Python, ESLint, Prettier, Docker, GitHub PRs.
+
+* Git & SSH in WSL:
+
+  ```bash
+  ssh-keygen -t ed25519 -C "you@example.com"
+  cat ~/.ssh/id_ed25519.pub
+  ssh -T git@github.com
+  ```
+
+* Python via pyenv + venv:
+
+  ```bash
+  sudo apt -y install build-essential curl git libssl-dev zlib1g-dev \
+    libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
   curl https://pyenv.run | bash
-  exec $SHELL  # reload shell to load pyenv
+  exec $SHELL
   pyenv install 3.12.5 && pyenv global 3.12.5
   python -m venv .venv && source .venv/bin/activate
   ```
 
-* **Node.js** via `nvm`:
+* Node via nvm:
 
   ```bash
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
@@ -216,59 +203,51 @@ ssh -T git@github.com
 
 ## 5) Windows ↔ Linux Interop
 
-### Access files both ways
+* Drives under `/mnt/c`, `/mnt/d`, …
 
-* From WSL, Windows drives live under `/mnt/c`, `/mnt/d`, …
-* Open File Explorer from WSL:
+* Open Explorer from WSL:
 
   ```bash
   explorer.exe .
   ```
 
-### Launch apps across the boundary
-
-* From WSL to Windows:
+* Call Windows from WSL:
 
   ```bash
   notepad.exe README.md
   powershell.exe -NoLogo -NoProfile -Command "Get-Date"
   ```
-* From Windows to WSL:
+
+* Call WSL from Windows:
 
   ```powershell
   wsl.exe ls -la ~
   ```
 
-**Tip:** PATHs differ; prefer absolute paths when mixing contexts.
-
-### Clipboard, fonts, locale
-
-* Copy to Windows clipboard:
+* Clipboard:
 
   ```bash
   ls | clip.exe
   ```
-* Set UTF-8 locale in WSL:
+
+* Locale:
 
   ```bash
   sudo update-locale LANG=en_US.UTF-8
   ```
 
-### (Optional) Linux GUI apps on Windows 11
+* (Optional) GUI apps on Windows 11 (WSLg):
 
-WSLg lets you run Linux GUI apps. Try:
-
-```bash
-sudo apt install -y gedit
-gedit &
-```
+  ```bash
+  sudo apt install -y gedit
+  gedit &
+  ```
 
 ---
 
 ## 6) Networking in WSL2
 
-WSL2 uses **NAT**; modern builds forward `localhost` correctly.
-
+* NAT behind the scenes; localhost mapping works.
 * Check IP:
 
   ```bash
@@ -281,39 +260,30 @@ WSL2 uses **NAT**; modern builds forward `localhost` correctly.
   python3 -m http.server 8000
   ```
 
-  Open `http://localhost:8000` from Windows.
+  Open `http://localhost:8000` in Windows.
 
 ### Docker Desktop with WSL backend
 
-1. Install Docker Desktop for Windows.
-2. **Settings → General**: enable **Use the WSL 2 based engine**.
-3. **Settings → Resources → WSL Integration**: enable for your distro(s).
-4. Test from WSL:
+1. Enable **WSL 2 based engine**.
+2. Enable per-distro integration.
+3. Test:
 
-   ```bash
-   docker version
-   docker run hello-world
-   ```
+```bash
+docker version
+docker run hello-world
+```
 
 ---
 
 ## 7) When NOT to Use WSL
 
-Prefer a **full VM** when you need:
-
-* Wi-Fi **monitor mode/packet injection**, SDR, or other hardware passthrough.
-* **USB** passthrough and custom udev rules.
-* **Kernel modules**, custom kernels, or LKM development.
-* **Isolated network labs** (multi-NIC routing, red/blue teams).
-
-See: [Build a Home Cybersecurity Lab](/posts/home-cyber-lab/) and [Mastering Linux for Cybersecurity](/posts/mastering-linux-for-cybersecurity/).
+Use full VM when you need monitor mode/packet injection, USB passthrough, kernel modules, or isolated network labs. See <a href="/posts/home-cyber-lab/" target="_blank" rel="noopener noreferrer">Build a Home Cybersecurity Lab</a>.
 
 ---
 
 ## 8) Quick Commands Cheat Sheet
 
 ```powershell
-# Windows / WSL management (PowerShell)
 wsl --list --online
 wsl --list --verbose
 wsl --install -d Ubuntu
@@ -328,7 +298,6 @@ wsl --update
 ```
 
 ```bash
-# Linux starter pack (inside WSL)
 pwd && ls -la
 mkdir -p ~/projects && cd ~/projects
 sudo apt update && sudo apt -y upgrade
@@ -340,83 +309,86 @@ python3 -m http.server 8000
 
 ## 9) Troubleshooting & FAQ
 
-**“WSL2” option not available**
-Update Windows; install/upgrade the Store version of WSL:
+**WSL2 option missing**
 
 ```powershell
 wsl --update
 wsl --set-default-version 2
 ```
 
-Ensure features are on (see Prerequisites).
-
-**DNS / Network hiccups**
-Quick reset:
+**DNS / network flaky**
 
 ```powershell
 wsl --shutdown
 ```
 
-Custom DNS (optional):
+Optional custom DNS:
+
+```ini
+# /etc/wsl.conf
+[network]
+generateResolvConf = false
+```
 
 ```bash
-# Stop auto-generating resolv.conf
-printf "[network]\ngenerateResolvConf = false\n" | sudo tee /etc/wsl.conf
 sudo rm -f /etc/resolv.conf
 echo "nameserver 1.1.1.1" | sudo tee /etc/resolv.conf
 ```
 
-Then `wsl --shutdown` and relaunch.
+Then `wsl --shutdown`.
 
-**Port not reachable from Windows**
-Bind your service to `0.0.0.0` or `127.0.0.1` as appropriate. Check Windows Firewall. Verify the port isn’t in use (`ss -tulpn` in WSL).
+**Port not reachable**
 
-**Disk usage huge under `%LOCALAPPDATA%\Packages\...`**
-Your distro uses an `ext4.vhdx` that grows. Reclaim space by:
+* Bind to `0.0.0.0`/`127.0.0.1`, check Windows Firewall, check `ss -tulpn`.
 
-1. Cleaning caches/logs inside WSL (e.g., `sudo apt clean`).
-2. `wsl --shutdown`.
-3. Compact the VHDX (Hyper-V tools) or use Docker Desktop’s disk utilities if applicable.
+**Large disk under %LOCALAPPDATA%**
 
-**Reset a distro / change defaults**
+1. `sudo apt clean`
+2. `wsl --shutdown`
+3. Compact VHDX (Hyper-V tools / Docker Desktop disk utilities).
+
+**Reset / default distro**
 
 ```powershell
-wsl --unregister <Name>   # DANGER: deletes the distro
+wsl --unregister <Name>   # destructive
 wsl --set-default <Name>
 ```
-
-**Slow Git on Windows-mounted folders**
-Keep repos on Linux FS (`~`). If you must use `/mnt/c`, consider mount metadata (see Appendix A).
 
 ---
 
 ## 10) Resources
 
-* WSL official docs (Microsoft Learn): <a href="https://learn.microsoft.com/windows/wsl/" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/</a>
-* Set up a WSL dev environment: <a href="https://learn.microsoft.com/windows/wsl/setup/environment" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/setup/environment</a>
-* Advanced config (`wsl.conf` / `.wslconfig`): <a href="https://learn.microsoft.com/windows/wsl/wsl-config" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/wsl-config</a>
+* WSL official docs: <a href="https://learn.microsoft.com/windows/wsl/" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/</a>
+* Setup a WSL dev environment: <a href="https://learn.microsoft.com/windows/wsl/setup/environment" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/setup/environment</a>
+* Config (`wsl.conf` / `.wslconfig`): <a href="https://learn.microsoft.com/windows/wsl/wsl-config" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/wsl-config</a>
 * VS Code – Remote WSL: <a href="https://code.visualstudio.com/docs/remote/wsl" target="_blank" rel="noopener noreferrer">code.visualstudio.com/docs/remote/wsl</a>
-* Get started: VS Code + WSL tutorial: <a href="https://learn.microsoft.com/windows/wsl/tutorials/wsl-vscode" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/tutorials/wsl-vscode</a>
-* Docker Desktop with WSL 2 backend: <a href="https://docs.docker.com/desktop/features/wsl/" target="_blank" rel="noopener noreferrer">docs.docker.com/desktop/features/wsl/</a>
-* Run Linux GUI apps (WSLg): <a href="https://learn.microsoft.com/windows/wsl/tutorials/gui-apps" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/tutorials/gui-apps</a>
+* VS Code + WSL tutorial: <a href="https://learn.microsoft.com/windows/wsl/tutorials/wsl-vscode" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/tutorials/wsl-vscode</a>
+* Docker Desktop WSL2 backend: <a href="https://docs.docker.com/desktop/features/wsl/" target="_blank" rel="noopener noreferrer">docs.docker.com/desktop/features/wsl/</a>
+* WSLg (Linux GUI apps): <a href="https://learn.microsoft.com/windows/wsl/tutorials/gui-apps" target="_blank" rel="noopener noreferrer">learn.microsoft.com/windows/wsl/tutorials/gui-apps</a>
 * GitHub – microsoft/WSL: <a href="https://github.com/microsoft/WSL" target="_blank" rel="noopener noreferrer">github.com/microsoft/WSL</a>
+
+**Further references (videos):**
+
+* <a href="https://www.youtube.com/watch?v=LktFP0Dpl-c" target="_blank" rel="noopener noreferrer">I Coded with WSL2 for a Week</a>
+* <a href="https://www.youtube.com/watch?v=_fntjriRe48&list=PLhfrWIlLOoKNMHhB39bh3XBpoLxV3f0V9" target="_blank" rel="noopener noreferrer">WSL 2: Getting started (playlist)</a>
+* <a href="https://www.youtube.com/watch?v=9aY9b4zLpC0" target="_blank" rel="noopener noreferrer">Running Linux on Windows Experience</a>
 
 ---
 
 ## Appendix A: Optional .wslconfig & wsl.conf
 
-**Global settings** (`%UserProfile%\.wslconfig`) — control memory/CPU, etc:
+**Global** (`%UserProfile%\.wslconfig`)
 
 ```ini
 [wsl2]
-memory=6GB           # limit RAM
-processors=4         # CPU cores
+memory=6GB
+processors=4
 localhostForwarding=true
 # swap=8GB
 # swapfile=C:\\WSL\\wsl-swap.vhdx
 ```
 
-**Per-distro settings** (`/etc/wsl.conf`) — automount, metadata, systemd:
+**Per-distro** (`/etc/wsl.conf`)
 
 ```ini
 [boot]
@@ -428,9 +400,7 @@ options="metadata,umask=22,fmask=11"
 mountFsTab=true
 ```
 
-* `metadata` lets Windows-mounted files respect Linux perms (helps `chmod`, Git).
-* `umask/fmask` can make default file perms saner on `/mnt/c`.
-* Apply with:
+Apply:
 
 ```powershell
 wsl --shutdown
@@ -438,39 +408,7 @@ wsl --shutdown
 
 ---
 
-## Appendix B: Video Gallery
-
-<div class="video-grid">
-  <div class="embed-16x9">
-    <iframe src="https://www.youtube.com/embed/vxTW22y8zV8" title="Linux on Windows......Windows on Linux" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="embed-16x9">
-    <iframe src="https://www.youtube.com/embed/EAROgwvOV4s" title="What Is The Windows Subsystem for Linux (WSL) For?!" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="embed-16x9">
-    <iframe src="https://www.youtube.com/embed/_fntjriRe48" title="WSL 2: Getting started" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="embed-16x9">
-    <iframe src="https://www.youtube.com/embed/LktFP0Dpl-c" title="I Coded with WSL2 for a Week" allowfullscreen loading="lazy"></iframe>
-  </div>
-  <div class="embed-16x9">
-    <iframe src="https://www.youtube.com/embed/9aY9b4zLpC0" title="Running Linux on Windows Experience" allowfullscreen loading="lazy"></iframe>
-  </div>
-</div>
-
-**Direct links (open in new tab):**
-
-* <a href="https://www.youtube.com/watch?v=vxTW22y8zV8" target="_blank" rel="noopener noreferrer">Linux on Windows......Windows on Linux</a>
-* <a href="https://www.youtube.com/watch?v=EAROgwvOV4s" target="_blank" rel="noopener noreferrer">What Is The Windows Subsystem for Linux (WSL) For?!</a>
-* <a href="https://www.youtube.com/watch?v=_fntjriRe48&list=PLhfrWIlLOoKNMHhB39bh3XBpoLxV3f0V9" target="_blank" rel="noopener noreferrer">WSL 2: Getting started (playlist)</a>
-* <a href="https://www.youtube.com/watch?v=LktFP0Dpl-c" target="_blank" rel="noopener noreferrer">I Coded with WSL2 for a Week</a>
-* <a href="https://www.youtube.com/watch?v=9aY9b4zLpC0" target="_blank" rel="noopener noreferrer">Running Linux on Windows Experience</a>
-
----
-
 ## Appendix C: Windows Terminal Profiles (ready-to-paste)
-
-Open Windows Terminal → Settings → **Open JSON** and add a profile for Ubuntu (adjust distro name if needed):
 
 ```json
 {
@@ -489,40 +427,30 @@ Open Windows Terminal → Settings → **Open JSON** and add a profile for Ubunt
         "hidden": false
       }
     ]
-  }
+  },
+  "defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}"
 }
-```
-
-Set it as default by adding near the root of JSON:
-
-```json
-"defaultProfile": "{2c4de342-38b7-51cf-b940-2309a097f518}"
 ```
 
 ---
 
 ## Appendix D: Docker + GPU (CUDA/WSLg) on WSL
 
-* **NVIDIA GPUs (typical path):**
+<div class="callout ok">
+NVIDIA path: install latest Windows driver (WSL support), enable Docker Desktop WSL engine + per-distro integration, then verify below.
+</div>
 
-  1. Install the latest **NVIDIA Windows driver** with WSL support.
-  2. Enable Docker Desktop **WSL 2 based engine** and per-distro integration.
-  3. Inside WSL, verify:
+```bash
+nvidia-smi || echo "Driver not detected in WSL"
+docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
+```
 
-     ```bash
-     nvidia-smi || echo "Driver not detected in WSL"
-     docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
-     ```
-* **AMD/Intel GPUs:** consult vendor docs for WSL support (ROCm / oneAPI).
-* **GUI apps with WSLg:** works out of the box on Windows 11 for many apps (see Resources).
-
-> Drivers/toolkits evolve. Always cross-check vendor docs before pinning exact versions.
+AMD/Intel: check vendor docs (ROCm / oneAPI).
+GUI with WSLg on Windows 11 works for many apps.
 
 ---
 
 ## Appendix E: VS Code Dev Containers (Node + Python example)
-
-Run a consistent dev env (no host pollution) with **Dev Containers**:
 
 **.devcontainer/devcontainer.json**
 
@@ -548,18 +476,16 @@ Run a consistent dev env (no host pollution) with **Dev Containers**:
 }
 ```
 
-From VS Code (WSL session) → Command Palette → **Dev Containers: Reopen in Container**.
+Use VS Code → **Dev Containers: Reopen in Container**.
 
 ---
 
 ## Appendix F: Automated WSL Backups (PowerShell + Task Scheduler)
 
-**backup-wsl.ps1** — export all distros daily with date-stamped TARs:
+**backup-wsl.ps1**
 
 ```powershell
-param(
-  [string]$BackupDir = "C:\backups\wsl"
-)
+param([string]$BackupDir = "C:\backups\wsl")
 
 $ts = Get-Date -Format "yyyy-MM-dd"
 New-Item -ItemType Directory -Force -Path $BackupDir | Out-Null
@@ -573,18 +499,18 @@ foreach ($d in $distros) {
   & wsl.exe --export "$d" "$out"
 }
 
-# Optional: delete backups older than 14 days
 Get-ChildItem $BackupDir -File -Filter *.tar |
   Where-Object { $_.CreationTime -lt (Get-Date).AddDays(-14) } |
   Remove-Item -Force
 ```
 
-* Create a **Task Scheduler** task:
+Task Scheduler → trigger daily, action:
 
-  * Trigger: Daily 03:00
-  * Action: `powershell.exe -ExecutionPolicy Bypass -File "C:\scripts\backup-wsl.ps1"`
+```
+powershell.exe -ExecutionPolicy Bypass -File "C:\scripts\backup-wsl.ps1"
+```
 
-Restore later with:
+Restore:
 
 ```powershell
 wsl --import <NewName> C:\WSL\<NewName> C:\backups\wsl\<DATE>-<Distro>.tar --version 2
@@ -594,25 +520,21 @@ wsl --import <NewName> C:\WSL\<NewName> C:\backups\wsl\<DATE>-<Distro>.tar --ver
 
 ## Appendix G: Performance & QoL Tweaks
 
-* **.wslconfig** caps memory/CPUs/swap (see Appendix A).
-* **Keep repos on Linux FS** (`~`) for fast I/O.
-* **Mount metadata** on `/mnt/c` if you need proper UNIX perms (Appendix A).
-* **Disable unnecessary real-time AV scanning** on large `ext4.vhdx` **only if you trust your code**. Add targeted exclusions instead of global ones.
-* **Time drift after sleep?** Use:
+* Limit RAM/CPU/swap via `.wslconfig`.
+* Keep repos on Linux FS.
+* Mount metadata on `/mnt/c` if you need UNIX perms.
+* Exclude only trusted paths from AV scans (selective).
+* Fix time drift after sleep:
 
   ```powershell
   wsl --shutdown
   ```
 
-  on resume if services misbehave.
-* **Dotfiles**: keep a Git repo for shell configs (`.bashrc`, `.gitconfig`) and bootstrap new machines quickly.
-
 ---
 
 ## Appendix H: Troubleshooting Deep Dive
 
-**1) Name resolution flips after network change**
-If `resolv.conf` is overwritten, re-enable generation and test:
+**Name resolution after network change**
 
 ```ini
 # /etc/wsl.conf
@@ -620,68 +542,42 @@ If `resolv.conf` is overwritten, re-enable generation and test:
 generateResolvConf = true
 ```
 
-Then:
-
 ```powershell
 wsl --shutdown
 ```
 
-If corporate DNS is flaky, switch to a known resolver temporarily (see FAQ).
-
-**2) “Permission denied” on `/mnt/c`**
-Mount with metadata (Appendix A). For Git repos on `/mnt/c`, add:
-
-```bash
-git config core.filemode false
-```
-
-as a last resort.
-
-**3) Port binding conflicts**
-On Windows, find the process:
+**Permission denied on `/mnt/c`** → mount with `metadata` (Appendix A).
+**Port conflicts** → on Windows:
 
 ```powershell
 Get-Process -Id (Get-NetTCPConnection -LocalPort 8000).OwningProcess
 ```
 
-Or inside WSL:
+In WSL:
 
 ```bash
 ss -tulpn | grep 8000
 ```
 
-**4) Distro stuck on boot**
-
-* `wsl --shutdown`
-* Kill stray `vmmem` only if truly hung (use Task Manager carefully).
-* `wsl --unregister <Name>` (destructive) as last resort, then restore from backup.
+**Distro stuck at boot** → `wsl --shutdown`, kill hung `vmmem` (carefully), last resort `wsl --unregister <Name>` and restore from backup.
 
 ---
 
 ## Appendix I: Kali on WSL — Quick Kit
 
-A compact starter to get **Kali Linux** productive inside WSL. Great for CLI tooling, web app testing, and learning workflows. For Wi-Fi monitor mode/USB passthrough and low-level kernel modules, use a full VM.
+Install:
 
-### 1) Install Kali
+```powershell
+wsl --install -d Kali-Linux
+```
 
-* Microsoft Store: search **Kali Linux** → **Get** → **Launch**
-* Or PowerShell (Admin):
-
-  ```powershell
-  wsl --install -d Kali-Linux
-  ```
-
-First boot:
+Then:
 
 ```bash
 sudo apt update && sudo apt -y full-upgrade
 ```
 
-### 2) Enable systemd (recommended on recent WSL)
-
-```bash
-sudo nano /etc/wsl.conf
-```
+Enable systemd:
 
 ```ini
 [boot]
@@ -694,45 +590,26 @@ Apply:
 wsl --shutdown
 ```
 
-### 3) Choose metapackages
-
-* Minimal headless:
-
-  ```bash
-  sudo apt install -y kali-linux-headless
-  ```
-* Typical desktop toolset:
-
-  ```bash
-  sudo apt install -y kali-linux-default
-  ```
-* Everything (large download):
-
-  ```bash
-  sudo apt install -y kali-linux-large
-  ```
-
-### 4) Shell & fonts
-
-* Zsh (+ common helpers):
-
-  ```bash
-  sudo apt install -y zsh zsh-autosuggestions zsh-syntax-highlighting
-  chsh -s "$(which zsh)"
-  ```
-* On Windows, install a dev font (e.g., **Cascadia Code** or **Fira Code**) and set it in **Windows Terminal** for the Kali profile.
-
-### 5) VS Code Server (Remote - WSL)
-
-From Kali terminal:
+Metapackages:
 
 ```bash
-code .
+sudo apt install -y kali-linux-headless
+# or
+sudo apt install -y kali-linux-default
+# or
+sudo apt install -y kali-linux-large
 ```
 
-VS Code will auto-install its server into the Kali distro. Suggested extensions: **Remote - WSL**, **Python**, **ESLint**, **Prettier**, **GitHub PRs**.
+Shell & fonts:
 
-### 6) Common tools (pick what you need)
+```bash
+sudo apt install -y zsh zsh-autosuggestions zsh-syntax-highlighting
+chsh -s "$(which zsh)"
+```
+
+Set dev font (Cascadia Code / Fira Code) in Windows Terminal.
+
+Tools (pick what you need):
 
 ```bash
 sudo apt install -y nmap nikto sqlmap gobuster metasploit-framework \
@@ -740,92 +617,41 @@ sudo apt install -y nmap nikto sqlmap gobuster metasploit-framework \
   wapiti ffuf burpsuite
 ```
 
-* Add your user to the `wireshark` group if you need packet capture without sudo:
+Add capture perms:
 
-  ```bash
-  sudo usermod -aG wireshark "$USER"
-  ```
+```bash
+sudo usermod -aG wireshark "$USER"
+```
 
-  Then restart the session.
+GUI options: WSLg (Win11) or KeX:
 
-### 7) Optional GUI paths
+```bash
+sudo apt install -y kali-win-kex
+kex --win -s
+```
 
-* **WSLg (Windows 11)**: many Linux GUI apps just work (e.g., `burpsuite`, `wireshark`).
-* **KeX** (RDP-like desktop session for Kali on WSL):
-
-  ```bash
-  sudo apt install -y kali-win-kex
-  kex --win -s
-  ```
-
-  Note: KeX is optional when WSLg is available.
-
-### 8) Interop & defaults
-
-* Set default user for the distro from Windows:
-
-  ```powershell
-  kali config --default-user <your_user>
-  ```
-* Open Explorer from Kali:
-
-  ```bash
-  explorer.exe .
-  ```
-
-**Good to know:** Wireless injection/monitor mode, USB gadget work, and raw device access are limited under WSL. Use a VM for those exercises → [Build a Home Cybersecurity Lab](/posts/home-cyber-lab/).
+Known limits under WSL: monitor mode/USB/raw devices → use a VM <a href="/posts/home-cyber-lab/" target="_blank" rel="noopener noreferrer">Build a Home Cybersecurity Lab</a>.
 
 ---
 
 ## Appendix J: GPU Quick Start Box (NVIDIA/AMD/Intel)
 
-A no-nonsense checklist to validate GPU in WSL for compute and containers.
+NVIDIA:
 
-### A) NVIDIA (most common)
+```bash
+nvidia-smi || echo "Driver not detected in WSL"
+docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
+```
 
-1. **Install latest NVIDIA Windows driver** (with WSL support).
-2. In **Docker Desktop**: enable **WSL 2 based engine** + per-distro integration.
-3. Inside your WSL distro:
-
-   ```bash
-   # Check driver visibility
-   nvidia-smi || echo "Driver not detected in WSL"
-
-   # (Optional) CUDA toolkit inside WSL for nvcc:
-   # sudo apt install -y nvidia-cuda-toolkit
-
-   # Sanity test with container:
-   docker run --rm --gpus all nvidia/cuda:12.3.1-base-ubuntu22.04 nvidia-smi
-   ```
-4. Popular frameworks (examples):
-
-   ```bash
-   # PyTorch (CUDA-enabled build will be auto-picked in many cases)
-   python -m pip install torch torchvision --index-url https://download.pytorch.org/whl/cu121
-
-   # Or TensorFlow (match to your CUDA stack per upstream guidance)
-   python -m pip install tensorflow
-   ```
-
-### B) AMD / Intel
-
-* Ensure you have **recent Windows drivers** (ROCm for AMD, oneAPI for Intel) and follow vendor-specific WSL notes.
-* Validate via vendor sample containers or CLI tools when available.
-
-### C) GUI + GPU
-
-* With **WSLg** on Windows 11, many OpenGL/GUI apps run out of the box. For heavy workloads, prefer containerized toolkits and check vendor docs for exact versions.
-
-> Always cross-check framework versions with the driver/toolkit matrix before pinning them in production projects.
+AMD/Intel: follow ROCm / oneAPI vendor notes.
+WSLg handles many GUI/OpenGL apps on Windows 11.
 
 ---
 
 *Continue your track:*
 
-* [Mastering Linux for Cybersecurity](/posts/mastering-linux-for-cybersecurity/)
-* [Build a Home Cybersecurity Lab](/posts/home-cyber-lab/)
-
-```
+* <a href="/posts/mastering-linux-for-cybersecurity/" target="_blank" rel="noopener noreferrer">Mastering Linux for Cybersecurity</a>
+* <a href="/posts/home-cyber-lab/" target="_blank" rel="noopener noreferrer">Build a Home Cybersecurity Lab</a>
 
 ---
 
