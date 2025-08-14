@@ -47,7 +47,6 @@ pre.topology {
   border-top: 1px dashed rgba(255,255,255,.12);
 }
 
-/* Helper */
 .back-to-top { display:inline-block; margin-top:0.75rem; font-size:0.95rem }
 kbd { background:#eee; border:1px solid #ccc; border-bottom:2px solid #bbb; padding:0 .35em; border-radius:3px; }
 .table-scroll { overflow-x:auto; }
@@ -55,7 +54,7 @@ kbd { background:#eee; border:1px solid #ccc; border-bottom:2px solid #bbb; padd
 
 # Build a Home Cybersecurity Lab with VirtualBox/VMware
 
-Halloo, it’s me SuiiKawaii again — this time we’re building your **home cybersecurity lab**. A virtual lab lets you learn hacking **legally and safely**: you practice on machines you own, isolated from your real network and data. In this guide, you’ll set up an **attacker VM** (Kali or Parrot), add a few **intentionally vulnerable targets**, wire them with the right **virtual network modes**, and learn a clean **snapshot workflow** so you can break things and roll back in seconds.
+Halloo, another time another post it’s me lovely SuiiKawaii again — this time we’re building your **home cybersecurity lab**. A virtual lab lets you learn hacking **legally and safely**: you practice on machines you own, isolated from your real network and data. In this guide, you’ll set up an **attacker VM** (Kali or Parrot), add a few **intentionally vulnerable targets**, wire them with the right **virtual network modes**, and learn a clean **snapshot workflow** so you can break things and roll back in seconds.
 
 ![Suiw]({{ '/assets/images/homelab/Suiw.gif' | relative_url }})
 
@@ -68,6 +67,7 @@ Halloo, it’s me SuiiKawaii again — this time we’re building your **home cy
 - [2) Legal & ethical rules](#2-legal--ethical-rules)
 - [3) What we’ll build (topologies)](#3-what-well-build-topologies)
 - [4) Requirements & downloads](#4-requirements--downloads)
+  - [4.1) Install the hypervisor (video walkthroughs)](#41-install-the-hypervisor-video-walkthroughs)
 - [5) VirtualBox vs VMware (quick compare)](#5-virtualbox-vs-vmware-quick-compare)
 - [6) Network modes explained](#6-network-modes-explained)
 - [7) Create your attacker VM (Kali/Parrot)](#7-create-your-attacker-vm-kaliparrot)
@@ -117,6 +117,10 @@ Halloo, it’s me SuiiKawaii again — this time we’re building your **home cy
 - Keep your lab **isolated** (Host-only networks for targets).  
 - If you demo or publish writeups, **scrub sensitive material** (keys, tokens, real data).
 
+**Further references:**  
+- <a href="https://owasp.org/www-project-web-security-testing-guide/" target="_blank" rel="noopener noreferrer">OWASP Web Security Testing Guide</a>  
+- <a href="https://en.wikipedia.org/wiki/Responsible_disclosure" target="_blank" rel="noopener noreferrer">Responsible disclosure (overview)</a>
+
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
@@ -140,6 +144,10 @@ Attacker                              ── NAT ── Internet (for updates/to
 
 > Rule of thumb: **Host-only** for lateral play; give the **attacker** a **second NIC (NAT)** for updates. Targets normally **don’t** need Internet.
 
+**Further references:**  
+- <a href="https://www.virtualbox.org/manual/ch06.html" target="_blank" rel="noopener noreferrer">VirtualBox Manual — Networking</a>  
+- <a href="https://docs.vmware.com/en/VMware-Workstation-Pro/index.html" target="_blank" rel="noopener noreferrer">VMware Workstation Pro — Docs</a>
+
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
@@ -159,7 +167,7 @@ Attacker                              ── NAT ── Internet (for updates/to
 - **Target images (choose 1–2 to start):**  
   - <a href="https://information.rapid7.com/metasploitable-download.html" target="_blank" rel="noopener noreferrer">Metasploitable2 (Rapid7)</a> — vulnerable services, perfect for enumeration  
   - <a href="https://owasp.org/www-project-juice-shop/" target="_blank" rel="noopener noreferrer">OWASP Juice Shop</a> — modern web app with intentional vulns  
-  - <a href="https://dvwa.co.uk/" target="_blank" rel="noopener noreferrer">Damn Vulnerable Web Application (DVWA)</a> — classic web vuln exercises  
+  - <a href="https://github.com/digininja/DVWA" target="_blank" rel="noopener noreferrer">Damn Vulnerable Web Application (DVWA)</a> — classic web vuln exercises  
   - <a href="https://www.vulnhub.com/" target="_blank" rel="noopener noreferrer">VulnHub</a> — huge library of downloadable vulnerable VMs
 
 **Host machine suggested minimum:** 4 cores, 16 GB RAM, SSD, and virtualization enabled in BIOS/UEFI (Intel VT-x / AMD-V).
@@ -170,7 +178,22 @@ Attacker                              ── NAT ── Internet (for updates/to
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
         allowfullscreen loading="lazy"></iframe>
 
+### 4.1) Install the hypervisor (video walkthroughs)
+
+<!-- VMware Workstation Pro (free license steps) -->
+<iframe src="https://www.youtube.com/embed/kTO810vbF_E"
+        title="Download and Install VMware Workstation Pro for FREE"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+        allowfullscreen loading="lazy"></iframe>
+
+<!-- VirtualBox on Windows 11 (Updated 2025) -->
+<iframe src="https://www.youtube.com/embed/homRENM8KVY"
+        title="How to Install Virtual Box on Windows 11 (Updated 2025)"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+        allowfullscreen loading="lazy"></iframe>
+
 **Further references:**  
+- <a href="https://www.youtube.com/watch?v=nvdnQX9UkMY&t=119s" target="_blank" rel="noopener noreferrer">How to use VirtualBox — Tutorial for Beginners</a>  
 - <a href="https://virtualcyberlabs.com/how-to-build-a-home-cybersecurity-lab/" target="_blank" rel="noopener noreferrer">How to Build a Home Cybersecurity Lab (Virtual Cyber Labs)</a>  
 - <a href="https://medium.com/@jibingeorge.mg/cybersecurity-research-lab-setup-5beb54d8dd59" target="_blank" rel="noopener noreferrer">Cybersecurity Research Lab Setup (Medium)</a>  
 - <a href="https://www.offsec.com/blog/cybersecurity-homelab/" target="_blank" rel="noopener noreferrer">OffSec: Cybersecurity Homelab (Blog)</a>  
@@ -184,22 +207,61 @@ Attacker                              ── NAT ── Internet (for updates/to
 ## 5) VirtualBox vs VMware (quick compare)
 
 <div class="md-table table-scroll">
-
-| Feature | VirtualBox | VMware Workstation/Fusion |
-|---|---|---|
-| Cost | Free | Player (free personal), Pro (paid) |
-| Ease | Beginner-friendly | Polished UI, strong device support |
-| Snapshots | Yes | Yes (Player lacks snapshot tree mgmt) |
-| Shared folders | Yes | Yes |
-| 3D/Graphics | Basic | Often better integration |
-| Cross-platform | Win/macOS/Linux | Win/Linux (Workstation), macOS (Fusion) |
-
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>VirtualBox</th>
+      <th>VMware Workstation/Fusion</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Cost</td>
+      <td>Free</td>
+      <td>Player (free personal), Pro (paid)</td>
+    </tr>
+    <tr>
+      <td>Ease</td>
+      <td>Beginner-friendly</td>
+      <td>Polished UI, strong device support</td>
+    </tr>
+    <tr>
+      <td>Snapshots</td>
+      <td>Yes</td>
+      <td>Yes (Player lacks snapshot tree mgmt)</td>
+    </tr>
+    <tr>
+      <td>Shared folders</td>
+      <td>Yes</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>3D/Graphics</td>
+      <td>Basic</td>
+      <td>Often better integration</td>
+    </tr>
+    <tr>
+      <td>Cross-platform</td>
+      <td>Win/macOS/Linux</td>
+      <td>Win/Linux (Workstation), macOS (Fusion)</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+
+<!-- Main compare video -->
+<iframe src="https://www.youtube.com/embed/jgwwf8uRgCg"
+        title="Both Free! Which is better? VMware Workstation vs Oracle VirtualBox"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;"
+        allowfullscreen loading="lazy"></iframe>
 
 **Pick one** and stick with it; the concepts here apply to both.
 
 **Further references:**  
-- <a href="https://www.virtualbox.org/manual/ch06.html" target="_blank" rel="noopener noreferrer">VirtualBox User Manual — Networking</a>
+- <a href="https://www.youtube.com/watch?v=2HTQT8bQ7P4" target="_blank" rel="noopener noreferrer">VMWare vs VirtualBox | Which is better in 2025?</a>  
+- <a href="https://www.virtualbox.org/manual/ch06.html" target="_blank" rel="noopener noreferrer">VirtualBox User Manual — Networking</a>  
+- <a href="https://docs.vmware.com/en/VMware-Workstation-Pro/index.html" target="_blank" rel="noopener noreferrer">VMware Workstation Pro — Documentation</a>
 
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
@@ -217,7 +279,9 @@ Attacker                              ── NAT ── Internet (for updates/to
 - Each target VM: **Adapter 1 = Host-only** (same network as the attacker’s Host-only)
 
 **Further references:**  
-- <a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer">Wireshark</a> (network inspection within your lab)
+- <a href="https://www.virtualbox.org/manual/ch06.html" target="_blank" rel="noopener noreferrer">VirtualBox Manual — Networking</a>  
+- <a href="https://docs.vmware.com/en/VMware-Workstation-Pro/index.html" target="_blank" rel="noopener noreferrer">VMware Workstation — Networking Overview</a>  
+- <a href="https://www.wireshark.org/" target="_blank" rel="noopener noreferrer">Wireshark</a> (inspect your lab traffic)
 
 <p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
@@ -386,6 +450,12 @@ Pick one to start:
 **Optional:** prefer containers for some web apps:
 
 * <a href="https://docs.docker.com/get-started/" target="_blank" rel="noopener noreferrer">Docker — Get Started</a> (run Juice Shop/DVWA as containers in an **isolated** user-defined bridge network)
+
+**Further references:**
+
+* <a href="https://information.rapid7.com/metasploitable-download.html" target="_blank" rel="noopener noreferrer">Metasploitable2 (official)</a>
+* <a href="https://owasp.org/www-project-juice-shop/" target="_blank" rel="noopener noreferrer">OWASP Juice Shop (official)</a>
+* <a href="https://github.com/digininja/DVWA" target="_blank" rel="noopener noreferrer">DVWA (GitHub)</a>
 
 ### 8.1) Hosted practice labs (no VM required)
 
