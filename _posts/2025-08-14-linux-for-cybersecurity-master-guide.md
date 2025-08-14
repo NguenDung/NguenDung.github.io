@@ -1,371 +1,391 @@
 ---
 layout: post
-title: "Linux for Cybersecurity — From Zero to Daily Driver (Deep Guide)"
-permalink: /posts/linux-for-cybersecurity-guide/
+title: "Mastering Linux for Cybersecurity: From Beginner to Pro"
+permalink: /posts/mastering-linux-for-cybersecurity/
 tags: [linux, cybersecurity, guide, shell, bash, beginner, ricing]
-description: "What Linux is, why it’s the best base for cybersecurity, how to pick your first distro, the skills to learn (CLI → Bash scripting), and how to rice your system with taste."
+description: "A comprehensive beginner-to-pro guide on learning, using, and mastering Linux for cybersecurity, from choosing a distro to automation and customization."
 ---
 
-# Linux for Cybersecurity — From Zero to Daily Driver (Deep Guide)
+# Mastering Linux for Cybersecurity: From Beginner to Pro
+Halloo, it’s me SuiiKawaii again — today we’re going to talk about Linux! Yes, that penguin OS you’re thinking of. To be honest, Linux is the backbone of modern cybersecurity and ethical hacking. Whether you are a beginner aspiring to work in IT security or an enthusiast exploring ethical hacking, mastering Linux is an essential step in your journey. This guide is designed to take you from zero to confident — from understanding what Linux is, to using it for security tasks, scripting, customization, and beyond.
 
-This is the guide I wish I had when I started: **clear mental models**, **practical steps**, and **projects that stick**. We’ll cover what Linux *really* is, why it’s the best environment for cybersecurity, how to pick your first distro, how to grow from CLI basics into Bash scripting, and finally how to **rice** (customize) your environment so it feels fast, beautiful, and *yours*.
-
-> If you’re totally new, warm up with my Bandit series:
-> <a href="{{ '/posts/overthewire/bandit-overview/' | relative_url }}" target="_blank" rel="noopener">OverTheWire Bandit — Complete Walkthrough Index</a>.
-
----
-
-## 1) What Linux actually is (no fluff)
-
-- **Kernel vs. Distribution.** *Linux* is the **kernel** (the core that manages hardware). A **distribution** (Ubuntu, Fedora, Arch, etc.) bundles the kernel with userland (GNU tools), a package manager, defaults, and sometimes a desktop environment.
-- **GNU/Linux userspace.** Everyday commands (`ls`, `grep`, `find`, `awk`, `sed`) come from GNU coreutils and friends. Your shell is typically **bash** or **zsh**.
-- **Unix philosophy.** Do one thing well, compose with pipes. This is why Linux feels like LEGO: lots of tiny tools you can chain into powerful workflows.
-- **Servers rule.** Most of the world’s servers run Linux. If you learn it well, you can move confidently between laptops, VPS, containers, and cloud.
-
-Keep this mental model as your compass; everything else will click around it.
+![Suimaid]({{ '/assets/images/linux/suimaid.gif' | relative_url }})
 
 ---
 
-## 2) Why Linux for cybersecurity
-
-- **First-class tooling.** Offense and defense tools are written for Linux first (or only): `nmap`, `tcpdump`, `wireshark`, `hydra`, `aircrack-ng`, `iptables/nftables`, `suricata`, `zeek`, etc.
-- **Transparency.** Open source means you can **inspect**, **audit**, and **modify**. That’s invaluable for learning and for trust.
-- **Automation power.** Shell + Bash + cron + systemd timers → you can automate recon, monitoring, log parsing, backups, lab resets.
-- **Networking is native.** The OS *expects* you to be comfortable with sockets, routing, interfaces, services, and logs.
-- **Containers & clouds.** Docker, Podman, Kubernetes… all feel natural on Linux. You’ll meet them everywhere in modern security workflows.
-- **Career leverage.** From SOC to Red Team to DevSecOps, Linux fluency is a **force multiplier**.
-
----
-
-## 3) Pick your **first distro** (decision guide)
-
-> TL;DR: **Ubuntu LTS** or **Fedora Workstation** for your *daily driver*. Use **Kali/Parrot** as **tools**, not as your first everyday OS.
-
-- **If you want maximum stability & tutorials everywhere:** **Ubuntu LTS** (or Linux Mint if you like a Windows-like UI).
-- **If you want latest desktop & kernels but still polished:** **Fedora Workstation**.
-- **If your laptop is weak (≤4GB RAM):** Ubuntu flavors (Xubuntu/Lubuntu) or Debian XFCE.
-- **If you’re on Windows and can’t dual-boot yet:** **WSL2** with Ubuntu. Great for CLI learning (no GUI), then move to a VM later.
-- **Kali/Parrot:** awesome **toolsets** for pentesting, but they are **not** ideal as first daily drivers. Better: keep a stable OS, then run Kali **inside a VM** when needed, or install specific security tools via your package manager/containers.
-
-### Minimum VM spec (good enough):
-- 2 vCPU, 4–8 GB RAM, 30+ GB disk, bridged networking (or NAT) in VirtualBox/VMware.
+## Table of Contents
+- [1. What is Linux?](#1-what-is-linux)
+- [2. Why use Linux for cybersecurity](#2-why-use-linux-for-cybersecurity)
+- [3. How to choose a Linux distro (beginners)](#3-how-to-choose-a-linux-distro-beginners)
+- [4. Installing your distro](#4-installing-your-distro)
+- [5. First things to do after install](#5-first-things-to-do-after-install)
+- [6. How to learn Linux effectively](#6-how-to-learn-linux-effectively)
+- [7. Practice with CTF: OverTheWire](#7-practice-with-ctf-overthewire)
+- [8. Learn Bash for automation](#8-learn-bash-for-automation)
+- [9. Ricing: customize your Linux](#9-ricing-customize-your-linux)
+- [10. Conclusion](#10-conclusion)
 
 ---
 
-## 4) Your first 10 days on Linux (habits first)
+## 1. What is Linux?
 
-**Day 1–2 — Navigation & files**
-- `pwd`, `cd -`, `ls -la`, `tree`, `cat`, `less`, `head`, `tail -f`
-- Create `~/lab` and live there.
+At its core, **Linux** is an **open-source operating system kernel** created by Linus Torvalds in 1991. The term “Linux” often refers to complete operating system distributions (distros) built around this kernel, combined with GNU utilities, software packages, and desktop environments.
 
-**Day 3–4 — Pipes & search**
-- `grep -R`, `rg` (ripgrep), `find`, `cut`, `sort`, `uniq -c`, `wc -l`
-- Practice: “Count unique IPs in this log” with a one-liner.
+Linux stands out because:
+- It is **free and open-source** — anyone can view, modify, and distribute its source code.
+- It offers **unmatched flexibility** — from tiny embedded systems to massive server clusters.
+- It has a **vibrant community** — users and developers worldwide contribute to improvements.
 
-**Day 5 — Permissions**
-- `chmod`, `chown`, `umask`, and the `rwx` model. Understand it deeply.
+Linux is widely used in servers, supercomputers, Android devices, IoT devices, and — most importantly for us — in **cybersecurity**.
 
-**Day 6 — Processes & jobs**
-- `ps aux`, `top`/`htop`, `kill`, job control: `&`, `Ctrl+Z`, `bg`, `fg`, `disown`.
+<!-- Main embed for this section -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/rrB13utjYV4?start=30" title="Linux in 100 Seconds" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
-**Day 7 — Packages**
-- Learn your PM well (Ubuntu: `apt`, Fedora: `dnf`).
-
-**Day 8 — Services & logs (systemd)**
-- `systemctl status/start/enable`, `journalctl -u SERVICE -xe`.
-
-**Day 9 — Networking**
-- `ip a`, `ss -tulpn`, `curl -I`, `scp`, `rsync -avh`.
-
-**Day 10 — Editor**
-- Pick **nano** (fastest start) or **vim** (worth it). Stick to one for 30 days.
+**Further references:**
+- <a href="https://www.youtube.com/watch?v=eQbIxEw3AI0" target="_blank" rel="noopener">What Is Linux? — Explained for Beginners (YouTube)</a>
 
 ---
 
-## 5) The 80/20 command toolkit (copy this into your notes)
+## 2. Why use Linux for cybersecurity
 
-**Files & disk**  
-`ls -la`, `tree`, `du -sh *`, `df -h`, `lsblk`, `mkdir -p`, `cp -r`, `mv`, `rm -i`
+Cybersecurity work demands tools, customization, and control that Linux provides out of the box. Here’s why it’s the go-to choice for ethical hackers, penetration testers, and security researchers:
 
-**Search & text**  
-`grep -R`, `rg`, `find`, `sort`, `uniq -c`, `cut -d -f`, `awk`, `sed`, `tr`, `xargs`
+1. **Pre-installed security tools**  
+   Many security-focused Linux distributions (like Kali Linux or Parrot OS) come with hundreds of tools for penetration testing, digital forensics, reverse engineering, and network analysis.
 
-**Archives**  
-`tar -czf / -xzf`, `zip`/`unzip`
+2. **Command-line power**  
+   The Linux terminal gives you low-level control and fast access to system internals. Many security exploits, scans, and scripts run best from a terminal.
 
-**Permissions**  
-`chmod 644/755`, `chown user:group file`, `umask 022`
+3. **Stability and security**  
+   Linux is known for its robust permission model, strong process isolation, and fewer default services running compared to Windows — reducing the attack surface.
 
-**Processes & jobs**  
-`ps aux`, `top`/`htop`, `kill -9 PID`, `nohup`, `tmux`
+4. **Customization for task-specific environments**  
+   In cybersecurity, you may need a tailored OS setup for red teaming, malware analysis, or incident response. Linux makes that possible.
 
-**Networking**  
-`ip a`, `ping`, `ss -tulpn`, `curl`, `wget`, `scp`, `rsync`
-
-**Services & logs**  
-`systemctl`, `journalctl -u name -xe`
+5. **Ubiquity in servers**  
+   Most web servers run Linux. To secure them, you must understand their inner workings.
 
 ---
 
-## 6) From CLI to **Bash scripting**
+## 3. How to choose a Linux distro (beginners)
 
-You don’t memorize Bash; you **write tiny scripts** that remove pain. Start with this header:
+For a beginner, choosing a Linux distribution can feel overwhelming. In reality, any distro can be used for cybersecurity, but some are better for starting out.
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-IFS=$'\n\t'
+**Beginner-friendly distros:**
+- **Linux Mint** — clean interface, easy to use for Windows switchers.
+- **Ubuntu** — huge community, lots of tutorials, stable.
+- **Pop!\_OS** — great for productivity and development.
+  
+**Security-focused distros:**
+- **Kali Linux** — industry-standard penetration testing OS with hundreds of tools pre-installed.
+- **Parrot Security OS** — lightweight, privacy-focused, includes pen-testing tools.
+- **BlackArch** — Arch-based, massive repository of security tools (best for advanced users).
+
+**Recommendation:**  
+If you’re learning cybersecurity, start with **Kali Linux** or **Parrot Security OS**. These distros save you hours of setup by preloading tools you will need in CTFs, penetration tests, and labs. Once you’re comfortable, you can migrate to any distro — because at the end of the day, Linux is Linux.
+
+<!-- Main embed for this section -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ORGjwyXBSiY?start=63" title="What Your Linux Distro Says About YOU!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+
+**Further references:**
+- <a href="https://www.youtube.com/watch?v=VKNMI6cYOFk&t=16s" target="_blank" rel="noopener">Every LINUX DISTRO Explained in 4 minutes (YouTube)</a>  
+- <a href="https://www.youtube.com/watch?v=jwJ6e5x0RLg" target="_blank" rel="noopener">The Best Hacking OS (Tier List) (YouTube)</a>
+
+---
+
+## 4. Installing your distro
+
+### a) Install as a virtual machine
+- **Tools**: VirtualBox, VMware Workstation Player.
+- **Pros**: Safe, runs alongside your main OS, easy to reset.
+- **Cons**: Limited performance for heavy tasks.
+
+### b) Dual boot
+- Partition your hard drive to run Linux and Windows side by side.
+- **Pros**: Full hardware performance.
+- **Cons**: Risk of data loss if not done carefully.
+
+### c) Live USB
+- Boot Linux from a USB stick without installing.
+- **Pros**: Portable.
+- **Cons**: Changes may not persist unless configured.
+
+If you’re new and worried about breaking things, start in a VM and take a snapshot before major changes.
+
+<!-- Main embed for this section -->
+<iframe width="560" height="315" src="https://www.youtube.com/embed/sAMnXte56yY" title="How To Install Kali Linux 2024 in VirtualBox | Kali Linux 2024.1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+
+**Further references:**
+- <a href="https://www.youtube.com/watch?v=2vTVA-Nq0bw" target="_blank" rel="noopener">How to Dual Boot Kali Linux and Windows (in 10 minutes)</a>  
+- <a href="https://www.youtube.com/watch?v=FYYU9qZ0Pps" target="_blank" rel="noopener">Kali Linux USB Live Boot with Persistence (in 5 minutes)</a>  
+- <a href="https://www.youtube.com/watch?v=BlLUbBjOYb8" target="_blank" rel="noopener">ParrotOS Latest — Download and Installation — Step by Step</a>  
+- <a href="https://www.youtube.com/watch?v=uIPrd5rcU58" target="_blank" rel="noopener">Parrot OS Security Dual Boot with Windows 10/11 — Step by Step</a>  
+- <a href="https://www.youtube.com/watch?v=zHDzfjuihi0" target="_blank" rel="noopener">Step-by-Step Guide: How to Install BlackArch Linux for Ethical Hackers</a>
+
+---
+
+## 5. First things to do after install
+
+After installing Linux, there are essential configurations and habits to set up:
+
+1. **Update your system**  
+   ```bash
+   sudo apt update && sudo apt upgrade -y
 ````
 
-* `-e` stop on error, `-u` undefined variable is error, `-o pipefail` fail if any pipe stage fails.
-* Prefer **functions**, **long options**, and **`getopts`** for flags.
+2. **Learn basic navigation**
+   Commands like `ls`, `cd`, `pwd`, `cat`, `nano` are your building blocks.
 
-### Script #1 — Daily backup (minimal but robust)
+3. **Familiarize yourself with package management**
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-dest="${1:-$HOME/backups}"
-mkdir -p "$dest"
-ts=$(date +%F_%H%M%S)
-tar -czf "$dest/lab_${ts}.tgz" "$HOME/lab"
-echo "Backup complete → $dest/lab_${ts}.tgz"
-```
+   * Debian/Ubuntu-based: `apt install package-name`
+   * Arch-based: `pacman -S package-name`
 
-**Cron it (8am daily):**
+4. **Create a safe workspace**
+   Organize directories for scripts, projects, and notes.
 
-```bash
-crontab -e
-# add:
-0 8 * * * /home/you/bin/backup_lab.sh >>/home/you/backup.log 2>&1
-```
+5. **Understand user permissions**
+   Learn `chmod`, `chown`, and `sudo`.
 
-### Script #2 — Quick alive-host scan (safe & useful)
+<!-- Main embed for this section -->
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-subnet="${1:-192.168.1}"
-printf "Scanning %s.0/24...\n" "$subnet"
-for i in $(seq 1 254); do
-  ip="${subnet}.${i}"
-  (ping -c1 -W1 "$ip" >/dev/null 2>&1 && echo "UP  $ip") &
-done
-wait
-```
+<iframe width="560" height="315" src="https://www.youtube.com/embed/Vos7DCTqvSM" title="Pro Tip: What to Do After Installing Kali Linux." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
-### Script #3 — Port sweep with `nc` (for your own lab)
+**Further references:**
 
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-host="${1:-127.0.0.1}"
-for p in 22 80 443 3128 3306 6379 8000 8080; do
-  (echo >/dev/tcp/$host/$p) >/dev/null 2>&1 && echo "OPEN $p" || true
-done
-```
-
-> Practice tip: convert your favorite one-liners into scripts, give them friendly names, and put them under `~/bin` (on PATH).
+* <a href="https://www.youtube.com/watch?v=odgD_RdJjCU" target="_blank" rel="noopener">10 Things You MUST DO After Installing Arch Linux (2023)</a>
 
 ---
 
-## 7) Learning roadmap (30 days → 90 days)
+## 6. How to learn Linux effectively
 
-**Days 1–30 (Foundation)**
+Rather than memorizing hundreds of commands, focus on understanding **how Linux works**. Treat the terminal like a language: small daily reps beat weekend marathons.
 
-* Files, processes, permissions, packages, services/logs, networking basics.
-* Project: **home lab** in a VM; host a simple web site with `nginx`, enable logs, rotate them.
+**Tips for learning:**
 
-**Days 31–60 (Scripting & services)**
+* Use **`man`** pages: `man ls` explains the `ls` command.
+* Practice daily — replace GUI actions with terminal commands.
+* Break and fix things — troubleshooting is the best teacher.
 
-* Bash variables, arrays, functions, `getopts`, exit codes, traps.
-* Project: write a **log watcher** that alerts on certain patterns.
-* Learn `tmux` (panes, sessions) and an editor deeper (vim movements + search/replace).
+<!-- Main embed for this section -->
 
-**Days 61–90 (Security workflows)**
+<iframe width="560" height="315" src="https://www.youtube.com/embed/zIdv2NDRExI?start=95" title="The Best Way to Learn Linux" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
-* Traffic captures with `tcpdump`/Wireshark; parse with `tshark` + pipes.
-* Build a small SOC toy: `journalctl` + grep pipelines; `fail2ban`-style logic in Bash.
-* Containers: package a toolchain in Docker; learn Dockerfiles & volumes.
+**Further references:**
 
----
-
-## 8) Build your **practice lab** (safe targets only)
-
-* **OTW Bandit** → Krypton/Narnia (puzzles with purpose).
-* **Deliberately vulnerable apps** in **containers/VMs** (for learning, not on production networks):
-
-  * OWASP Juice Shop, DVWA, Metasploitable (VM), WebGoat.
-* **Network playground:** one Linux router VM + two host VMs to practice `iptables/nftables`, routing, and logging.
-
-> Golden rule: practice **ethically** and **legally**. Only target systems you own or have explicit permission to test.
+* <a href="https://linuxjourney.com/" target="_blank" rel="noopener">Linux Journey — Free Linux Learning Path</a>
+* <a href="https://www.youtube.com/watch?v=lvSoxOMg5_c&list=PLT98CRl2KxKHaKA9-4_I38sLzK134p4GJ" target="_blank" rel="noopener">Linux Commands for Beginners (YouTube Playlist)</a>
+* <a href="https://www.youtube.com/watch?v=VbEx7B_PTOE&list=PLIhvC56v63IJIujb5cyE13oLuyORZpdkL" target="_blank" rel="noopener">Linux for Hackers — NetworkChuck (YouTube Playlist)</a>
 
 ---
 
-## 9) Ricing: make it *yours* (looks + speed)
+## 7. Practice with CTF: OverTheWire
 
-Ricing is not just aesthetics; it’s **discoverability**, **speed**, and **joy**. Keep it tasteful and minimal at first.
+Learning Linux commands in isolation is fine, but using them in challenges makes skills stick. One of the best free resources for beginners is **OverTheWire**.
 
-### Terminal & shell
+**OverTheWire: Bandit**
 
-* **Fonts:** install a Nerd Font (e.g., FiraCode Nerd Font).
-* **Prompt:** try **starship** (fast, cross-shell).
+* A gamified Linux learning experience.
+* Starts with logging in via SSH and progresses to more advanced file searching, decoding, and scripting.
+* Perfect for building the hacker mindset.
 
-Install starship + minimal config:
+📌 You can check my complete **OverTheWire Bandit walkthrough index** [here](/posts/overthewire/bandit-overview/).
+
+---
+
+## 8. Learn Bash for automation
+
+Once you’re comfortable with commands, the next step is to automate repetitive tasks. Start with tasks you repeat weekly; if you do it twice, script it.
+
+**Why Bash?**
+
+* Native to Linux.
+* Can chain commands into powerful scripts.
+* Useful for recon automation, log analysis, and data parsing.
+
+Example:
 
 ```bash
-# Ubuntu/Fedora (example):
-curl -fsSL https://starship.rs/install.sh | bash -s -- -y
-echo 'eval "$(starship init bash)"' >> ~/.bashrc
-mkdir -p ~/.config
-cat > ~/.config/starship.toml <<'EOF'
-add_newline = true
-format = "$all"
-scan_timeout = 10
-[username] show_always = true
-[hostname] ssh_only = false
-[directory] truncation_length = 3
-[cmd_duration] min_time = 200
-[character] success_symbol = "[➜] " error_symbol = "[✗] "
-EOF
-```
-
-### Shell QoL (drop into `~/.bashrc` or `~/.zshrc`)
-
-```bash
-# Safer defaults
-alias rm='rm -i'; alias cp='cp -i'; alias mv='mv -i'
-# Quality-of-life
-alias ll='ls -alF'; alias ..='cd ..'; alias ...='cd ../..'
-alias duh='du -sh *'; alias ports='ss -tulpn | less'
-# History search on Up/Down
-bind '"\e[A": history-search-backward'
-bind '"\e[B": history-search-forward'
-```
-
-### Tmux (session management)
-
-`~/.tmux.conf` starter:
-
-```tmux
-set -g mouse on
-set -g history-limit 100000
-setw -g mode-keys vi
-bind r source-file ~/.tmux.conf \; display "Reloaded!"
-bind | split-window -h
-bind - split-window -v
-bind h select-pane -L
-bind j select-pane -D
-bind k select-pane -U
-bind l select-pane -R
-```
-
-### Editor theme
-
-If you’re on **vim/neovim**, pick **one** theme (Tokyonight/Dracula/One) and stick for a month. Learn motions (`w`, `b`, `0`, `$`), search (`/`), replace (`:%s/old/new/g`), buffers, and splits.
-
-### Desktop environment (optional, later)
-
-* Start with your distro default (GNOME/KDE).
-* When comfortable, try window managers (i3, sway, awesome).
-* Keep a **dotfiles** repo for your configs (`~/.config/*`, `~/.bashrc`, `~/.tmux.conf`, editor settings).
-
-> Guiding principle: **few, consistent, well-understood tools** > flashy screenshots. Rice to reduce friction, not to impress Reddit.
-
----
-
-## 10) Common pitfalls (and fixes)
-
-* **“Permission denied.”** Check `ls -l`, owner/group; use `sudo` *only* when needed. Scripts must be `chmod +x`.
-* **Command not found.** `which cmd`, check `$PATH`, install via package manager.
-* **Port already in use.** `sudo ss -tulpn | grep :PORT`, stop or change service.
-* **Cron works weird.** Use absolute paths; redirect stdout/stderr; minimal environment.
-* **Breaking your system.** Avoid random `curl | sh` scripts; prefer packages. Snapshot VMs before experiments.
-
----
-
-## 11) Stretch projects (pick one and ship it)
-
-* **Backup suite**: daily `tar` with retention policy + integrity check + off-box copy with `rsync`.
-* **Threat-hunt toy**: parse auth logs, detect brute force, auto-ban via `iptables`/`nftables`.
-* **Recon helper**: wrapper around `nmap` + `httpx` + `aquatone` (or alternatives) with structured output.
-* **Homelab observability**: ship logs to a containerized stack (Grafana/Prometheus/Loki) and create a security dashboard.
-
----
-
-## 12) A learning philosophy to keep
-
-* **Touch it daily.** 20 minutes > 2 hours once a week.
-* **Write it down.** Notes make knowledge durable.
-* **Automate the boring stuff.** If you do it twice, script it.
-* **Be ethical.** Practice on your lab; permission is mandatory.
-* **Have fun ricing.** Personality fuels consistency.
-
----
-
-## Appendix A — CLI mini-cheatsheet
-
-```bash
-# disk & space
-df -h; du -sh *; lsblk
-
-# search through logs
-grep -R "pattern" /var/log
-journalctl -u ssh -S "1 hour ago" -f
-
-# network quickies
-ip a; ip route; ss -tulpn; curl -I https://example.com
-
-# compress & transfer
-tar -czf site.tgz site/
-scp site.tgz user@host:/tmp/
-rsync -avh ~/lab user@host:~/lab-backup/
-
-# jobs & processes
-sleep 300 &; jobs; fg; bg; disown
-ps aux | grep name; pkill -9 name
-```
-
----
-
-## Appendix B — Safe starter scripts
-
-**`~/bin/safedel.sh`** (moves to trash directory instead of deleting)
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-trash="$HOME/.local/share/Trash/files"
-mkdir -p "$trash"
-for f in "$@"; do
-  mv -v -- "$f" "$trash/"
-done
-echo "Moved to trash → $trash"
-```
-
-**`~/bin/logwatch.sh`** (tail & alert on pattern)
-
-```bash
-#!/usr/bin/env bash
-set -euo pipefail
-log="${1:-/var/log/auth.log}"
-pattern="${2:-Failed password}"
-tail -Fn0 "$log" | \
-while read -r line; do
-  if [[ "$line" == *"$pattern"* ]]; then
-    printf '[%(%F %T)T] ALERT: %s\n' -1 "$line"
-  fi
+#!/bin/bash
+for ip in $(cat ips.txt); do
+  ping -c 1 "$ip" | grep "bytes from"
 done
 ```
 
+<!-- Main embed for this section -->
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/2733cRPudvI" title="How To Write Bash Scripts In Linux - Complete Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+
+**Further references:**
+
+* <a href="https://www.youtube.com/watch?v=SPwyp2NG-bE&list=PLIhvC56v63IKioClkSNDjW7iz-6TFvLwS" target="_blank" rel="noopener">You Need to Learn BASH Scripting RIGHT NOW!! (YouTube)</a>
+
 ---
 
-## Final words
+## 9. Ricing: customize your Linux
 
-Linux isn’t a course; it’s a **daily craft**. Start simple, build reps, automate tiny pains, and rice just enough to love your setup. The cybersecurity part grows naturally when your hands are fluent on the terminal. You’ve got this. 🐧💪
+“Ricing” refers to deeply customizing your Linux environment — themes, icons, window managers, terminal looks — to make it uniquely yours.
+
+Why bother?
+
+* **Aesthetics**: a pleasing environment motivates longer study/work sessions.
+* **Efficiency**: custom keybindings and layouts can speed up workflow.
+* **Identity**: your desktop becomes an extension of your style.
+
+Popular setups:
+
+* **Tiling window managers**: i3, Hyprland, bspwm.
+* **Theming**: GTK themes, icon packs.
+* **Terminal customization**: neofetch, custom prompts, color schemes.
+
+<!-- Main embed for this section -->
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/j_eCc8s1v3M" title="[Hyprland] My Arch Hypr Rice Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+
+**Further references:**
+
+* <a href="https://www.youtube.com/watch?v=fCTjNfwtKXs" target="_blank" rel="noopener">5 STAGES of ARCH Ricing (YouTube)</a>
+* <a href="https://www.youtube.com/watch?v=AL88UNqiInc" target="_blank" rel="noopener">Beginners guide to Ricing! (Linux Customization) (YouTube)</a>
+* <a href="https://www.youtube.com/watch?v=Bv_CpFbf84w" target="_blank" rel="noopener">How to Rice Hyprland | Full Guide (YouTube)</a>
+
+**Communities:**
+
+* <a href="https://www.reddit.com/r/unixporn/" target="_blank" rel="noopener">r/unixporn</a>
+* <a href="https://www.reddit.com/r/LinuxPorn/" target="_blank" rel="noopener">r/LinuxPorn</a>
+
+---
+
+## 10. Conclusion
+
+Mastering Linux is not about memorizing every command — it’s about understanding the ecosystem, thinking like a problem-solver, and continuously experimenting. In short, the best way to learn it is to simply use it. If you spend enough time with it, you’ll quickly get comfortable and learn to master it.
+
+**Your roadmap:**
+
+1. Understand Linux basics and why it matters in security.
+2. Choose a beginner-friendly yet security-ready distro.
+3. Install it in a safe environment.
+4. Learn core commands and permissions.
+5. Practice through daily use and CTFs.
+6. Automate tasks with Bash.
+7. Customize your setup for both looks and productivity.
+
+By combining consistent practice with the right resources, you’ll transition from a beginner to a confident Linux power user, ready to tackle cybersecurity challenges head-on.
+
+---
+
+## Appendix A — Quickstart checklist
+
+**Goal:** get productive on Linux for security in one sitting.
+
+**Hardware & install**
+
+* Decide your path: VM (VirtualBox/VMware) first, dual boot later if needed.
+* Allocate VM: 2–4 CPU cores, 4–8 GB RAM, 40+ GB disk, enable virtualization in BIOS.
+* Download ISO: Kali/Parrot (security) or Ubuntu/Mint (daily driver).
+
+**First 60 minutes**
+
+* Update packages (APT/DNF/Pacman depending on distro).
+* Install a code editor (VS Code, Neovim) and a modern terminal (Kitty/Alacritty).
+* Create a `~/lab` folder with subfolders: `notes`, `scripts`, `loot`, `logs`.
+* Set your shell prompt readable (timestamps, git branch).
+* Take your first snapshot (VM) called `clean-base`.
+
+**Daily routine**
+
+* 20 minutes CLI practice (navigation, search, permissions).
+* 20 minutes on a Bandit level or similar lab.
+* 10 minutes writing a journal: commands learned, gotchas, next goal.
+
+---
+
+## Appendix B — FAQ
+
+**Should I daily-drive Kali/Parrot?**
+Not at first. Use Kali/Parrot in a VM for tools; daily-drive Ubuntu/Mint for stability. Later, choose any distro you like.
+
+**Do I have to memorize commands?**
+No. Understand what each tool does and practice. Repetition builds muscle memory.
+
+**Is a tiling window manager necessary?**
+No. It’s a productivity preference. Start with GNOME/KDE, move to i3/Hyprland when you know your workflow.
+
+**How do I stay safe legally/ethically?**
+Only test systems you own or have explicit written permission to test. Keep logs of your activities.
+
+---
+
+## Appendix C — Glossary
+
+**Kernel** — the core of the OS managing hardware and processes.
+**Distro** — a complete OS built on the Linux kernel (Ubuntu, Kali, Parrot…).
+**Package manager** — tool to install/update software (APT, DNF, Pacman).
+**Shell** — interface to run commands (bash, zsh, fish).
+**Permission model (rwx)** — controls who can read/write/execute files.
+**Pipe (`|`)** — sends output of one command to another.
+**Redirection (`>`, `>>`, `2>`)** — saves output to files or redirects errors.
+**TTY/PTY** — terminal interfaces for user input/output.
+**Cron/systemd timer** — schedule tasks (scripts, maintenance).
+**VM snapshot** — a point-in-time save of a virtual machine’s state.
+
+---
+
+## Appendix D — Common errors & fixes
+
+**“Permission denied” running a script**
+
+* Make it executable: `chmod +x script.sh`
+* Or call explicitly with interpreter: `bash script.sh`
+
+**“Command not found”**
+
+* Ensure the package is installed (e.g., `sudo apt install <tool>`).
+* Verify PATH or call with absolute path.
+
+**APT/DNF/Pacman lock or broken packages**
+
+* Close other package managers; retry `sudo apt --fix-broken install`.
+* For Pacman: `sudo pacman -Syu` then reinstall the package.
+
+**Network tools need root**
+
+* Use `sudo` where required (`tcpdump`, `nmap` raw scans).
+* On VMs, check that the network adapter is in Bridged/NAT mode as intended.
+
+**Cannot write to mounted USB/drive**
+
+* Check filesystem type and mount options; remount with proper permissions or use `sudo chown` where appropriate.
+
+---
+
+## Appendix E — 30-day study plan
+
+**Daily (30–45 minutes):**
+
+* 10 min: terminal reps (navigation, search, permissions).
+* 15 min: Bandit or a small lab task.
+* 5–10 min: notes — one new command + one insight.
+
+**Weekly focus:**
+
+* Week 1: filesystem, users/groups, permissions, editors.
+* Week 2: processes, services, logs, package management.
+* Week 3: networking basics (ip/ss/netstat/nc), transfers (scp/rsync), archives.
+* Week 4: Bash scripting fundamentals, small automation for your workflow.
+
+**Milestones:**
+
+* Day 7: finish Bandit Level 10, write a summary post.
+* Day 14: build a personal “cheat sheet” from your notes.
+* Day 21: write a 20-line script that saves you time weekly.
+* Day 30: publish your setup + lessons learned.
+
+---
 
 ## Thanks for reading!
 
-Until next time — **Otsumachi!!** 💖☄️✨
+Until next time — **Otsumachi!!**
 
-![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
+!\[Cinema]\({{ '/assets/images/advice/cinema.gif' | relative\_url }})
+
+
