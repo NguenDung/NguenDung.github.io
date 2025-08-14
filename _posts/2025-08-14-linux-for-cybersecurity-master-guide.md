@@ -6,6 +6,23 @@ tags: [linux, cybersecurity, guide, shell, bash, beginner, ricing]
 description: "A comprehensive beginner-to-pro guide on learning, using, and mastering Linux for cybersecurity, from choosing a distro to automation and customization."
 ---
 
+<!-- Responsive embeds for THIS post only -->
+<style>
+iframe[src*="youtube.com"],
+iframe[src*="youtu.be"],
+iframe[src*="vimeo.com"]{
+  display:block;
+  width:100% !important;   
+  max-width:100%;
+  height:auto;             
+  aspect-ratio:16/9;     
+  border:0;
+}
+.back-to-top {
+  display:inline-block;margin-top:0.75rem;font-size:0.95rem
+}
+</style>
+
 # Mastering Linux for Cybersecurity: From Beginner to Pro
 Halloo, it’s me SuiiKawaii again — today we’re going to talk about Linux! Yes, that penguin OS you’re thinking of. To be honest, Linux is the backbone of modern cybersecurity and ethical hacking. Whether you are a beginner aspiring to work in IT security or an enthusiast exploring ethical hacking, mastering Linux is an essential step in your journey. This guide is designed to take you from zero to confident — from understanding what Linux is, to using it for security tasks, scripting, customization, and beyond.
 
@@ -39,10 +56,12 @@ Linux stands out because:
 Linux is widely used in servers, supercomputers, Android devices, IoT devices, and — most importantly for us — in **cybersecurity**.
 
 <!-- Main embed for this section -->
-<iframe width="560" height="315" src="https://www.youtube.com/embed/rrB13utjYV4?start=30" title="Linux in 100 Seconds" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/rrB13utjYV4?start=30" title="Linux in 100 Seconds" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
-- <a href="https://www.youtube.com/watch?v=eQbIxEw3AI0" target="_blank" rel="noopener">What Is Linux? — Explained for Beginners (YouTube)</a>
+- <a href="https://www.youtube.com/watch?v=eQbIxEw3AI0" target="_blank" rel="noopener noreferrer">What Is Linux? — Explained for Beginners (YouTube)</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -65,6 +84,8 @@ Cybersecurity work demands tools, customization, and control that Linux provides
 5. **Ubiquity in servers**  
    Most web servers run Linux. To secure them, you must understand their inner workings.
 
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
+
 ---
 
 ## 3. How to choose a Linux distro (beginners)
@@ -72,31 +93,33 @@ Cybersecurity work demands tools, customization, and control that Linux provides
 For a beginner, choosing a Linux distribution can feel overwhelming. In reality, any distro can be used for cybersecurity, but some are better for starting out.
 
 **Beginner-friendly distros:**
-- **Linux Mint** — clean interface, easy to use for Windows switchers.
-- **Ubuntu** — huge community, lots of tutorials, stable.
-- **Pop!\_OS** — great for productivity and development.
+- **<a href="https://linuxmint.com/" target="_blank" rel="noopener noreferrer">Linux Mint</a>** — clean interface, easy to use for Windows switchers.
+- **<a href="https://ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a>** — huge community, lots of tutorials, stable.
+- **<a href="https://pop.system76.com/" target="_blank" rel="noopener noreferrer">Pop!_OS</a>** — great for productivity and development.
   
 **Security-focused distros:**
-- **Kali Linux** — industry-standard penetration testing OS with hundreds of tools pre-installed.
-- **Parrot Security OS** — lightweight, privacy-focused, includes pen-testing tools.
-- **BlackArch** — Arch-based, massive repository of security tools (best for advanced users).
+- **<a href="https://www.kali.org/" target="_blank" rel="noopener noreferrer">Kali Linux</a>** — industry-standard penetration testing OS with hundreds of tools pre-installed.
+- **<a href="https://www.parrotsec.org/" target="_blank" rel="noopener noreferrer">Parrot Security OS</a>** — lightweight, privacy-focused, includes pen-testing tools.
+- **<a href="https://www.blackarch.org/" target="_blank" rel="noopener noreferrer">BlackArch</a>** — Arch-based, massive repository of security tools (best for advanced users).
 
 **Recommendation:**  
-If you’re learning cybersecurity, start with **Kali Linux** or **Parrot Security OS**. These distros save you hours of setup by preloading tools you will need in CTFs, penetration tests, and labs. Once you’re comfortable, you can migrate to any distro — because at the end of the day, Linux is Linux.
+If you’re learning cybersecurity, start with **<a href="https://www.kali.org/" target="_blank" rel="noopener noreferrer">Kali Linux</a>** or **<a href="https://www.parrotsec.org/" target="_blank" rel="noopener noreferrer">Parrot Security OS</a>**. These distros save you hours of setup by preloading tools you will need in CTFs, penetration tests, and labs. Once you’re comfortable, you can migrate to any distro — because at the end of the day, Linux is Linux.
 
 <!-- Main embed for this section -->
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ORGjwyXBSiY?start=63" title="What Your Linux Distro Says About YOU!" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/ORGjwyXBSiY?start=63" title="What Your Linux Distro Says About YOU!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
-- <a href="https://www.youtube.com/watch?v=VKNMI6cYOFk&t=16s" target="_blank" rel="noopener">Every LINUX DISTRO Explained in 4 minutes (YouTube)</a>  
-- <a href="https://www.youtube.com/watch?v=jwJ6e5x0RLg" target="_blank" rel="noopener">The Best Hacking OS (Tier List) (YouTube)</a>
+- <a href="https://www.youtube.com/watch?v=VKNMI6cYOFk&t=16s" target="_blank" rel="noopener noreferrer">Every LINUX DISTRO Explained in 4 minutes (YouTube)</a>  
+- <a href="https://www.youtube.com/watch?v=jwJ6e5x0RLg" target="_blank" rel="noopener noreferrer">The Best Hacking OS (Tier List) (YouTube)</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
 ## 4. Installing your distro
 
 ### a) Install as a virtual machine
-- **Tools**: VirtualBox, VMware Workstation Player.
+- **Tools**: <a href="https://www.virtualbox.org/" target="_blank" rel="noopener noreferrer">VirtualBox</a>, <a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion" target="_blank" rel="noopener noreferrer">VMware Workstation Player</a>.
 - **Pros**: Safe, runs alongside your main OS, easy to reset.
 - **Cons**: Limited performance for heavy tasks.
 
@@ -113,14 +136,16 @@ If you’re learning cybersecurity, start with **Kali Linux** or **Parrot Securi
 If you’re new and worried about breaking things, start in a VM and take a snapshot before major changes.
 
 <!-- Main embed for this section -->
-<iframe width="560" height="315" src="https://www.youtube.com/embed/sAMnXte56yY" title="How To Install Kali Linux 2024 in VirtualBox | Kali Linux 2024.1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/sAMnXte56yY" title="How To Install Kali Linux 2024 in VirtualBox | Kali Linux 2024.1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
-- <a href="https://www.youtube.com/watch?v=2vTVA-Nq0bw" target="_blank" rel="noopener">How to Dual Boot Kali Linux and Windows (in 10 minutes)</a>  
-- <a href="https://www.youtube.com/watch?v=FYYU9qZ0Pps" target="_blank" rel="noopener">Kali Linux USB Live Boot with Persistence (in 5 minutes)</a>  
-- <a href="https://www.youtube.com/watch?v=BlLUbBjOYb8" target="_blank" rel="noopener">ParrotOS Latest — Download and Installation — Step by Step</a>  
-- <a href="https://www.youtube.com/watch?v=uIPrd5rcU58" target="_blank" rel="noopener">Parrot OS Security Dual Boot with Windows 10/11 — Step by Step</a>  
-- <a href="https://www.youtube.com/watch?v=zHDzfjuihi0" target="_blank" rel="noopener">Step-by-Step Guide: How to Install BlackArch Linux for Ethical Hackers</a>
+- <a href="https://www.youtube.com/watch?v=2vTVA-Nq0bw" target="_blank" rel="noopener noreferrer">How to Dual Boot Kali Linux and Windows (in 10 minutes)</a>  
+- <a href="https://www.youtube.com/watch?v=FYYU9qZ0Pps" target="_blank" rel="noopener noreferrer">Kali Linux USB Live Boot with Persistence (in 5 minutes)</a>  
+- <a href="https://www.youtube.com/watch?v=BlLUbBjOYb8" target="_blank" rel="noopener noreferrer">ParrotOS Latest — Download and Installation — Step by Step</a>  
+- <a href="https://www.youtube.com/watch?v=uIPrd5rcU58" target="_blank" rel="noopener noreferrer">Parrot OS Security Dual Boot with Windows 10/11 — Step by Step</a>  
+- <a href="https://www.youtube.com/watch?v=zHDzfjuihi0" target="_blank" rel="noopener noreferrer">Step-by-Step Guide: How to Install BlackArch Linux for Ethical Hackers</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -149,11 +174,13 @@ After installing Linux, there are essential configurations and habits to set up:
 
 <!-- Main embed for this section -->
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/Vos7DCTqvSM" title="Pro Tip: What to Do After Installing Kali Linux." frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/Vos7DCTqvSM" title="Pro Tip: What to Do After Installing Kali Linux." allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 
-* <a href="https://www.youtube.com/watch?v=odgD_RdJjCU" target="_blank" rel="noopener">10 Things You MUST DO After Installing Arch Linux (2023)</a>
+* <a href="https://www.youtube.com/watch?v=odgD_RdJjCU" target="_blank" rel="noopener noreferrer">10 Things You MUST DO After Installing Arch Linux (2023)</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -169,19 +196,21 @@ Rather than memorizing hundreds of commands, focus on understanding **how Linux 
 
 <!-- Main embed for this section -->
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/zIdv2NDRExI?start=95" title="The Best Way to Learn Linux" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/zIdv2NDRExI?start=95" title="The Best Way to Learn Linux" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 
-* <a href="https://linuxjourney.com/" target="_blank" rel="noopener">Linux Journey — Free Linux Learning Path</a>
-* <a href="https://www.youtube.com/watch?v=lvSoxOMg5_c&list=PLT98CRl2KxKHaKA9-4_I38sLzK134p4GJ" target="_blank" rel="noopener">Linux Commands for Beginners (YouTube Playlist)</a>
-* <a href="https://www.youtube.com/watch?v=VbEx7B_PTOE&list=PLIhvC56v63IJIujb5cyE13oLuyORZpdkL" target="_blank" rel="noopener">Linux for Hackers — NetworkChuck (YouTube Playlist)</a>
+* <a href="https://linuxjourney.com/" target="_blank" rel="noopener noreferrer">Linux Journey — Free Linux Learning Path</a>
+* <a href="https://www.youtube.com/watch?v=lvSoxOMg5_c&list=PLT98CRl2KxKHaKA9-4_I38sLzK134p4GJ" target="_blank" rel="noopener noreferrer">Linux Commands for Beginners (YouTube Playlist)</a>
+* <a href="https://www.youtube.com/watch?v=VbEx7B_PTOE&list=PLIhvC56v63IJIujb5cyE13oLuyORZpdkL" target="_blank" rel="noopener noreferrer">Linux for Hackers — NetworkChuck (YouTube Playlist)</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
 ## 7. Practice with CTF: OverTheWire
 
-Learning Linux commands in isolation is fine, but using them in challenges makes skills stick. One of the best free resources for beginners is **OverTheWire**.
+Learning Linux commands in isolation is fine, but using them in challenges makes skills stick. One of the best free resources for beginners is **<a href="https://overthewire.org/wargames/" target="_blank" rel="noopener noreferrer">OverTheWire</a>**.
 
 **OverTheWire: Bandit**
 
@@ -190,6 +219,8 @@ Learning Linux commands in isolation is fine, but using them in challenges makes
 * Perfect for building the hacker mindset.
 
 📌 You can check my complete **OverTheWire Bandit walkthrough index** [here](/posts/overthewire/bandit-overview/).
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -214,17 +245,21 @@ done
 
 <!-- Main embed for this section -->
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/2733cRPudvI" title="How To Write Bash Scripts In Linux - Complete Guide" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/2733cRPudvI" title="How To Write Bash Scripts In Linux - Complete Guide" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 
-* <a href="https://www.youtube.com/watch?v=SPwyp2NG-bE&list=PLIhvC56v63IKioClkSNDjW7iz-6TFvLwS" target="_blank" rel="noopener">You Need to Learn BASH Scripting RIGHT NOW!! (YouTube)</a>
+* <a href="https://www.youtube.com/watch?v=SPwyp2NG-bE&list=PLIhvC56v63IKioClkSNDjW7iz-6TFvLwS" target="_blank" rel="noopener noreferrer">You Need to Learn BASH Scripting RIGHT NOW!! (YouTube)</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
 ## 9. Ricing: customize your Linux
 
 “Ricing” refers to deeply customizing your Linux environment — themes, icons, window managers, terminal looks — to make it uniquely yours.
+
+![Rice]({{ '/assets/images/linux/ricing.jpg' | relative_url }})
 
 Why bother?
 
@@ -234,30 +269,35 @@ Why bother?
 
 Popular setups:
 
-* **Tiling window managers**: i3, Hyprland, bspwm.
-* **Theming**: GTK themes, icon packs.
-* **Terminal customization**: neofetch, custom prompts, color schemes.
+* **Desktop environments**: <a href="https://www.gnome.org/" target="_blank" rel="noopener noreferrer">GNOME</a>, <a href="https://kde.org/" target="_blank" rel="noopener noreferrer">KDE</a>.
+* **Tiling window managers**: <a href="https://i3wm.org/" target="_blank" rel="noopener noreferrer">i3</a>, <a href="https://hyprland.org/" target="_blank" rel="noopener noreferrer">Hyprland</a>, <a href="https://github.com/baskerville/bspwm" target="_blank" rel="noopener noreferrer">bspwm</a>.
+* **Theming**: <a href="https://www.gnome-look.org/" target="_blank" rel="noopener noreferrer">GNOME-Look (themes/icon packs)</a>, <a href="https://store.kde.org/" target="_blank" rel="noopener noreferrer">KDE Store</a>.
+* **Terminal customization**: <a href="https://github.com/dylanaraps/neofetch" target="_blank" rel="noopener noreferrer">Neofetch</a>, custom prompts (e.g., <a href="https://starship.rs/" target="_blank" rel="noopener noreferrer">Starship</a>), color schemes.
 
 <!-- Main embed for this section -->
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/j_eCc8s1v3M" title="[Hyprland] My Arch Hypr Rice Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/j_eCc8s1v3M" title="[Hyprland] My Arch Hypr Rice Showcase" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 
-* <a href="https://www.youtube.com/watch?v=fCTjNfwtKXs" target="_blank" rel="noopener">5 STAGES of ARCH Ricing (YouTube)</a>
-* <a href="https://www.youtube.com/watch?v=AL88UNqiInc" target="_blank" rel="noopener">Beginners guide to Ricing! (Linux Customization) (YouTube)</a>
-* <a href="https://www.youtube.com/watch?v=Bv_CpFbf84w" target="_blank" rel="noopener">How to Rice Hyprland | Full Guide (YouTube)</a>
+* <a href="https://www.youtube.com/watch?v=fCTjNfwtKXs" target="_blank" rel="noopener noreferrer">5 STAGES of ARCH Ricing (YouTube)</a>
+* <a href="https://www.youtube.com/watch?v=AL88UNqiInc" target="_blank" rel="noopener noreferrer">Beginners guide to Ricing! (Linux Customization) (YouTube)</a>
+* <a href="https://www.youtube.com/watch?v=Bv_CpFbf84w" target="_blank" rel="noopener noreferrer">How to Rice Hyprland | Full Guide (YouTube)</a>
 
 **Communities:**
 
-* <a href="https://www.reddit.com/r/unixporn/" target="_blank" rel="noopener">r/unixporn</a>
-* <a href="https://www.reddit.com/r/LinuxPorn/" target="_blank" rel="noopener">r/LinuxPorn</a>
+* <a href="https://www.reddit.com/r/unixporn/" target="_blank" rel="noopener noreferrer">r/unixporn</a>
+* <a href="https://www.reddit.com/r/LinuxPorn/" target="_blank" rel="noopener noreferrer">r/LinuxPorn</a>
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
 ## 10. Conclusion
 
 Mastering Linux is not about memorizing every command — it’s about understanding the ecosystem, thinking like a problem-solver, and continuously experimenting. In short, the best way to learn it is to simply use it. If you spend enough time with it, you’ll quickly get comfortable and learn to master it.
+
+![Suffer]({{ '/assets/images/linux/suffer.gif' | relative_url }})
 
 **Your roadmap:**
 
@@ -271,6 +311,8 @@ Mastering Linux is not about memorizing every command — it’s about understan
 
 By combining consistent practice with the right resources, you’ll transition from a beginner to a confident Linux power user, ready to tackle cybersecurity challenges head-on.
 
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
+
 ---
 
 ## Appendix A — Quickstart checklist
@@ -279,14 +321,14 @@ By combining consistent practice with the right resources, you’ll transition f
 
 **Hardware & install**
 
-* Decide your path: VM (VirtualBox/VMware) first, dual boot later if needed.
+* Decide your path: VM (<a href="https://www.virtualbox.org/" target="_blank" rel="noopener noreferrer">VirtualBox</a>/<a href="https://www.vmware.com/products/desktop-hypervisor/workstation-and-fusion" target="_blank" rel="noopener noreferrer">VMware</a>) first, dual boot later if needed.
 * Allocate VM: 2–4 CPU cores, 4–8 GB RAM, 40+ GB disk, enable virtualization in BIOS.
-* Download ISO: Kali/Parrot (security) or Ubuntu/Mint (daily driver).
+* Download ISO: <a href="https://www.kali.org/" target="_blank" rel="noopener noreferrer">Kali</a>/<a href="https://www.parrotsec.org/" target="_blank" rel="noopener noreferrer">Parrot</a> (security) or <a href="https://ubuntu.com/" target="_blank" rel="noopener noreferrer">Ubuntu</a>/<a href="https://linuxmint.com/" target="_blank" rel="noopener noreferrer">Mint</a> (daily driver).
 
 **First 60 minutes**
 
 * Update packages (APT/DNF/Pacman depending on distro).
-* Install a code editor (VS Code, Neovim) and a modern terminal (Kitty/Alacritty).
+* Install a code editor (<a href="https://code.visualstudio.com/" target="_blank" rel="noopener noreferrer">VS Code</a>, <a href="https://neovim.io/" target="_blank" rel="noopener noreferrer">Neovim</a>) and a modern terminal (<a href="https://sw.kovidgoyal.net/kitty/" target="_blank" rel="noopener noreferrer">Kitty</a>/<a href="https://alacritty.org/" target="_blank" rel="noopener noreferrer">Alacritty</a>).
 * Create a `~/lab` folder with subfolders: `notes`, `scripts`, `loot`, `logs`.
 * Set your shell prompt readable (timestamps, git branch).
 * Take your first snapshot (VM) called `clean-base`.
@@ -296,6 +338,8 @@ By combining consistent practice with the right resources, you’ll transition f
 * 20 minutes CLI practice (navigation, search, permissions).
 * 20 minutes on a Bandit level or similar lab.
 * 10 minutes writing a journal: commands learned, gotchas, next goal.
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -308,10 +352,12 @@ Not at first. Use Kali/Parrot in a VM for tools; daily-drive Ubuntu/Mint for sta
 No. Understand what each tool does and practice. Repetition builds muscle memory.
 
 **Is a tiling window manager necessary?**
-No. It’s a productivity preference. Start with GNOME/KDE, move to i3/Hyprland when you know your workflow.
+No. It’s a productivity preference. Start with <a href="https://www.gnome.org/" target="_blank" rel="noopener noreferrer">GNOME</a>/<a href="https://kde.org/" target="_blank" rel="noopener noreferrer">KDE</a>, move to <a href="https://i3wm.org/" target="_blank" rel="noopener noreferrer">i3</a>/<a href="https://hyprland.org/" target="_blank" rel="noopener noreferrer">Hyprland</a> when you know your workflow.
 
 **How do I stay safe legally/ethically?**
 Only test systems you own or have explicit written permission to test. Keep logs of your activities.
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -327,6 +373,8 @@ Only test systems you own or have explicit written permission to test. Keep logs
 **TTY/PTY** — terminal interfaces for user input/output.
 **Cron/systemd timer** — schedule tasks (scripts, maintenance).
 **VM snapshot** — a point-in-time save of a virtual machine’s state.
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -349,12 +397,14 @@ Only test systems you own or have explicit written permission to test. Keep logs
 
 **Network tools need root**
 
-* Use `sudo` where required (`tcpdump`, `nmap` raw scans).
+* Use `sudo` where required (<a href="https://www.tcpdump.org/" target="_blank" rel="noopener noreferrer">tcpdump</a>, <a href="https://nmap.org/" target="_blank" rel="noopener noreferrer">nmap</a> raw scans).
 * On VMs, check that the network adapter is in Bridged/NAT mode as intended.
 
 **Cannot write to mounted USB/drive**
 
 * Check filesystem type and mount options; remount with proper permissions or use `sudo chown` where appropriate.
+
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
 
 ---
 
@@ -380,12 +430,12 @@ Only test systems you own or have explicit written permission to test. Keep logs
 * Day 21: write a 20-line script that saves you time weekly.
 * Day 30: publish your setup + lessons learned.
 
+<p class="back-to-top"><a href="#table-of-contents">↑ Back to top</a></p>
+
 ---
 
 ## Thanks for reading!
 
-Until next time — **Otsumachi!!**
+Until next time — **Otsumachi!!** 💖☄️✨
 
-!\[Cinema]\({{ '/assets/images/advice/cinema.gif' | relative\_url }})
-
-
+![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
