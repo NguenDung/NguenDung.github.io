@@ -56,7 +56,7 @@ Linux stands out because:
 Linux is widely used in servers, supercomputers, Android devices, IoT devices, and — most importantly for us — in **cybersecurity**.
 
 <!-- Main embed for this section -->
-<iframe src="https://www.youtube.com/embed/rrB13utjYV4?start=30" title="Linux in 100 Seconds" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/rrB13utjYV4" title="Linux in 100 Seconds" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 - <a href="https://www.youtube.com/watch?v=eQbIxEw3AI0" target="_blank" rel="noopener noreferrer">What Is Linux? — Explained for Beginners (YouTube)</a>
@@ -106,7 +106,7 @@ For a beginner, choosing a Linux distribution can feel overwhelming. In reality,
 If you’re learning cybersecurity, start with **<a href="https://www.kali.org/" target="_blank" rel="noopener noreferrer">Kali Linux</a>** or **<a href="https://www.parrotsec.org/" target="_blank" rel="noopener noreferrer">Parrot Security OS</a>**. These distros save you hours of setup by preloading tools you will need in CTFs, penetration tests, and labs. Once you’re comfortable, you can migrate to any distro — because at the end of the day, Linux is Linux.
 
 <!-- Main embed for this section -->
-<iframe src="https://www.youtube.com/embed/ORGjwyXBSiY?start=63" title="What Your Linux Distro Says About YOU!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/ORGjwyXBSiY" title="What Your Linux Distro Says About YOU!" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 - <a href="https://www.youtube.com/watch?v=VKNMI6cYOFk&t=16s" target="_blank" rel="noopener noreferrer">Every LINUX DISTRO Explained in 4 minutes (YouTube)</a>  
@@ -196,7 +196,7 @@ Rather than memorizing hundreds of commands, focus on understanding **how Linux 
 
 <!-- Main embed for this section -->
 
-<iframe src="https://www.youtube.com/embed/zIdv2NDRExI?start=95" title="The Best Way to Learn Linux" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
+<iframe src="https://www.youtube.com/embed/zIdv2NDRExI" title="The Best Way to Learn Linux" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture;" allowfullscreen loading="lazy"></iframe>
 
 **Further references:**
 
