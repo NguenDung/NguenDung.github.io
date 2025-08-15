@@ -4,6 +4,7 @@ title: "Build a Home Cybersecurity Lab with VirtualBox/VMware"
 permalink: /posts/home-cyber-lab/
 tags: [virtualization, lab, kali, parrot, blackarch, backbox, virtualbox, vmware, networking, beginner]
 description: "A step-by-step guide to building a safe, isolated cybersecurity lab at home using VirtualBox or VMware — with Kali/Parrot, vulnerable targets, hosted labs, network modes, snapshots, and best practices."
+excerpt_separator: <!--more-->
 ---
 
 <!-- Scoped styles for THIS post only -->

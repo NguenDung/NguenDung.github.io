@@ -99,7 +99,7 @@ Run commands that modify the system with <code>sudo</code>. Avoid mixing differe
 
 </div>
 
-**Reference video**
+**Reference video:**
 <div class="embed-16x9" markdown="0">
   <iframe src="https://www.youtube.com/embed/lkii2cGuKao"
           title="Linux Package Management | Debian, Fedora, and Arch Linux"

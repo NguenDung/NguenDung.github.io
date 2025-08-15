@@ -4,6 +4,7 @@ title: "My Advice for Self-Learning Cybersecurity (Red Team Track): A Practical 
 permalink: /posts/how-i-self-learned-cybersec/
 tags: [guide, roadmap, red-team, ctf, web, crypto, forensics, osint]
 description: "A realistic, beginner-friendly path: sniff-test with YouTube, learn on interactive platforms, start CTFs, find communities, read the right books, consider certs, and—above all—be patient and persistent."
+excerpt_separator: <!--more-->
 ---
 
 # My Advice for Self-Learning Cybersecurity (Red Team Track): A Practical Roadmap
