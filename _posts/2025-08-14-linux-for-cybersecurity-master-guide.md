@@ -24,7 +24,7 @@ iframe[src*="vimeo.com"]{
 </style>
 
 # Mastering Linux for Cybersecurity: From Beginner to Pro
-Halloo, it’s me SuiiKawaii again — today we’re going to talk about Linux! Yes, that penguin OS you’re thinking of. To be honest, Linux is the backbone of modern cybersecurity and ethical hacking. Whether you are a beginner aspiring to work in IT security or an enthusiast exploring ethical hacking, mastering Linux is an essential step in your journey. This guide is designed to take you from zero to confident — from understanding what Linux is, to using it for security tasks, scripting, customization, and beyond.
+Halloo, it’s me **SuiiKawaii** again — today we’re going to talk about Linux! Yes, that penguin OS you’re thinking of. To be honest, Linux is the backbone of modern cybersecurity and ethical hacking. Whether you are a beginner aspiring to work in IT security or an enthusiast exploring ethical hacking, mastering Linux is an essential step in your journey. This guide is designed to take you from zero to confident — from understanding what Linux is, to using it for security tasks, scripting, customization, and beyond.
 
 ![Suimaid]({{ '/assets/images/linux/suimaid.gif' | relative_url }})
 

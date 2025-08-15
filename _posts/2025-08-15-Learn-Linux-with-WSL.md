@@ -13,17 +13,29 @@ excerpt_separator: <!--more-->
 .embed-16x9 { position: relative; width: 100%; aspect-ratio: 16 / 9; }
 .embed-16x9 iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-/* Nicer tables + horizontal scroll */
+/* Tables + scroll */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .md-table table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
-.md-table th, .md-table td { padding: .6rem .8rem; border: 1px solid var(--table-border, #e5e7eb); }
-.md-table thead th { background: var(--table-head, #f8fafc); text-align: left; }
+.md-table th, .md-table td { padding: .6rem .8rem; border: 1px solid #e5e7eb; }
+.md-table thead th { background: #f8fafc; text-align: left; } /* light default */
 
-/* Lightweight callouts (avoid blockquote pitfalls) */
+/* Callouts */
 .callout { padding:.8rem 1rem; border-left:4px solid #6b7280; background:rgba(107,114,128,.08); margin:1rem 0; }
 .callout.warn { border-color:#d97706; background:rgba(217,119,6,.08); }
 .callout.ok { border-color:#059669; background:rgba(5,150,105,.08); }
+
+/* Dark mode: soften header + borders */
+@media (prefers-color-scheme: dark) {
+  .md-table th, .md-table td { border-color: rgba(255,255,255,.12); }
+  .md-table thead th { background: rgba(255,255,255,.06); }
+}
 </style>
+
+_Halloo, it’s me **SuiiKawaii** again - nice to meet ya in another post of the Linux series with pure pain suffer and also joy!!. Today we’re going to make Linux feel at home on Windows by setting up WSL2, then build a practical day-to-day workflow with VS Code, Git, Docker, and a few security-minded tips. If you’re a Windows user learning Linux, this is the fastest safe path._
+
+![Hi]({{ '/assets/images/wsl/hi.gif' | relative_url }})
+
+Before we start you might want to watch this video from the GOAT **NetworkChuck**:
 
 <!-- Main video embed -->
 <div class="embed-16x9" markdown="0">
@@ -71,7 +83,7 @@ WSL lets you run a GNU/Linux environment directly on Windows without dual-boot.
 - **WSL1** translates Linux syscalls to Windows (compat layer).  
 - **WSL2** runs a real Linux kernel in a lightweight VM → best compatibility and containers.
 
-<div class="table-scroll md-table">
+<div class="table-scroll md-table" markdown="1">
 
 | Topic | WSL1 | WSL2 |
 |---|---|---|
@@ -82,6 +94,8 @@ WSL lets you run a GNU/Linux environment directly on Windows without dual-boot.
 | Networking | Shared host IP (simple) | NAT by default; modern builds map `localhost` reliably |
 | Resource Usage | Lower baseline | Slightly higher (VM) but dynamic |
 | Best Use | Simple scripting | Dev/security tooling, containers, most learning paths |
+
+</div>
 
 <div class="callout">
 If you need monitor mode/USB passthrough/isolated labs, move to a full VM: <a href="/posts/home-cyber-lab/" target="_blank" rel="noopener noreferrer">Build a Home Cybersecurity Lab</a> and the broader track <a href="/posts/mastering-linux-for-cybersecurity/" target="_blank" rel="noopener noreferrer">Mastering Linux for Cybersecurity</a>.
@@ -94,17 +108,17 @@ If you need monitor mode/USB passthrough/isolated labs, move to a full VM: <a hr
 - **Windows 11** or **Windows 10 (21H2/19044+)** recommended.  
 - **Virtualization** enabled in BIOS/UEFI (Intel VT-x / AMD-V).
 - Quick checks:
-  ```powershell
-  wsl --status
-  wsl --version
+```powershell
+wsl --status
+wsl --version
 ````
 
 * On older Windows 10 you may need:
 
-  ```powershell
-  dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-  dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-  ```
+```powershell
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+```
 
 ---
 
@@ -158,90 +172,89 @@ wsl
 
 * Work on Linux FS:
 
-  ```bash
-  mkdir -p ~/projects && cd ~/projects
-  ```
+```bash
+mkdir -p ~/projects && cd ~/projects
+```
 
-  `/mnt/c` is Windows drive (crossing boundaries is slower).
+`/mnt/c` is Windows drive (crossing boundaries is slower).
 
 * VS Code Remote – WSL:
 
-  ```bash
-  code .
-  ```
+```bash
+code .
+```
 
-  Install extensions: Remote - WSL, Python, ESLint, Prettier, Docker, GitHub PRs.
+Install extensions: Remote - WSL, Python, ESLint, Prettier, Docker, GitHub PRs.
 
 * Git & SSH in WSL:
 
-  ```bash
-  ssh-keygen -t ed25519 -C "you@example.com"
-  cat ~/.ssh/id_ed25519.pub
-  ssh -T git@github.com
-  ```
+```bash
+ssh-keygen -t ed25519 -C "you@example.com"
+cat ~/.ssh/id_ed25519.pub
+ssh -T git@github.com
+```
 
 * Python via pyenv + venv:
 
-  ```bash
-  sudo apt -y install build-essential curl git libssl-dev zlib1g-dev \
-    libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
-  curl https://pyenv.run | bash
-  exec $SHELL
-  pyenv install 3.12.5 && pyenv global 3.12.5
-  python -m venv .venv && source .venv/bin/activate
-  ```
+```bash
+sudo apt -y install build-essential curl git libssl-dev zlib1g-dev \
+  libbz2-dev libreadline-dev libsqlite3-dev libffi-dev
+curl https://pyenv.run | bash
+exec $SHELL
+pyenv install 3.12.5 && pyenv global 3.12.5
+python -m venv .venv && source .venv/bin/activate
+```
 
 * Node via nvm:
 
-  ```bash
-  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-  exec $SHELL
-  nvm install --lts
-  ```
+```bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+exec $SHELL
+nvm install --lts
+```
 
 ---
 
 ## 5) Windows ↔ Linux Interop
 
 * Drives under `/mnt/c`, `/mnt/d`, …
-
 * Open Explorer from WSL:
 
-  ```bash
-  explorer.exe .
-  ```
+```bash
+explorer.exe .
+```
 
 * Call Windows from WSL:
 
-  ```bash
-  notepad.exe README.md
-  powershell.exe -NoLogo -NoProfile -Command "Get-Date"
-  ```
+```bash
+notepad.exe README.md
+powershell.exe -NoLogo -NoProfile -Command "Get-Date"
+```
 
 * Call WSL from Windows:
 
-  ```powershell
-  wsl.exe ls -la ~
-  ```
+```powershell
+wsl.exe ls -la ~
+```
 
 * Clipboard:
 
-  ```bash
-  ls | clip.exe
-  ```
+```bash
+ls | clip.exe
+```
 
 * Locale:
 
-  ```bash
-  sudo update-locale LANG=en_US.UTF-8
-  ```
+```bash
+sudo update-locale LANG=en_US.UTF-8
+```
 
 * (Optional) GUI apps on Windows 11 (WSLg):
 
-  ```bash
-  sudo apt install -y gedit
-  gedit &
-  ```
+```bash
+sudo apt install -y gedit
+gedit &
+```
 
 ---
 
@@ -250,17 +263,18 @@ wsl
 * NAT behind the scenes; localhost mapping works.
 * Check IP:
 
-  ```bash
-  ip a
-  ```
+```bash
+ip a
+```
+
 * Tiny web server:
 
-  ```bash
-  cd ~/projects
-  python3 -m http.server 8000
-  ```
+```bash
+cd ~/projects
+python3 -m http.server 8000
+```
 
-  Open `http://localhost:8000` in Windows.
+Open `http://localhost:8000` in Windows.
 
 ### Docker Desktop with WSL backend
 
@@ -526,9 +540,9 @@ wsl --import <NewName> C:\WSL\<NewName> C:\backups\wsl\<DATE>-<Distro>.tar --ver
 * Exclude only trusted paths from AV scans (selective).
 * Fix time drift after sleep:
 
-  ```powershell
-  wsl --shutdown
-  ```
+```powershell
+wsl --shutdown
+```
 
 ---
 
@@ -654,6 +668,7 @@ WSLg handles many GUI/OpenGL apps on Windows 11.
 * <a href="/posts/home-cyber-lab/" target="_blank" rel="noopener noreferrer">Build a Home Cybersecurity Lab</a>
 
 ---
+
 
 ## Thanks for reading!
 

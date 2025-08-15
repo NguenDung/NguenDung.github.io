@@ -54,7 +54,7 @@ kbd { background:#eee; border:1px solid #ccc; border-bottom:2px solid #bbb; padd
 
 # Build a Home Cybersecurity Lab with VirtualBox/VMware
 
-Halloo, another time another post it’s me lovely SuiiKawaii again — this time we’re building your **home cybersecurity lab**. A virtual lab lets you learn hacking **legally and safely**: you practice on machines you own, isolated from your real network and data. In this guide, you’ll set up an **attacker VM** (Kali or Parrot), add a few **intentionally vulnerable targets**, wire them with the right **virtual network modes**, and learn a clean **snapshot workflow** so you can break things and roll back in seconds.
+Halloo, another time another post it’s me lovely **SuiiKawaii** again — this time we’re building your **home cybersecurity lab**. A virtual lab lets you learn hacking **legally and safely**: you practice on machines you own, isolated from your real network and data. In this guide, you’ll set up an **attacker VM** (Kali or Parrot), add a few **intentionally vulnerable targets**, wire them with the right **virtual network modes**, and learn a clean **snapshot workflow** so you can break things and roll back in seconds.
 
 ![Suiw]({{ '/assets/images/homelab/Suiw.gif' | relative_url }})
 
