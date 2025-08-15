@@ -31,13 +31,17 @@ excerpt_separator: <!--more-->
 .callout.ok { border-color:#059669; background:rgba(5,150,105,.08); }
 </style>
 
-This is your practical field guide to the three most common package managers on Linux desktops and servers:
+_Hello and welcome back — **SuiiKawaii** here. Today we are demystifying **Linux package managers** in a practical, do-first way. If you can install, update, roll back, and troubleshoot packages confidently, you can keep any Linux box healthy — whether it is a home lab or a production server._
 
-- **apt** for Debian/Ubuntu
-- **pacman** for Arch-based systems
-- **dnf** for Fedora/RHEL-like systems
+![Pkg]({{ '/assets/images/pkg/pkg.gif' | relative_url }})
 
-We will keep things hands-on: daily commands, where the configuration lives, how to clean up safely, and how to fix common breakages. If you’re aiming at security or blue-team work, pair this with the path here: <a href="/posts/mastering-linux-for-cybersecurity/" target="_blank" rel="noopener noreferrer">Mastering Linux for Cybersecurity</a>.
+**What you will learn in this guide**
+- Daily workflows for **apt**, **pacman**, and **dnf**
+- Where configuration, repositories, keys, cache, and logs live
+- Safe cleanup routines that do not brick your system
+- Fast rollbacks and recovery when upgrades go wrong
+
+If you’re on a security track, pair this with <a href="/posts/mastering-linux-for-cybersecurity/" target="_blank" rel="noopener noreferrer">Mastering Linux for Cybersecurity</a>.
 
 ## Table of Contents
 - [Why Package Managers Matter](#why-package-managers-matter)
@@ -45,6 +49,7 @@ We will keep things hands-on: daily commands, where the configuration lives, how
 - [apt (Debian/Ubuntu)](#apt-debianubuntu)
 - [pacman (Arch)](#pacman-arch)
 - [dnf (Fedora/RHEL)](#dnf-fedorarhel)
+- [Rollback & Safety Patterns](#rollback--safety-patterns)
 - [Hands-on Example: Install Nmap Across apt, pacman, and dnf](#hands-on-example-install-nmap-across-apt-pacman-and-dnf)
 - [Safe Cleanups](#safe-cleanups)
 - [Common Errors & Fixes](#common-errors--fixes)
@@ -62,7 +67,7 @@ We will keep things hands-on: daily commands, where the configuration lives, how
 Package managers (PMs) keep your system consistent: they resolve dependencies, verify signatures, upgrade safely, and maintain history. Learn one deeply, then map the muscle memory to others.
 
 <div class="callout warn">
-Run commands that modify the system with <code>sudo</code>. Avoid mixing different PM ecosystems (e.g., using <code>pip</code> with <code>sudo</code> to overwrite distro Python packages).
+Run commands that modify the system with <code>sudo</code>. Avoid mixing different PM ecosystems (e.g., using <code>pip</code> with <code>sudo</code> to overwrite distro Python packages). Prefer <code>pipx</code> for CLI Python tools to avoid polluting system packages.
 </div>
 
 <!-- Main video embed -->
@@ -94,8 +99,7 @@ Run commands that modify the system with <code>sudo</code>. Avoid mixing differe
 
 </div>
 
-Refrences video:
-<!-- Supporting video after comparison -->
+**Reference video**
 <div class="embed-16x9" markdown="0">
   <iframe src="https://www.youtube.com/embed/lkii2cGuKao"
           title="Linux Package Management | Debian, Fedora, and Arch Linux"
@@ -167,7 +171,7 @@ sudo dpkg --configure -a
 # fix broken deps
 sudo apt --fix-broken install
 
-# release lock (only if no apt/dpkg is running!)
+# release locks (only if no apt/dpkg is running!)
 sudo lsof /var/lib/dpkg/lock-frontend /var/lib/apt/lists/lock /var/cache/apt/archives/lock
 # if stale: sudo rm -f <lockfile> && sudo dpkg --configure -a
 ```
@@ -203,16 +207,21 @@ sudo pacman -U ./pkgfile.pkg.tar.zst
 
 ### Configuration, mirrors, keys
 
-* **Config**: `/etc/pacman.conf` (enable repos, color, ParallelDownloads, etc.)
+* **Config**: `/etc/pacman.conf`
+  Example additions:
+
+  ```ini
+  Color
+  ParallelDownloads = 5
+  ```
 * **Mirrors**: `/etc/pacman.d/mirrorlist` (order matters). Tools like `reflector` can auto-rank mirrors.
 * **Keys**: pacman uses its own keyring:
 
-```bash
-# refresh / (re)initialize keyring
-sudo pacman -Sy archlinux-keyring
-sudo pacman-key --init
-sudo pacman-key --populate archlinux
-```
+  ```bash
+  sudo pacman -Sy archlinux-keyring
+  sudo pacman-key --init
+  sudo pacman-key --populate archlinux
+  ```
 
 ### Cache, logs, hooks
 
@@ -250,29 +259,73 @@ sudo dnf history undo <ID>   # rollback a transaction (when possible)
 ### Repos, modules, configuration
 
 * **Repos**: `/etc/yum.repos.d/*.repo`
-* **Config**: `/etc/dnf/dnf.conf` (e.g., `fastestmirror=1`, `max_parallel_downloads=10`, `installonly_limit=3`)
+* **Config**: `/etc/dnf/dnf.conf`
+  Example:
+
+  ```ini
+  [main]
+  fastestmirror=1
+  max_parallel_downloads=10
+  installonly_limit=3
+  ```
 * **Modularity** (Fedora/RHEL streams):
 
-```bash
-dnf module list
-sudo dnf module enable nodejs:20
-sudo dnf module install nodejs:20/common
-```
+  ```bash
+  dnf module list
+  sudo dnf module enable nodejs:20
+  sudo dnf module install nodejs:20/common
+  ```
 
 ### Keys, cache, logs
 
-* **Keys**: typically stored under `/etc/pki/rpm-gpg/`; import with `sudo rpm --import /path/to/RPM-GPG-KEY`
+* **Keys**: `/etc/pki/rpm-gpg/` (import via `sudo rpm --import ...`)
 * **Cache**: `/var/cache/dnf`
 * **Logs & history**: `/var/log/dnf.log` and `dnf history` for transactions
 
 ### Useful checks
 
 ```bash
-# verify dependency sanity and duplicates
 sudo dnf check
 sudo dnf repoquery --duplicated
-sudo dnf distro-sync    # align to repo versions
+sudo dnf distro-sync
 ```
+
+---
+
+## Rollback & Safety Patterns
+
+When updates go sideways, these are quick exits that save time:
+
+### apt
+
+```bash
+# prevent a package from upgrading temporarily
+echo "<pkg> hold" | sudo dpkg --set-selections
+apt-mark showhold
+# unhold later:
+echo "<pkg> install" | sudo dpkg --set-selections
+
+# install a specific version (see apt policy first)
+sudo apt install <pkg>=<version>
+```
+
+### pacman
+
+```bash
+# downgrade using a cached package (if still in cache)
+ls -t /var/cache/pacman/pkg/<pkg>-*.pkg.tar.zst | head
+sudo pacman -U /var/cache/pacman/pkg/<pkg>-<ver>-x86_64.pkg.tar.zst
+```
+
+### dnf
+
+```bash
+# list history and rollback a transaction
+dnf history
+sudo dnf history undo <ID>
+```
+
+> Keep reasonable caches (see Safe Cleanups) so you actually have old packages to roll back to.
 
 ---
 
@@ -682,8 +735,6 @@ sudo dnf autoremove && sudo dnf clean packages
 * RPM packaging: <a href="https://rpm-packaging-guide.github.io/" target="_blank" rel="noopener noreferrer">rpm-packaging-guide.github.io</a> | <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html-single/rpm_packaging_guide/index" target="_blank" rel="noopener noreferrer">RHEL: RPM Packaging Guide</a>
 * DNF docs: <a href="https://docs.fedoraproject.org/en-US/quick-docs/dnf/" target="_blank" rel="noopener noreferrer">Fedora Quick Docs: DNF</a> | <a href="https://dnf.readthedocs.io/en/latest/command_ref.html" target="_blank" rel="noopener noreferrer">DNF command reference</a>
 * Python Packaging User Guide: <a href="https://packaging.python.org/" target="_blank" rel="noopener noreferrer">packaging.python.org</a> | <a href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/" target="_blank" rel="noopener noreferrer">pip + venv</a>
-
-Pair this with the core Linux path here: <a href="/posts/mastering-linux-for-cybersecurity/" target="_blank" rel="noopener noreferrer">Mastering Linux for Cybersecurity</a>.
 
 ---
 
