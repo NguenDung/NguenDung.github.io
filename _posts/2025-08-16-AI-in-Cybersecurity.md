@@ -33,9 +33,12 @@ excerpt_separator: <!--more-->
 
 /* Optional subtle figure captions */
 .figcap { font-size:.9rem; color:#6b7280; margin-top:.3rem; }
+
+/* Anchor scroll offset for sticky headers */
+h1[id], h2[id], h3[id], h4[id] { scroll-margin-top: 80px; }
 </style>
 
-Hello again — SuiiKawaii here. This long-form guide takes an **evidence-based** look at AI for cybersecurity: where it accelerates learners and defenders, where it fails, and how to deploy it with **technical controls, evaluation, and governance**. It’s both a rigorous reference and a hands-on handbook.
+Hello again — **SuiiKawaii** here. This long-form guide takes an **evidence-based** look at AI for cybersecurity: where it accelerates learners and defenders, where it fails, and how to deploy it with **technical controls, evaluation, and governance**. It’s both a rigorous reference and a hands-on handbook.
 
 ![ai]({{ '/assets/images/ai/ai.gif' | relative_url }})
 
@@ -98,7 +101,7 @@ If you are building foundational Linux + security skills, pair this with:
 
 ---
 
-## 1) Scope: What “AI” Means Here
+<h2 id="1-scope-what-ai-means-here">1) Scope: What “AI” Means Here</h2>
 
 We focus on **language-model–driven assistants** for security work (LLMs & tool-using agents) and supporting components:
 
@@ -111,7 +114,7 @@ AI here is **assistive**, not autonomous. Human review and tests are non-negotia
 
 ---
 
-## 2) Capability Map: Where AI Helps Most
+<h2 id="2-capability-map-where-ai-helps-most">2) Capability Map: Where AI Helps Most</h2>
 
 <div class="table-scroll md-table" markdown="1">
 
@@ -129,7 +132,7 @@ AI here is **assistive**, not autonomous. Human review and tests are non-negotia
 
 ---
 
-## 3) Learning vs. Work: How AI Changes the Curve
+<h2 id="3-learning-vs-work-how-ai-changes-the-curve">3) Learning vs. Work: How AI Changes the Curve</h2>
 
 <div class="table-scroll md-table" markdown="1">
 
@@ -141,11 +144,13 @@ AI here is **assistive**, not autonomous. Human review and tests are non-negotia
 | **Work delivery** | Templates/manual drafts | Drafts + checklists + unit tests | Unreviewed outputs shipped |
 | **Retention** | Medium | Better via spaced repetition, Socratic | Poor; no internalization |
 
+</div>
+
 **Guiding principle:** use AI to **compress uncreative overhead** (boilerplate, summarization, scaffolding), not to replace thinking, testing, or accountability.
 
 ---
 
-## 4) Risk Model: How AI Fails (and Why)
+<h2 id="4-risk-model-how-ai-fails-and-why">4) Risk Model: How AI Fails (and Why)</h2>
 
 - **Hallucination** — plausible fiction  
 - **Prompt Injection** — untrusted input subverts instructions  
@@ -162,13 +167,13 @@ AI here is **assistive**, not autonomous. Human review and tests are non-negotia
 </div>
 <p class="figcap">Prompt injection is not theoretical. Build instruction firewalls and never auto-execute model output.</p>
 
-<div class="callout.warn">
+<div class="callout warn">
 Treat AI outputs as drafts. Require <strong>human-in-the-loop</strong> review, test in a lab first, and log prompts/outputs for auditability.
 </div>
 
 ---
 
-## 5) Data Classes, Redaction, and Minimization
+<h2 id="5-data-classes-redaction-and-minimization">5) Data Classes, Redaction, and Minimization</h2>
 
 Before using any AI tool:
 
@@ -181,9 +186,9 @@ Typical “safe-to-share”: public advisories, sanitized snippets, your own pro
 
 ---
 
-## 6) Architecture Patterns for Security Work
+<h2 id="6-architecture-patterns-for-security-work">6) Architecture Patterns for Security Work</h2>
 
-### 6.1 Retrieval-Augmented Generation (RAG) done right
+<h3 id="61-retrieval-augmented-generation-rag-done-right">6.1 Retrieval-Augmented Generation (RAG) done right</h3>
 
 **Goal:** ground the model in your truth (playbooks, rule repos, IR reports) to cut hallucination.
 
@@ -201,14 +206,14 @@ Pipeline:
 
 **Anti-patterns:** uncurated “all-of-Confluence”, >20 long chunks, answering beyond retrieved evidence.
 
-### 6.2 Guardrails and Output Controls
+<h3 id="62-guardrails-and-output-controls">6.2 Guardrails and Output Controls</h3>
 
 - **Schema validation**: enforce JSON/YAML for rules/IOCs/checklists  
 - **Policy filters**: block secrets (e.g., `AKIA…`), disallow destructive commands  
 - **Instruction firewalls**: strip/escape untrusted inputs (defend prompt injection)  
 - **Proof-of-Work**: demand test cases & negatives with every rule/query
 
-### 6.3 Local vs. SaaS Models
+<h3 id="63-local-vs-saas-models">6.3 Local vs. SaaS Models</h3>
 
 <div class="table-scroll md-table" markdown="1">
 
@@ -226,7 +231,7 @@ Start hybrid: SaaS for public/sanitized tasks; local for sensitive retrieval and
 
 ---
 
-## 7) LMMOps: Operating an AI Assistant in the SOC
+<h2 id="7-lmmops-operating-an-ai-assistant-in-the-soc">7) LMMOps: Operating an AI Assistant in the SOC</h2>
 
 - **Version pinning** (model/params), **prompt registry** (as code)  
 - **Gold datasets** for triage & detection tasks  
@@ -236,7 +241,7 @@ Start hybrid: SaaS for public/sanitized tasks; local for sensitive retrieval and
 
 ---
 
-## 8) Evaluation: Metrics and Experiment Design
+<h2 id="8-evaluation-metrics-and-experiment-design">8) Evaluation: Metrics and Experiment Design</h2>
 
 **Metrics**: Precision, Recall, F1, Latency (p95), Cost (tokens/case), Coverage (% usable outputs), Drift (delta vs. baseline over time)
 
@@ -248,240 +253,228 @@ Start hybrid: SaaS for public/sanitized tasks; local for sensitive retrieval and
 5. Compare AI-assisted vs. baseline on metrics + minutes saved  
 6. Catalog failure modes; iterate
 
-<div class="callout.ok">
+<div class="callout ok">
 Never ship a detection from AI without test data. Require <strong>positive</strong>/<strong>negative</strong> examples, field checks, and staged rollout.
 </div>
 
 ---
 
-## 9) Role-by-Role Playbooks & Prompts
+<h2 id="9-role-by-role-playbooks--prompts">9) Role-by-Role Playbooks &amp; Prompts</h2>
 
-### 9.1 SOC
+<h3 id="91-soc">9.1 SOC</h3>
 
 **Batch triage**
-```
-
+```text
 Role: SOC analyst. Summarize these alerts into a triage note:
-
-* Exec summary (3–5 bullets)
-* IOC table (IP/domain/hash)
-* ATT\&CK techniques (IDs only) from evidence
-* Validation queries (KQL/Splunk) citing exact field names
-  Constraints: If a field is missing, say “unknown”. Do not invent indicators.
-  Input:
-  {{sanitized\_alert\_batch}}
-
-```
+- Exec summary (3–5 bullets)
+- IOC table (IP/domain/hash)
+- ATT&CK techniques (IDs only) from evidence
+- Validation queries (KQL/Splunk) citing exact field names
+Constraints: If a field is missing, say “unknown”. Do not invent indicators.
+Input:
+{{sanitized_alert_batch}}
+````
 
 **De-duplication**
-```
 
+```text
 Cluster alerts by {hostname, user, TTP, timeframe ±2h}. Output clusters with rationale and a canonical incident title per cluster.
-
 ```
 
-### 9.2 Threat Intelligence
+<h3 id="92-threat-intelligence">9.2 Threat Intelligence</h3>
 
 **Campaign brief**
-```
 
+```text
 Task: One-page brief:
-
-* Who/What/So What
-* TTPs (ATT\&CK IDs)
-* Affected platforms/products
-* Detection hypotheses (plain English)
-* 72h defender actions
-  Grounding: Use only these sources; cite URLs or section IDs.
-  Sources:
-  {{urls\_or\_pasted\_excerpts}}
-
+- Who/What/So What
+- TTPs (ATT&CK IDs)
+- Affected platforms/products
+- Detection hypotheses (plain English)
+- 72h defender actions
+Grounding: Use only these sources; cite URLs or section IDs.
+Sources:
+{{urls_or_pasted_excerpts}}
 ```
 
-### 9.3 Detection Engineering
+<h3 id="93-detection-engineering">9.3 Detection Engineering</h3>
 
 **Hypothesis → rule + tests**
-```
 
+```text
 Convert this hypothesis into: (1) Sigma YAML (logsource, selection, condition, FP notes), and (2) KQL.
 Also output:
-
-* 3 positive synthetic events
-* 3 negative counterexamples
-* Required fields and source
-  Do not invent field names. Ask if missing.
-  Hypothesis:
-  {{english\_hypothesis}}
-
+- 3 positive synthetic events
+- 3 negative counterexamples
+- Required fields and source
+Do not invent field names. Ask if missing.
+Hypothesis:
+{{english_hypothesis}}
 ```
 
 **Sanity checklist**
-```
 
+```text
 Propose field-existence checks, rate limits, and edge cases that could cause false positives. Output as a review checklist.
-
 ```
 
-### 9.4 Incident Response
+<h3 id="94-incident-response">9.4 Incident Response</h3>
 
 **IR report scaffold**
-```
 
+```text
 Role: IR scribe. Turn these notes into a report:
-
-* Executive summary
-* Timeline (UTC)
-* Impact
-* Containment/eradication/recovery
-* Lessons learned & action items
-  Cite note IDs in brackets. Neutral tone.
-  Input:
-  {{sanitized\_notes}}
-
+- Executive summary
+- Timeline (UTC)
+- Impact
+- Containment/eradication/recovery
+- Lessons learned & action items
+Cite note IDs in brackets. Neutral tone.
+Input:
+{{sanitized_notes}}
 ```
 
-### 9.5 GRC & Policy
+<h3 id="95-grc--policy">9.5 GRC &amp; Policy</h3>
 
 **One-page policy**
-```
 
+```text
 Draft an “AI Use in Security Operations” policy:
 Purpose, Scope, Allowed/Forbidden Data, Process (classify→redact→prompt→review→log), Approved Tools, Logging & Retention, Review Cadence, Enforcement.
-
 ```
 
-### 9.6 AppSec & Cloud Security
+<h3 id="96-appsec--cloud-security">9.6 AppSec &amp; Cloud Security</h3>
 
 **Least-privilege policy diff**
-```
 
+```text
 Given current IAM policy JSON and a target least-privilege spec, propose a diff with justification and potential blast radius. Flag wildcard actions.
-
 ```
 
 ---
 
-## 10) Regulatory & Compliance Lens (NIST, ENISA, SAIF)
+<h2 id="10-regulatory--compliance-lens-nist-enisa-saif">10) Regulatory &amp; Compliance Lens (NIST, ENISA, SAIF)</h2>
 
-- **NIST AI RMF 1.0** — map program work to GOVERN / MAP / MEASURE / MANAGE  
-  <a href="https://www.nist.gov/video/introduction-nist-ai-risk-management-framework-ai-rmf-10-explainer-video" target="_blank" rel="noopener noreferrer">NIST explainer (video)</a>
-- **ENISA** — AI & Cybersecurity research, FAICP practice framing  
-  <a href="https://www.enisa.europa.eu/publications/artificial-intelligence-and-cybersecurity-research" target="_blank" rel="noopener noreferrer">ENISA research</a> ·
-  <a href="https://www.faicp-framework.com/" target="_blank" rel="noopener noreferrer">FAICP overview</a>
-- **Google Secure AI Framework (SAIF)** — pragmatic controls to align with existing SDLC/SecOps  
-  <a href="https://cloud.google.com/use-cases/secure-ai-framework" target="_blank" rel="noopener noreferrer">SAIF (overview)</a>
+* **NIST AI RMF 1.0** — map program work to GOVERN / MAP / MEASURE / MANAGE <a href="https://www.nist.gov/video/introduction-nist-ai-risk-management-framework-ai-rmf-10-explainer-video" target="_blank" rel="noopener noreferrer">NIST explainer (video)</a>
+* **ENISA** — AI & Cybersecurity research, FAICP practice framing <a href="https://www.enisa.europa.eu/publications/artificial-intelligence-and-cybersecurity-research" target="_blank" rel="noopener noreferrer">ENISA research</a> · <a href="https://www.faicp-framework.com/" target="_blank" rel="noopener noreferrer">FAICP overview</a>
+* **Google Secure AI Framework (SAIF)** — pragmatic controls to align with existing SDLC/SecOps <a href="https://cloud.google.com/use-cases/secure-ai-framework" target="_blank" rel="noopener noreferrer">SAIF (overview)</a>
 
-<div class="callout.info">
+<div class="callout info">
 If you already use ISO 27001/SOC 2: map AI controls to existing Annex A controls (asset mgmt, access control, secure development, logging). Keep a single control catalog.
 </div>
 
 ---
 
-## 11) Security of AI Systems
+<h2 id="11-security-of-ai-systems">11) Security of AI Systems</h2>
 
 Threats to the assistant itself & mitigations:
-- **Prompt Injection** → input sanitization, allowlists, retrieval isolation, tool-use gating  
-- **Data Poisoning** → doc signing, source allowlists, change review  
-- **Model/Plugin Supply Chain** → signature verification, SBOM, reproducible builds  
-- **Model Extraction** → rate limit, watermark, anomaly monitoring  
-- **Sensitive Outputs** → content filters for secrets/PII, deterministic schemas
+
+* **Prompt Injection** → input sanitization, allowlists, retrieval isolation, tool-use gating
+* **Data Poisoning** → doc signing, source allowlists, change review
+* **Model/Plugin Supply Chain** → signature verification, SBOM, reproducible builds
+* **Model Extraction** → rate limit, watermark, anomaly monitoring
+* **Sensitive Outputs** → content filters for secrets/PII, deterministic schemas
 
 ---
 
-## 12) When NOT to Use AI
+<h2 id="12-when-not-to-use-ai">12) When NOT to Use AI</h2>
 
-- Handling **sensitive incident data** on non-approved tools
-- Auto-executing commands, queries, or playbooks
-- Issuing legal/HR/contractual conclusions
-- Generating exploit code or bypass techniques
-- High-novelty events with scarce ground truth
+* Handling **sensitive incident data** on non-approved tools
+* Auto-executing commands, queries, or playbooks
+* Issuing legal/HR/contractual conclusions
+* Generating exploit code or bypass techniques
+* High-novelty events with scarce ground truth
 
 ---
 
-## 13) 30/60/90 Rollout Plan (Team or Lab)
+<h2 id="136090-rollout-plan-team-or-lab">13) 30/60/90 Rollout Plan (Team or Lab)</h2>
 
 <div class="table-scroll md-table" markdown="1">
 
-| Phase | Outcomes | Activities | Artifacts |
-|---|---|---|---|
+| Phase       | Outcomes                 | Activities                                                                                          | Artifacts                                            |
+| ----------- | ------------------------ | --------------------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | **30 days** | Policy & guardrails live | Approve tools; classify data; redaction helpers; pick 2 workflows (SOC triage, detection skeletons) | Policy 1-pager; prompt registry v0; gold datasets v0 |
-| **60 days** | Evaluated pilot | A/B test vs. baseline; add RAG for playbooks; start metrics (P/R/F1, latency, coverage, cost) | Pilot report; failure-mode log; updated prompts |
-| **90 days** | Staged adoption | Staged rollout; training; budget alerts; periodic drift checks | SOPs; dashboards; retraining plan; review cadence |
+| **60 days** | Evaluated pilot          | A/B test vs. baseline; add RAG for playbooks; start metrics (P/R/F1, latency, coverage, cost)       | Pilot report; failure-mode log; updated prompts      |
+| **90 days** | Staged adoption          | Staged rollout; training; budget alerts; periodic drift checks                                      | SOPs; dashboards; retraining plan; review cadence    |
 
 </div>
 
 ---
 
-## 14) Case Studies
+<h2 id="14-case-studies">14) Case Studies</h2>
 
-### 14.1 Phishing Triage End-to-End
+<h3 id="141-phishing-triage-end-to-end">14.1 Phishing Triage End-to-End</h3>
 
 **Goal:** reduce time-to-triage without increasing false positives.
 
 **Inputs (sanitized):**
-- Email headers/body (PII masked)
-- URL artifacts (defanged)
-- Existing IOC lists
-- Mail gateway logs
+
+* Email headers/body (PII masked)
+* URL artifacts (defanged)
+* Existing IOC lists
+* Mail gateway logs
 
 **Workflow:**
-1) **LLM Summarization** → extract sender, subject, indicators; label intent (spoofing, credential harvest).  
-2) **IOC Table** → URLs/domains/ips/hashes with source and confidence.  
-3) **Detection Hypotheses** → plain English (e.g., “new domain + brand terms + short-lived landing page”).  
-4) **Validation Queries** → generate KQL/Splunk searches citing fields.  
-5) **Decision Aid** → risk score with rationale + recommended actions.
+
+1. **LLM Summarization** → extract sender, subject, indicators; label intent (spoofing, credential harvest).
+2. **IOC Table** → URLs/domains/ips/hashes with source and confidence.
+3. **Detection Hypotheses** → plain English (e.g., “new domain + brand terms + short-lived landing page”).
+4. **Validation Queries** → generate KQL/Splunk searches citing fields.
+5. **Decision Aid** → risk score with rationale + recommended actions.
 
 **Prompt (drop-in):**
-```
 
+```text
 Role: SOC analyst (email security).
 Task: Summarize this suspected phishing message. Output:
-
-* 5-bullet executive summary
-* IOC table (type,value,first\_seen,source,confidence)
-* Likely technique (ATT\&CK ID) if explicitly supported
-* KQL to find siblings in the last 48h (cite exact field names)
-  Constraints:
-* Use only facts from the input; if unknown, say so.
-  Input:
-  {{sanitized\_email + headers + gateway\_snippets}}
-
-````
+- 5-bullet executive summary
+- IOC table (type,value,first_seen,source,confidence)
+- Likely technique (ATT&CK ID) if explicitly supported
+- KQL to find siblings in the last 48h (cite exact field names)
+Constraints:
+- Use only facts from the input; if unknown, say so.
+Input:
+{{sanitized_email + headers + gateway_snippets}}
+```
 
 **Checks before action:**
-- Links resolve to known brand impersonation patterns?
-- Domain age & reputation?
-- Mailbox telemetry for the recipient cohort?
-- Manual verification for high-risk accounts.
 
-**KPIs:** median triage time ↓, precision@top-K, % cases with complete IOC tables.
+* Links resolve to known brand impersonation patterns?
+* Domain age & reputation?
+* Mailbox telemetry for the recipient cohort?
+* Manual verification for high-risk accounts.
+
+**KPIs:** median triage time ↓, precision\@top-K, % cases with complete IOC tables.
 
 ---
 
-### 14.2 Detection from Hypothesis → Sigma/KQL → Tests → Rollout
+<h3 id="142-detection-from-hypothesis--sigmakql--tests--rollout">14.2 Detection from Hypothesis → Sigma/KQL → Tests → Rollout</h3>
 
-**Hypothesis (English):**  
+**Hypothesis (English):**
 “Alert when `powershell.exe` launches with `-enc` or `-encodedcommand` and network connections follow within 30s from the same PID.”
 
 **LLM Output (expected skeletons):**
-- Sigma rule (logsource: Windows process creation + network events)  
-- KQL with **field existence checks** and **join on PID + time window**  
-- **3 positive** and **3 negative** synthetic examples  
-- False-positive notes (admin tools, EDR scripts)
+
+* Sigma rule (logsource: Windows process creation + network events)
+* KQL with **field existence checks** and **join on PID + time window**
+* **3 positive** and **3 negative** synthetic examples
+* False-positive notes (admin tools, EDR scripts)
 
 **Sanity Review Checklist:**
-- Fields present in your telemetry? (e.g., `ProcessCommandLine`, `InitiatingProcessId`, `RemoteUrl`)  
-- Time window tuned to infra? (10–60s)  
-- Rate limits / suppression?  
-- Known FP sources whitelisted?
+
+* Fields present in your telemetry? (e.g., `ProcessCommandLine`, `InitiatingProcessId`, `RemoteUrl`)
+* Time window tuned to infra? (10–60s)
+* Rate limits / suppression?
+* Known FP sources whitelisted?
 
 **Rollout:** lab test → canary → staged (5–25–100%) → monitor P/R/F1 and alert volume → adjust.
 
 ---
 
-## Appendix A: Redaction Helpers (Bash/Python)
+<h2 id="appendix-a-redaction-helpers-bashpython">Appendix A: Redaction Helpers (Bash/Python)</h2>
 
 ### Bash (sed) — quick masking
+
 ```bash
 # Mask IPv4 -> 10.0.0.X
 sed -E 's/\b([0-9]{1,3}\.){3}[0-9]{1,3}\b/10.0.0.X/g' input.log > redacted.log
@@ -491,7 +484,7 @@ sed -E 's/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/uX@example.local/g' -i 
 
 # Mask hostnames ending in corp/local/internal -> host-XXX
 sed -E 's/\b([a-zA-Z0-9-]+)\.(corp|local|internal)\b/host-XXX/g' -i redacted.log
-````
+```
 
 ### Python — structured redaction with a keeplist
 
@@ -516,7 +509,7 @@ python redact.py '["192.0.2.10","admin@example.com"]' < raw.txt > redacted.txt
 
 ---
 
-## Appendix B: Thin RAG Pipeline Example (Python)
+<h2 id="appendix-b-thin-rag-pipeline-example-python">Appendix B: Thin RAG Pipeline Example (Python)</h2>
 
 > Minimal demo with local embeddings and a simple retriever to ground an LLM. Replace `emit()` with your model call; enforce schemas in production.
 
@@ -591,7 +584,7 @@ def mrr(retrieved, gold):
 
 ---
 
-## Appendix C: Prompt Registry (YAML Example)
+<h2 id="appendix-c-prompt-registry-yaml-example">Appendix C: Prompt Registry (YAML Example)</h2>
 
 ```yaml
 id: soc_triage_v1
@@ -625,7 +618,7 @@ changelog:
 
 ---
 
-## Appendix D: One-Page AI Use Policy Starter
+<h2 id="appendix-d-one-page-ai-use-policy-starter">Appendix D: One-Page AI Use Policy Starter</h2>
 
 ```
 Title: AI Use in Security Operations
@@ -653,7 +646,7 @@ Enforcement:
 
 ---
 
-## Appendix E: Evaluation Checklist (One-Pager)
+<h2 id="appendix-e-evaluation-checklist-one-pager">Appendix E: Evaluation Checklist (One-Pager)</h2>
 
 * **Task Definition** — problem, owner, success criteria
 * **Dataset** — representative, labeled, sanitized; includes negatives
@@ -666,7 +659,7 @@ Enforcement:
 
 ---
 
-## Appendix F: Traditional ML for SOC (Metrics & Baselines)
+<h2 id="appendix-f-traditional-ml-for-soc-metrics--baselines">Appendix F: Traditional ML for SOC (Metrics &amp; Baselines)</h2>
 
 <div class="table-scroll md-table" markdown="1">
 
@@ -702,7 +695,7 @@ print(f"Precision@{K}: {prec_at_k:.2%}")
 
 ---
 
-## Further Reading & Videos
+<h2 id="further-reading--videos">Further Reading &amp; Videos</h2>
 
 **Frameworks & official resources**
 
@@ -720,11 +713,8 @@ print(f"Precision@{K}: {prec_at_k:.2%}")
 * <a href="https://www.youtube.com/watch?v=eUY9i1CWmUg" target="_blank" rel="noopener noreferrer">RAG Patterns (InfoQ)</a> — retrieval do’s and don’ts
 * <a href="https://www.youtube.com/watch?v=rhVKGkCVRiE" target="_blank" rel="noopener noreferrer">RAG LLMs Are Not Safe</a> — safety pitfalls & countermeasures
 * <a href="https://www.youtube.com/watch?v=utcYsBKL7e8" target="_blank" rel="noopener noreferrer">How AI Can Accelerate Cybersecurity</a> — the talk we embedded up top
-
-**(Use with caution — “edutainment” titles)**
-
 * <a href="https://www.youtube.com/watch?v=3D6gaawXwfk" target="_blank" rel="noopener noreferrer">Using AI to become a Hacker</a> — entertaining; keep a policy lens
-* <a href="https://www.youtube.com/watch?v=meWsngooexo" target="_blank" rel="noopener noreferrer">How ChatGPT Transformed Me into a God-Tier Hacker!</a> — good for mindset debate, not for process
+* <a href="https://www.youtube.com/watch?v=meWsngooexo" target="_blank" rel="noopener noreferrer">How ChatGPT Transformed Me into a God-Tier Hacker!</a> — mindset debate, not for process
 
 **Keep learning**
 
