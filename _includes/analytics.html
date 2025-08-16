@@ -1,8 +1,15 @@
 {% if jekyll.environment == "production" %}
-  {% if site.analytics and site.analytics.plausible_domain %}
+  {%- if site.analytics and site.analytics.goatcounter_id and site.analytics.goatcounter_id != "" -%}
+    <script data-goatcounter="https://{{ site.analytics.goatcounter_id }}.goatcounter.com/count"
+            async src="//gc.zgo.at/count.js"></script>
+    <noscript><img src="https://{{ site.analytics.goatcounter_id }}.goatcounter.com/count?p={{ page.url | relative_url }}" alt=""></noscript>
+  {%- endif -%}
+
+  {%- if site.analytics and site.analytics.plausible_domain and site.analytics.plausible_domain != "" -%}
     <script defer data-domain="{{ site.analytics.plausible_domain }}" src="https://plausible.io/js/plausible.js"></script>
-  {% endif %}
-  {% if site.analytics and site.analytics.umami_website_id and site.analytics.umami_src %}
+  {%- endif -%}
+
+  {%- if site.analytics and site.analytics.umami_website_id and site.analytics.umami_src -%}
     <script async src="{{ site.analytics.umami_src }}" data-website-id="{{ site.analytics.umami_website_id }}"></script>
-  {% endif %}
+  {%- endif -%}
 {% endif %}

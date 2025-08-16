@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-with-comments
 title: "Mastering Linux for Cybersecurity: From Beginner to Pro"
 permalink: /posts/mastering-linux-for-cybersecurity/
 tags: [linux, cybersecurity, guide, shell, bash, beginner, ricing]

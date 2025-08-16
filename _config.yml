@@ -88,6 +88,7 @@ giscus:
 
 # ---- Analytics (optional) ----
 analytics:
-  plausible_domain: "nguendung.github.io"
+  goatcounter_id: "suiikawaii"
+  plausible_domain: ""
   umami_website_id: ""          # e.g. UUID
   umami_src: ""                 # e.g. https://umami.example.com/script.js
