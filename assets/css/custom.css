@@ -628,3 +628,10 @@ picture.hero img {
   height: auto;
   border-radius: 12px;
 }
+.share{display:flex;align-items:center;gap:.5rem;margin:1.25rem 0}
+.share__label{opacity:.8;margin-right:.25rem;font-size:.95rem}
+.share__btn{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;
+  border:1px solid var(--border-color,#333);border-radius:8px;background:transparent;color:#ddd}
+.share__btn:hover{background:rgba(255,255,255,.06)}
+.share__btn svg{width:18px;height:18px}
+.share__copy.copied{outline:2px solid #4caf50}
