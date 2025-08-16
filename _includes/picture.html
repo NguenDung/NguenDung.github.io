@@ -1,0 +1,26 @@
+{%- comment -%}
+Usage:
+{% include picture.html
+   src="/assets/images/posts/home-lab/hero.jpg"
+   alt="Home lab overview"
+   width="1280" height="720"
+   class="hero" %}
+This will try to use /assets/images/.../hero.avif and hero.webp first (same basename).
+{%- endcomment -%}
+{% assign src = include.src %}
+{% assign alt = include.alt | default: "" %}
+{% assign w = include.width | default: "" %}
+{% assign h = include.height | default: "" %}
+{% assign class = include.class | default: "" %}
+
+{% assign avif = src | replace: '.jpg', '.avif' | replace: '.jpeg','.avif' | replace: '.png','.avif' | replace: '.webp','.avif' %}
+{% assign webp = src | replace: '.jpg', '.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.avif','.webp' %}
+
+<picture class="{{ class }}">
+  <source srcset="{{ avif | relative_url }}" type="image/avif">
+  <source srcset="{{ webp | relative_url }}" type="image/webp">
+  <img src="{{ src | relative_url }}" alt="{{ alt | escape }}"
+       {% if w %}width="{{ w }}"{% endif %}
+       {% if h %}height="{{ h }}"{% endif %}
+       loading="eager" decoding="async">
+</picture>

@@ -1,7 +1,7 @@
-# ---- Site basics (keep yours) ----
+# ---- Site basics ----
 title: SuiiKawaii
 author: SuiiKawaii
-description: >
+description: >-
   Part time CTF Player learn every day!!
   <br/>🌠 I Love Hoshimachi Suisei!!  🌠
   <br/>🌠 I Love Hoshimachi Suisei!! 🌠
@@ -11,29 +11,30 @@ paginate: 10
 paginate_path: "/blog/page:num/"
 
 # ---- URLs ----
-# Set your user domain. Do NOT set baseurl here if workflow passes --baseurl.
-url: "https://NguenDung.github.io"   # <--- đổi 'NguenDung' nếu khác
-# baseurl: "/design"                 # <--- ĐỂ TRỐNG vì workflow đã truyền --baseurl
+# User/Org site => baseurl must be empty
+url: "https://nguendung.github.io"
+baseurl: ""
 
 # ---- Theme ----
-remote-theme: jekyll-dash
+remote_theme: jekyll-dash
 
-# ---- Plugins (load by Actions build) ----
+# ---- Plugins ----
 plugins:
   - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
+  - jekyll-sitemap
   - jekyll-paginate
   - liquid-md5
-  - jekyll/tagging          # <--- Quan trọng: bật plugin tag
-  - jekyll-archives
+  - jekyll/tagging
+  # - jekyll-archives   # disabled to avoid duplicate tag pages
 
 # ---- jekyll-tagging config ----
-tag_permalink_style: pretty    # /tag/<slug>/
-tag_page_layout: tag_page      # layout bạn đang có trong _layouts
-tag_page_dir: tag              # output vào /tag/
+tag_permalink_style: pretty     # /tag/<slug>/
+tag_page_layout: tag_page       # your tag layout in _layouts
+tag_page_dir: tag               # output to /tag/
 
-# ---- dash theme options (giữ nguyên phần của bạn) ----
+# ---- dash theme options ----
 dash:
   date_format: "%b %-d, %Y"
   social_links:
@@ -60,21 +61,5 @@ exclude:
   - .gitignore
   - .github
 
-jekyll-archives:
-  enabled: [tags]
-  layouts:
-    tag: tag
-  permalinks:
-    tag: /tag/:name/     # URL sẽ là /tag/ten-tag/
-
 timezone: Asia/Ho_Chi_Minh
 future: true
-
-
-
-
-
-
-
-
-    

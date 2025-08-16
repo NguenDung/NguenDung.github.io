@@ -583,3 +583,38 @@ body.warn-lock{
   #article-search,
   .recent-articles .recent-header input[type="search"]{ width: 60% !important; max-width: 60% !important; }
 }
+/* ====== READ TIME CHIP ====== */
+.post-meta-inline {
+  margin-top: 0.25rem;
+  font-size: 0.95rem;
+  opacity: 0.9;
+}
+.post-meta-inline .reading-time {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border: 1px solid rgba(0,0,0,0.10);
+  border-radius: 999px;
+  font-size: 0.82rem;
+  line-height: 1;
+  opacity: 0.85;
+}
+@media (prefers-color-scheme: dark){
+  .post-meta-inline .reading-time{ border-color: rgba(255,255,255,0.20); }
+}
+
+/* ====== CODE COPY BUTTON ====== */
+pre { position: relative; }
+pre > code { display: block; }
+.copy-btn{
+  position: absolute; top: .5rem; right: .5rem;
+  padding: .25rem .5rem; font-size: .75rem; line-height: 1;
+  border: 1px solid rgba(0,0,0,.15); border-radius: .4rem;
+  background: rgba(255,255,255,.75); cursor: pointer; user-select: none;
+}
+.copy-btn:hover{ filter: brightness(1.03); }
+.copy-btn:active{ transform: translateY(1px); }
+.copy-btn.done{ background: #c8f7c5; }
+@media (prefers-color-scheme: dark){
+  .copy-btn{ background: rgba(20,20,20,.75); color:#eee; border-color: rgba(255,255,255,.2); }
+  .copy-btn.done{ background: #1b3f1b; }
+}

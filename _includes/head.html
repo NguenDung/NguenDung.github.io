@@ -1,28 +1,30 @@
 <head>
+  <!-- Basics -->
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   {%- seo -%}
+  {%- feed_meta -%}
 
-  <!-- Theme default CSS -->
+  <!-- Theme CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
-
-  <!-- Popup CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/magnific-popup.css' | relative_url }}">
 
-  <!-- CSS override: cover, widget, etc -->
+  <!-- Your overrides (read-time & copy styles are inside) -->
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="{{ '/assets/favicon.png' | relative_url }}" />
 
-  {%- feed_meta -%}
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
 
-  <!-- JS popup & jQuery -->
+  <!-- jQuery + popup (keep NON-defer for inline scripts that use $) -->
   <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
   <script src="{{ '/assets/js/jquery.magnific-popup.js' | relative_url }}"></script>
+
+  <!-- Single bundled enhancement script -->
+  <script defer src="{{ '/assets/js/site.js' | relative_url }}"></script>
 </head>
