@@ -7,11 +7,12 @@
   {%- seo -%}
   {%- feed_meta -%}
 
+  <!-- JSON-LD BlogPosting only on posts -->
+  {%- if page.date -%}{%- include jsonld-post.html -%}{%- endif -%}
+
   <!-- Theme CSS -->
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/magnific-popup.css' | relative_url }}">
-
-  <!-- Your overrides (read-time & copy styles are inside) -->
   <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
 
   <!-- Favicon -->
@@ -20,8 +21,9 @@
   {%- if jekyll.environment == 'production' and site.google_analytics -%}
     {%- include google-analytics.html -%}
   {%- endif -%}
+  {%- include analytics.html -%}
 
-  <!-- jQuery + popup (keep NON-defer for inline scripts that use $) -->
+  <!-- jQuery + popup -->
   <script src="https://code.jquery.com/jquery-3.2.0.min.js"></script>
   <script src="{{ '/assets/js/jquery.magnific-popup.js' | relative_url }}"></script>
 

@@ -1,0 +1,50 @@
+{% if page.comments != false and site.giscus and site.giscus.repo and site.giscus.repo_id and site.giscus.category and site.giscus.category_id %}
+<section id="comments" class="post-comments" style="margin-top:2rem;">
+  <script
+    src="https://giscus.app/client.js"
+    data-repo="{{ site.giscus.repo }}"
+    data-repo-id="{{ site.giscus.repo_id }}"
+    data-category="{{ site.giscus.category }}"
+    data-category-id="{{ site.giscus.category_id }}"
+    data-mapping="{{ site.giscus.mapping | default: 'pathname' }}"
+    data-reactions-enabled="{{ site.giscus.reactions | default: '1' }}"
+    data-emit-metadata="0"
+    data-input-position="{{ site.giscus.input_position | default: 'bottom' }}"
+    data-theme="{{ site.giscus.theme | default: 'preferred_color_scheme' }}"
+    data-lang="{{ site.giscus.lang | default: 'en' }}"
+    crossorigin="anonymous"
+    async>
+  </script>
+  <script>
+    (function () {
+    // Lấy theme hiện tại của site (dựa vào data-theme trên <html>)
+    function currentTheme() {
+        return document.documentElement.getAttribute('data-theme') === 'light'
+        ? 'light'
+        : 'dark';
+    }
+
+    // Gửi thông điệp đổi theme cho iframe giscus
+    function setGiscusTheme(theme) {
+        const iframe = document.querySelector('iframe.giscus-frame');
+        if (!iframe) return;
+        iframe.contentWindow.postMessage(
+        { giscus: { setConfig: { theme: theme } } },
+        'https://giscus.app'
+        );
+    }
+
+    // Khi DOM sẵn sàng: set theme ban đầu
+    document.addEventListener('DOMContentLoaded', function () {
+        setGiscusTheme(currentTheme());
+    });
+
+    // Theo dõi thay đổi thuộc tính data-theme (khi bạn bấm toggle)
+    const obs = new MutationObserver(() => setGiscusTheme(currentTheme()));
+    obs.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+    })();
+    </script>
+
+  <noscript>Please enable JavaScript to view the comments powered by Giscus.</noscript>
+</section>
+{% endif %}

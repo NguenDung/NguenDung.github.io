@@ -1,0 +1,22 @@
+{%- assign url = page.url | absolute_url -%}
+{%- assign headline = page.title | strip -%}
+{%- assign desc = page.description | default: page.excerpt | strip | truncate: 160 -%}
+{%- assign author_name = page.author | default: site.author | default: site.title -%}
+{%- assign date_pub = page.date | date_to_xmlschema -%}
+{%- assign date_mod = page.last_modified_at | default: page.date | date_to_xmlschema -%}
+{%- assign img = page.image | default: page.hero | default: site.logo | default: '/assets/favicon.png' -%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": { "@type": "WebPage", "@id": "{{ url }}" },
+  "headline": {{ headline | jsonify }},
+  "description": {{ desc | jsonify }},
+  "image": {{ img | absolute_url | jsonify }},
+  "author": { "@type": "Person", "name": {{ author_name | jsonify }} },
+  "publisher": { "@type": "Organization", "name": {{ site.title | jsonify }} },
+  "datePublished": "{{ date_pub }}",
+  "dateModified": "{{ date_mod }}"
+}
+</script>

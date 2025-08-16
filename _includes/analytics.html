@@ -1,0 +1,8 @@
+{% if jekyll.environment == "production" %}
+  {% if site.analytics and site.analytics.plausible_domain %}
+    <script defer data-domain="{{ site.analytics.plausible_domain }}" src="https://plausible.io/js/plausible.js"></script>
+  {% endif %}
+  {% if site.analytics and site.analytics.umami_website_id and site.analytics.umami_src %}
+    <script async src="{{ site.analytics.umami_src }}" data-website-id="{{ site.analytics.umami_website_id }}"></script>
+  {% endif %}
+{% endif %}

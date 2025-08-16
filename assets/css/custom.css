@@ -618,3 +618,13 @@ pre > code { display: block; }
   .copy-btn{ background: rgba(20,20,20,.75); color:#eee; border-color: rgba(255,255,255,.2); }
   .copy-btn.done{ background: #1b3f1b; }
 }
+/* ===== HERO IMAGE ===== */
+picture.hero, .hero picture, img.hero {
+  display: block;
+  max-width: 100%;
+}
+picture.hero img {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+}

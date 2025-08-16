@@ -1,26 +1,68 @@
 {%- comment -%}
-Usage:
+Usage examples:
+
+<!-- Hero (LCP): eager + high priority -->
 {% include picture.html
    src="/assets/images/posts/home-lab/hero.jpg"
    alt="Home lab overview"
    width="1280" height="720"
-   class="hero" %}
-This will try to use /assets/images/.../hero.avif and hero.webp first (same basename).
-{%- endcomment -%}
-{% assign src = include.src %}
-{% assign alt = include.alt | default: "" %}
-{% assign w = include.width | default: "" %}
-{% assign h = include.height | default: "" %}
-{% assign class = include.class | default: "" %}
+   class="hero"
+   priority="eager"
+   sizes="(max-width: 800px) 100vw, 800px" %}
 
-{% assign avif = src | replace: '.jpg', '.avif' | replace: '.jpeg','.avif' | replace: '.png','.avif' | replace: '.webp','.avif' %}
-{% assign webp = src | replace: '.jpg', '.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.avif','.webp' %}
+<!-- Inline image (không gấp): lazy -->
+{% include picture.html
+   src="/assets/images/posts/home-lab/diagram.png"
+   alt="Network diagram"
+   width="960" height="600"
+   priority="lazy" %}
+
+<!-- Nếu CHƯA có .avif/.webp bên cạnh, có thể tắt để tránh 404 -->
+{% include picture.html
+   src="/assets/images/posts/foo/bar.jpg"
+   alt="Example"
+   no_avif=true
+   no_webp=true %}
+
+Notes:
+- AVIF/WebP được suy ra cùng basename: hero.avif, hero.webp.
+- Mặc định giữ nguyên hành vi cũ: priority="eager".
+{%- endcomment -%}
+
+{% assign src   = include.src %}
+{% assign alt   = include.alt   | default: "" %}
+{% assign w     = include.width | default: "" %}
+{% assign h     = include.height | default: "" %}
+{% assign class = include.class | default: "" %}
+{% assign sizes = include.sizes | default: "" %}
+{% assign prio  = include.priority | default: "eager" %}
+{% assign no_avif = include.no_avif | default: false %}
+{% assign no_webp = include.no_webp | default: false %}
+
+{% assign avif = src | replace: '.jpg','.avif' | replace: '.jpeg','.avif' | replace: '.png','.avif' | replace: '.webp','.avif' %}
+{% assign webp = src | replace: '.jpg','.webp' | replace: '.jpeg','.webp' | replace: '.png','.webp' | replace: '.avif','.webp' %}
+
+{% assign loading = 'eager' %}
+{% assign fetchp  = 'high' %}
+{% if prio == 'lazy' or prio == 'auto' %}
+  {% assign loading = 'lazy' %}
+  {% assign fetchp  = '' %}
+{% endif %}
 
 <picture class="{{ class }}">
-  <source srcset="{{ avif | relative_url }}" type="image/avif">
-  <source srcset="{{ webp | relative_url }}" type="image/webp">
-  <img src="{{ src | relative_url }}" alt="{{ alt | escape }}"
-       {% if w %}width="{{ w }}"{% endif %}
-       {% if h %}height="{{ h }}"{% endif %}
-       loading="eager" decoding="async">
+  {% unless no_avif %}
+    <source srcset="{{ avif | relative_url }}" type="image/avif">
+  {% endunless %}
+  {% unless no_webp %}
+    <source srcset="{{ webp | relative_url }}" type="image/webp">
+  {% endunless %}
+  <img
+    src="{{ src | relative_url }}"
+    alt="{{ alt | escape }}"
+    {% if w %}width="{{ w }}"{% endif %}
+    {% if h %}height="{{ h }}"{% endif %}
+    {% if sizes %}sizes="{{ sizes | escape }}"{% endif %}
+    loading="{{ loading }}"
+    {% if fetchp %}fetchpriority="{{ fetchp }}"{% endif %}
+    decoding="async">
 </picture>

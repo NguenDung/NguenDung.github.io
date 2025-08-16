@@ -16,11 +16,11 @@ url: "https://nguendung.github.io"
 baseurl: ""
 
 # ---- Theme ----
-remote_theme: jekyll-dash
+# Using local layouts/assets (no remote theme)
+# remote_theme: jekyll-dash
 
 # ---- Plugins ----
 plugins:
-  - jekyll-remote-theme
   - jekyll-feed
   - jekyll-seo-tag
   - jekyll-sitemap
@@ -34,7 +34,7 @@ tag_permalink_style: pretty     # /tag/<slug>/
 tag_page_layout: tag_page       # your tag layout in _layouts
 tag_page_dir: tag               # output to /tag/
 
-# ---- dash theme options ----
+# ---- dash theme options (safe to keep even without remote theme) ----
 dash:
   date_format: "%b %-d, %Y"
   social_links:
@@ -63,3 +63,31 @@ exclude:
 
 timezone: Asia/Ho_Chi_Minh
 future: true
+
+# ---- Defaults: comments only on posts ----
+defaults:
+  - scope:
+      path: ""        # all paths
+      type: "posts"   # only blog posts
+    values:
+      layout: post-with-comments
+      comments: true  # you can disable per post with: comments: false
+
+# ---- Comments (Giscus) ----
+giscus:
+  repo: "NguenDung/NguenDung.github.io"
+  repo_id: "R_kgDOPYNL4w"
+  category: "General"
+  category_id: "DIC_kwDOPYNL484CuPwb"
+  mapping: "pathname"
+  reactions: "1"
+  input_position: "bottom"
+  theme: "preferred_color_scheme"
+  lang: "en"
+
+
+# ---- Analytics (optional) ----
+analytics:
+  plausible_domain: "nguendung.github.io"
+  umami_website_id: ""          # e.g. UUID
+  umami_src: ""                 # e.g. https://umami.example.com/script.js
