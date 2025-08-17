@@ -260,3 +260,21 @@
   document.addEventListener('DOMContentLoaded', togglePlayerAwareUI);
   togglePlayerAwareUI();
 })();
+// --- Keep back-to-top on <body> so it beats all stacking contexts ---
+(function(){
+  const SEL = '#back-to-top, .back-to-top, .to-top, button[aria-label*="back" i]';
+  function lift(){
+    const el = document.querySelector(SEL);
+    if (!el) return;
+    if (el.parentElement !== document.body) document.body.appendChild(el);
+    // harden style in case theme injects inline CSS
+    Object.assign(el.style, {
+      position:'fixed', right:'1rem', bottom:'1rem', zIndex:'2147483647', willChange:'transform'
+    });
+  }
+  const once = () => { lift(); };
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', once, { once:true });
+  else once();
+  window.addEventListener('pageshow', lift);
+  new MutationObserver(lift).observe(document.documentElement, { childList:true, subtree:true });
+})();

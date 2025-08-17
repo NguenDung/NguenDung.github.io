@@ -564,3 +564,436 @@ picture.hero img{ width:100%; height:auto; border-radius:12px; }
   pointer-events:auto;
 }
 #spotify-player-wrapper, #schedule-bar{ z-index:1000 !important; }
+/* ===== TABLES – viền rõ ở cả light/dark (chỉ trong vùng nội dung bài) ===== */
+:root[data-theme="light"]{ --tbl-border:#cbd5e1; --tbl-bg:#fff; --tbl-head:#f6f8fa; }
+:root:not([data-theme="light"]){ --tbl-border:rgba(255,255,255,.18); --tbl-bg:rgba(255,255,255,.02); --tbl-head:rgba(255,255,255,.06); }
+
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) table{
+  width:100%; border-collapse:collapse !important; background:var(--tbl-bg) !important;
+  border:1px solid var(--tbl-border) !important; font-size:.96rem;
+}
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) :is(th,td){
+  border:1px solid var(--tbl-border) !important; padding:.6rem .8rem; vertical-align:top;
+}
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) thead th{
+  background:var(--tbl-head) !important; font-weight:600;
+}
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) table code{
+  white-space:pre-wrap; word-break:break-word;
+}
+
+/* ===== SHARE – làm nút Copy Link đậm hơn (không đổi size) ===== */
+:is(.share, .share-bar, .post-share) a[title*="copy" i],
+:is(.share, .share-bar, .post-share) a[aria-label*="copy" i],
+:is(.share, .share-bar, .post-share) a:last-child{
+  --copy-c:#475569; border-color:var(--copy-c) !important; color:var(--copy-c) !important;
+  background: color-mix(in srgb, var(--copy-c) 10%, transparent);
+}
+:root:not([data-theme="light"]) :is(.share, .share-bar, .post-share) a[title*="copy" i],
+:root:not([data-theme="light"]) :is(.share, .share-bar, .post-share) a[aria-label*="copy" i],
+:root:not([data-theme="light"]) :is(.share, .share-bar, .post-share) a:last-child{
+  --copy-c:#a8b3cf; background: color-mix(in srgb, var(--copy-c) 14%, transparent);
+}
+:is(.share, .share-bar, .post-share) a[title*="copy" i]:hover,
+:is(.share, .share-bar, .post-share) a[aria-label*="copy" i]:hover,
+:is(.share, .share-bar, .post-share) a:last-child:hover{
+  background:var(--copy-c) !important; color:#fff !important; border-color:var(--copy-c) !important;
+}
+
+/* ===== BACK-TO-TOP – luôn đè lên Spotify/iframe ===== */
+#back-to-top, .back-to-top, .to-top{
+  position:fixed !important; right:1rem !important; bottom:1rem !important;
+  z-index:2147483647 !important; isolation:isolate; pointer-events:auto;
+}
+/* Spotify thấp hơn */
+#spotify-player-wrapper, #schedule-bar{ z-index:1000 !important; }
+#spotify-player-wrapper iframe{ z-index:auto !important; }
+
+/* Nếu có rule cũ “né Spotify” thì vô hiệu hóa */
+html.with-player #back-to-top, html.with-player .back-to-top, html.with-player .to-top{
+  right:1rem !important;
+}
+/* ====== FORCE TABLE STYLE INSIDE POST CONTENT (both themes) ====== */
+:root[data-theme="light"]{
+  --tbl-border: #d0d7de;       /* GitHub-like borders */
+  --tbl-bg: #ffffff;
+  --tbl-head: #f6f8fa;
+  --tbl-stripe: #fafbfc;
+}
+:root:not([data-theme="light"]){
+  --tbl-border: rgba(255,255,255,.18);
+  --tbl-bg: rgba(255,255,255,.02);
+  --tbl-head: rgba(255,255,255,.06);
+  --tbl-stripe: rgba(255,255,255,.04);
+}
+
+/* target mọi table trong vùng bài viết và đè mọi reset từ theme */
+.page-content .wrapper .post-content :where(table){
+  width: 100%;
+  border-collapse: collapse !important;
+  table-layout: auto;
+  background: var(--tbl-bg) !important;
+  border: 1px solid var(--tbl-border) !important;
+  margin: .5rem 0 1.25rem;
+  font-size: .96rem;
+}
+
+.page-content .wrapper .post-content :where(th, td){
+  border: 1px solid var(--tbl-border) !important;
+  padding: .6rem .8rem !important;
+  vertical-align: top;
+}
+
+.page-content .wrapper .post-content thead :where(th){
+  background: var(--tbl-head) !important;
+  font-weight: 600;
+}
+
+.page-content .wrapper .post-content tbody tr:nth-child(odd) > *{
+  background: var(--tbl-stripe) !important;
+}
+
+/* code trong ô bảng không bị tràn */
+.page-content .wrapper .post-content table code{
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+/* ====== TABLES — FORCE STYLE TRONG BÀI VIẾT (v2 mạnh tay) ====== */
+:root[data-theme="light"]{
+  --tbl-border: #d0d7de;
+  --tbl-bg: #ffffff;
+  --tbl-head: #f6f8fa;
+  --tbl-stripe: #fafbfc;
+}
+:root:not([data-theme="light"]){
+  --tbl-border: rgba(255,255,255,.18);
+  --tbl-bg: rgba(255,255,255,.02);
+  --tbl-head: rgba(255,255,255,.06);
+  --tbl-stripe: rgba(255,255,255,.04);
+}
+
+/* Bắt mọi table nằm trong vùng nội dung post (dù class là gì) */
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) :where(table){
+  width:100%;
+  border-collapse:collapse !important;
+  table-layout:auto;
+  background:var(--tbl-bg) !important;
+  border:1px solid var(--tbl-border) !important;
+  margin:.5rem 0 1.25rem;
+  font-size:.96rem;
+}
+
+/* Ô và viền */
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) :where(th,td){
+  border:1px solid var(--tbl-border) !important;
+  padding:.6rem .8rem !important;
+  vertical-align:top;
+}
+
+/* Header */
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) thead :where(th){
+  background:var(--tbl-head) !important;
+  font-weight:600;
+}
+
+/* Stripe */
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) tbody tr:nth-child(odd) > *{
+  background:var(--tbl-stripe) !important;
+}
+
+/* Code trong ô không tràn */
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) table code{
+  white-space:pre-wrap;
+  word-break:break-word;
+}
+/* ====== TABLES (bảng thật) — ép style rõ ràng ====== */
+:root[data-theme="light"]{
+  --tbl-border:#d0d7de; --tbl-bg:#fff; --tbl-head:#f6f8fa; --tbl-stripe:#fafbfc;
+}
+:root:not([data-theme="light"]){
+  --tbl-border:rgba(255,255,255,.18);
+  --tbl-bg:rgba(255,255,255,.02);
+  --tbl-head:rgba(255,255,255,.06);
+  --tbl-stripe:rgba(255,255,255,.04);
+}
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) :where(table){
+  width:100%; border-collapse:collapse !important; table-layout:auto;
+  background:var(--tbl-bg) !important; border:1px solid var(--tbl-border) !important;
+  margin:.5rem 0 1.25rem; font-size:.96rem;
+}
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) :where(th,td){
+  border:1px solid var(--tbl-border) !important; padding:.6rem .8rem !important; vertical-align:top;
+}
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) thead :where(th){
+  background:var(--tbl-head) !important; font-weight:600;
+}
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) tbody tr:nth-child(odd) > *{
+  background:var(--tbl-stripe) !important;
+}
+.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) table code{
+  white-space:pre-wrap; word-break:break-word;
+}
+
+/* ====== Fallback cho “Quick Comparison” KHÔNG dùng <table> ====== */
+/* Giả định tiêu đề có id auto-gen là quick-comparison (nếu khác, đổi ở đây) */
+.post-content h2[id*="quick-comparison"] + *{
+  /* khung ngoài */
+  border:1px solid var(--tbl-border) !important;
+  background:var(--tbl-bg) !important;
+  border-radius:8px; overflow:hidden;
+  padding:.25rem;               /* tí đệm cho đẹp */
+}
+
+/* Tạo vạch ngang/dọc giữa “ô” – hoạt động tốt cho layout lưới/list phổ biến */
+.post-content h2[id*="quick-comparison"] + * :is(div,li,section){
+  /* mỗi “hàng” */
+  border-top:1px solid var(--tbl-border) !important;
+}
+.post-content h2[id*="quick-comparison"] + * :is(div,li,section):first-child{
+  border-top:0 !important;
+}
+
+/* Các “ô” con bên trong hàng */
+.post-content h2[id*="quick-comparison"] + * :is(p,span,code,strong,em,small,a){
+  display:inline-block; padding:.45rem .6rem;
+  border-left:1px solid var(--tbl-border) !important;
+}
+.post-content h2[id*="quick-comparison"] + * :is(p,span,code,strong,em,small,a):first-child{
+  border-left:0 !important;
+}
+
+/* Làm hàng tiêu đề đậm hơn nếu có hàng đầu tiên dạng header */
+.post-content h2[id*="quick-comparison"] + * :is(div,li,section):first-child :is(p,span,strong){
+  font-weight:600;
+  background:var(--tbl-head) !important;
+}
+/* ===== Quick Comparison: ép style bảng rõ ràng trong .md-table ===== */
+
+/* token cho sáng/tối (nếu chưa có) */
+:root[data-theme="light"]{
+  --tbl-border:#d0d7de; --tbl-bg:#fff; --tbl-head:#f6f8fa; --tbl-stripe:#fafbfc;
+}
+:root:not([data-theme="light"]){
+  --tbl-border:rgba(255,255,255,.18);
+  --tbl-bg:rgba(255,255,255,.02);
+  --tbl-head:rgba(255,255,255,.06);
+  --tbl-stripe:rgba(255,255,255,.04);
+}
+
+/* khung bên ngoài */
+.post-content #quick-comparison + .table-scroll.md-table{
+  background: var(--tbl-bg) !important;
+  border: 1px solid var(--tbl-border) !important;
+  border-radius: 8px;
+  padding: .25rem;                  /* đệm nhẹ cho đẹp */
+  overflow: auto;                   /* vẫn cuộn ngang khi cần */
+}
+
+/* bảng bên trong: border-collapse + width + viền */
+.post-content #quick-comparison + .table-scroll.md-table > table,
+.post-content .table-scroll.md-table > table{
+  width: 100%;
+  border-collapse: collapse !important;
+  table-layout: auto;
+  background: var(--tbl-bg) !important;
+  border: 1px solid var(--tbl-border) !important;
+  margin: .25rem 0 1rem;
+  font-size: .96rem;
+}
+
+/* ô */
+.post-content .table-scroll.md-table > table :where(th, td){
+  border: 1px solid var(--tbl-border) !important;
+  padding: .6rem .8rem !important;
+  vertical-align: top;
+}
+
+/* hàng header: thead rỗng => lấy hàng đầu tiên trong tbody làm header */
+.post-content .table-scroll.md-table > table > tbody > tr:first-child > *{
+  background: var(--tbl-head) !important;
+  font-weight: 600;
+}
+
+/* sọc hàng nhẹ */
+.post-content .table-scroll.md-table > table > tbody > tr:nth-child(odd) > td{
+  background: var(--tbl-stripe) !important;
+}
+
+/* code trong ô không vỡ layout */
+.post-content .table-scroll.md-table > table code{
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+/* ===== FIX: Quick Comparison table – ép border rõ, thắng theme ===== */
+
+/* tokens sáng/tối */
+:root[data-theme="light"]{
+  --tbl-border:#d0d7de; --tbl-bg:#fff; --tbl-head:#f6f8fa; --tbl-stripe:#fafbfc;
+}
+:root:not([data-theme="light"]){
+  --tbl-border:rgba(255,255,255,.18);
+  --tbl-bg:rgba(255,255,255,.02);
+  --tbl-head:rgba(255,255,255,.06);
+  --tbl-stripe:rgba(255,255,255,.04);
+}
+
+/* bọc ngoài của bảng (có scroll) */
+.page-content .wrapper .table-scroll.md-table{
+  background:var(--tbl-bg) !important;
+  border:1px solid var(--tbl-border) !important;
+  border-radius:8px;
+  padding:.25rem;
+  overflow:auto;
+}
+
+/* chính cái <table> bên trong */
+.page-content .wrapper .table-scroll.md-table > table{
+  width:100%;
+  border-collapse:collapse !important;
+  border-spacing:0 !important;
+  background:var(--tbl-bg) !important;
+  border:1px solid var(--tbl-border) !important;
+  margin:.25rem 0 1rem;
+  font-size:.96rem;
+}
+
+/* đảm bảo theme không đổi display của ô */
+.page-content .wrapper .table-scroll.md-table :is(tr){ display: table-row !important; }
+.page-content .wrapper .table-scroll.md-table :is(th,td){
+  display: table-cell !important;
+  border:1px solid var(--tbl-border) !important;
+  padding:.6rem .8rem !important;
+  vertical-align:top;
+}
+
+/* thead có thể rỗng -> lấy hàng đầu của tbody làm header */
+.page-content .wrapper .table-scroll.md-table > table > thead > tr > th{
+  background:var(--tbl-head) !important; font-weight:600 !important;
+}
+.page-content .wrapper .table-scroll.md-table > table > tbody > tr:first-child > :is(th,td){
+  background:var(--tbl-head) !important; font-weight:600 !important;
+}
+
+/* sọc hàng nhẹ */
+.page-content .wrapper .table-scroll.md-table > table > tbody > tr:nth-child(odd) > td{
+  background:var(--tbl-stripe) !important;
+}
+
+/* code trong ô không vỡ layout */
+.page-content .wrapper .table-scroll.md-table > table code{
+  white-space:pre-wrap; word-break:break-word;
+}
+/* ==== Fix "2 lớp" & đồng bộ style bảng (Quick Comparison) ==== */
+
+/* 1) Vô hiệu wrapper md-table để không vẽ thêm lớp khung */
+.page-content .wrapper .post-content .table-scroll,
+.page-content .wrapper .post-content .md-table {
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
+/* 2) Token màu cho bảng */
+:root[data-theme="light"]{
+  --tbl-border: #d0d7de;
+  --tbl-bg: #ffffff;
+  --tbl-head: #f6f8fa;
+  --tbl-stripe: #fafbfc;
+}
+:root:not([data-theme="light"]){
+  --tbl-border: rgba(255,255,255,.18);
+  --tbl-bg: rgba(255,255,255,.02);
+  --tbl-head: rgba(255,255,255,.06);
+  --tbl-stripe: rgba(255,255,255,.04);
+}
+
+/* 3) Bảng 1 lớp khung, bo góc, sọc hàng */
+.page-content .wrapper .post-content table{
+  border-collapse: separate !important; /* để giữ border-radius */
+  border-spacing: 0 !important;
+  width: 100%;
+  background: var(--tbl-bg) !important;
+  border: 1px solid var(--tbl-border) !important;
+  border-radius: 10px !important;
+  overflow: hidden; /* bo góc gọn */
+  font-size: .96rem;
+}
+
+/* header */
+.page-content .wrapper .post-content thead th{
+  background: var(--tbl-head) !important;
+  border-bottom: 1px solid var(--tbl-border) !important;
+  font-weight: 600;
+}
+
+/* ô và đường kẻ */
+.page-content .wrapper .post-content th,
+.page-content .wrapper .post-content td{
+  border-left: 1px solid var(--tbl-border) !important;
+  border-top: 1px solid var(--tbl-border) !important;
+  padding: .6rem .8rem; 
+  vertical-align: top;
+  background: var(--tbl-bg) !important;
+}
+.page-content .wrapper .post-content tr:first-child th { border-top: none !important; }
+.page-content .wrapper .post-content tr td:first-child,
+.page-content .wrapper .post-content tr th:first-child { border-left: none !important; }
+
+/* sọc hàng nhẹ giống dark */
+.page-content .wrapper .post-content tbody tr:nth-child(odd) td{
+  background: var(--tbl-stripe) !important;
+}
+
+/* code trong ô không tràn */
+.page-content .wrapper .post-content table code{
+  white-space: pre-wrap; word-break: break-word;
+}
+/* ====== TABLE: bỏ viền/nền của wrapper để khỏi bị "2 lớp" ====== */
+.page-content .wrapper .post-content .table-scroll,
+.page-content .wrapper .post-content .md-table{
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Nếu theme có pseudo viền trang trí, tắt luôn */
+.page-content .wrapper .post-content .table-scroll::before,
+.page-content .wrapper .post-content .table-scroll::after,
+.page-content .wrapper .post-content .md-table::before,
+.page-content .wrapper .post-content .md-table::after{
+  content: none !important;
+  display: none !important;
+}
+
+/* Đảm bảo TABLE là nơi duy nhất có viền + bo góc + collapse */
+.page-content .wrapper .post-content .table-scroll > table,
+.page-content .wrapper .post-content .md-table > table,
+.page-content .wrapper .post-content table{
+  border-collapse: collapse !important;
+  margin: 0 !important;
+  border: 1px solid var(--tbl-border) !important;
+  background: var(--tbl-bg) !important;
+  border-radius: 10px;            /* cùng vibe với dark */
+  overflow: hidden;               /* để bo góc “ăn” cả thead/tbody */
+}
+
+/* Viền ô & header giữ đồng nhất (đè mọi rule stripe cũ) */
+.page-content .wrapper .post-content th,
+.page-content .wrapper .post-content td{
+  border: 1px solid var(--tbl-border) !important;
+}
+.page-content .wrapper .post-content thead th{
+  background: var(--tbl-head) !important;
+  font-weight: 600;
+}
+
+/* Tắt mọi border/outline phụ trong wrapper con của theme (nếu có) */
+.page-content .wrapper .post-content .md-table .md-table__inner,
+.page-content .wrapper .post-content .table-scroll .table-inner{
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
