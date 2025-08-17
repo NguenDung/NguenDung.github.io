@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments-with-comments
+layout: post-with-comments
 title: "Learn Linux with WSL: A Practical Starter for Windows Users"
 permalink: /posts/wsl-linux-starter/
 tags: [wsl, windows, linux, beginner, ubuntu, terminal, dev, guide]

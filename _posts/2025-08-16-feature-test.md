@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments-with-comments
+layout: post-with-comments
 title: "Feature Test Post"
 description: "Quick smoke test: read time, copy button, lazy images, SEO tags."
 tags: [test, smoke]

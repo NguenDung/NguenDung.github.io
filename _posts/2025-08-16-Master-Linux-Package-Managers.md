@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments-with-comments
+layout: post-with-comments
 title: "Master Linux Package Managers: apt, pacman, and dnf"
 permalink: /posts/master-package-managers/
 tags: [linux, apt, pacman, dnf, package-manager, troubleshooting, beginner, guide]

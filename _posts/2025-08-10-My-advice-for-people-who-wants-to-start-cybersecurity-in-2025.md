@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments-with-comments
+layout: post-with-comments
 title: "My Advice for Self-Learning Cybersecurity (Red Team Track): A Practical Roadmap"
 permalink: /posts/how-i-self-learned-cybersec/
 tags: [guide, roadmap, red-team, ctf, web, crypto, forensics, osint]
