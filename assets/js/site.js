@@ -1,5 +1,10 @@
 // assets/js/site.js
 (() => {
+  // Flag để CSS biết có Spotify và đẩy nút back-to-top vào trong
+  if (document.getElementById('spotify-player-wrapper')) {
+    document.body.classList.add('has-spotify');
+  }
+
   /* ------------- tiny helpers ------------- */
   const $  = (sel, root = document) => root.querySelector(sel);
   const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
@@ -189,4 +194,69 @@
 
     window.SiteEnhance = enhance;
   });
+})();
+/* ===== Auto-sync Giscus theme with page theme ===== */
+(function () {
+  function currentTheme() {
+    const t = document.documentElement.getAttribute('data-theme');
+    if (t) return t === 'dark' ? 'dark' : 'light';
+    return window.matchMedia &&
+           window.matchMedia('(prefers-color-scheme: dark)').matches
+           ? 'dark' : 'light';
+  }
+
+  function setGiscusTheme(theme) {
+    const frames = document.querySelectorAll('iframe.giscus-frame, iframe[src*="giscus.app"]');
+    frames.forEach(f => {
+      try {
+        f.contentWindow.postMessage(
+          { giscus: { setConfig: { theme } } },
+          'https://giscus.app'
+        );
+      } catch (_) {}
+    });
+  }
+
+  function sync() { setGiscusTheme(currentTheme()); }
+
+  // Lúc trang sẵn sàng
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sync, { once: true });
+  } else {
+    sync();
+  }
+
+  // Khi bạn toggle (html[data-theme] đổi)
+  new MutationObserver(sync).observe(document.documentElement, {
+    attributes: true, attributeFilter: ['data-theme']
+  });
+
+  // Khi hệ thống đổi dark/light
+  try {
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    (mq.addEventListener ? mq.addEventListener : mq.addListener).call(mq, 'change', sync);
+  } catch (_) {}
+
+  // Khi iframe giscus được thêm trễ
+  new MutationObserver(sync).observe(document.body, { childList: true, subtree: true });
+})();
+// --- Back-to-top tránh đè Spotify ---
+(function(){
+  const root = document.documentElement;
+  const player = document.getElementById('spotify-player-wrapper');
+
+  function togglePlayerAwareUI(){
+    const wide = window.innerWidth >= 1024;         // màn hình rộng (desktop)
+    const visible = !!(player && player.offsetParent !== null);
+    if (wide && visible){
+      root.classList.add('with-player');
+    } else {
+      root.classList.remove('with-player');
+    }
+  }
+
+  window.addEventListener('resize', togglePlayerAwareUI, { passive:true });
+  window.addEventListener('orientationchange', togglePlayerAwareUI, { passive:true });
+  document.addEventListener('DOMContentLoaded', togglePlayerAwareUI);
+  togglePlayerAwareUI();
 })();
