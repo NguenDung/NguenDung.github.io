@@ -1,8 +1,8 @@
 /* =========================================================
-   CUSTOM.CSS — CLEAN & CONSOLIDATED (FINAL)
+   CUSTOM.CSS — CLEAN & CONSOLIDATED (COMPACT FINAL)
    ========================================================= */
 
-/* ====== QUICK CONFIG ====== */
+/* -------------------- QUICK CONFIG -------------------- */
 :root{
   --player-w: 455px;
   --player-h: 520px;
@@ -12,222 +12,148 @@
   --gap: 1.2rem;
 }
 
-/* Avoid horizontal scroll when layout uses 100vw */
+/* Avoid horizontal scroll on 100vw layouts */
 html, body{ overflow-x: clip; }
 
-/* ====== BACKGROUND ====== */
+/* -------------------- BACKGROUND -------------------- */
 body{
   background: url("../images/bground/background.jpg") no-repeat center/cover fixed;
 }
 
-/* ====== LAYOUT: overlay/card on top of background ====== */
+/* -------------------- LAYOUT (overlay/card) -------------------- */
 .page-content{ display:flex; justify-content:flex-start; }
 
 .page-content .wrapper{
   width: calc(100vw - var(--player-w) - var(--player-right) - var(--wrapper-left));
   max-width: none !important;
   margin: 2rem var(--gap) 2rem var(--wrapper-left);
-  background: rgba(0,0,0,0.98);
+  background: rgba(0,0,0,.98);
   padding: 2.5rem;
   border-radius: 1.2rem;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.8);
+  box-shadow: 0 6px 20px rgba(0,0,0,.8);
   overflow: hidden;
   box-sizing: border-box;
   font-size: 1.08rem;
   line-height: 1.7;
 }
 
-/* Normalize nested wrappers inside the overlay */
-.page-content .wrapper .wrapper,
-.page-content .wrapper .site-header .wrapper,
-.page-content .wrapper .site-footer .wrapper,
-.page-content .wrapper .page-header .wrapper,
-.page-content .wrapper .dash-header .wrapper{
-  width: 100% !important;
-  max-width: none !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  box-sizing: border-box;
+/* Normalize nested wrappers inside overlay */
+.page-content .wrapper :is(.wrapper, .site-header .wrapper, .site-footer .wrapper, .page-header .wrapper, .dash-header .wrapper){
+  width:100% !important; max-width:none !important;
+  margin:0 !important; padding:0 !important; box-sizing:border-box;
 }
 
-/* Transparent header/footer bars when placed inside overlay */
-.page-content .wrapper .site-header,
-.page-content .wrapper .page-header,
-.page-content .wrapper .dash-header,
-.page-content .wrapper .site-footer{
-  background: transparent !important;
-  box-shadow: none !important;
-  border: 0 !important;
+/* Transparent bars inside overlay */
+.page-content .wrapper :is(.site-header, .page-header, .dash-header, .site-footer){
+  background:transparent !important; box-shadow:none !important; border:0 !important;
 }
 
-/* ====== TYPOGRAPHY ====== */
-.page-content .wrapper h1{ font-size: 2.2rem; }
-.page-content .wrapper h2{ font-size: 1.6rem; letter-spacing: .2px; margin-bottom: 1rem; }
-.page-content .wrapper h3{ font-size: 1.25rem; }
+/* -------------------- TYPOGRAPHY -------------------- */
+.page-content .wrapper h1{ font-size:2.2rem; }
+.page-content .wrapper h2{ font-size:1.6rem; letter-spacing:.2px; margin-bottom:1rem; }
+.page-content .wrapper h3{ font-size:1.25rem; }
 
-.page-content .wrapper .tag,
-.page-content .wrapper .post-tag,
-.page-content .wrapper .label{
-  font-size: .92rem;
-  padding: .25rem .6rem;
-  border-radius: .6rem;
+.page-content .wrapper :is(.tag,.post-tag,.label){
+  font-size:.92rem; padding:.25rem .6rem; border-radius:.6rem;
 }
+.page-content .wrapper :is(.post-meta,.post__meta){ font-size:.95rem; }
 
-.page-content .wrapper .post-meta,
-.page-content .wrapper .post__meta{ font-size: .95rem; }
-
-/* ====== HEADER AVATAR & INTRO ====== */
-.page-content .wrapper header img,
-.page-content .wrapper .site-header img,
-.page-content .wrapper .dash-header img{
+/* Header avatar */
+.page-content .wrapper :is(header,.site-header,.dash-header) img{
   width:72px; height:72px; object-fit:cover; border-radius:12px; margin-right:12px;
 }
-.page-content .wrapper header p,
-.page-content .wrapper .site-header p,
-.page-content .wrapper .dash-header p{ font-size:1.02em; }
+.page-content .wrapper :is(header,.site-header,.dash-header) p{ font-size:1.02em; }
 
-/* ====== SPOTIFY CARD ====== */
+/* -------------------- SPOTIFY & SCHEDULE -------------------- */
 #spotify-player-wrapper{
-  position: fixed;
-  bottom: 2rem;
-  right: var(--player-right);
-  width: var(--player-w);
-  height: var(--player-h);
-  background: rgba(0,0,0,.7);
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-  border-bottom-left-radius: 1rem;
-  border-bottom-right-radius: 1rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,.6);
-  overflow: hidden;
-  z-index: 1000;
+  position:fixed; bottom:2rem; right:var(--player-right);
+  width:var(--player-w); height:var(--player-h);
+  background:rgba(0,0,0,.7);
+  border-radius:0 0 1rem 1rem;
+  box-shadow:0 4px 16px rgba(0,0,0,.6);
+  overflow:hidden; z-index:1000;
 }
 #spotify-player-wrapper iframe{ width:100%; height:100%; border:0; }
 
-/* ====== SCHEDULE BAR (STACK ABOVE SPOTIFY) ====== */
 #schedule-bar{
-  position: fixed !important;
-  right: var(--player-right);
-  bottom: calc(2rem + var(--player-h) + var(--stack-gap));
-  width: var(--player-w);
-  height: 230px;
-  background: rgba(0,0,0,.85);
-  border-top-left-radius: 1rem;
-  border-top-right-radius: 1rem;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  box-shadow: 0 6px 16px rgba(0,0,0,.6);
-  overflow: hidden;
-  z-index: 1000;
+  position:fixed !important; right:var(--player-right);
+  bottom:calc(2rem + var(--player-h) + var(--stack-gap));
+  width:var(--player-w); height:230px;
+  background:rgba(0,0,0,.85);
+  border-radius:1rem 1rem 0 0;
+  box-shadow:0 6px 16px rgba(0,0,0,.6);
+  overflow:hidden; z-index:1000;
 }
 #schedule-bar iframe{ width:100%; height:100%; border:0; }
 
-/* ====== MOBILE ====== */
-@media (max-width: 600px){
-  #spotify-player-wrapper, #schedule-bar{ display:none; }
+/* Mobile */
+@media (max-width:600px){
+  #spotify-player-wrapper, #schedule-bar{ display:none !important; }
   .page-content .wrapper{ width:100%; margin:1rem; max-width:none; }
 }
 
-/* ====== SWUP FADE ====== */
-.transition-fade{ transition: opacity .2s ease; }
+/* -------------------- SWUP FADE -------------------- */
+.transition-fade{ transition:opacity .2s ease; }
 html.is-changing .transition-fade{ opacity:0; }
 
-/* ====== WARNING MODAL (clean) ====== */
+/* -------------------- WARNING MODAL -------------------- */
 #warning-modal{
-  position: fixed; inset: 0;
-  display: none;
-  align-items: center; justify-content: center;
-  background: rgba(0,0,0,.9);
-  z-index: 1300;
-  backdrop-filter: blur(2px);
-  padding: 0;
+  position:fixed; inset:0; display:none;
+  align-items:center; justify-content:center;
+  background:rgba(0,0,0,.9); z-index:1300; backdrop-filter:blur(2px); padding:0;
 }
 #warning-modal img{
-  display:block;
-  width: min(96vmin, calc(100vw - 16px)) !important;
-  height: auto !important;
-  max-height: calc(100vh - 16px) !important;
-  object-fit: contain !important;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.6);
+  display:block; width:min(96vmin, calc(100vw - 16px)) !important;
+  height:auto !important; max-height:calc(100vh - 16px) !important;
+  object-fit:contain !important; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,.6);
 }
-@media (orientation: portrait){
-  #warning-modal{
-    padding: env(safe-area-inset-top) env(safe-area-inset-right)
-             env(safe-area-inset-bottom) env(safe-area-inset-left);
-  }
+@media (orientation:portrait){
+  #warning-modal{ padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left); }
   #warning-modal img{
-    width: min(92vmin,
-      calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 16px)
-    ) !important;
-    max-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px) !important;
+    width:min(92vmin, calc(100vw - env(safe-area-inset-left) - env(safe-area-inset-right) - 16px)) !important;
+    max-height:calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 16px) !important;
   }
 }
-body.warn-lock{
-  overflow:hidden !important;
-  cursor:not-allowed !important;
-  user-select:none !important;
-}
+body.warn-lock{ overflow:hidden !important; cursor:not-allowed !important; user-select:none !important; }
 
-/* ====== SEARCH BOX ====== */
+/* -------------------- SEARCH BOX -------------------- */
 .recent-articles .recent-header{
-  display:flex; align-items:center; gap:1rem;
-  margin-bottom:1.5rem; padding-right:2rem;
+  display:flex; align-items:center; gap:1rem; margin-bottom:1.5rem; padding-right:2rem;
 }
-.recent-articles .recent-header h2{
-  margin:0; font-size:2rem; color:#4e8cff;
-}
+.recent-articles .recent-header h2{ margin:0; font-size:2rem; color:#4e8cff; }
 #article-search{
-  width: clamp(350px, 60%, 800px);
-  padding:.6rem 1rem; font-size:1rem;
-  border:1px solid #ccc; border-radius:.5rem;
-  background:#f5f5f5; color:#4e8cff;
+  width:clamp(350px,60%,800px); padding:.6rem 1rem; font-size:1rem;
+  border:1px solid #ccc; border-radius:.5rem; background:#f5f5f5; color:#4e8cff;
   transition:border-color .2s, box-shadow .2s;
 }
 #article-search::placeholder{ color:#a0a0a0; }
-#article-search:focus{
-  outline:none; border-color:#4e8cff;
-  box-shadow:0 0 0 3px rgba(78,140,255,.3);
-}
-.article-item.hidden{
-  opacity:0; height:0; margin:0; padding:0; overflow:hidden;
-  transition:opacity .3s, height .3s;
-}
-#articles-list{ list-style:none; padding-left:0; margin:0; }
-#articles-list > li{ list-style:none; margin:0 0 1.25rem 0; }
+#article-search:focus{ outline:none; border-color:#4e8cff; box-shadow:0 0 0 3px rgba(78,140,255,.3); }
+.article-item.hidden{ opacity:0; height:0; margin:0; padding:0; overflow:hidden; transition:opacity .3s, height .3s; }
+#articles-list{ list-style:none; padding:0; margin:0; }
+#articles-list > li{ margin:0 0 1.25rem 0; }
 #articles-list > li::marker, #articles-list > li::before{ content:none !important; }
 
-/* ====== WELCOME MODAL (no flicker base) ====== */
-#welcome-overlay, #welcome-modal{
-  opacity:0; pointer-events:none; display:none;
-  transition: opacity .25s cubic-bezier(.4,0,.2,1);
-}
+/* -------------------- WELCOME MODAL -------------------- */
+#welcome-overlay, #welcome-modal{ opacity:0; pointer-events:none; display:none; transition:opacity .25s cubic-bezier(.4,0,.2,1); }
 #welcome-overlay.active{ opacity:1; pointer-events:auto; display:block; }
 #welcome-modal.active{ opacity:1; pointer-events:auto; display:flex; }
 
 #welcome-modal{
   position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
   width:92vw; max-width:1080px; max-height:calc(100vh - 8vh);
-  padding:4.25rem 4.25rem 3.5rem;
-  background: rgba(0,0,0,.95);
-  border-radius:1.4rem;
-  box-shadow:0 16px 36px rgba(0,0,0,.8);
-  z-index:2000;
-  flex-direction:column; align-items:center; gap:1.5rem; overflow:auto;
+  padding:4.25rem 4.25rem 3.5rem; background:rgba(0,0,0,.95);
+  border-radius:1.4rem; box-shadow:0 16px 36px rgba(0,0,0,.8);
+  z-index:2000; display:flex; flex-direction:column; align-items:center; gap:1.5rem; overflow:auto;
 }
 .welcome-card{ display:flex; flex-direction:column; align-items:center; text-align:center; position:relative; }
 .welcome-avatar{ width:280px; height:280px; border-radius:50%; object-fit:cover; }
-.welcome-card h1{ font-size: clamp(3.6rem, 2.4rem + 2.6vw, 5.4rem); margin:0; line-height:1.04; }
-.welcome-card p { font-size: clamp(1.18rem, 1.05rem + .40vw, 1.50rem); margin:.5rem 0; line-height:1.4; }
+.welcome-card h1{ font-size:clamp(3.6rem, 2.4rem + 2.6vw, 5.4rem); margin:0; line-height:1.04; }
+.welcome-card p { font-size:clamp(1.18rem, 1.05rem + .40vw, 1.50rem); margin:.5rem 0; line-height:1.4; }
 
-.welcome-links{
-  display:grid; grid-template-columns:repeat(3,1fr); gap:1rem 2rem;
-  list-style:none; padding:0; margin:1.35rem 0 0;
-}
+.welcome-links{ display:grid; grid-template-columns:repeat(3,1fr); gap:1rem 2rem; list-style:none; padding:0; margin:1.35rem 0 0; }
 .welcome-links a{
-  display:inline-flex; align-items:center; gap:.5rem;
-  font-size:1.34rem; color:#4e8cff !important; fill:currentColor;
-  text-decoration:none; transition:color .15s;
+  display:inline-flex; align-items:center; gap:.5rem; font-size:1.34rem;
+  color:#4e8cff !important; fill:currentColor; text-decoration:none; transition:color .15s;
 }
 .welcome-links a:hover{ color:#75aaff !important; fill:#75aaff; text-decoration:underline; }
 .svg-icon{ display:inline-flex; vertical-align:middle; margin-right:.4em; width:1.2em; height:1.2em; }
@@ -236,764 +162,283 @@ body.warn-lock{
 #welcome-close{ position:absolute; top:.5rem; right:.75rem; background:none; border:none; font-size:3.2rem; color:#ccc; cursor:pointer; }
 #welcome-close:hover{ color:#fff; }
 
-:root[data-theme="light"] #welcome-modal{
-  background: rgba(255,255,255,.98) !important;
-  box-shadow: 0 16px 36px rgba(0,0,0,.2) !important;
-}
-:root[data-theme="light"] #welcome-modal p,
-:root[data-theme="light"] #welcome-modal li,
-:root[data-theme="light"] #welcome-modal small{ color:#111 !important; }
+:root[data-theme="light"] #welcome-modal{ background:rgba(255,255,255,.98) !important; box-shadow:0 16px 36px rgba(0,0,0,.2) !important; }
+:root[data-theme="light"] #welcome-modal :is(p,li,small){ color:#111 !important; }
 :root[data-theme="light"] #welcome-close{ color:#666 !important; }
 :root[data-theme="light"] #welcome-close:hover{ color:#000 !important; }
 
-@media (max-width:480px){
-  #welcome-modal{ width:92vw; max-width:none; padding:2rem; }
-  .welcome-avatar{ width:150px; height:150px; }
-  .welcome-links a{ font-size:1.12rem; }
-}
-@media (max-height:600px){
-  #welcome-modal{ padding:2.25rem; }
-  .welcome-avatar{ width:170px; height:170px; }
-}
-@media (min-width:1400px){
-  #welcome-modal{ max-width:1200px; }
-  .welcome-avatar{ width:320px; height:320px; }
-  .welcome-card h1{ font-size: clamp(3.9rem, 2rem + 3.2vw, 5.8rem); }
-}
+@media (max-width:480px){ #welcome-modal{ width:92vw; max-width:none; padding:2rem; } .welcome-avatar{ width:150px; height:150px; } .welcome-links a{ font-size:1.12rem; } }
+@media (max-height:600px){ #welcome-modal{ padding:2.25rem; } .welcome-avatar{ width:170px; height:170px; } }
+@media (min-width:1400px){ #welcome-modal{ max-width:1200px; } .welcome-avatar{ width:320px; height:320px; } .welcome-card h1{ font-size:clamp(3.9rem,2rem+3.2vw,5.8rem); } }
 
-/* ====== ABOUT PILL ====== */
+/* -------------------- ABOUT PILL -------------------- */
 .about-btn{
-  font-family:inherit; font-size:1rem; font-weight:500; color:inherit;
-  background: rgba(255,255,255,.17);
-  border:none; border-radius:.7rem; padding:.28em 1.1em; margin-left:1rem;
-  cursor:pointer; transition: background .18s, color .18s;
-  line-height:1.13; box-shadow:none; letter-spacing:.01em;
-  display:inline-block; vertical-align:middle;
+  font: 500 1rem/1.13 inherit;
+  color:inherit; background:rgba(255,255,255,.17);
+  border:0; border-radius:.7rem; padding:.28em 1.1em; margin-left:1rem;
+  cursor:pointer; transition:background .18s, color .18s; display:inline-block;
 }
-.about-btn:hover, .about-btn:focus{ background: rgba(255,255,255,.28); color:inherit; text-decoration:none; }
+.about-btn:hover, .about-btn:focus{ background:rgba(255,255,255,.28); }
 
-/* ====== SOCIAL ICONS ====== */
+/* -------------------- SOCIAL ICONS -------------------- */
 :root:not([data-theme="light"]) .social_links a,
 :root:not([data-theme="light"]) header .social_links a,
 :root:not([data-theme="light"]) .dash-header .social_links a{
-  color:#fff !important; background:none !important; transition:color .17s;
+  color:#fff !important; background:transparent !important; transition:color .17s;
 }
 :root:not([data-theme="light"]) .social_links a:hover,
 :root:not([data-theme="light"]) header .social_links a:hover,
-:root:not([data-theme="light"]) .dash-header .social_links a:hover{
-  color:#4e8cff !important;
-}
+:root:not([data-theme="light"]) .dash-header .social_links a:hover{ color:#4e8cff !important; }
 
-/* ====== LIGHT THEME TOKENS & OVERRIDES ====== */
+/* -------------------- LIGHT THEME OVERRIDES -------------------- */
 :root[data-theme="light"]{
-  --text-main:  #222;
-  --text-dim:   #5b5b5b;
-  --overlay-bg: rgba(255,255,255,.92);
-
-  --title-pink:   #ff4da6;
-  --title-pink-h: #cc0077;
-
-  --tag-bg:     #e8f5ee;
-  --tag-text:   #2a915a;
-  --tag-border: #c6ead7;
-
-  --icon:       #111;
-  --icon-hover: #2a66d4;
-
-  --search-bg:  #f5f7fb;
-  --search-bd:  #d9dfeb;
-  --search-ph:  #9aa6b2;
+  --text-main:#222; --text-dim:#5b5b5b; --overlay-bg:rgba(255,255,255,.92);
+  --title-pink:#ff4da6; --title-pink-h:#cc0077;
+  --tag-bg:#e8f5ee; --tag-text:#2a915a; --tag-border:#c6ead7;
+  --icon:#111; --icon-hover:#2a66d4;
+  --search-bg:#f5f7fb; --search-bd:#d9dfeb; --search-ph:#9aa6b2;
 }
+:root[data-theme="light"] .page-content .wrapper{ background:var(--overlay-bg) !important; color:var(--text-main) !important; }
+:root[data-theme="light"] .page-content .wrapper :is(p,li){ color:var(--text-main) !important; }
+:root[data-theme="light"] .page-content .wrapper :is(.post-meta,.post__meta){ color:var(--text-dim) !important; }
 
-:root[data-theme="light"] .page-content .wrapper{
-  background: var(--overlay-bg) !important;
-  color: var(--text-main) !important;
-}
-:root[data-theme="light"] .page-content .wrapper p,
-:root[data-theme="light"] .page-content .wrapper li{ color: var(--text-main) !important; }
-:root[data-theme="light"] .page-content .wrapper .post-meta,
-:root[data-theme="light"] .page-content .wrapper .post__meta{ color: var(--text-dim) !important; }
-
-:root[data-theme="light"] .page-content .wrapper .post-link,
-:root[data-theme="light"] a.post-link,
-:root[data-theme="light"] .post-title a,
-:root[data-theme="light"] h1.post-title a,
-:root[data-theme="light"] .posts .post-title a{
-  color: var(--title-pink) !important; text-decoration:none !important;
-}
-:root[data-theme="light"] .page-content .wrapper .post-link:hover,
-:root[data-theme="light"] a.post-link:hover,
-:root[data-theme="light"] .post-title a:hover,
-:root[data-theme="light"] h1.post-title a:hover,
-:root[data-theme="light"] .posts .post-title a:hover{
-  color: var(--title-pink-h) !important; text-decoration:underline !important;
-}
+:root[data-theme="light"] .page-content .wrapper :is(.post-link, .post-title a, h1.post-title a, .posts .post-title a),
+:root[data-theme="light"] a.post-link{ color:var(--title-pink) !important; text-decoration:none !important; }
+:root[data-theme="light"] .page-content .wrapper :is(.post-link, .post-title a, h1.post-title a, .posts .post-title a):hover,
+:root[data-theme="light"] a.post-link:hover{ color:var(--title-pink-h) !important; text-decoration:underline !important; }
 
 :root[data-theme="light"] .site-title{ color:#111 !important; font-weight:700; }
 :root[data-theme="light"] .site-title a{ color:inherit !important; text-decoration:none !important; }
 :root[data-theme="light"] .site-title a:hover{ opacity:.85; }
-:root[data-theme="light"] .site-title::after,
-:root[data-theme="light"] .site-title > span,
-:root[data-theme="light"] .site-title .chevron,
-:root[data-theme="light"] .site-title a > span{ color:#4e8cff !important; }
-
+:root[data-theme="light"] .site-title :is(::after, > span, .chevron, a > span){ color:#4e8cff !important; }
 :root[data-theme="light"] .recent-articles .recent-header h2{ color:#2a66d4 !important; }
 
-:root[data-theme="light"] .page-content .wrapper .tag,
-:root[data-theme="light"] .page-content .wrapper .post-tag,
-:root[data-theme="light"] .page-content .wrapper .label{
-  background: var(--tag-bg) !important;
-  color: var(--tag-text) !important;
-  border: 1px solid var(--tag-border) !important;
-  box-shadow:none !important; background-clip: padding-box !important;
+:root[data-theme="light"] .page-content .wrapper :is(.tag,.post-tag,.label){
+  background:var(--tag-bg) !important; color:var(--tag-text) !important;
+  border:1px solid var(--tag-border) !important; box-shadow:none !important; background-clip:padding-box !important;
 }
-
-:root[data-theme="light"] #article-search{
-  background: var(--search-bg) !important;
-  border: 1px solid var(--search-bd) !important;
-  color: var(--text-main) !important;
-}
-:root[data-theme="light"] #article-search::placeholder{ color: var(--search-ph) !important; }
-
+:root[data-theme="light"] #article-search{ background:var(--search-bg) !important; border:1px solid var(--search-bd) !important; color:var(--text-main) !important; }
 :root[data-theme="light"] .social_links a,
 :root[data-theme="light"] header .social_links a,
-:root[data-theme="light"] .dash-header .social_links a{
-  color: var(--icon) !important; background:transparent !important;
-}
+:root[data-theme="light"] .dash-header .social_links a{ color:var(--icon) !important; background:transparent !important; }
 :root[data-theme="light"] .social_links a:hover,
 :root[data-theme="light"] header .social_links a:hover,
-:root[data-theme="light"] .dash-header .social_links a:hover{
-  color: var(--icon-hover) !important;
-}
+:root[data-theme="light"] .dash-header .social_links a:hover{ color:var(--icon-hover) !important; }
 
-/* Dark guard: keep overlay color */
-:root:not([data-theme="light"]) .page-content .wrapper{
-  background: rgba(0,0,0,.98) !important; color:inherit !important;
-}
+/* Dark guard */
+:root:not([data-theme="light"]) .page-content .wrapper{ background:rgba(0,0,0,.98) !important; }
 
-/* Light tweak for About pill */
-:root[data-theme="light"] .about-btn{
-  background: rgba(0,0,0,.08) !important; color:#111 !important;
-  box-shadow: 0 1px 2px rgba(0,0,0,.05);
-}
-:root[data-theme="light"] .about-btn:hover{ background: rgba(0,0,0,.14) !important; }
+/* About pill light tweak */
+:root[data-theme="light"] .about-btn{ background:rgba(0,0,0,.08) !important; color:#111 !important; box-shadow:0 1px 2px rgba(0,0,0,.05); }
+:root[data-theme="light"] .about-btn:hover{ background:rgba(0,0,0,.14) !important; }
 
-/* ===== LIGHT MODE: remove header/footer pill effect ===== */
-:root[data-theme="light"] .site-header,
-:root[data-theme="light"] .site-header .wrapper,
-:root[data-theme="light"] .site-footer,
-:root[data-theme="light"] .site-footer .wrapper {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  border-radius: 0 !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
+/* Remove header/footer pill in light */
+:root[data-theme="light"] :is(.site-header, .site-header .wrapper, .site-footer, .site-footer .wrapper){
+  background:transparent !important; border:0 !important; box-shadow:none !important; border-radius:0 !important;
+  backdrop-filter:none !important; -webkit-backdrop-filter:none !important;
 }
-:root[data-theme="light"] .site-header::before,
-:root[data-theme="light"] .site-header::after,
-:root[data-theme="light"] .site-footer::before,
-:root[data-theme="light"] .site-footer::after { content: none !important; }
+:root[data-theme="light"] :is(.site-header, .site-footer)::before,
+:root[data-theme="light"] :is(.site-header, .site-footer)::after{ content:none !important; }
 
-/* ====== FOOTER CREDIT (same color both themes) ====== */
-:root:not([data-theme="light"]) .site-footer,
-:root:not([data-theme="light"]) .site-footer a,
-:root:not([data-theme="light"]) .site-footer a:visited,
-:root[data-theme="light"] .site-footer,
-:root[data-theme="light"] .site-footer a,
-:root[data-theme="light"] .site-footer a:visited{
-  color: rgba(255,255,255,.70) !important;
-  text-decoration:none !important;
-}
+/* -------------------- FOOTER CREDIT -------------------- */
+:root :is(.site-footer, .site-footer a){ color:rgba(255,255,255,.70) !important; text-decoration:none !important; }
 .site-footer a:hover, .site-footer a:focus-visible{ opacity:.85; }
-.site-footer a:active, .site-footer a:visited{ color:inherit !important; }
 
-/* ===== MOBILE: compact header & search ====== */
+/* -------------------- MOBILE header & search -------------------- */
 @media (max-width:600px) and (orientation:portrait){
-  .recent-articles .recent-header{
-    flex-wrap:wrap !important; gap:.6rem 1rem !important; padding-right:0 !important;
-  }
-  #article-search,
-  .recent-articles .recent-header input[type="search"]{
-    flex:0 0 85% !important; width:85% !important; max-width:85% !important; min-width:0 !important;
-    box-sizing:border-box !important;
-  }
-  .site-header .wrapper, .dash-header .wrapper{
-    display:flex !important; align-items:center !important; gap:6px !important;
-    flex-wrap:nowrap !important; overflow:visible !important;
-  }
+  .recent-articles .recent-header{ flex-wrap:wrap !important; gap:.6rem 1rem !important; padding-right:0 !important; }
+  #article-search, .recent-articles .recent-header input[type="search"]{ flex:0 0 85% !important; width:85% !important; max-width:85% !important; min-width:0 !important; box-sizing:border-box !important; }
+  .site-header .wrapper, .dash-header .wrapper{ display:flex !important; align-items:center !important; gap:6px !important; flex-wrap:nowrap !important; overflow:visible !important; }
   .site-title{ margin-right:auto !important; }
-  .about-btn{
-    font-size:13px !important; padding:.22em .65em !important; border-radius:.55rem !important;
-    margin:0 4px 0 8px !important; display:inline-flex !important; flex:0 0 auto !important;
-  }
-  ul.social_links{
-    display:inline-flex !important; align-items:center !important; gap:3px !important;
-    flex-wrap:nowrap !important; white-space:nowrap !important; margin:0 !important; padding:0 !important;
-  }
+  .about-btn{ font-size:13px !important; padding:.22em .65em !important; border-radius:.55rem !important; margin:0 4px 0 8px !important; display:inline-flex !important; flex:0 0 auto !important; }
+  ul.social_links{ display:inline-flex !important; align-items:center !important; gap:3px !important; flex-wrap:nowrap !important; white-space:nowrap !important; margin:0 !important; padding:0 !important; }
   ul.social_links li{ margin:0 !important; padding:0 !important; flex:0 0 auto !important; }
-  ul.social_links a{
-    width:30px; height:30px; line-height:30px; font-size:24px;
-    display:inline-flex; align-items:center; justify-content:center; border-radius:7px;
-  }
-  :root[data-theme="light"] ul.social_links a{ color:#111 !important; }
-
-  #spotify-player-wrapper, #schedule-bar{ display:none !important; }
-
-  #welcome-modal .welcome-card h1{
-    font-size: clamp(1.9rem, 7.2vw, 2.25rem) !important; line-height:1.06 !important; white-space:nowrap !important;
-  }
-  #welcome-modal .welcome-avatar{ width:180px; height:180px; }
-  #welcome-modal .welcome-links a{ font-size:1.08rem; }
+  ul.social_links a{ width:30px; height:30px; line-height:30px; font-size:24px; display:inline-flex; align-items:center; justify-content:center; border-radius:7px; }
 }
 
-/* Landscape (phones) show shrunken widgets */
+/* Landscape phones */
 @media (orientation:landscape) and (max-height:480px){
-  #spotify-player-wrapper, #schedule-bar{
-    display:block !important; position:fixed !important; right:10px; z-index:1000;
-  }
+  #spotify-player-wrapper, #schedule-bar{ display:block !important; position:fixed !important; right:10px; z-index:1000; }
   #spotify-player-wrapper{ width:360px !important; height:420px !important; bottom:12px !important; }
-  #schedule-bar{ width:360px !important; height:170px !important; bottom: calc(12px + 420px + 8px) !important; }
-  .page-content .wrapper{ margin-right: calc(360px + 24px) !important; max-width:none !important; }
-  #article-search,
-  .recent-articles .recent-header input[type="search"]{ width:60% !important; max-width:60% !important; }
+  #schedule-bar{ width:360px !important; height:170px !important; bottom:calc(12px + 420px + 8px) !important; }
+  .page-content .wrapper{ margin-right:calc(360px + 24px) !important; max-width:none !important; }
+  #article-search, .recent-articles .recent-header input[type="search"]{ width:60% !important; max-width:60% !important; }
 }
 
-/* ====== READ TIME CHIP ====== */
+/* -------------------- READ TIME CHIP -------------------- */
 .post-meta-inline{ margin-top:.25rem; font-size:.95rem; opacity:.9; }
 .post-meta-inline .reading-time{
   display:inline-block; padding:.15rem .5rem; border:1px solid rgba(0,0,0,.10);
   border-radius:999px; font-size:.82rem; line-height:1; opacity:.85;
 }
-@media (prefers-color-scheme:dark){
-  .post-meta-inline .reading-time{ border-color: rgba(255,255,255,.20); }
-}
+@media (prefers-color-scheme:dark){ .post-meta-inline .reading-time{ border-color:rgba(255,255,255,.20); } }
 
-/* ====== CODE COPY BUTTON ====== */
+/* -------------------- CODE COPY BUTTON -------------------- */
 pre{ position:relative; }
 pre > code{ display:block; }
 .copy-btn{
   position:absolute; top:.5rem; right:.5rem;
   padding:.25rem .5rem; font-size:.75rem; line-height:1;
   border:1px solid rgba(0,0,0,.15); border-radius:.4rem;
-  background: rgba(255,255,255,.75); cursor:pointer; user-select:none;
+  background:rgba(255,255,255,.75); cursor:pointer; user-select:none;
 }
 .copy-btn:hover{ filter:brightness(1.03); }
-.copy-btn:active{ transform: translateY(1px); }
+.copy-btn:active{ transform:translateY(1px); }
 .copy-btn.done{ background:#c8f7c5; }
 @media (prefers-color-scheme:dark){
-  .copy-btn{ background: rgba(20,20,20,.75); color:#eee; border-color: rgba(255,255,255,.2); }
+  .copy-btn{ background:rgba(20,20,20,.75); color:#eee; border-color:rgba(255,255,255,.2); }
   .copy-btn.done{ background:#1b3f1b; }
 }
 
-/* ====== HERO IMAGE ====== */
+/* -------------------- HERO IMAGE -------------------- */
 picture.hero, .hero picture, img.hero{ display:block; max-width:100%; }
 picture.hero img{ width:100%; height:auto; border-radius:12px; }
 
-/* ====== TABLES (scoped to post content) ====== */
-:root[data-theme="light"]{
-  --tbl-border:#d0d7de;
-  --tbl-bg:#fff;
-  --tbl-head:#f6f8fa;
-}
-:root:not([data-theme="light"]){
-  --tbl-border:rgba(255,255,255,.18);
-  --tbl-bg:rgba(255,255,255,.02);
-  --tbl-head:rgba(255,255,255,.06);
-}
-.page-content .wrapper .post-content table{
-  width:100%; border-collapse:collapse !important; background:var(--tbl-bg) !important;
-  border:1px solid var(--tbl-border) !important; font-size:.96rem;
-}
-.page-content .wrapper .post-content th,
-.page-content .wrapper .post-content td{
-  border:1px solid var(--tbl-border) !important; padding:.6rem .8rem; vertical-align:top;
-}
-.page-content .wrapper .post-content thead th{
-  background:var(--tbl-head) !important; font-weight:600;
-}
-.page-content .wrapper .post-content table code{ white-space:pre-wrap; word-break:break-word; }
-
-/* ====== SHARE BAR (unified & clearer) ====== */
+/* -------------------- SHARE BAR -------------------- */
 :root{ --share-size:34px; --share-radius:10px; --share-icon-size:18px; }
-
 .share, .share-bar, .post-share{ display:flex; align-items:center; flex-wrap:wrap; gap:.5rem; }
 .share-label{ margin-right:.25rem; font-weight:600; opacity:.9; }
-
-.share a, .share .share-btn,
-.share-bar a, .share-bar .share-btn,
-.post-share a, .post-share .share-btn,
-.share__btn, .share-buttons .btn, .share__copy{
+.share a, .share .share-btn, .share-bar a, .share-bar .share-btn, .post-share a, .post-share .share-btn, .share__btn, .share-buttons .btn, .share__copy{
   width:var(--share-size); height:var(--share-size);
   display:inline-flex; align-items:center; justify-content:center;
   border-radius:var(--share-radius);
   border:1.5px solid var(--share-border, #cbd5e1);
   background:var(--share-bg, #fff);
   color:var(--share-fg, #334155);
-  text-decoration:none; outline:0;
-  transition: transform .15s ease, color .15s ease, border-color .15s ease, background .15s ease, box-shadow .15s ease;
-  opacity:1;
+  text-decoration:none; outline:0; transition:.15s ease;
 }
 :root[data-theme="light"]{ --share-bg:#fff; --share-fg:#334155; --share-border:#cbd5e1; }
 :root:not([data-theme="light"]){ --share-bg:transparent; --share-fg:#e5e7eb; --share-border:rgba(255,255,255,.22); }
-
-.share a:hover, .share .share-btn:hover,
-.share-bar a:hover, .share-bar .share-btn:hover,
-.post-share a:hover, .post-share .share-btn:hover,
-.share__btn:hover, .share__copy:hover, .share-buttons .btn:hover{
-  transform: translateY(-1px);
-  color: var(--link-color, #2a66d4);
-  border-color: var(--link-color, #2a66d4);
-  box-shadow:0 2px 10px rgba(0,0,0,.08);
+.share :is(a,.share-btn,.share__btn,.share__copy,.share-buttons .btn):hover{
+  transform:translateY(-1px); color:var(--link-color, #2a66d4);
+  border-color:var(--link-color, #2a66d4); box-shadow:0 2px 10px rgba(0,0,0,.08);
 }
-.share a svg, .share a i,
-.post-share a svg, .post-share a i,
-.share__btn svg, .share__copy svg, .share-buttons .btn svg{
-  width:var(--share-icon-size); height:var(--share-icon-size); line-height:1; pointer-events:none;
-}
-/* copy state */
-.share__copy.copied{
-  border-color:#4caf50 !important;
-  background:rgba(76,175,80,.15) !important;
-}
-
-/* ====== BACK-TO-TOP (above Spotify, below welcome) ====== */
-#back-to-top, .back-to-top, .to-top{
-  position:fixed; right:1rem; bottom:1rem;
-  z-index:1500 !important; /* welcome(2000) > back-to-top(1500) > spotify(1000) */
-  pointer-events:auto;
-}
-#spotify-player-wrapper, #schedule-bar{ z-index:1000 !important; }
-/* ===== TABLES – viền rõ ở cả light/dark (chỉ trong vùng nội dung bài) ===== */
-:root[data-theme="light"]{ --tbl-border:#cbd5e1; --tbl-bg:#fff; --tbl-head:#f6f8fa; }
-:root:not([data-theme="light"]){ --tbl-border:rgba(255,255,255,.18); --tbl-bg:rgba(255,255,255,.02); --tbl-head:rgba(255,255,255,.06); }
-
-.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) table{
-  width:100%; border-collapse:collapse !important; background:var(--tbl-bg) !important;
-  border:1px solid var(--tbl-border) !important; font-size:.96rem;
-}
-.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) :is(th,td){
-  border:1px solid var(--tbl-border) !important; padding:.6rem .8rem; vertical-align:top;
-}
-.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) thead th{
-  background:var(--tbl-head) !important; font-weight:600;
-}
-.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) table code{
-  white-space:pre-wrap; word-break:break-word;
-}
-
-/* ===== SHARE – làm nút Copy Link đậm hơn (không đổi size) ===== */
-:is(.share, .share-bar, .post-share) a[title*="copy" i],
-:is(.share, .share-bar, .post-share) a[aria-label*="copy" i],
-:is(.share, .share-bar, .post-share) a:last-child{
+.share :is(svg){ width:var(--share-icon-size); height:var(--share-icon-size); pointer-events:none; }
+/* Copy link highlight */
+:is(.share,.share-bar,.post-share) a[title*="copy" i],
+:is(.share,.share-bar,.post-share) a[aria-label*="copy" i],
+:is(.share,.share-bar,.post-share) a:last-child{
   --copy-c:#475569; border-color:var(--copy-c) !important; color:var(--copy-c) !important;
-  background: color-mix(in srgb, var(--copy-c) 10%, transparent);
+  background:color-mix(in srgb, var(--copy-c) 10%, transparent);
 }
-:root:not([data-theme="light"]) :is(.share, .share-bar, .post-share) a[title*="copy" i],
-:root:not([data-theme="light"]) :is(.share, .share-bar, .post-share) a[aria-label*="copy" i],
-:root:not([data-theme="light"]) :is(.share, .share-bar, .post-share) a:last-child{
-  --copy-c:#a8b3cf; background: color-mix(in srgb, var(--copy-c) 14%, transparent);
+:root:not([data-theme="light"]) :is(.share,.share-bar,.post-share) a[title*="copy" i],
+:root:not([data-theme="light"]) :is(.share,.share-bar,.post-share) a[aria-label*="copy" i],
+:root:not([data-theme="light"]) :is(.share,.share-bar,.post-share) a:last-child{
+  --copy-c:#a8b3cf; background:color-mix(in srgb, var(--copy-c) 14%, transparent);
 }
-:is(.share, .share-bar, .post-share) a[title*="copy" i]:hover,
-:is(.share, .share-bar, .post-share) a[aria-label*="copy" i]:hover,
-:is(.share, .share-bar, .post-share) a:last-child:hover{
+:is(.share,.share-bar,.post-share) a[title*="copy" i]:hover,
+:is(.share,.share-bar,.post-share) a[aria-label*="copy" i]:hover,
+:is(.share,.share-bar,.post-share) a:last-child:hover{
   background:var(--copy-c) !important; color:#fff !important; border-color:var(--copy-c) !important;
 }
 
-/* ===== BACK-TO-TOP – luôn đè lên Spotify/iframe ===== */
+/* -------------------- BACK-TO-TOP -------------------- */
 #back-to-top, .back-to-top, .to-top{
-  position:fixed !important; right:1rem !important; bottom:1rem !important;
-  z-index:2147483647 !important; isolation:isolate; pointer-events:auto;
+  position:fixed; right:1rem; bottom:1rem; pointer-events:auto;
+  z-index:1500 !important; /* welcome(2000) > back-to-top(1500) > spotify(1000) */
 }
-/* Spotify thấp hơn */
 #spotify-player-wrapper, #schedule-bar{ z-index:1000 !important; }
-#spotify-player-wrapper iframe{ z-index:auto !important; }
 
-/* Nếu có rule cũ “né Spotify” thì vô hiệu hóa */
-html.with-player #back-to-top, html.with-player .back-to-top, html.with-player .to-top{
-  right:1rem !important;
-}
-/* ====== FORCE TABLE STYLE INSIDE POST CONTENT (both themes) ====== */
+/* =========================================================
+   TABLES — Single layer, consistent in Light/Dark, no wrapper box
+   ========================================================= */
+
+/* Theme tokens for tables (and a border width) */
 :root[data-theme="light"]{
-  --tbl-border: #d0d7de;       /* GitHub-like borders */
+  --tbl-bw: 1.5px;
+  --tbl-b:  #9aa4b2;
   --tbl-bg: #ffffff;
-  --tbl-head: #f6f8fa;
-  --tbl-stripe: #fafbfc;
+  --tbl-head:#eef2f6;
+  --tbl-stripe:#f8fafc;
 }
 :root:not([data-theme="light"]){
-  --tbl-border: rgba(255,255,255,.18);
+  --tbl-bw: 1px;
+  --tbl-b:  rgba(255,255,255,.18);
   --tbl-bg: rgba(255,255,255,.02);
-  --tbl-head: rgba(255,255,255,.06);
-  --tbl-stripe: rgba(255,255,255,.04);
+  --tbl-head:rgba(255,255,255,.06);
+  --tbl-stripe:rgba(255,255,255,.04);
 }
 
-/* target mọi table trong vùng bài viết và đè mọi reset từ theme */
-.page-content .wrapper .post-content :where(table){
-  width: 100%;
-  border-collapse: collapse !important;
-  table-layout: auto;
-  background: var(--tbl-bg) !important;
-  border: 1px solid var(--tbl-border) !important;
-  margin: .5rem 0 1.25rem;
-  font-size: .96rem;
+/* Kill wrapper decoration to avoid “double layer” */
+.page-content .wrapper .post-content :is(.table-scroll, .md-table){
+  background:transparent !important; border:0 !important; box-shadow:none !important;
+  padding:0 !important; margin:0 !important; border-radius:0 !important;
 }
+.page-content .wrapper .post-content :is(.table-scroll, .md-table)::before,
+.page-content .wrapper .post-content :is(.table-scroll, .md-table)::after{ content:none !important; }
 
-.page-content .wrapper .post-content :where(th, td){
-  border: 1px solid var(--tbl-border) !important;
-  padding: .6rem .8rem !important;
-  vertical-align: top;
-}
-
-.page-content .wrapper .post-content thead :where(th){
-  background: var(--tbl-head) !important;
-  font-weight: 600;
-}
-
-.page-content .wrapper .post-content tbody tr:nth-child(odd) > *{
-  background: var(--tbl-stripe) !important;
-}
-
-/* code trong ô bảng không bị tràn */
-.page-content .wrapper .post-content table code{
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-/* ====== TABLES — FORCE STYLE TRONG BÀI VIẾT (v2 mạnh tay) ====== */
-:root[data-theme="light"]{
-  --tbl-border: #d0d7de;
-  --tbl-bg: #ffffff;
-  --tbl-head: #f6f8fa;
-  --tbl-stripe: #fafbfc;
-}
-:root:not([data-theme="light"]){
-  --tbl-border: rgba(255,255,255,.18);
-  --tbl-bg: rgba(255,255,255,.02);
-  --tbl-head: rgba(255,255,255,.06);
-  --tbl-stripe: rgba(255,255,255,.04);
-}
-
-/* Bắt mọi table nằm trong vùng nội dung post (dù class là gì) */
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) :where(table){
+/* The table itself is the only element with border */
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) table{
   width:100%;
-  border-collapse:collapse !important;
-  table-layout:auto;
+  border-collapse:collapse !important; border-spacing:0 !important;
   background:var(--tbl-bg) !important;
-  border:1px solid var(--tbl-border) !important;
+  border:var(--tbl-bw) solid var(--tbl-b) !important;
+  border-radius:10px !important;
+  overflow:hidden;                 /* let radius clip thead/tbody */
+  font-size:.96rem;
   margin:.5rem 0 1.25rem;
-  font-size:.96rem;
 }
 
-/* Ô và viền */
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) :where(th,td){
-  border:1px solid var(--tbl-border) !important;
+/* Cells & header */
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) :is(th,td){
+  border:var(--tbl-bw) solid var(--tbl-b) !important;
   padding:.6rem .8rem !important;
   vertical-align:top;
+  background:var(--tbl-bg) !important;
 }
-
-/* Header */
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) thead :where(th){
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) thead th{
   background:var(--tbl-head) !important;
-  font-weight:600;
+  font-weight:600 !important;
 }
 
-/* Stripe */
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) tbody tr:nth-child(odd) > *{
-  background:var(--tbl-stripe) !important;
+/* If thead is empty, use first row of tbody as header */
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content)
+  :is(.table-scroll, .md-table) > table > tbody > tr:first-child > :is(th,td){
+  background:var(--tbl-head) !important; font-weight:600 !important;
 }
 
-/* Code trong ô không tràn */
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content, article) table code{
-  white-space:pre-wrap;
-  word-break:break-word;
-}
-/* ====== TABLES (bảng thật) — ép style rõ ràng ====== */
-:root[data-theme="light"]{
-  --tbl-border:#d0d7de; --tbl-bg:#fff; --tbl-head:#f6f8fa; --tbl-stripe:#fafbfc;
-}
-:root:not([data-theme="light"]){
-  --tbl-border:rgba(255,255,255,.18);
-  --tbl-bg:rgba(255,255,255,.02);
-  --tbl-head:rgba(255,255,255,.06);
-  --tbl-stripe:rgba(255,255,255,.04);
-}
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) :where(table){
-  width:100%; border-collapse:collapse !important; table-layout:auto;
-  background:var(--tbl-bg) !important; border:1px solid var(--tbl-border) !important;
-  margin:.5rem 0 1.25rem; font-size:.96rem;
-}
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) :where(th,td){
-  border:1px solid var(--tbl-border) !important; padding:.6rem .8rem !important; vertical-align:top;
-}
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) thead :where(th){
-  background:var(--tbl-head) !important; font-weight:600;
-}
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) tbody tr:nth-child(odd) > *{
-  background:var(--tbl-stripe) !important;
-}
-.page-content .wrapper :is(.post-content,.entry-content,.markdown-body,.content,article) table code{
+/* Soft zebra stripes */
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content)
+  tbody tr:nth-child(odd) > *{ background:var(--tbl-stripe) !important; }
+
+/* Code inside cells wraps nicely */
+.page-content .wrapper :is(.post-content, article, .markdown-body, .entry-content, .content) table code{
   white-space:pre-wrap; word-break:break-word;
 }
-
-/* ====== Fallback cho “Quick Comparison” KHÔNG dùng <table> ====== */
-/* Giả định tiêu đề có id auto-gen là quick-comparison (nếu khác, đổi ở đây) */
-.post-content h2[id*="quick-comparison"] + *{
-  /* khung ngoài */
-  border:1px solid var(--tbl-border) !important;
-  background:var(--tbl-bg) !important;
-  border-radius:8px; overflow:hidden;
-  padding:.25rem;               /* tí đệm cho đẹp */
+/* ==== HARD FIX cho LIGHT: ép 1 lớp viền rõ, thắng mọi rule của theme ==== */
+html[data-theme="light"] .page-content .wrapper :is(.table-scroll, .md-table){
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
 }
 
-/* Tạo vạch ngang/dọc giữa “ô” – hoạt động tốt cho layout lưới/list phổ biến */
-.post-content h2[id*="quick-comparison"] + * :is(div,li,section){
-  /* mỗi “hàng” */
-  border-top:1px solid var(--tbl-border) !important;
-}
-.post-content h2[id*="quick-comparison"] + * :is(div,li,section):first-child{
-  border-top:0 !important;
-}
-
-/* Các “ô” con bên trong hàng */
-.post-content h2[id*="quick-comparison"] + * :is(p,span,code,strong,em,small,a){
-  display:inline-block; padding:.45rem .6rem;
-  border-left:1px solid var(--tbl-border) !important;
-}
-.post-content h2[id*="quick-comparison"] + * :is(p,span,code,strong,em,small,a):first-child{
-  border-left:0 !important;
-}
-
-/* Làm hàng tiêu đề đậm hơn nếu có hàng đầu tiên dạng header */
-.post-content h2[id*="quick-comparison"] + * :is(div,li,section):first-child :is(p,span,strong){
-  font-weight:600;
-  background:var(--tbl-head) !important;
-}
-/* ===== Quick Comparison: ép style bảng rõ ràng trong .md-table ===== */
-
-/* token cho sáng/tối (nếu chưa có) */
-:root[data-theme="light"]{
-  --tbl-border:#d0d7de; --tbl-bg:#fff; --tbl-head:#f6f8fa; --tbl-stripe:#fafbfc;
-}
-:root:not([data-theme="light"]){
-  --tbl-border:rgba(255,255,255,.18);
-  --tbl-bg:rgba(255,255,255,.02);
-  --tbl-head:rgba(255,255,255,.06);
-  --tbl-stripe:rgba(255,255,255,.04);
-}
-
-/* khung bên ngoài */
-.post-content #quick-comparison + .table-scroll.md-table{
-  background: var(--tbl-bg) !important;
-  border: 1px solid var(--tbl-border) !important;
-  border-radius: 8px;
-  padding: .25rem;                  /* đệm nhẹ cho đẹp */
-  overflow: auto;                   /* vẫn cuộn ngang khi cần */
-}
-
-/* bảng bên trong: border-collapse + width + viền */
-.post-content #quick-comparison + .table-scroll.md-table > table,
-.post-content .table-scroll.md-table > table{
-  width: 100%;
+html[data-theme="light"] .page-content .wrapper
+  :is(.table-scroll > table, .md-table > table, table){
+  width: 100% !important;
   border-collapse: collapse !important;
-  table-layout: auto;
-  background: var(--tbl-bg) !important;
-  border: 1px solid var(--tbl-border) !important;
-  margin: .25rem 0 1rem;
+  border-spacing: 0 !important;
+  background: #ffffff !important;
+  border: 1.5px solid #9aa4b2 !important;   /* viền rõ */
+  border-radius: 10px !important;
+  overflow: hidden;
   font-size: .96rem;
+  margin: .5rem 0 1.25rem;
 }
 
-/* ô */
-.post-content .table-scroll.md-table > table :where(th, td){
-  border: 1px solid var(--tbl-border) !important;
+html[data-theme="light"] .page-content .wrapper :is(th,td){
+  border: 1.5px solid #9aa4b2 !important;
   padding: .6rem .8rem !important;
   vertical-align: top;
+  background: #ffffff !important;
 }
 
-/* hàng header: thead rỗng => lấy hàng đầu tiên trong tbody làm header */
-.post-content .table-scroll.md-table > table > tbody > tr:first-child > *{
-  background: var(--tbl-head) !important;
-  font-weight: 600;
+html[data-theme="light"] .page-content .wrapper thead th{
+  background: #eef2f6 !important;
+  font-weight: 600 !important;
 }
 
-/* sọc hàng nhẹ */
-.post-content .table-scroll.md-table > table > tbody > tr:nth-child(odd) > td{
-  background: var(--tbl-stripe) !important;
-}
-
-/* code trong ô không vỡ layout */
-.post-content .table-scroll.md-table > table code{
-  white-space: pre-wrap;
-  word-break: break-word;
-}
-/* ===== FIX: Quick Comparison table – ép border rõ, thắng theme ===== */
-
-/* tokens sáng/tối */
-:root[data-theme="light"]{
-  --tbl-border:#d0d7de; --tbl-bg:#fff; --tbl-head:#f6f8fa; --tbl-stripe:#fafbfc;
-}
-:root:not([data-theme="light"]){
-  --tbl-border:rgba(255,255,255,.18);
-  --tbl-bg:rgba(255,255,255,.02);
-  --tbl-head:rgba(255,255,255,.06);
-  --tbl-stripe:rgba(255,255,255,.04);
-}
-
-/* bọc ngoài của bảng (có scroll) */
-.page-content .wrapper .table-scroll.md-table{
-  background:var(--tbl-bg) !important;
-  border:1px solid var(--tbl-border) !important;
-  border-radius:8px;
-  padding:.25rem;
-  overflow:auto;
-}
-
-/* chính cái <table> bên trong */
-.page-content .wrapper .table-scroll.md-table > table{
-  width:100%;
-  border-collapse:collapse !important;
-  border-spacing:0 !important;
-  background:var(--tbl-bg) !important;
-  border:1px solid var(--tbl-border) !important;
-  margin:.25rem 0 1rem;
-  font-size:.96rem;
-}
-
-/* đảm bảo theme không đổi display của ô */
-.page-content .wrapper .table-scroll.md-table :is(tr){ display: table-row !important; }
-.page-content .wrapper .table-scroll.md-table :is(th,td){
-  display: table-cell !important;
-  border:1px solid var(--tbl-border) !important;
-  padding:.6rem .8rem !important;
-  vertical-align:top;
-}
-
-/* thead có thể rỗng -> lấy hàng đầu của tbody làm header */
-.page-content .wrapper .table-scroll.md-table > table > thead > tr > th{
-  background:var(--tbl-head) !important; font-weight:600 !important;
-}
-.page-content .wrapper .table-scroll.md-table > table > tbody > tr:first-child > :is(th,td){
-  background:var(--tbl-head) !important; font-weight:600 !important;
-}
-
-/* sọc hàng nhẹ */
-.page-content .wrapper .table-scroll.md-table > table > tbody > tr:nth-child(odd) > td{
-  background:var(--tbl-stripe) !important;
-}
-
-/* code trong ô không vỡ layout */
-.page-content .wrapper .table-scroll.md-table > table code{
-  white-space:pre-wrap; word-break:break-word;
-}
-/* ==== Fix "2 lớp" & đồng bộ style bảng (Quick Comparison) ==== */
-
-/* 1) Vô hiệu wrapper md-table để không vẽ thêm lớp khung */
-.page-content .wrapper .post-content .table-scroll,
-.page-content .wrapper .post-content .md-table {
-  background: transparent !important;
-  border: 0 !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-}
-
-/* 2) Token màu cho bảng */
-:root[data-theme="light"]{
-  --tbl-border: #d0d7de;
-  --tbl-bg: #ffffff;
-  --tbl-head: #f6f8fa;
-  --tbl-stripe: #fafbfc;
-}
-:root:not([data-theme="light"]){
-  --tbl-border: rgba(255,255,255,.18);
-  --tbl-bg: rgba(255,255,255,.02);
-  --tbl-head: rgba(255,255,255,.06);
-  --tbl-stripe: rgba(255,255,255,.04);
-}
-
-/* 3) Bảng 1 lớp khung, bo góc, sọc hàng */
-.page-content .wrapper .post-content table{
-  border-collapse: separate !important; /* để giữ border-radius */
-  border-spacing: 0 !important;
-  width: 100%;
-  background: var(--tbl-bg) !important;
-  border: 1px solid var(--tbl-border) !important;
-  border-radius: 10px !important;
-  overflow: hidden; /* bo góc gọn */
-  font-size: .96rem;
-}
-
-/* header */
-.page-content .wrapper .post-content thead th{
-  background: var(--tbl-head) !important;
-  border-bottom: 1px solid var(--tbl-border) !important;
-  font-weight: 600;
-}
-
-/* ô và đường kẻ */
-.page-content .wrapper .post-content th,
-.page-content .wrapper .post-content td{
-  border-left: 1px solid var(--tbl-border) !important;
-  border-top: 1px solid var(--tbl-border) !important;
-  padding: .6rem .8rem; 
-  vertical-align: top;
-  background: var(--tbl-bg) !important;
-}
-.page-content .wrapper .post-content tr:first-child th { border-top: none !important; }
-.page-content .wrapper .post-content tr td:first-child,
-.page-content .wrapper .post-content tr th:first-child { border-left: none !important; }
-
-/* sọc hàng nhẹ giống dark */
-.page-content .wrapper .post-content tbody tr:nth-child(odd) td{
-  background: var(--tbl-stripe) !important;
-}
-
-/* code trong ô không tràn */
-.page-content .wrapper .post-content table code{
-  white-space: pre-wrap; word-break: break-word;
-}
-/* ====== TABLE: bỏ viền/nền của wrapper để khỏi bị "2 lớp" ====== */
-.page-content .wrapper .post-content .table-scroll,
-.page-content .wrapper .post-content .md-table{
-  border: 0 !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
-/* Nếu theme có pseudo viền trang trí, tắt luôn */
-.page-content .wrapper .post-content .table-scroll::before,
-.page-content .wrapper .post-content .table-scroll::after,
-.page-content .wrapper .post-content .md-table::before,
-.page-content .wrapper .post-content .md-table::after{
-  content: none !important;
-  display: none !important;
-}
-
-/* Đảm bảo TABLE là nơi duy nhất có viền + bo góc + collapse */
-.page-content .wrapper .post-content .table-scroll > table,
-.page-content .wrapper .post-content .md-table > table,
-.page-content .wrapper .post-content table{
-  border-collapse: collapse !important;
-  margin: 0 !important;
-  border: 1px solid var(--tbl-border) !important;
-  background: var(--tbl-bg) !important;
-  border-radius: 10px;            /* cùng vibe với dark */
-  overflow: hidden;               /* để bo góc “ăn” cả thead/tbody */
-}
-
-/* Viền ô & header giữ đồng nhất (đè mọi rule stripe cũ) */
-.page-content .wrapper .post-content th,
-.page-content .wrapper .post-content td{
-  border: 1px solid var(--tbl-border) !important;
-}
-.page-content .wrapper .post-content thead th{
-  background: var(--tbl-head) !important;
-  font-weight: 600;
-}
-
-/* Tắt mọi border/outline phụ trong wrapper con của theme (nếu có) */
-.page-content .wrapper .post-content .md-table .md-table__inner,
-.page-content .wrapper .post-content .table-scroll .table-inner{
-  border: 0 !important;
-  box-shadow: none !important;
-  background: transparent !important;
+html[data-theme="light"] .page-content .wrapper tbody tr:nth-child(odd) > *{
+  background: #f8fafc !important;
 }
