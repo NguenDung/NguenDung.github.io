@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments
+layout: post-with-comments-with-comments
 title: "OverTheWire Bandit — Complete Walkthrough Index"
 permalink: /posts/overthewire/bandit-overview/
 tags: [overthewire, bandit, walkthrough, ctf, linux, beginner]

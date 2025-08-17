@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments
+layout: post-with-comments-with-comments
 title: "Master Linux Package Managers: apt, pacman, and dnf"
 permalink: /posts/master-package-managers/
 tags: [linux, apt, pacman, dnf, package-manager, troubleshooting, beginner, guide]
@@ -9,26 +9,57 @@ excerpt_separator: <!--more-->
 
 <!-- Scoped styles for THIS post only -->
 <style>
-/* Responsive video embeds (16:9) — kept for consistency across posts */
+
 .embed-16x9 { position: relative; width: 100%; aspect-ratio: 16 / 9; }
 .embed-16x9 iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
 
-/* Tables + scroll */
 .table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
 .md-table table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
 .md-table th, .md-table td { padding: .6rem .8rem; border: 1px solid #e5e7eb; }
 .md-table thead th { background: #f8fafc; text-align: left; }
 
-/* Dark mode soften */
 @media (prefers-color-scheme: dark) {
   .md-table th, .md-table td { border-color: rgba(255,255,255,.12); }
   .md-table thead th { background: rgba(255,255,255,.06); }
 }
 
-/* Callouts */
 .callout { padding:.8rem 1rem; border-left:4px solid #6b7280; background:rgba(107,114,128,.08); margin:1rem 0; }
 .callout.warn { border-color:#d97706; background:rgba(217,119,6,.08); }
 .callout.ok { border-color:#059669; background:rgba(5,150,105,.08); }
+
+.post-content h2[id*="further"] ~ :is(.table-scroll,.md-table){
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+.post-content h2[id*="further"] ~ :is(.table-scroll,.md-table) > table{
+  border: 0 !important;
+  background: transparent !important;
+}
+
+#further-reading :is(ul,ol){
+  list-style: disc outside !important;
+  padding-left: 1.2rem !important;
+  margin: .25rem 0 1rem !important;
+}
+#further-reading li{
+  display: list-item !important;
+  background: transparent !important;
+  border: 0 !important;
+  padding: .2rem 0 !important;
+  margin: 0 !important;
+}
+
+#further-reading a{
+  display: inline !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+}
+
 </style>
 
 _Hello and welcome back — **SuiiKawaii** here. Today we are demystifying **Linux package managers** in a practical, do-first way. If you can install, update, roll back, and troubleshoot packages confidently, you can keep any Linux box healthy — whether it is a home lab or a production server._
@@ -718,6 +749,8 @@ sudo dnf autoremove && sudo dnf clean packages
 
 ## Further Reading
 
+<section id="further-reading">
+
 **Videos**
 
 * <a href="https://www.youtube.com/watch?v=1lLZ-59xH3Y" target="_blank" rel="noopener noreferrer">Linux Packaging Formats explained: Flatpak vs Snaps vs DEB & RPM vs AppImage vs AUR</a>
@@ -735,6 +768,9 @@ sudo dnf autoremove && sudo dnf clean packages
 * RPM packaging: <a href="https://rpm-packaging-guide.github.io/" target="_blank" rel="noopener noreferrer">rpm-packaging-guide.github.io</a> | <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html-single/rpm_packaging_guide/index" target="_blank" rel="noopener noreferrer">RHEL: RPM Packaging Guide</a>
 * DNF docs: <a href="https://docs.fedoraproject.org/en-US/quick-docs/dnf/" target="_blank" rel="noopener noreferrer">Fedora Quick Docs: DNF</a> | <a href="https://dnf.readthedocs.io/en/latest/command_ref.html" target="_blank" rel="noopener noreferrer">DNF command reference</a>
 * Python Packaging User Guide: <a href="https://packaging.python.org/" target="_blank" rel="noopener noreferrer">packaging.python.org</a> | <a href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/" target="_blank" rel="noopener noreferrer">pip + venv</a>
+
+</section>
+
 
 ---
 

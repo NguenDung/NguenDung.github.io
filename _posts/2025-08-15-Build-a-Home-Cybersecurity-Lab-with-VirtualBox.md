@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments
+layout: post-with-comments-with-comments
 title: "Build a Home Cybersecurity Lab with VirtualBox/VMware"
 permalink: /posts/home-cyber-lab/
 tags: [virtualization, lab, kali, parrot, blackarch, backbox, virtualbox, vmware, networking, beginner]

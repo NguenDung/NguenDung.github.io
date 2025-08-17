@@ -1,5 +1,5 @@
 ---
-layout: post-with-comments
+layout: post-with-comments-with-comments
 title: "AI in Cybersecurity: Benefits, Risks, and an Evidence-Based Playbook"
 permalink: /posts/ai-in-cybersecurity-practical-guide/
 tags: [ai, cybersecurity, blue-team, red-team, soc, threat-intel, detection, governance, mlops, llmops, rag, education]

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: post-with-comments
 title: "OverTheWire Bandit Level 1 tutorial!!"
 permalink: /posts/OverTheWire-Bandit-Level-1/
 tags: [overthewire, bandit, walkthrough, ctf, linux, beginner]
