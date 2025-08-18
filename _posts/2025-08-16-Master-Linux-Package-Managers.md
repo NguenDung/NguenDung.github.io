@@ -751,7 +751,6 @@ sudo dnf autoremove && sudo dnf clean packages
 
 <section id="further-reading" markdown="1">
 
-**Videos**
 <p><strong>Videos</strong></p>
 <ul>
   <li><a href="https://www.youtube.com/watch?v=1lLZ-59xH3Y" target="_blank" rel="noopener">Linux Packaging Formats explained: Flatpak vs Snaps vs DEB &amp; RPM vs AppImage vs AUR</a></li>
