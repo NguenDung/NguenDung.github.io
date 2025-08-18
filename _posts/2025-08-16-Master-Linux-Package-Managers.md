@@ -752,10 +752,13 @@ sudo dnf autoremove && sudo dnf clean packages
 <section id="further-reading" markdown="1">
 
 **Videos**
-- [Linux Packaging Formats explained: Flatpak vs Snaps vs DEB & RPM vs AppImage vs AUR](https://www.youtube.com/watch?v=1lLZ-59xH3Y)
-- [apt, dpkg, git, Python PiP (Linux Package Management) // Linux for Hackers // EP 5](https://www.youtube.com/watch?v=vX3krP6JmOY)
-- [Linux Package Management | Debian, Fedora, and Arch Linux](https://www.youtube.com/watch?v=lkii2cGuKao)
-- [The Best Package Manager](https://www.youtube.com/watch?v=QsYEvnV-P34)
+<p><strong>Videos</strong></p>
+<ul>
+  <li><a href="https://www.youtube.com/watch?v=1lLZ-59xH3Y" target="_blank" rel="noopener">Linux Packaging Formats explained: Flatpak vs Snaps vs DEB &amp; RPM vs AppImage vs AUR</a></li>
+  <li><a href="https://www.youtube.com/watch?v=vX3krP6JmOY" target="_blank" rel="noopener">apt, dpkg, git, Python PiP (Linux Package Management) // Linux for Hackers // EP 5</a></li>
+  <li><a href="https://www.youtube.com/watch?v=lkii2cGuKao" target="_blank" rel="noopener">Linux Package Management | Debian, Fedora, and Arch Linux</a></li>
+  <li><a href="https://www.youtube.com/watch?v=QsYEvnV-P34" target="_blank" rel="noopener">The Best Package Manager</a></li>
+</ul>
 
 **Official docs & references**
 - **Flatpak docs**
