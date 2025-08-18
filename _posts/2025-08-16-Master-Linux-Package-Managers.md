@@ -749,25 +749,40 @@ sudo dnf autoremove && sudo dnf clean packages
 
 ## Further Reading
 
-<section id="further-reading">
+<section id="further-reading" markdown="1">
 
 **Videos**
-
-* <a href="https://www.youtube.com/watch?v=1lLZ-59xH3Y" target="_blank" rel="noopener noreferrer">Linux Packaging Formats explained: Flatpak vs Snaps vs DEB & RPM vs AppImage vs AUR</a>
-* <a href="https://www.youtube.com/watch?v=vX3krP6JmOY" target="_blank" rel="noopener noreferrer">apt, dpkg, git, Python PiP (Linux Package Management) // Linux for Hackers // EP 5</a>
-* <a href="https://www.youtube.com/watch?v=lkii2cGuKao" target="_blank" rel="noopener noreferrer">Linux Package Management | Debian, Fedora, and Arch Linux</a>
-* <a href="https://www.youtube.com/watch?v=QsYEvnV-P34" target="_blank" rel="noopener noreferrer">The Best Package Manager</a>
+- [Linux Packaging Formats explained: Flatpak vs Snaps vs DEB & RPM vs AppImage vs AUR](https://www.youtube.com/watch?v=1lLZ-59xH3Y)
+- [apt, dpkg, git, Python PiP (Linux Package Management) // Linux for Hackers // EP 5](https://www.youtube.com/watch?v=vX3krP6JmOY)
+- [Linux Package Management | Debian, Fedora, and Arch Linux](https://www.youtube.com/watch?v=lkii2cGuKao)
+- [The Best Package Manager](https://www.youtube.com/watch?v=QsYEvnV-P34)
 
 **Official docs & references**
-
-* Flatpak docs: <a href="https://docs.flatpak.org/" target="_blank" rel="noopener noreferrer">docs.flatpak.org</a> | <a href="https://docs.flatpak.org/en/latest/introduction.html" target="_blank" rel="noopener noreferrer">Introduction</a> | <a href="https://docs.flatpak.org/en/latest/getting-started.html" target="_blank" rel="noopener noreferrer">Getting started</a>
-* Snapcraft docs: <a href="https://snapcraft.io/docs" target="_blank" rel="noopener noreferrer">snapcraft.io/docs</a> | <a href="https://snapcraft.io/docs/get-started" target="_blank" rel="noopener noreferrer">Get started</a>
-* AppImage docs: <a href="https://docs.appimage.org/" target="_blank" rel="noopener noreferrer">docs.appimage.org</a> | <a href="https://docs.appimage.org/introduction/quickstart.html" target="_blank" rel="noopener noreferrer">Quickstart</a>
-* Arch User Repository (AUR): <a href="https://wiki.archlinux.org/title/Arch_User_Repository" target="_blank" rel="noopener noreferrer">ArchWiki: AUR</a> | <a href="https://aur.archlinux.org/" target="_blank" rel="noopener noreferrer">aur.archlinux.org</a>
-* dpkg manual: <a href="https://manpages.debian.org/buster/dpkg/dpkg.1.en.html" target="_blank" rel="noopener noreferrer">Debian manpages</a> | <a href="https://man7.org/linux/man-pages/man1/dpkg.1.html" target="_blank" rel="noopener noreferrer">man7.org</a>
-* RPM packaging: <a href="https://rpm-packaging-guide.github.io/" target="_blank" rel="noopener noreferrer">rpm-packaging-guide.github.io</a> | <a href="https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html-single/rpm_packaging_guide/index" target="_blank" rel="noopener noreferrer">RHEL: RPM Packaging Guide</a>
-* DNF docs: <a href="https://docs.fedoraproject.org/en-US/quick-docs/dnf/" target="_blank" rel="noopener noreferrer">Fedora Quick Docs: DNF</a> | <a href="https://dnf.readthedocs.io/en/latest/command_ref.html" target="_blank" rel="noopener noreferrer">DNF command reference</a>
-* Python Packaging User Guide: <a href="https://packaging.python.org/" target="_blank" rel="noopener noreferrer">packaging.python.org</a> | <a href="https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/" target="_blank" rel="noopener noreferrer">pip + venv</a>
+- **Flatpak docs**
+  - <https://docs.flatpak.org/>
+  - [Introduction](https://docs.flatpak.org/en/latest/introduction.html)
+  - [Getting started](https://docs.flatpak.org/en/latest/getting-started.html)
+- **Snapcraft docs**
+  - <https://snapcraft.io/docs>
+  - [Get started](https://snapcraft.io/docs/get-started)
+- **AppImage docs**
+  - <https://docs.appimage.org/>
+  - [Quickstart](https://docs.appimage.org/introduction/quickstart.html)
+- **Arch User Repository (AUR)**
+  - [ArchWiki: AUR](https://wiki.archlinux.org/title/Arch_User_Repository)
+  - <https://aur.archlinux.org/>
+- **dpkg manual**
+  - [Debian manpages](https://manpages.debian.org/buster/dpkg/dpkg.1.en.html)
+  - [man7.org](https://man7.org/linux/man-pages/man1/dpkg.1.html)
+- **RPM packaging**
+  - <https://rpm-packaging-guide.github.io/>
+  - [RHEL: RPM Packaging Guide](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html-single/rpm_packaging_guide/index)
+- **DNF docs**
+  - [Fedora Quick Docs: DNF](https://docs.fedoraproject.org/en-US/quick-docs/dnf/)
+  - [DNF command reference](https://dnf.readthedocs.io/en/latest/command_ref.html)
+- **Python Packaging User Guide**
+  - <https://packaging.python.org/>
+  - [pip + venv](https://packaging.python.org/guides/installing-using-pip-and-virtual-environments/)
 
 </section>
 
