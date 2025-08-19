@@ -549,3 +549,61 @@ body.modal-open{ overflow:hidden; }
   .subscribe-form{ flex-direction:column; }
   .subscribe-btn{ width:100%; }
 }
+
+/* ==== Subscribe email autofill (Chrome/Safari/Firefox) ==== */
+
+#subscribe-modal input[type="email"]:-webkit-autofill,
+#subscribe-modal input[type="email"]:-webkit-autofill:hover,
+#subscribe-modal input[type="email"]:-webkit-autofill:focus,
+#subscribe-modal input[type="email"]:-webkit-autofill:active {
+  transition: background-color 9999s ease-out 0s;
+}
+
+:root[data-theme="light"] #subscribe-modal input[type="email"]:-webkit-autofill,
+:root[data-theme="light"] #subscribe-modal input[type="email"]:-webkit-autofill:hover,
+:root[data-theme="light"] #subscribe-modal input[type="email"]:-webkit-autofill:focus,
+:root[data-theme="light"] #subscribe-modal input[type="email"]:-webkit-autofill:active {
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a;
+  box-shadow: 0 0 0 1000px #f8fafc inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #f8fafc inset !important;
+  border-color: #c7d2fe !important;
+}
+
+:root:not([data-theme="light"]) #subscribe-modal input[type="email"]:-webkit-autofill,
+:root:not([data-theme="light"]) #subscribe-modal input[type="email"]:-webkit-autofill:hover,
+:root:not([data-theme="light"]) #subscribe-modal input[type="email"]:-webkit-autofill:focus,
+:root:not([data-theme="light"]) #subscribe-modal input[type="email"]:-webkit-autofill:active {
+  -webkit-text-fill-color: #e5e7eb !important;
+  caret-color: #e5e7eb;
+  box-shadow: 0 0 0 1000px #0b1220 inset !important;
+  -webkit-box-shadow: 0 0 0 1000px #0b1220 inset !important;
+  border-color: #334155 !important;
+}
+
+#subscribe-modal input[type="email"]:-moz-autofill {
+  box-shadow: 0 0 0 1000px var(--autofill-bg) inset !important;
+  -moz-text-fill-color: currentColor !important;
+}
+:root[data-theme="light"] #subscribe-modal input[type="email"] { --autofill-bg:#f8fafc; }
+:root:not([data-theme="light"]) #subscribe-modal input[type="email"] { --autofill-bg:#0b1220; }
+
+#subscribe-modal input[type="email"] { background-clip: padding-box; }
+
+/* Toast */
+.toast{
+  position:fixed; left:50%; bottom:22px; transform:translate(-50%,20px);
+  padding:.65rem .9rem; border-radius:.75rem; z-index:10000;
+  border:1px solid #334155; box-shadow:0 8px 30px rgba(0,0,0,.35);
+  background:rgba(15,23,42,.98); color:#e5e7eb;
+  opacity:0; pointer-events:none; transition:opacity .18s, transform .18s;
+  font-size:.95rem; line-height:1.25;
+}
+.toast.show{ opacity:1; transform:translate(-50%,0); }
+.toast[data-type="err"]{ background:#7f1d1d; border-color:#ef4444; color:#fff; }
+:root[data-theme="light"] .toast{ background:#111827; color:#fff; border-color:#111827; }
+/* Nếu lỡ có 2 form, ẩn cái thứ 2 (failsafe, nhưng tốt nhất là dọn HTML) */
+.subscribe-dialog .subscribe-form + .subscribe-form { display: none !important; }
+
+/* Toast (nếu muốn tuỳ chỉnh thêm) */
+#sub-toast { backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
