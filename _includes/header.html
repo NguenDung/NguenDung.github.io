@@ -1,19 +1,30 @@
 <div class="site-header">
   <!-- Flex wrapper để căn trái–phải -->
   <div class="wrapper" style="display: flex; align-items: center;">
-    <!-- Site title -->
+    <!-- Site title (giữ nguyên hiệu ứng của bạn) -->
     <a class="site-title" rel="author" href="{{ "/" | relative_url }}">
       {{ site.title | escape }}<b class="command_prompt"></b><b class="blinking_cursor">_</b>
     </a>
 
-    <!-- Nhóm About Me + Social, sẽ tự đẩy sang phải -->
+    <!-- Nhóm Bell + About + Social (đẩy sang phải) -->
     <div class="header-controls" style="margin-left: auto; display: flex; align-items: center; gap: 0.5rem;">
-      <!-- Link About Me dẫn tới bài post /about/ -->
-      <a href="{{ '/about/' | relative_url }}" class="about-btn" aria-label="About Me">
-        About Me
-      </a>
+      <!-- Bell: đứng TRƯỚC About -->
+      <button
+        id="subBell"
+        class="sub-bell"
+        type="button"
+        aria-label="Subscribe to new posts"
+        aria-haspopup="dialog"
+        aria-controls="subscribe-modal">
+        <svg class="bell-ico" width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 2a6 6 0 0 0-6 6v3.382c0 .406-.162.796-.45 1.082L4.3 14.694A1 1 0 0 0 5 16h14a1 1 0 0 0 .7-1.706l-1.25-1.25a1.53 1.53 0 0 1-.45-1.082V8a6 6 0 0 0-6-6Zm0 20a3 3 0 0 0 2.995-2.824L15 19h-6a3 3 0 0 0 2.824 2.995L12 22Z" fill="currentColor"/>
+        </svg>
+      </button>
 
-      <!-- Social links -->
+      <!-- About Me -->
+      <a href="{{ '/about/' | relative_url }}" class="about-btn" aria-label="About Me">About Me</a>
+
+      <!-- Social links (giữ nguyên) -->
       <span class="social_links">
         {% for link in site.dash.social_links %}
           {% if link.fa %}
@@ -30,3 +41,5 @@
     </div>
   </div>
 </div>
+
+{% include subscribe.html %}

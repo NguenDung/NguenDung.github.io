@@ -1,0 +1,40 @@
+<div id="subscribe-modal" class="subscribe-modal" hidden aria-hidden="true">
+  <div class="subscribe-backdrop" data-close></div>
+
+  <div class="subscribe-dialog" role="dialog" aria-modal="true" aria-labelledby="sub-title">
+    <button type="button" class="subscribe-close" aria-label="Close" data-close>
+      <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+        <path d="M18.3 5.7a1 1 0 0 0-1.4 0L12 10.6 7.1 5.7A1 1 0 0 0 5.7 7.1L10.6 12l-4.9 4.9a1 1 0 1 0 1.4 1.4L12 13.4l4.9 4.9a1 1 0 0 0 1.4-1.4L13.4 12l4.9-4.9a1 1 0 0 0 0-1.4z" fill="currentColor"/>
+      </svg>
+    </button>
+
+    <div class="sub-hero">
+      <img class="sub-ava" src="/assets/wah.gif" alt="SuiiKawaii avatar">
+      <div class="sub-head">
+        <h3 id="sub-title">Get new posts by email</h3>
+        <p class="sub-tagline">
+          ✨ Weekly digest &amp; stream alerts. No spam — unsubscribe anytime ✨
+        </p>
+        <p class="sub-extra">
+          💙 You’ll get ~1–2 emails/week: highlights, new post and any Sui-chan updates 💙
+        </p>
+      </div>
+    </div>
+
+    <form class="subscribe-form" action="#" method="post" novalidate aria-label="Subscribe form" onsubmit="return false;">
+      <label for="sub-email" class="sr-only">Email address</label>
+      <input id="sub-email" name="email" type="email" placeholder="you@example.com"
+             autocomplete="email" inputmode="email" required>
+      <button type="submit" class="subscribe-btn">Subscribe</button>
+    </form>
+
+    <div class="sub-foot">
+      <label class="sub-digest">
+        <input id="sub-weekly" type="checkbox" checked>
+        <span>Send me a weekly digest</span>
+      </label>
+
+      <a href="#" class="sub-notnow" data-close>Not now</a>
+    </div>
+  </div>
+</div>
