@@ -590,7 +590,6 @@ body.modal-open{ overflow:hidden; }
 
 #subscribe-modal input[type="email"] { background-clip: padding-box; }
 
-/* Toast */
 .toast{
   position:fixed; left:50%; bottom:22px; transform:translate(-50%,20px);
   padding:.65rem .9rem; border-radius:.75rem; z-index:10000;
@@ -602,8 +601,80 @@ body.modal-open{ overflow:hidden; }
 .toast.show{ opacity:1; transform:translate(-50%,0); }
 .toast[data-type="err"]{ background:#7f1d1d; border-color:#ef4444; color:#fff; }
 :root[data-theme="light"] .toast{ background:#111827; color:#fff; border-color:#111827; }
-/* Nếu lỡ có 2 form, ẩn cái thứ 2 (failsafe, nhưng tốt nhất là dọn HTML) */
+
 .subscribe-dialog .subscribe-form + .subscribe-form { display: none !important; }
 
-/* Toast (nếu muốn tuỳ chỉnh thêm) */
 #sub-toast { backdrop-filter: blur(2px); -webkit-backdrop-filter: blur(2px); }
+
+.sub-foot {
+  display:flex; align-items:center; gap:12px; justify-content:space-between;
+}
+.sub-manage {
+  margin-left:auto; font-size:.9rem; opacity:.8;
+}
+.sub-manage:hover { opacity:1; text-decoration:underline; }
+.subscribe-modal .sub-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: .75rem;
+}
+.subscribe-modal .sub-foot .sub-actions {
+  display: flex;
+  gap: 1rem;
+}
+
+.subscribe-dialog .sub-foot{
+  display:flex;
+  align-items:center;
+  gap:.75rem;             
+}
+
+.subscribe-dialog .sub-actions{
+  margin-left:auto;        
+  display:flex;
+  align-items:center;
+  gap:.75rem;           
+}
+
+.subscribe-dialog .sub-notnow{
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+@media (max-width: 520px){
+  .subscribe-dialog .sub-foot{ flex-wrap:wrap; row-gap:.5rem; }
+  .subscribe-dialog .sub-actions{ width:100%; justify-content:flex-end; }
+}
+/* Chân modal: label bên trái, 2 link bên phải */
+.subscribe-dialog .sub-foot{
+  display:flex;
+  align-items:center;
+  gap:.75rem;
+  flex-wrap:wrap; /* gọn gàng trên mobile */
+}
+
+/* Nhóm 2 link nằm cạnh nhau, đẩy về bên phải */
+.subscribe-dialog .sub-actions{
+  margin-left:auto;
+  display:flex;
+  align-items:center;
+  gap:.75rem;   /* khoảng cách giữa 2 link */
+}
+
+/* Dùng đúng style của "Not now" cho cả 2 link */
+.subscribe-dialog .sub-notnow{
+  font: inherit;
+  color: inherit;             /* theo theme hiện tại (light/dark) */
+  text-decoration: underline; /* giống Not now */
+  cursor: pointer;
+}
+
+/* Mobile: 2 link chuyển xuống hàng, vẫn canh phải */
+@media (max-width: 520px){
+  .subscribe-dialog .sub-actions{
+    width:100%;
+    justify-content:flex-end;
+  }
+}

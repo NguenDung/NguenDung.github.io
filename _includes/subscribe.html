@@ -18,17 +18,13 @@
       </div>
     </div>
 
-    <!-- ONLY ONE FORM -->
+    <!-- ONE FORM ONLY -->
     <form id="subForm"
           class="subscribe-form"
           action="https://api.follow.it/subscription-form/VzJyMFFvZkNQcFYwVk05cStKWDFkRDQvcEgwOGF6V0UwUmtZSmlBWHJnQXZxU1RWOHNYNWIvOEdpUWJsKzJWODRSelJEb29Rb2tYN0MvWElwL1VwQ2dtOEgwcDFTTHRVWCtPbk0vTjkyaUFpcTdOM0h4dTUvWUNHUmd3L3ovTzR8c09RUGNGRXV3WlF2aW9iZ05WNlJtbHdtTmovS3VYeEdiR0Z1NUNtWkFKND0=/8"
           data-action-instant="https://api.follow.it/subscription-form/VzJyMFFvZkNQcFYwVk05cStKWDFkRDQvcEgwOGF6V0UwUmtZSmlBWHJnQXZxU1RWOHNYNWIvOEdpUWJsKzJWODRSelJEb29Rb2tYN0MvWElwL1VwQ2dtOEgwcDFTTHRVWCtPbk0vTjkyaUFpcTdOM0h4dTUvWUNHUmd3L3ovTzR8c09RUGNGRXV3WlF2aW9iZ05WNlJtbHdtTmovS3VYeEdiR0Z1NUNtWkFKND0=/8"
           data-action-weekly="https://api.follow.it/subscription-form/VzJyMFFvZkNQcFYwVk05cStKWDFkRDQvcEgwOGF6V0UwUmtZSmlBWHJnQXZxU1RWOHNYNWIvOEdpUWJsKzJWODRSelJEb29Rb2tYN0MvWElwL1VwQ2dtOEgwcDFTTHRVWCtPbk0vTjkyaUFpcTdOM0h4dTUvWUNHUmd3L3ovTzR8c09RUGNGRXV3WlF2aW9iZ05WNlJtbHdtTmovS3VYeEdiR0Z1NUNtWkFKND0=/8"
-          method="post"
-          target="_blank"
-          rel="noopener"
-          novalidate
-          aria-label="Subscribe form">
+          method="post" target="_blank" rel="noopener" novalidate aria-label="Subscribe form">
       <label for="sub-email" class="sr-only">Email address</label>
       <input id="sub-email" name="email" type="email" placeholder="you@example.com"
              autocomplete="email" inputmode="email" required>
@@ -40,7 +36,13 @@
         <input id="sub-weekly" type="checkbox" checked>
         <span>Send me a weekly digest</span>
       </label>
-      <a href="#" class="sub-notnow" data-close>Not now</a>
+
+      <div class="sub-actions">
+        <a class="sub-notnow" href="https://follow.it/suiikawaii?action=manage" target="_blank" rel="noopener">
+          Manage / Unsubscribe
+        </a>
+        <a class="sub-notnow" href="#" data-close>Not now</a>
+      </div>
     </div>
   </div>
 </div>

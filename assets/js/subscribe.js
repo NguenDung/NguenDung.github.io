@@ -120,17 +120,15 @@
     });
   }
 
-  // ---------- Submit (không preventDefault) ----------
   if (form) {
     form.addEventListener('submit', () => {
-      // chọn action theo checkbox
+
       const actionInstant = form.dataset.actionInstant || form.getAttribute('action');
       const actionWeekly  = form.dataset.actionWeekly  || form.getAttribute('action');
       form.setAttribute('action', (weeklyChk && weeklyChk.checked) ? actionWeekly : actionInstant);
 
       toast.show('Opening follow.it…');
 
-      // Đóng modal SAU khi browser đã bắt đầu POST (tránh xóa email trước khi gửi)
       setTimeout(() => close({ preserveEmail: true }), 200);
     });
   }
