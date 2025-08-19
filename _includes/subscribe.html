@@ -6,25 +6,29 @@
     <button type="button" class="subscribe-close" aria-label="Close" data-close>
       <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path d="M18.3 5.7a1 1 0 0 0-1.4 0L12 10.6 7.1 5.7A1 1 0 0 0 5.7 7.1L10.6 12l-4.9 4.9a1 1 0 1 0 1.4 1.4L12 13.4l4.9 4.9a1 1 0 0 0 1.4-1.4L13.4 12l4.9-4.9a1 1 0 0 0 0-1.4z" fill="currentColor"/>
-        </svg>
+      </svg>
     </button>
 
     <div class="sub-hero">
       <img class="sub-ava" src="/assets/wah.gif" alt="SuiiKawaii avatar">
       <div class="sub-head">
         <h3 id="sub-title">Get new posts by email</h3>
-        <p class="sub-tagline">✨ Weekly digest & stream alerts. No spam — unsubscribe anytime ✨</p>
+        <p class="sub-tagline">✨ Weekly digest &amp; stream alerts. No spam — unsubscribe anytime ✨</p>
         <p class="sub-extra">💙 You’ll get ~1–2 emails/week: highlights, new post and any Sui-chan updates 💙</p>
       </div>
     </div>
 
-    <!-- CHỈ MỘT FORM NÀY THÔI -->
+    <!-- ONLY ONE FORM -->
     <form id="subForm"
           class="subscribe-form"
-          action="https://api.follow.it/subscription-form/INSTANT_ID/8"
-          data-action-instant="https://api.follow.it/subscription-form/INSTANT_ID/8"
-          data-action-weekly="https://api.follow.it/subscription-form/WEEKLY_ID/8"
-          method="post" target="_blank" rel="noopener" novalidate aria-label="Subscribe form">
+          action="https://api.follow.it/subscription-form/VzJyMFFvZkNQcFYwVk05cStKWDFkRDQvcEgwOGF6V0UwUmtZSmlBWHJnQXZxU1RWOHNYNWIvOEdpUWJsKzJWODRSelJEb29Rb2tYN0MvWElwL1VwQ2dtOEgwcDFTTHRVWCtPbk0vTjkyaUFpcTdOM0h4dTUvWUNHUmd3L3ovTzR8c09RUGNGRXV3WlF2aW9iZ05WNlJtbHdtTmovS3VYeEdiR0Z1NUNtWkFKND0=/8"
+          data-action-instant="https://api.follow.it/subscription-form/VzJyMFFvZkNQcFYwVk05cStKWDFkRDQvcEgwOGF6V0UwUmtZSmlBWHJnQXZxU1RWOHNYNWIvOEdpUWJsKzJWODRSelJEb29Rb2tYN0MvWElwL1VwQ2dtOEgwcDFTTHRVWCtPbk0vTjkyaUFpcTdOM0h4dTUvWUNHUmd3L3ovTzR8c09RUGNGRXV3WlF2aW9iZ05WNlJtbHdtTmovS3VYeEdiR0Z1NUNtWkFKND0=/8"
+          data-action-weekly="https://api.follow.it/subscription-form/VzJyMFFvZkNQcFYwVk05cStKWDFkRDQvcEgwOGF6V0UwUmtZSmlBWHJnQXZxU1RWOHNYNWIvOEdpUWJsKzJWODRSelJEb29Rb2tYN0MvWElwL1VwQ2dtOEgwcDFTTHRVWCtPbk0vTjkyaUFpcTdOM0h4dTUvWUNHUmd3L3ovTzR8c09RUGNGRXV3WlF2aW9iZ05WNlJtbHdtTmovS3VYeEdiR0Z1NUNtWkFKND0=/8"
+          method="post"
+          target="_blank"
+          rel="noopener"
+          novalidate
+          aria-label="Subscribe form">
       <label for="sub-email" class="sr-only">Email address</label>
       <input id="sub-email" name="email" type="email" placeholder="you@example.com"
              autocomplete="email" inputmode="email" required>

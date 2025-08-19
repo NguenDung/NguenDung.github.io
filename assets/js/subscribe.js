@@ -1,15 +1,13 @@
-/* subscribe.js — single source of truth for the modal */
 (() => {
-  const modal = document.getElementById('subscribe-modal');
+  const modal    = document.getElementById('subscribe-modal');
   if (!modal) return;
 
   const dialog    = modal.querySelector('.subscribe-dialog');
-  const openBtn   = document.getElementById('subBell');           // nút chuông
+  const openBtn   = document.getElementById('subBell');
   const backdrop  = modal.querySelector('.subscribe-backdrop');
-  const form      = modal.querySelector('#subForm');
+  const form      = modal.querySelector('.subscribe-form');
   const emailInp  = modal.querySelector('#sub-email');
   const weeklyChk = modal.querySelector('#sub-weekly');
-  const submitBtn = form?.querySelector('.subscribe-btn');
 
   const getFocusables = () =>
     [...modal.querySelectorAll('button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])')]
@@ -18,56 +16,44 @@
   let lastActive = null;
   let isOpen = false;
 
-  // ---------- Toast (mini) ----------
+  const firstFocusEl = () =>
+    modal.querySelector('#sub-email') ||
+    modal.querySelector('input, button, .subscribe-close') || dialog;
+
+  // ---------- Tiny toast ----------
   const toast = (() => {
     let el;
     const ensure = () => {
       if (el) return el;
       el = document.createElement('div');
-      el.id = 'sub-toast';
       el.setAttribute('role', 'status');
-      el.style.cssText = `
-        position:fixed; left:50%; bottom:22px; transform:translateX(-50%);
-        max-width:92vw; padding:12px 16px; border-radius:10px;
-        background:#0f172a; color:#e5e7eb; border:1px solid #1f2937;
-        box-shadow:0 6px 26px rgba(0,0,0,.35); z-index:99999; font:500 14px/1.35 system-ui,Segoe UI,Arial;
-        opacity:0; pointer-events:none; transition:opacity .15s ease;
-      `;
+      el.ariaLive = 'polite';
+      Object.assign(el.style, {
+        position:'fixed', inset:'auto 1rem 1rem auto', zIndex:10000,
+        padding:'10px 14px', borderRadius:'10px', fontWeight:'600',
+        border:'1px solid #22c55e', background:'#16a34a', color:'#fff',
+        boxShadow:'0 10px 30px rgba(0,0,0,.25)', transform:'translateY(10px)',
+        opacity:'0', transition:'opacity .18s, transform .18s'
+      });
       document.body.appendChild(el);
       return el;
     };
-    let t = 0;
-    return (msg, type='ok') => {
-      const node = ensure();
-      node.textContent = msg;
-      node.style.background = type === 'err' ? '#7f1d1d' : '#0f172a';
-      node.style.borderColor = type === 'err' ? '#b91c1c' : '#1f2937';
-      node.style.opacity = '1';
-      clearTimeout(t);
-      t = setTimeout(() => (node.style.opacity = '0'), 2200);
+    return {
+      show(msg='Done!') {
+        const t = ensure();
+        t.textContent = msg;
+        requestAnimationFrame(() => {
+          t.style.opacity = '1'; t.style.transform = 'translateY(0)';
+          setTimeout(() => { t.style.opacity = '0'; t.style.transform = 'translateY(10px)'; }, 1700);
+        });
+      }
     };
   })();
-
-  // ---------- Helpers ----------
-  const firstFocusEl = () => emailInp || modal.querySelector('input, button, .subscribe-close');
-
-  function resetForm() {
-    if (emailInp) {
-      emailInp.value = '';
-      emailInp.setCustomValidity('');
-    }
-    if (weeklyChk) {
-      const saved = localStorage.getItem('sub.weekly');
-      weeklyChk.checked = saved == null ? true : saved === 'true';
-    }
-  }
 
   function open() {
     if (isOpen) return;
     isOpen = true;
     lastActive = document.activeElement;
-
-    resetForm();
 
     modal.hidden = false;
     modal.setAttribute('aria-hidden', 'false');
@@ -79,11 +65,19 @@
       openBtn.blur();
     }
 
+    // restore weekly choice
+    if (weeklyChk) {
+      const saved = localStorage.getItem('subWeekly');
+      if (saved !== null) weeklyChk.checked = saved === '1';
+    }
+
     (firstFocusEl() || dialog).focus();
     document.addEventListener('keydown', onKeydown, true);
   }
 
-  function close() {
+  // thêm flag để KHÔNG xóa email khi đóng do submit
+  function close(opts = {}) {
+    const { preserveEmail = false } = opts;
     if (!isOpen) return;
     isOpen = false;
 
@@ -92,15 +86,14 @@
     document.body.classList.remove('modal-open');
     document.removeEventListener('keydown', onKeydown, true);
 
+    if (!preserveEmail && emailInp) emailInp.value = '';
+
     if (openBtn) {
       openBtn.classList.remove('is-active');
       openBtn.setAttribute('aria-expanded', 'false');
       openBtn.blur();
     }
     if (lastActive && typeof lastActive.focus === 'function') lastActive.focus();
-
-    // Xóa email sau khi đóng để lần sau mở lại trống tinh
-    if (emailInp) emailInp.value = '';
   }
 
   function onKeydown(e) {
@@ -114,42 +107,31 @@
   }
 
   // ---------- Wire events ----------
-  if (openBtn) openBtn.addEventListener('click', (e) => { e.preventDefault(); isOpen ? close() : open(); });
+  if (openBtn)  openBtn.addEventListener('click', (e) => { e.preventDefault(); isOpen ? close() : open(); });
   if (backdrop) backdrop.addEventListener('click', close);
-  modal.addEventListener('click', (e) => { if (e.target.closest('[data-close]')) { e.preventDefault(); close(); } });
+  modal.addEventListener('click', (e) => {
+    const closer = e.target.closest('[data-close]');
+    if (closer) { e.preventDefault(); close(); }
+  });
 
   if (weeklyChk) {
     weeklyChk.addEventListener('change', () => {
-      localStorage.setItem('sub.weekly', String(weeklyChk.checked));
+      localStorage.setItem('subWeekly', weeklyChk.checked ? '1' : '0');
     });
   }
 
+  // ---------- Submit (không preventDefault) ----------
   if (form) {
-    form.addEventListener('submit', (e) => {
-      // validate email trước khi submit
-      const val = (emailInp?.value || '').trim();
-      if (!val || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
-        e.preventDefault();
-        toast('Please enter a valid email', 'err');
-        emailInp?.focus();
-        return;
-      }
+    form.addEventListener('submit', () => {
+      // chọn action theo checkbox
+      const actionInstant = form.dataset.actionInstant || form.getAttribute('action');
+      const actionWeekly  = form.dataset.actionWeekly  || form.getAttribute('action');
+      form.setAttribute('action', (weeklyChk && weeklyChk.checked) ? actionWeekly : actionInstant);
 
-      // chọn endpoint theo weekly
-      const endpoint = weeklyChk?.checked
-        ? form.dataset.actionWeekly
-        : form.dataset.actionInstant;
+      toast.show('Opening follow.it…');
 
-      if (endpoint) form.setAttribute('action', endpoint);
-
-      // UI feedback + đóng
-      submitBtn && (submitBtn.disabled = true, submitBtn.textContent = 'Sending…');
-      setTimeout(() => {
-        close();
-        submitBtn && (submitBtn.disabled = false, submitBtn.textContent = 'Subscribe');
-        toast('Check the new tab to confirm 💌');
-      }, 250);
-      // KHÔNG preventDefault để form post sang follow.it (mở tab mới)
+      // Đóng modal SAU khi browser đã bắt đầu POST (tránh xóa email trước khi gửi)
+      setTimeout(() => close({ preserveEmail: true }), 200);
     });
   }
 })();
