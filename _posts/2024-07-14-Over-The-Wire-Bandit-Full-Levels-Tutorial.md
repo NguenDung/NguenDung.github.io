@@ -57,116 +57,114 @@ My goal isn’t to dump passwords but to show *why* each step works so you can s
 
 Pro tip: the real magic is in **pipes** (`|`) and **redirection** (`>`, `>>`, `2>`).
 
----
-
 ## Levels Index (0 → 34)
 
 Each link opens in a new tab. The one-liner tells you the main idea for that level.
 
 - 🐣 **Level 0 — SSH Login**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-0/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — First SSH into the Bandit server.
+  <a href="{{ '/posts/overTheWire-Bandit-Level-0/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — First SSH into the Bandit server.
 
-- 📄 **Level 1 — Reading a File**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-1/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Use `cat` to read the password.
+- 📄 **Level 0 → 1 — Reading a File**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-0-to-1/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Use `cat` to read the password.
 
-- 🌀 **Level 2 — Weird Filenames**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-2/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Handle names with spaces/special chars.
+- 🌀 **Level 1 → 2 — Weird Filenames**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-1-to-2/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Handle names with spaces/special chars.
 
-- 💬 **Level 3 — Spaces in Filenames**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-3/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Quote/escape filenames.
+- 💬 **Level 2 → 3 — Spaces in Filenames**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-2-to-3/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Quote/escape filenames.
 
-- 👀 **Level 4 — Hidden Files**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-4/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Reveal dotfiles with `ls -a`.
+- 👀 **Level 3 → 4 — Hidden Files**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-3-to-4/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Reveal dotfiles with `ls -a`.
 
-- 🧾 **Level 5 — File Types**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-5/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Identify with `file`.
+- 🧾 **Level 4 → 5 — File Types**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-4-to-5/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Identify with `file`.
 
-- 📏 **Level 6 — Size & Permissions**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-6/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — `find` by size/owner/type.
+- 📏 **Level 5 → 6 — Size & Permissions**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-5-to-6/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — `find` by size/owner/type.
 
-- 🧍 **Level 7 — Owner/Group Search**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-7/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Search by ownership.
+- 🧍 **Level 6 → 7 — Owner/Group Search**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-6-to-7/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Search by ownership.
 
-- 🔍 **Level 8 — Grep & Pipe**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-8/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Filter with `grep`.
+- 🔍 **Level 7 → 8 — Grep & Pipe**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-7-to-8/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Filter with `grep`.
 
-- 🔄 **Level 9 — Unique Lines**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-9/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — `sort` + `uniq`.
+- 🔄 **Level 8 → 9 — Unique Lines**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-8-to-9/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — `sort` + `uniq`.
 
-- 💻 **Level 10 — Strings in Binary**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-10/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Extract text with `strings`.
+- 💻 **Level 9 → 10 — Strings in Binary**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-9-to-10/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Extract text with `strings`.
 
-- 🧩 **Level 11 — Base64**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-11/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Decode with `base64 -d`.
+- 🧩 **Level 10 → 11 — Base64**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-10-to-11/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Decode with `base64 -d`.
 
-- 🔡 **Level 12 — Rot13 / Substitution**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-12/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Transform with `tr`.
+- 🔡 **Level 11 → 12 — Rot13 / Substitution**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-11-to-12/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Transform with `tr`.
 
-- 🪄 **Level 13 — Hexdump Magic**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-13/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Recognize file types by hex.
+- 🪄 **Level 12 → 13 — Hexdump Magic**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-12-to-13/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Recognize file types by hex.
 
-- 🔑 **Level 14 — SSH Keys**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-14/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Login using a private key.
+- 🔑 **Level 13 → 14 — SSH Keys**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-13-to-14/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Login using a private key.
 
-- 📡 **Level 15 — Netcat Basics**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-15/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Read from a TCP service.
+- 📡 **Level 14 → 15 — Netcat Basics**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-14-to-15/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Read from a TCP service.
 
-- 📂 **Level 16 — Port Scanning**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-16/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Find the right port.
+- 📂 **Level 15 → 16 — Port Scanning**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-15-to-16/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Find the right port.
 
-- 🕵️ **Level 17 — Diff Files**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-17/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Compare with `diff`.
+- 🕵️ **Level 16 → 17 — Diff Files**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-16-to-17/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Compare with `diff`.
 
-- 🔐 **Level 18 — Hidden in Plain Sight**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-18/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Spot secrets in text.
+- 🔐 **Level 17 → 18 — Hidden in Plain Sight**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-17-to-18/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Spot secrets in text.
 
-- 📜 **Level 19 — Permissions Trick**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-19/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Exploit file permissions.
+- 📜 **Level 18 → 19 — Permissions Trick**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-18-to-19/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Exploit file permissions.
 
-- 🛠️ **Level 20 — Netcat & Scripts**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-20/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Interact with a server script.
+- 🛠️ **Level 19 → 20 — Netcat & Scripts**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-19-to-20/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Interact with a server script.
 
-- 🔄 **Level 21 — Cron Jobs**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-21/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Abuse scheduled tasks.
+- 🔄 **Level 20 → 21 — Cron Jobs**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-20-to-21/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Abuse scheduled tasks.
 
-- 🗂️ **Level 22 — Cron & Scripts**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-22/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Read what cron runs.
+- 🗂️ **Level 21 → 22 — Cron & Scripts**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-21-to-22/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Read what cron runs.
 
-- 🧵 **Level 23 — More Cron Fun**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-23/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Chain cron scripts.
+- 🧵 **Level 22 → 23 — More Cron Fun**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-22-to-23/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Chain cron scripts.
 
-- ⚙️ **Level 24 — TCP & Scripts**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-24/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Connect to a custom TCP service.
+- ⚙️ **Level 23 → 24 — TCP & Scripts**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-23-to-24/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Connect to a custom TCP service.
 
-- 📨 **Level 25 — SSH & Port Forwarding**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-25/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Forward ports with SSH.
+- 📨 **Level 24 → 25 — SSH & Port Forwarding**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-24-to-25/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Forward ports with SSH.
 
-- 📦 **Level 26 — Special Shells**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-26/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Escape restricted shells.
+- 📦 **Level 25 → 26 — Special Shells**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-25-to-26/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Escape restricted shells.
 
-- 🧪 **Level 27 — Git Basics**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-27/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Clone and inspect a repo.
+- 🧪 **Level 26 → 27 — Git Basics**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-26-to-27/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Clone and inspect a repo.
 
-- 🕳️ **Level 28 — Git History**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-28/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Dig secrets from commits.
+- 🕳️ **Level 27 → 28 — Git History**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-27-to-28/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Dig secrets from commits.
 
-- 🗝️ **Level 29 — Git Tags**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-29/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Check tags for clues.
+- 🗝️ **Level 28 → 29 — Git Tags**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-28-to-29/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Check tags for clues.
 
-- 📖 **Level 30 — Git Branches**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-30/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Inspect branches.
+- 📖 **Level 29 → 30 — Git Branches**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-29-to-30/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Inspect branches.
 
-- 🌀 **Level 31 — Git Remotes**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-31/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Explore remotes.
+- 🌀 **Level 30 → 31 — Git Remotes**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-30-to-31/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Explore remotes.
 
-- 📚 **Level 32 — Bash Loops**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-32/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Automate with loops.
+- 📚 **Level 31 → 32 — Bash Loops**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-31-to-32/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Automate with loops.
 
-- 🧠 **Level 33 — Knowledge Check**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-33/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Combine previous skills.
+- 🧠 **Level 32 → 33 — Knowledge Check**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-32-to-33/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Combine previous skills.
 
-- 🏁 **Level 34 — The End!**  
-  <a href="{{ '/posts/OverTheWire-Bandit-Level-34/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Final challenge 🎓
+- 🏁 **Level 33 → 34 — The End!**  
+  <a href="{{ '/posts/overTheWire-Bandit-Level-33-to-34/' | relative_url }}" target="_blank" rel="noopener">Read post →</a> — Final challenge 🎓
 
 ---
 
