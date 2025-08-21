@@ -57,6 +57,7 @@ My goal isn’t to dump passwords but to show *why* each step works so you can s
 
 Pro tip: the real magic is in **pipes** (`|`) and **redirection** (`>`, `>>`, `2>`).
 
+---
 ## Levels Index (0 → 34)
 
 Each link opens in a new tab. The one-liner tells you the main idea for that level.
