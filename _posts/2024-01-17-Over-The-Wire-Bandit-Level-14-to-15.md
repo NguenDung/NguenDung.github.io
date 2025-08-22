@@ -59,7 +59,7 @@ The password for the next level can be retrieved by **sending the current passwo
 * **`nc` (netcat)** opens simple TCP (or UDP) connections and lets you send/receive bytes via your terminal or pipes.
 * **Newline matters.** Most simple services expect your input to end with `\n`. `echo`/`printf` add it for you.
 
-**Further reading (open in new tab):**
+**Further reading:**
 
 * <a href="https://linux.die.net/man/1/nc" target="_blank" rel="noopener">`nc` (netcat) manual</a>
 * <a href="https://en.wikipedia.org/wiki/Localhost" target="_blank" rel="noopener">Localhost (Wikipedia)</a>
