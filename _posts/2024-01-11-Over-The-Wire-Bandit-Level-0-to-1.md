@@ -86,7 +86,7 @@ Use that password to SSH into **bandit1**.
 
    *Why?* `cat` outputs the file content directly; the output is the password for **bandit1**.
 
-   ![readme output]({{ '/assets/images/bandit/level-0-to-1/pass.jpg' | relative_url }})
+![readme output]({{ '/assets/images/bandit/level-0-to-1/pass.jpg' | relative_url }})
 
 4. **Copy the password** (careful: no extra spaces or newline when pasting).
 
@@ -100,7 +100,7 @@ Use that password to SSH into **bandit1**.
 
    *Why?* Each Bandit level is a distinct user; you use the found password to access the next account.
 
-### Password
+## Password
 
 > This is the password shown in my run; if it doesn’t match yours, copy the one from your own terminal output.
 

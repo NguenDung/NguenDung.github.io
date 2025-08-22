@@ -79,7 +79,7 @@ The password for the next level is stored in **`data.txt`** and appears as a **h
 
    *Why?* Sanity check that `data.txt` exists and you’re in the right place.
 
-   ![ls data.txt]({{ '/assets/images/bandit/level-9-to-10/file.jpg' | relative_url }})
+![ls data.txt]({{ '/assets/images/bandit/level-9-to-10/file.jpg' | relative_url }})
 
 2. **Extract printable strings and look for `===`**
 
@@ -91,7 +91,7 @@ The password for the next level is stored in **`data.txt`** and appears as a **h
 
    *Why?* `strings` surfaces human-readable chunks; `grep` narrows to the few lines preceded by equals signs.
 
-   ![strings + grep]({{ '/assets/images/bandit/level-9-to-10/succes.jpg' | relative\_url }})
+![strings + grep]({{ '/assets/images/bandit/level-9-to-10/succes.jpg' | relative\_url }})
 
 3. **(Optional) Show offsets**
 
@@ -111,7 +111,7 @@ The password for the next level is stored in **`data.txt`** and appears as a **h
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 

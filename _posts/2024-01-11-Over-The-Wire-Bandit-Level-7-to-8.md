@@ -78,7 +78,7 @@ The password for the next level is stored in the file **`data.txt`** and is on t
 
    *Why?* Sanity check; the challenge states `data.txt` is here.
 
-   ![ls data.txt]({{ '/assets/images/bandit/level-7-to-8/file.jpg' | relative_url }})
+![ls data.txt]({{ '/assets/images/bandit/level-7-to-8/file.jpg' | relative_url }})
 
 2. **Search for the keyword**
 
@@ -99,7 +99,7 @@ The password for the next level is stored in the file **`data.txt`** and is on t
 
    *Why?* Prints just the second field (the password) — copy-friendly.
 
-   ![extract password]({{ '/assets/images/bandit/level-7-to-8/succes.jpg' | relative_url }})
+![extract password]({{ '/assets/images/bandit/level-7-to-8/succes.jpg' | relative_url }})
 
 4. **Copy the password** (no extra spaces/newlines).
 
@@ -111,7 +111,7 @@ The password for the next level is stored in the file **`data.txt`** and is on t
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 

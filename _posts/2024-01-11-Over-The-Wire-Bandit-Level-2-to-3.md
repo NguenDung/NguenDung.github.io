@@ -121,7 +121,7 @@ The password for the next level is stored in a file named **--spaces in this fil
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 

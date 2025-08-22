@@ -102,7 +102,7 @@ The password for the next level is stored in a file named **-** (a single hyphen
    cat /home/bandit1/-
    ```
 
-   ![cat]({{ '/assets/images/bandit/level-1-to-2/succes.jpg' | relative_url }})
+![cat]({{ '/assets/images/bandit/level-1-to-2/succes.jpg' | relative_url }})
 
 4. **Copy the password** (avoid trailing spaces/newlines).
 
@@ -114,7 +114,7 @@ The password for the next level is stored in a file named **-** (a single hyphen
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 

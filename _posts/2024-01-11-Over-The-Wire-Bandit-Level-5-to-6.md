@@ -87,7 +87,7 @@ The password for the next level is stored **somewhere under** the directory **`i
 
    *Why?* Quick overview of the directory layout before searching.
 
-  ![Listing inhere]({{ '/assets/images/bandit/level-5-to-6/inhere.jpg' | relative_url }})
+![Listing inhere]({{ '/assets/images/bandit/level-5-to-6/inhere.jpg' | relative_url }})
 
 2. **Search for the file matching all constraints**
 
@@ -113,7 +113,7 @@ The password for the next level is stored **somewhere under** the directory **`i
 
    *Why?* Confirms it’s human-readable (e.g., `ASCII text, with very long lines (1000)`).
 
-  ![find output]({{ '/assets/images/bandit/level-5-to-6/file.jpg' | relative_url }})
+![find output]({{ '/assets/images/bandit/level-5-to-6/file.jpg' | relative_url }})
 
 4. **Print the password**
 
@@ -123,7 +123,7 @@ The password for the next level is stored **somewhere under** the directory **`i
 
    *Why?* Outputs the content — the password for the next level.
 
-   ![cat target]({{ '/assets/images/bandit/level-5-to-6/succes.jpg' | relative_url }})
+![cat target]({{ '/assets/images/bandit/level-5-to-6/succes.jpg' | relative_url }})
 
 5. **Copy the password** (no extra spaces/newlines).
 
@@ -135,7 +135,7 @@ The password for the next level is stored **somewhere under** the directory **`i
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 

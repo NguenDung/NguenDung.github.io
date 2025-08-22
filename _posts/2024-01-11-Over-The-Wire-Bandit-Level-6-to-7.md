@@ -91,7 +91,7 @@ The password for the next level is stored **somewhere on the server** and the fi
 
    *Why?* Walks the whole filesystem, returning only regular files that match the exact owner, group, and size.
 
-   ![find result]({{ '/assets/images/bandit/level-6-to-7/file.jpg' | relative_url }})
+![find result]({{ '/assets/images/bandit/level-6-to-7/file.jpg' | relative_url }})
 
    *Example output (from my run):*
 
@@ -108,7 +108,7 @@ The password for the next level is stored **somewhere on the server** and the fi
 
    *Why?* The matching file contains the next level’s password.
 
-   ![cat target]({{ '/assets/images/bandit/level-6-to-7/succes.jpg' | relative_url }})
+![cat target]({{ '/assets/images/bandit/level-6-to-7/succes.jpg' | relative_url }})
 
 3. **Copy the password** (no extra spaces/newlines).
 
@@ -120,7 +120,7 @@ The password for the next level is stored **somewhere on the server** and the fi
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 

@@ -77,7 +77,7 @@ The password for the next level is stored in **`data.txt`** and is the **only li
 
    *Why?* Sanity check before running heavy commands.
 
-   ![ls data.txt]({{ '/assets/images/bandit/level-8-to-9/file.jpg' | relative_url }})
+![ls data.txt]({{ '/assets/images/bandit/level-8-to-9/file.jpg' | relative_url }})
 
 2. **Find the line that appears exactly once**
 
@@ -89,7 +89,7 @@ The password for the next level is stored in **`data.txt`** and is the **only li
 
    *Why?* `sort` groups duplicates; `uniq -u` keeps strictly-unique lines.
 
-   ![sort]({{ '/assets/images/bandit/level-8-to-9/succes.jpg' | relative_url }})
+![sort]({{ '/assets/images/bandit/level-8-to-9/succes.jpg' | relative_url }})
 
 3. **(Optional) Inspect counts to be sure**
 
@@ -111,7 +111,7 @@ The password for the next level is stored in **`data.txt`** and is the **only li
    # paste the password you just found when prompted
    ```
 
-### Password
+## Password
 
 > This is the password shown in my run; if yours differs, copy the one from your own terminal output.
 
