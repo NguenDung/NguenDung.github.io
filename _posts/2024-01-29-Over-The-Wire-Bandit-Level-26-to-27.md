@@ -41,7 +41,7 @@ Log in as **bandit26** (use the key from Level 25 → 26, or the password if you
 ssh -i bandit26.sshkey -p 2220 bandit26@localhost
 # or
 ssh bandit26@bandit.labs.overthewire.org -p 2220
-# password: 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
+# password: s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
 ````
 
 > Why? Each Bandit level is a separate UNIX user. To solve 26 → 27, you must be the `bandit26` user first.
@@ -77,7 +77,6 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
 
    *Why?* This is the same escape from Level 25 → 26 to obtain a usable shell.
 
-   !\[escape placeholder]\({{ '/assets/images/bandit/level-26-to-27/escape.jpg' | relative\_url }})
 
 2. **List the home directory and discover the helper**
 
@@ -88,8 +87,6 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
    You should see **`bandit27-do`** and `text.txt`.
 
    *Why?* The filename hints it runs commands **as bandit27**.
-
-   !\[ls placeholder]\({{ '/assets/images/bandit/level-26-to-27/ls.jpg' | relative\_url }})
 
 3. **Check what the helper does**
 
@@ -107,8 +104,6 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
 
    *Why?* Confirms it runs arbitrary commands with bandit27’s privileges.
 
-   !\[helper usage placeholder]\({{ '/assets/images/bandit/level-26-to-27/helper.jpg' | relative\_url }})
-
 4. **Verify effective user**
 
    ```bash
@@ -116,8 +111,6 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
    ```
 
    *Why?* Sanity-check that commands run as **bandit27**.
-
-   !\[id placeholder]\({{ '/assets/images/bandit/level-26-to-27/id.jpg' | relative\_url }})
 
 5. **Read the password for bandit27 using the helper**
 
@@ -127,14 +120,14 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
 
    *Why?* This prints the next level’s password with bandit27’s permissions.
 
-   !\[password read placeholder]\({{ '/assets/images/bandit/level-26-to-27/read.jpg' | relative\_url }})
+   ![password read placeholder]({{ '/assets/images/bandit/level-26-to-27/read.jpg' | relative_url }})
 
 ## Password
 
-> Paste here the exact line printed by the helper (from **your** run).
+> Paste here the exact line printed by the helper (of course from your own run).
 
 ```
-<contents of /etc/bandit_pass/bandit27>
+upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
 ```
 
 **Troubleshooting**
@@ -146,7 +139,7 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
 
 ---
 
-**Congrats 🎉** You leveraged the `bandit27-do` helper to execute as **bandit27** and retrieve the next credentials!
+**Congrats 🎉** You leveraged the `bandit27-do` helper to execute as **bandit27** and retrieved the next credentials!
 
 ---
 
@@ -155,4 +148,3 @@ You’ll find a helper binary in bandit26’s home that can **run commands as ba
 Until next time — **Otsumachi!!** 💖☄️✨
 
 ![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
-

@@ -130,7 +130,8 @@ Your job is to figure out how to break out of this restricted environment and ob
    * In vim, type:
 
      ```
-     :shell
+    :set shell=/bin/bash
+    :shell
      ```
 
    *Why?* This spawns a new shell, giving you full access as bandit26.

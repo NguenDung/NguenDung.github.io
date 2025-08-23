@@ -39,7 +39,7 @@ Log in as **bandit27** using the password you obtained from Level 26 → 27.
 
 ```bash
 ssh bandit27@bandit.labs.overthewire.org -p 2220
-# password: s0773xxkk0MXfdqOfPRVr9L3jJBUOgCZ
+# password: upsNCc7vzaRDx6oZC6GiR6ERwe1MowGB
 ````
 
 > Why? Each Bandit level is a separate UNIX user. To solve 27 → 28, you must be the `bandit27` user.
@@ -48,15 +48,14 @@ ssh bandit27@bandit.labs.overthewire.org -p 2220
 
 ![Task placeholder]({{ '/assets/images/bandit/level-27-to-28/task.jpg' | relative_url }})
 
-The home directory contains a **git repository**.
-Your task: clone it, explore the commits, and find the password for **bandit28**.
+The home directory contains a **git repository** (served over SSH).
+Your task: clone it, explore the history, and recover the password for **bandit28**.
 
 ## A little bit of Theory
 
-* **Git repositories** often hide history in `.git/`.
-* Using `git log`, you can see commit history.
-* Using `git show <commit>`, you can inspect changes made in that commit.
-* Sometimes secrets (like passwords) are removed from later commits but still exist in earlier history.
+* Git history lives in `.git/`; earlier commits can still expose removed secrets.
+* `git log` shows commits; `git show <hash>` displays the changes (or file contents at that commit).
+* If HEAD looks clean, the password is probably hidden in an **older** commit.
 
 **Further reading:**
 
@@ -65,66 +64,65 @@ Your task: clone it, explore the commits, and find the password for **bandit28**
 
 ## Solution
 
-1. **Clone the repository**
+1. **Clone the repository to a writable temp folder**
 
    ```bash
-   mkdir /tmp/bandit27
-   cd /tmp/bandit27
-   git clone ssh://bandit27@localhost:2220/home/bandit27/repo
-   cd repo
+   WORKDIR=$(mktemp -d)
+   cd "$WORKDIR"
+   git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo "repo-$RANDOM"
+   cd repo-*
    ```
 
-   !\[git clone placeholder]\({{ '/assets/images/bandit/level-27-to-28/git-clone.jpg' | relative\_url }})
+   *Why?* `/tmp` is writable by you; cloning here avoids permission issues. When prompted for a password for `bandit27-git`, enter the **bandit27 password**.
 
-   *Why?* Cloning into `/tmp` gives you a writable location to explore.
+   ![git clone placeholder]({{ '/assets/images/bandit/level-27-to-28/git-clone.jpg' | relative_url }})
 
-2. **Check the commit history**
+2. **List the history**
 
    ```bash
-   git log
+   git log --oneline --decorate --graph
    ```
 
-   Look for suspicious commits mentioning “password” or similar.
+   *Why?* A quick, readable view to spot the commit(s) that likely introduced/removed a secret.
 
-   !\[git log placeholder]\({{ '/assets/images/bandit/level-27-to-28/git-log.jpg' | relative\_url }})
+   ![git log placeholder]({{ '/assets/images/bandit/level-27-to-28/git-log.jpg' | relative_url }})
 
-   *Why?* Passwords may have been committed and later removed.
-
-3. **Inspect earlier commits**
+3. **Show the commit content**
 
    ```bash
    git show <commit-id>
    ```
 
-   You should eventually find a commit where the password for bandit28 was added (then deleted later).
+   *Why?* Inspect the README change; the password is typically added in the initial commit or an early one.
 
-   !\[git show placeholder]\({{ '/assets/images/bandit/level-27-to-28/git-show\.jpg' | relative\_url }})
+   ![git show placeholder]({{ '/assets/images/bandit/level-27-to-28/git-show.jpg' | relative_url }})
+
 
 4. **Extract the password**
 
-   Once you find the right commit, copy the password string.
+   Copy the password string you find in the relevant commit.
 
 ---
 
 ## Password
 
-> This is the password I got for **bandit28**:
+> The password revealed in the commit on my run:
 
 ```
-<the password string from repo commit>
+Yz9IpL0sBcCeuG7m9uQFt8ZNpS4HZRcN
 ```
 
 ---
 
 **Troubleshooting**
 
-* **“Permission denied (publickey)”** → Remember: use the password from Level 26 → 27 to log in as bandit27.
-* **“not a git repository”** → Always `cd` into the cloned repo directory before running git commands.
-* **Nothing in log?** → Scroll through multiple commits; the password is usually hidden in an earlier one.
+* **Permission denied (publickey)** → The remote is `bandit27-git@localhost` on port **2220**; it prompts for your **bandit27** password.
+* **“not a git repository”** → Make sure you `cd repo` before using `git log` / `git show`.
+* **No secret in HEAD** → Use `git log` to step back through commits and `git show <hash>` each one until you see it.
 
 ---
 
-**Congrats 🎉** You’ve just learned how to dig into **git commit history** to retrieve secrets. On to **bandit28**! 🚀
+**Congrats 🎉** You used **git history forensics** to recover a removed secret. On to **bandit28**!
 
 ---
 
@@ -133,4 +131,5 @@ Your task: clone it, explore the commits, and find the password for **bandit28**
 Until next time — **Otsumachi!!** 💖☄️✨
 
 ![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
+
 
