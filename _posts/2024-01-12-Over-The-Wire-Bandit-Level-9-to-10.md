@@ -91,7 +91,7 @@ The password for the next level is stored in **`data.txt`** and appears as a **h
 
    *Why?* `strings` surfaces human-readable chunks; `grep` narrows to the few lines preceded by equals signs.
 
-![strings + grep]({{ '/assets/images/bandit/level-9-to-10/succes.jpg' | relative\_url }})
+![strings + grep]({{ '/assets/images/bandit/level-9-to-10/succes.jpg' | relative_url }})
 
 3. **(Optional) Show offsets**
 

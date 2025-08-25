@@ -216,6 +216,6 @@ cat /etc/leviathan_pass/leviathan2
 
 Until next time — **Otsumachi!!** 💖☄️✨
 
-![Cinema]({{ '/assets/images/advice/cinema.gif' | relative\_url }})
+![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
 
 
