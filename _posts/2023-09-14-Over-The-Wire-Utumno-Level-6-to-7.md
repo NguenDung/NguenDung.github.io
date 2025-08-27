@@ -2,7 +2,7 @@
 date: 2023-09-14 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Utumno Level 6 → 7 tutorial!!"
-permalink: /posts/Over-The-Wire-Utumno-Level-6-to-7/
+permalink: /posts/overTheWire-Utumno-Level-6-to-7/
 tags: [overthewire, utumno, pwn, strtoul, pointer-trick, envp, shellcode, binary-exploitation, linux, beginner]
 description: "A step by step tutorial for OverTheWire Utumno Level 6 → 7!!"
 ---

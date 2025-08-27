@@ -2,7 +2,7 @@
 date: 2023-09-04 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 6 → 7 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-6-to-7/
+permalink: /posts/overTheWire-Behemoth-Level-6-to-7/
 tags: [overthewire, behemoth, exploitation, shellcode, linux-syscall, x86, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Behemoth Level 6 → 7!!"
 ---

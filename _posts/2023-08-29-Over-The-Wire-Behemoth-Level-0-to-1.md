@@ -2,7 +2,7 @@
 date: 2023-08-29 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 0 → 1 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-0-to-1/
+permalink: /posts/overTheWire-Behemoth-Level-0-to-1/
 tags: [overthewire, behemoth, exploitation, reverse-engineering, ltrace, priv-esc, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Behemoth Level 0 → 1!!"
 ---

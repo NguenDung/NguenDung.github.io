@@ -2,7 +2,7 @@
 date: 2023-08-26 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Narnia Level 8 → 9 Walkthrough"
-permalink: /posts/Over-The-Wire-Narnia-Level-8-to-9/
+permalink: /posts/overTheWire-Narnia-Level-8-to-9/
 tags: [overthewire, narnia, pwn, overflow, ret2env, binary-exploitation, linux, beginner]
 description: "Step-by-step solution for OverTheWire Narnia Level 8 → 9."
 ---

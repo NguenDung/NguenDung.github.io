@@ -2,7 +2,7 @@
 date: 2023-08-04 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Krypton Level 3 → 4 tutorial!!"
-permalink: /posts/Over-The-Wire-Krypton-Level-3-to-4/
+permalink: /posts/overTheWire-Krypton-Level-3-to-4/
 tags: [overthewire, krypton, crypto, substitution, frequency-analysis, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Krypton Level 3 → 4!!"
 ---

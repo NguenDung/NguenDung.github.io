@@ -2,7 +2,7 @@
 date: 2023-09-11 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Utumno Level 3 → 4 tutorial!!"
-permalink: /posts/Over-The-Wire-Utumno-Level-3-to-4/
+permalink: /posts/overTheWire-Utumno-Level-3-to-4/
 tags: [overthewire, utumno, pwn, getchar, env, buffer-overwrite, shellcode, binary-exploitation, linux, beginner]
 description: "A step by step tutorial for OverTheWire Utumno Level 3 → 4!!"
 ---

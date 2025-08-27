@@ -2,7 +2,7 @@
 date: 2023-01-24 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Bandit Level 21 → 22 tutorial!!"
-permalink: /posts/Over-The-Wire-Bandit-Level-21-to-22/
+permalink: /posts/overTheWire-Bandit-Level-21-to-22/
 tags: [overthewire, bandit, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Bandit Level 21 → 22!!"
 ---

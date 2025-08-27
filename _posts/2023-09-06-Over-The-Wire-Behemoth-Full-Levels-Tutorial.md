@@ -2,7 +2,7 @@
 date: 2023-09-06 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth — Complete Walkthrough Index"
-permalink: /posts/Over-The-Wire-Behemoth-Full-Levels-Tutorial/
+permalink: /posts/overTheWire-Behemoth-Full-Levels-Tutorial/
 tags: [overthewire, behemoth, exploitation, buffer-overflow, race-condition, priv-esc, walkthrough, ctf, linux, beginner]
 description: "A full index of my OverTheWire Behemoth walkthroughs — from Level 0 to Level 8 — including links, descriptions, and practical tips for binary exploitation beginners."
 excerpt_separator: <!--more-->

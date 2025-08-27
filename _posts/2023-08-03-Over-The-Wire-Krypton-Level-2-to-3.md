@@ -2,7 +2,7 @@
 date: 2023-08-03 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Krypton Level 2 → 3 tutorial!!"
-permalink: /posts/Over-The-Wire-Krypton-Level-2-to-3/
+permalink: /posts/overTheWire-Krypton-Level-2-to-3/
 tags: [overthewire, krypton, crypto, caesar, setuid, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Krypton Level 2 → 3!!"
 ---

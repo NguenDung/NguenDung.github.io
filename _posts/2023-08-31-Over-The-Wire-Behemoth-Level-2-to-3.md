@@ -2,7 +2,7 @@
 date: 2023-08-31 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 2 → 3 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-2-to-3/
+permalink: /posts/overTheWire-Behemoth-Level-2-to-3/
 tags: [overthewire, behemoth, exploitation, path-hijacking, priv-esc, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Behemoth Level 2 → 3!!"
 ---

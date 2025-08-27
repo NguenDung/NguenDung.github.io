@@ -2,7 +2,7 @@
 date: 2023-08-01 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Krypton Level 0 → 1 tutorial!!"
-permalink: /posts/Over-The-Wire-Krypton-Level-0-to-1/
+permalink: /posts/overTheWire-Krypton-Level-0-to-1/
 tags: [overthewire, krypton, crypto, base64, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Krypton Level 0 → 1!!"
 ---

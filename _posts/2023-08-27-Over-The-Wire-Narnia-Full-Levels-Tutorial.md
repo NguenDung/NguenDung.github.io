@@ -2,7 +2,7 @@
 date: 2023-08-27 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Narnia — Complete Walkthrough Index"
-permalink: /posts/Over-The-Wire-Narnia-Full-Levels-Tutorial/
+permalink: /posts/overTheWire-Narnia-Full-Levels-Tutorial/
 tags: [overthewire, narnia, pwn, overflow, binary-exploitation, linux, beginner]
 description: "A full index of my OverTheWire Narnia walkthroughs — from Level 0 to Level 9 — including links, short descriptions, and practical tips."
 excerpt_separator: <!--more-->

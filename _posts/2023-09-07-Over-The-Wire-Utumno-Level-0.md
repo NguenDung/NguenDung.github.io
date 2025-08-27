@@ -2,7 +2,7 @@
 date: 2023-09-07 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Utumno Level 0 tutorial!!"
-permalink: /posts/Over-The-Wire-Utumno-Level-0/
+permalink: /posts/overTheWire-Utumno-Level-0/
 tags: [overthewire, utumno, walkthrough, ctf, binary, exploitation]
 description: "A step by step tutorial for OverTheWire Utumno Level 0!!"
 ---

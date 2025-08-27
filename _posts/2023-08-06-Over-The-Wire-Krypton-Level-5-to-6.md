@@ -2,7 +2,7 @@
 date: 2023-08-06 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Krypton Level 5 → 6 tutorial!!"
-permalink: /posts/Over-The-Wire-Krypton-Level-5-to-6/
+permalink: /posts/overTheWire-Krypton-Level-5-to-6/
 tags: [overthewire, krypton, crypto, vigenere, frequency, kasiski, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Krypton Level 5 → 6!!"
 ---

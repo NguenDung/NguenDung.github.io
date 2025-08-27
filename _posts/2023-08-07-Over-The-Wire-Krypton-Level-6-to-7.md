@@ -2,7 +2,7 @@
 date: 2023-08-07 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Krypton Level 6 → 7 tutorial!!"
-permalink: /posts/Over-The-Wire-Krypton-Level-6-to-7/
+permalink: /posts/overTheWire-Krypton-Level-6-to-7/
 tags: [overthewire, krypton, crypto, streamcipher, lfsr, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Krypton Level 6 → 7!!"
 ---

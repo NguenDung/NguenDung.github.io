@@ -2,7 +2,7 @@
 date: 2023-09-03 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 5 → 6 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-5-to-6/
+permalink: /posts/overTheWire-Behemoth-Level-5-to-6/
 tags: [overthewire, behemoth, exploitation, udp, sockets, walkthrough, ctf, linux, beginner]
 description: "A full step-by-step detailed write-up for OverTheWire Behemoth Level 5 → 6!!"
 ---

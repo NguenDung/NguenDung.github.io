@@ -2,7 +2,7 @@
 date: 2023-08-08 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Krypton — Complete Walkthrough Index"
-permalink: /posts/Over-The-Wire-Krypton-Full-Levels-Tutorial/
+permalink: /posts/overTheWire-Krypton-Full-Levels-Tutorial/
 tags: [overthewire, krypton, walkthrough, ctf, crypto, beginner]
 description: "A full index of my OverTheWire Krypton walkthroughs — from Level 0 to Level 6 — including links, descriptions, and tips for beginners."
 excerpt_separator: <!--more-->

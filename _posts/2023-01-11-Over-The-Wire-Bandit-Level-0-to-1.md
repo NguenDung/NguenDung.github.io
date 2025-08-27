@@ -2,7 +2,7 @@
 date: 2023-01-11 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Bandit Level 0 → 1 tutorial!!"
-permalink: /posts/Over-The-Wire-Bandit-Level-0-to-1/
+permalink: /posts/overTheWire-Bandit-Level-0-to-1/
 tags: [overthewire, bandit, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Bandit Level 0 → 1!!"
 ---

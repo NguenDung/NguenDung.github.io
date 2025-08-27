@@ -2,7 +2,7 @@
 date: 2023-09-15 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Utumno Level 7 → 8 tutorial!!"
-permalink: /posts/Over-The-Wire-Utumno-Level-7-to-8/
+permalink: /posts/overTheWire-Utumno-Level-7-to-8/
 tags: [overthewire, utumno, pwn, setjmp-longjmp, strcpy, jmpbuf, buffer-overflow, shellcode, binary-exploitation, linux, beginner]
 description: "A step by step tutorial for OverTheWire Utumno Level 7 → 8!!"
 ---

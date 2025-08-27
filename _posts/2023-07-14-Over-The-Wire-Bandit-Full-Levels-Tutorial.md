@@ -2,7 +2,7 @@
 date: 2023-07-14 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Bandit — Complete Walkthrough Index"
-permalink: /posts/Over-The-Wire-Bandit-Full-Levels-Tutorial/
+permalink: /posts/overTheWire-Bandit-Full-Levels-Tutorial/
 tags: [overthewire, bandit, walkthrough, ctf, linux, beginner]
 description: "A full index of my OverTheWire Bandit walkthroughs — from Level 0 to Level 34 — including links, descriptions, and tips for beginners."
 excerpt_separator: <!--more-->

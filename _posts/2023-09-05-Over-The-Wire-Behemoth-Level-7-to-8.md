@@ -2,7 +2,7 @@
 date: 2023-09-05 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 7 → 8 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-7-to-8/
+permalink: /posts/overTheWire-Behemoth-Level-7-to-8/
 tags: [overthewire, behemoth, exploitation, buffer-overflow, nop-sled, alphanumeric-shellcode, priv-esc, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Behemoth Level 7 → 8!!"
 ---

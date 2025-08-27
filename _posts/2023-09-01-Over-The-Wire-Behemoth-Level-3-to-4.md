@@ -2,7 +2,7 @@
 date: 2023-09-01 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 3 → 4 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-3-to-4/
+permalink: /posts/overTheWire-Behemoth-Level-3-to-4/
 tags: [overthewire, behemoth, exploitation, format-string, GOT-overwrite, priv-esc, walkthrough, ctf, linux, beginner]
 description: "A full step-by-step detailed write-up for OverTheWire Behemoth Level 3 → 4!!"
 ---

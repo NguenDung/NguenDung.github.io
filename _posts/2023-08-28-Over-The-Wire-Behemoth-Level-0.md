@@ -2,7 +2,7 @@
 date: 2023-08-28 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Behemoth Level 0 tutorial!!"
-permalink: /posts/Over-The-Wire-Behemoth-Level-0/
+permalink: /posts/overTheWire-Behemoth-Level-0/
 tags: [overthewire, behemoth, exploitation, buffer-overflow, race-condition, priv-esc, walkthrough, ctf, linux, beginner]
 description: "A step by step tutorial for OverTheWire Behemoth Level 0!!"
 ---

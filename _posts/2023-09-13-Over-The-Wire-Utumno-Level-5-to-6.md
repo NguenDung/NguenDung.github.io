@@ -2,7 +2,7 @@
 date: 2023-09-13 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Utumno Level 5 → 6 tutorial!!"
-permalink: /posts/Over-The-Wire-Utumno-Level-5-to-6/
+permalink: /posts/overTheWire-Utumno-Level-5-to-6/
 tags: [overthewire, utumno, pwn, argc0, envp, strcpy, strncpy, buffer-overflow, shellcode, binary-exploitation, linux, beginner]
 description: "A step by step tutorial for OverTheWire Utumno Level 5 → 6!!"
 ---

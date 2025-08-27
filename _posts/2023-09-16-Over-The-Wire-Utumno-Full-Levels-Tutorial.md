@@ -2,7 +2,7 @@
 date: 2023-09-16 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Utumno — Complete Walkthrough Index"
-permalink: /posts/Over-The-Wire-Utumno-Full-Levels-Tutorial/
+permalink: /posts/overTheWire-Utumno-Full-Levels-Tutorial/
 tags: [overthewire, utumno, walkthrough, ctf, binary, exploitation]
 description: "A full index of my OverTheWire Utumno walkthroughs — from Level 0 to Level 8 — including links, descriptions, and tips for binary exploitation learners."
 excerpt_separator: <!--more-->

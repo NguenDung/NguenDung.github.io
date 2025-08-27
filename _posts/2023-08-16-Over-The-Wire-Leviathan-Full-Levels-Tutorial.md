@@ -2,7 +2,7 @@
 date: 2023-08-16 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Leviathan — Complete Walkthrough Index"
-permalink: /posts/Over-The-Wire-Leviathan-Full-Levels-Tutorial/
+permalink: /posts/overTheWire-Leviathan-Full-Levels-Tutorial/
 tags: [overthewire, leviathan, walkthrough, ctf, linux, beginner, reversing, suid]
 description: "A full index of my OverTheWire Leviathan walkthroughs — from Level 0 to Level 7 — including links, descriptions, and practical tips."
 excerpt_separator: <!--more-->

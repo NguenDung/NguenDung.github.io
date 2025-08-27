@@ -2,7 +2,7 @@
 date: 2023-08-25 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Narnia Level 7 → 8 tutorial!!"
-permalink: /posts/Over-The-Wire-Narnia-Level-7-to-8/
+permalink: /posts/overTheWire-Narnia-Level-7-to-8/
 tags: [overthewire, narnia, pwn, binary-exploitation, format-string, linux, beginner]
 description: "A step by step tutorial for OverTheWire Narnia Level 7 → 8!!"
 ---

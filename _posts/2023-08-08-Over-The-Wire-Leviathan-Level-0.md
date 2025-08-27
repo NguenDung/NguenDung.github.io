@@ -2,7 +2,7 @@
 date: 2023-08-08 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Leviathan Level 0 tutorial!!"
-permalink: /posts/Over-The-Wire-Leviathan-Level-0/
+permalink: /posts/overTheWire-Leviathan-Level-0/
 tags: [overthewire, leviathan, walkthrough, ctf, linux, beginner, suid]
 description: "A step by step tutorial for OverTheWire Leviathan Level 0!!"
 ---
