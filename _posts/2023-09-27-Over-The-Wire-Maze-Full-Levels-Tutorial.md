@@ -1,5 +1,4 @@
 ---
-date: 2023-09-27 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Maze — Complete Walkthrough Index"
 permalink: /posts/overTheWire-Maze-Full-Levels-Tutorial/

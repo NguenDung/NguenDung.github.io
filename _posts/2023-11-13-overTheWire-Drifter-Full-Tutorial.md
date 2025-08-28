@@ -1,5 +1,4 @@
 ---
-date: 2025-08-28 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Drifter — Complete Walkthrough Index"
 permalink: /posts/overTheWire-Drifter-Full-Levels-Tutorial/
