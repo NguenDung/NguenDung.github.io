@@ -54,8 +54,6 @@ ls -la /formulaone/
 
 You’ll see sources and setuid binaries for the next levels.
 
-!\[Listing]\({{ '/assets/images/formulaone/level-1-to-2/ls-la.png' | relative\_url }})
-
 ---
 
 ## Task

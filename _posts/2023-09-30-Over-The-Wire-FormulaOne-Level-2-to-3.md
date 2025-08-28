@@ -61,8 +61,6 @@ The goal is to exploit the binary `formulaone3` in order to retrieve the passwor
 
 Looking inside `/formulaone/`:
 
-!\[ls]\({{ '/assets/images/formulaone/level-2-to-3/ls.png' | relative\_url }})
-
 We see both the compiled `formulaone3` and its source `formulaone3.c`. The binary has **setuid** permissions, so it runs as **formulaone3**.
 
 The source reveals a program that uses **System V Shared Memory (shm)**, with two buffers:

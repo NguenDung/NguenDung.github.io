@@ -7,7 +7,7 @@ description: >-
   <br/>🌠 I Love Hoshimachi Suisei!! 🌠
 show_excerpts: false
 
-paginate: 10
+paginate: 20
 paginate_path: "/blog/page:num/"
 
 # ---- URLs ----
